@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+use App\User;
+use Socialite;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -26,7 +30,93 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::DASHBOARD;
+
+    /**
+     * Redirect the user to the social authentication page.
+     * this include GitHub, Twitter, Facebook and Google
+     *
+     * @return Response
+    */
+    public function redirectToProvider($provider)
+    {
+         return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Obtain the user information from Social Account.
+     *
+     * @return Response
+    */
+    public function handleProviderCallback($provider)
+    {
+        try {
+            // $userSocial = Socialite::driver($provider)->user();
+            $userSocial = Socialite::driver($provider)->stateless()->user();
+        } catch (Exception $e) {
+            return $this->sendFailedResponse($e->getMessage());
+        }
+
+        if ($userSocial->email != null) {
+            $authUser = $this->findOrCreateUser($userSocial, $provider);
+            Auth::login($authUser, true);
+            return redirect()->intended('/');
+        }
+
+        return redirect('/register')->with('error', 'Unable to Login, try another login option!');
+    }
+
+    /**
+     * If a user has registered before using social auth, return the user
+     * else, create a new user object.
+     * @param  $user Socialite user object
+     * @param $provider Social auth provider
+     * @return  User
+     */
+    public function findOrCreateUser($userSocial, $provider)
+    {
+        $authUser = User::where('email', $userSocial->email)->first();
+        if ($authUser) {
+            $authUser->update([
+                'provider'          => $provider,
+                'provider_id'       => $userSocial->id,
+                'access_token'      => $userSocial->token,
+                'avatar'            => $userSocial->avatar,
+            ]);
+            return $authUser;
+        }
+
+        $name = $userSocial->name;
+        $string = substr($name, 0 , 5);
+        $randomDigit = rand(100,999);
+
+        $username = strtoupper($string . $randomDigit);
+
+        $user = new User();
+        $user->full_name = $userSocial->name;
+        $user->username = $username;
+        $user->email = $userSocial->email;
+        $user->provider = $provider;
+        $user->provider_id = $userSocial->id;
+        $user->access_token = $userSocial->token;
+        $user->avatar = $userSocial->avatar;
+        $user->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
+        $user->save();
+
+        return $user;
+    }
+
+    /**
+      * Send a failed response with a msg
+      *
+      * @param null $msg
+      * @return \Illuminate\Http\RedirectResponse
+    */
+    protected function sendFailedResponse($message = null)
+    {
+         return redirect()->route('login')
+             ->withError(['message' => $message ?: 'Unable to login, try with another provider to login.']);
+    }
 
     /**
      * Create a new controller instance.
