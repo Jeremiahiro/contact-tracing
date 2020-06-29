@@ -6,7 +6,7 @@
 - *Splash Screen 1*
 - *Data Input*
 - *Fulfiled Entry*
-- *Activity Selection | modal*
+- *Activity Selection | slide up*
 - *Network Selection | modal*
 - *Proximity Alert | modal*
 
