@@ -25,12 +25,12 @@
 <body>
     <div id="app">
         @desktop
-            <h1 class="text-center">Please use a mobile device</h1>
+            @yield('web-content')
         @elsedesktop
             @yield('header')
 
             <main class="py-4"> 
-                @yield('content')
+                @yield('mobile-content')
             </main>
             
             @include('partials.mobile.footer.footer')
