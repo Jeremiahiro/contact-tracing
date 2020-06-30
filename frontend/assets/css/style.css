@@ -1,0 +1,150 @@
+/* GENERAL STYLE */
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('../font/HelveticaNeue Light.ttf')format('truetype');
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../font/Gilroy-Light.otf')format('truetype');
+}
+
+a {
+    text-decoration: none !important;
+}
+
+p {
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+}
+
+hr {
+    background-color: #0B24FA;
+}
+
+.carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+
+
+/* HEADER STYLE */
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-icon a {
+    font-size: 42px;
+    color: #0B24FA;
+}
+
+.contact-trace .menu-icon a,
+.contact-trace2 .menu-icon a,
+.contact-trace3 .menu-icon a {
+    color: #fff;
+}
+
+
+/* BODY STYLE */
+
+
+.contact-trace,
+.contact-trace2, 
+.contact-trace3 {
+    background-image: url('../img/cont.png');
+    background-color: rgb(85, 85, 85);
+    background-blend-mode: overlay;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+}
+
+.contact-trace2 {
+    background-image: url('../img/cont1.png');
+}
+
+.contact-trace3 {
+    background-image: url('../img/cont2.png');
+}
+
+.trace_date h1 {
+    font-family: 'Gilroy';
+    font-size: 238px;
+    color: transparent;
+    -webkit-text-stroke: 2px #fff;
+    line-height: 0.9;
+}
+
+.trace_date h4,
+h3,
+.ct_name h1 {
+    font-family: 'Gilroy';
+    font-size: 31px;
+    color: #fff;
+    line-height: 0.8;
+}
+
+.trace_date h3 {
+    font-size: 47px;
+}
+
+.ct_name h1 {
+    font-size: 47px;
+    line-height: 1.1;
+}
+
+.splash_details {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.splash_details p {
+    color: #fff;
+    font-family: 'Gilroy';
+    font-size: 12px;
+}
+
+.splash_button {
+    color: #fff;
+    border-color: #fff;
+    font-family: 'Gilroy';
+    width: 82px;
+}
+
+.add_contact {
+    
+}
+
+
+/* FOOTER STYLE */
+
+footer {
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    background-color: #0B24FA;
+}
+
+.footer-text {
+    color: #fff;
+    font-size: 10px !important;
+    font-family: 'HelveticaNeue';
+}
+
+.footer-menu {
+    background-color: #fff;
+}
+
+.footer-menu img {
+    width: 35px;
+    height: 35px;
+}
