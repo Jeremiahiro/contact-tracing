@@ -1,19 +1,23 @@
 @extends('layouts.app')
 
+@section('title')
+    Homepage
+@endsection
+
 @section('custom-style')
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 @endsection
 
 @section('header')
-    @include('partials.mobile.header.header-white')
-@endsection
 
+@endsection
+    
 @section('web-content')
     <h1 class="text-center">Please use a mobile device</h1>
 @endsection
 
 @section('mobile-content')
-<div class="container">
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -39,8 +43,25 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
+<section class="vh-100">
+
+    <div id="carouselExampleIndicators" class="carousel slide" >
+        <ol class="carousel-indicators pb-5">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          @include('homepage.splash.splash-1')
+          @include('homepage.splash.splash-2')
+          @include('homepage.splash.splash-3')
+        </div>
+      </div>
+</section>
+
 @endsection
 @section('script')
-    
+    {{-- your script goes here --}}
 @endsection

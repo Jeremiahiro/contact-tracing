@@ -7,31 +7,35 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title')</title>
+    <title>Contact Tracing | @yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('frontend/jquery/jquery-3.2.1.min.js') }}" defer></script>
+    <script src="{{ asset('frontend/bootstrap/js/bootstrap.min.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
     @yield('custom-style')
     
 </head>
 <body>
-    <div id="app">
+    <div id="app" style="background: none;">
         @desktop
             @yield('web-content')
         @elsedesktop
+        <main class="p-0 m-0"> 
             @yield('header')
 
-            <main class="py-4"> 
-                @yield('mobile-content')
-            </main>
+            @yield('mobile-content')
+        </main>
             
             @include('partials.mobile.footer.footer')
         @enddesktop

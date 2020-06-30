@@ -1,0 +1,60 @@
+/* GENERAL STYLE */
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('../font/HelveticaNeue Light.ttf')format('truetype');
+}
+
+p {
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+}
+
+.carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+.splash {
+    background-color: rgb(85, 85, 85);
+    background-blend-mode: overlay;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100vh;
+    color: #fff;
+}
+
+.splash-1 {
+    background-image: url('../img/cont.png');
+}
+.splash-2 {
+    background-image: url('../img/cont1.png');
+}
+
+.splash-3 {
+    background-image: url('../img/cont2.png');
+}
+
+.trace_date h1 {
+    font-size: 238px;
+    color: transparent;
+    -webkit-text-stroke: 2px #fff;
+    line-height: 0.9;
+}
+
+.trace_date h4 {
+    font-size: 31px;
+    line-height: 0.8;
+}
+
+.trace_date h3 {
+    font-size: 47px;
+}
+
+.ct_name h1 {
+    font-size: 47px;
+    line-height: 1.1;
+}
