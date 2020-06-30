@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('custom-style')
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('frontend/css/auth.css') }}" rel="stylesheet">
 @endsection
 
 @section('header')
-    @include('partials.mobile.header.header-white')
+
 @endsection
 
 @section('web-content')
@@ -13,7 +13,15 @@
 @endsection
 
 @section('mobile-content')
-<div class="container">
+<section>
+    <div class="splash splash-1">
+        @include('partials.mobile.header.header-transparent')
+
+        Login
+    </div>
+</section>
+
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -81,5 +89,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
