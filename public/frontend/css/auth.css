@@ -1,0 +1,14 @@
+.splash {
+    background-color: rgb(85, 85, 85);
+    background-blend-mode: overlay;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100vh;
+    color: #fff;
+}
+
+.splash-1 {
+    background-image: url('../img/cont.png');
+}
