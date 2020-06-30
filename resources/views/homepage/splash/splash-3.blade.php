@@ -1,18 +1,21 @@
 <div class="carousel-item splash splash-3">
     @include('partials.mobile.header.header-transparent')
-   
+
     <div class="container">
         <div class="trace_date py-5">
-            <h1>16</h1>
-            <h4 class="pl-4">June, 2020</h4>
-            <h3 class="pl-4">10:15PM</h3>
+            <h1>{{ date('d') }}</h1>
+            <h4>{{ date('M, Y') }}</h4>
+            <h3>{{ date('H:i A') }}</h3>
         </div>
     </div>
 
     <div class="container">
         <div class="add_contact py-3 pl-4">
             <span>
-                <a href="#"><img src="assets/img/add.png" alt="add"></a>
+                <a href="#" class="text-primary">
+                    @include('homepage.splash.home')
+
+                </a>
             </span>
         </div>
     </div>
