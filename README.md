@@ -1,9 +1,9 @@
 #### TASK LIST 
-- *Login Window*
+- *Login Window*  [x] 
 - *Register Window*
 - *Login*
-- *Splash Screen*
-- *Splash Screen 1*
+- *Splash Screen* [x] 
+- *Splash Screen 1* [x] 
 - *Data Input*
 - *Fulfiled Entry*
 - *Activity Selection | slide up*
