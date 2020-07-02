@@ -36,8 +36,7 @@
 
             @yield('mobile-content')
         </main>
-            
-            @include('partials.mobile.footer.footer')
+            @yield('footer')            
         @enddesktop
         
     </div>
