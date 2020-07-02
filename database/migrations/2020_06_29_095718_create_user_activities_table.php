@@ -15,7 +15,7 @@ class CreateUserActivitiesTable extends Migration
     {
         Schema::create('user_activities', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('owner_id');
             $table->string('from_location');
             $table->string('from_latitude');
             $table->string('from_longitude');
@@ -26,7 +26,7 @@ class CreateUserActivitiesTable extends Migration
             $table->dateTime('end_date', 0);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('owner_id')->references('id')->on('users');
 
         });
     }

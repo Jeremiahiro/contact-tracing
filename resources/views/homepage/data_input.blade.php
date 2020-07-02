@@ -22,22 +22,22 @@
             <h3>Record Activity</h3>
             <form>
                 <div class="form-group">
-                    <label for="where">WHERE</label>
-                    <input type="text" class="form-control" id="fullname" placeholder="24 Sanga Street Dline">
+                    <label for="wherefrom">WHERE</label>
+                    <input type="text" class="form-control" id="wherefrom" placeholder="24 Sanga Street Dline">
                 </div>
                 <div class="form-group">
-                    <label for="where">WHERE</label>
-                    <input type="text" class="form-control" id="email" placeholder="24 Sanga Street Dline">
+                    <label for="whereto">WHERE</label>
+                    <input type="text" class="form-control" id="whereto" placeholder="24 Sanga Street Dline">
                 </div>
                 <div class="form-group">
-                    <label for="phone">WHEN</label>
-                    <input type="datetime-local" class="form-control" id="phone" >
+                    <label for="time">WHEN</label>
+                    <input type="datetime-local" class="form-control" id="time" >
                 </div>
                 <div class="form-group">
-                    <label for="contacts">WHO (Meet or See)</label>
-                    <img src="{{  asset('/frontend/img/svg/support.svg') }}" alt="">
-                    <input type="password" class="form-control" id="password" placeholder=".......">
+                    <label for="contacts">WHO (Meet or See)</label><br>
+                    <input type="file" class="form-control" id="contact-image">
                 </div>
+               
                 <div class="form-group">
                     <label for="password">Confirm Password</label>
                     <input type="password" class="form-control" id="confirmpassword" placeholder=".......">

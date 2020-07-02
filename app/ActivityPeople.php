@@ -4,18 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserActivity extends Model
+class ActivityPeople extends Model
 {
-
-    /**
+        /**
      * The attributes that are mass assignable.
      *
      * @var array
     */
     protected $fillable = [
-        'user_id', 'from_latitude', 'from_longitude', 'from_location',
-        'to_latitude', 'to_longitude', 'to_location',
-        'start_date', 'end_date',
+        'user_id', 'activity_id', 'name',
+        'email', 'phone', 'person_id',
     ];
 
     /**
@@ -29,7 +27,7 @@ class UserActivity extends Model
     ];
 
     /**
-     * Get the user that owns the activity.
+     * Get the user that owns the activity people.
      */
     public function user()
     {
@@ -37,10 +35,10 @@ class UserActivity extends Model
     }
 
     /**
-     * Get the people attached to the  activity.
+     * Get the activity that the people belong to.
      */
-    public function people()
+    public function activity()
     {
-        return $this->hasMany('App\ActivityPeople');
+        return $this->belongsTo('App\User', 'owner_id');
     }
 }
