@@ -11,16 +11,16 @@
 
     <div class="container">
         <div class="d-flex justify-content-around align-items-center">
-            <span>
-                <a href="#"><img src="assets/img/map-pin-marked.png" alt="marker"></a>
+            <span class="text-center">
+                <a href="#"><img src="{{  asset('/frontend/img/svg/marker.svg') }}" alt="marker"></a>
                 <p class="py-2">23 Locations</p>
             </span>
-            <span class="pt-1"> 
-                <a href="#"><img src="assets/img/Icon material-people.png" alt="contacts"></a>
+            <span class="text-center pt-2"> 
+                <a href="#"><img src="{{  asset('/frontend/img/svg/person.svg') }}" alt="contacts"></a>
                 <p class="py-2">248 Contacts</p>
             </span>
-            <span class="pt-1">
-                <a href="#"><img src="assets/img/Icon material-people1.png" alt="Active"></a>
+            <span class="text-center pt-2">
+                <a href="#"><img src="{{  asset('/frontend/img/svg/people.svg') }}" alt="Active"></a>
                 <p class="py-2">2.6m Active</p>
             </span>
         </div>

@@ -1,0 +1,21 @@
+.register label {
+    font-size: 7px;
+    color: #fff;
+    font-family: 'Gilroy';
+}
+
+.register input {
+    border: 0px;
+}
+
+.register ::placeholder {
+    color:#0B24FA;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.register button {
+    color: #fff;
+    font-size: 12px;
+    border-color: #fff;
+}

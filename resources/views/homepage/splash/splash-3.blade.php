@@ -12,7 +12,7 @@
     <div class="container">
         <div class="add_contact py-3 pl-4">
             <span>
-                <a href="#"><img src="assets/img/add.png" alt="add"></a>
+                <a href="#"><img src="{{  asset('/frontend/img/svg/add.svg') }}" alt="add"></a>
             </span>
         </div>
     </div>

@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('homepage.index');
 });
 
+Route::get('data_input', function () {
+    return view('homepage.data_input');
+});
+
 
 Auth::routes(['verify' => true]);
 

@@ -1,17 +1,14 @@
-<div class="form-group">
 
-    <label for="name" class="col-md-4 control-label">Login With</label>
+    <div class="container">
+        <div class="d-flex justify-content-around align-items-center pt-5">
+            <p class="pt-4">CONNECT WITH</p>
+            <a href="{{ route('social.login', 'facebook') }}"><img src="{{  asset('/frontend/img/svg/facebook.svg') }}" alt="facebook"></a>
+            <a href="{{ route('social.login', 'twitter') }}"><img src="{{  asset('/frontend/img/svg/twitter.svg') }}" alt="twitter"></a>
+            <a href="{{ route('social.login', 'google') }}"><img src="{{  asset('/frontend/img/svg/google.svg') }}" alt="google"></a>
+        </div>
 
-    <div class="col-md-6">
-
-        <a href="{{ route('social.login', 'facebook') }}" class="btn btn-social-icon btn-facebook">facebook</a>
-
-        <a href="{{ route('social.login', 'twitter') }}" class="btn btn-social-icon btn-twitter">Twitter</a>
-
-        <a href="{{ route('social.login', 'google') }}" class="btn btn-social-icon btn-google-plus">Google</a>
-
-        <a href="{{ route('social.login', 'github') }}" class="btn btn-social-icon btn-github">Github</a>
-
+        <div class="align-items-center text-center">
+            <button type="button" class="btn border-2 border-white btn-sm btn-transparent text-white px-3">Register</button>
+            <button type="button" class="btn border-2 border-white btn-sm btn-transparent text-white px-3">Login</button>
+        </div>
     </div>
-
-</div>
