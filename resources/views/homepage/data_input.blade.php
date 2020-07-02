@@ -3,6 +3,7 @@
 @section('custom-style')
     <link href="{{ asset('frontend/css/auth.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/css/datainput.css') }}" rel="stylesheet">
 @endsection
 
 
@@ -35,12 +36,22 @@
                 </div>
                 <div class="form-group">
                     <label for="contacts">WHO (Meet or See)</label><br>
-                    <input type="file" class="form-control" id="contact-image">
+                    <input type="file" class="p-1 contact-file-input" id="contact-image">
                 </div>
-               
-                <div class="form-group">
-                    <label for="password">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirmpassword" placeholder=".......">
+                <div class="form-group d-flex justify-content-between contacts">
+                    <label for="contactname">Name</label>
+                    <input type="text" class="form-control" id="contactname">
+                </div>
+                <div>
+                    <p>Additional Details</p>
+                </div>
+                <div class="form-group d-flex justify-content-between contacts">
+                    <label for="contactemail">Email</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div class="form-group d-flex justify-content-between contacts">
+                    <label for="contactphone">Phone Number</label>
+                    <input type="number" class="form-control" id="phone">
                 </div>
                 <button type="submit" class="w-100 btn btn-outline-primary">SIGN UP</button>
             </form>

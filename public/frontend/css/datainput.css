@@ -1,0 +1,21 @@
+.contact-file-input {
+    color: transparent;
+  }
+  .contact-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .contact-file-input::before {
+    content: url(/frontend/img/svg/camera.svg);
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .contacts label {
+      font-size: 18px;
+      color: #0B24FA;
+  }
+
+  .contacts input {
+    border: 2px dashed;
+}
