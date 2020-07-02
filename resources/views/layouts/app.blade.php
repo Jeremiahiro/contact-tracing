@@ -36,8 +36,12 @@
 
             @yield('mobile-content')
         </main>
+<<<<<<< HEAD
             
             @yield('footer')
+=======
+            @yield('footer')            
+>>>>>>> 439412680203bceec259643026d9ac4cdf96083b
         @enddesktop
         
     </div>
