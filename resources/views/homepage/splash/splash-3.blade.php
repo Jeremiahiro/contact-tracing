@@ -12,10 +12,14 @@
     <div class="container">
         <div class="add_contact py-3 pl-4">
             <span>
+<<<<<<< HEAD
+                <a href="#"><img src="{{  asset('/frontend/img/svg/add.svg') }}" alt="add"></a>
+=======
                 <a href="#" class="text-primary">
                     @include('homepage.splash.home')
 
                 </a>
+>>>>>>> b5481725ff268436f4f2a07a5be49416b1c65ce2
             </span>
         </div>
     </div>

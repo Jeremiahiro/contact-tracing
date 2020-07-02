@@ -1,0 +1,9 @@
+/* FOOTER STYLE */
+
+footer {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background-color: #0B24FA;
+}
