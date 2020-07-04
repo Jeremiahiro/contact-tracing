@@ -15,8 +15,8 @@ class CreateActivityPeopleTable extends Migration
     {
         Schema::create('activity_people', function (Blueprint $table) {
             $table->id();
-            $table->unsigned('owner_id');
-            $table->unsigned('activity_id');
+            $table->unsignedInteger('owner_id');
+            $table->unsignedInteger('activity_id');
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
