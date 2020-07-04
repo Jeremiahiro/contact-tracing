@@ -66,6 +66,13 @@ p {
     font-weight: bold;
 }
 
+.white_input,
+.white_input:focus,
+.white_input::placeholder {
+    color: #fff;
+    font-weight: bold;
+}
+
 .form-control,
 .form-control:focus,
 .form-control:active {
@@ -85,4 +92,53 @@ p {
     -webkit-appearance: none;
     -webkit-box-shadow: none;
     outline: -webkit-focus-ring-color auto 0px;
+}
+
+.blue-btn {
+    background-color: #0000FF;
+    color: #fff;
+    font-size: 14px;
+}
+
+.login input {
+    border-bottom: 2px solid #fff;
+    border-radius: 0;
+}
+
+.vl {
+    border-left: 2px solid #0B24FA;
+    height: 105px;
+}
+
+.fulfilled img{
+    border-radius: 50%;
+    height: 20px;
+    width: auto;
+    margin-left: 2px;
+}
+
+.fulfilled_location  {
+    color: #0B24FA;
+}
+
+.fulfilled_locationwhite {
+    color: #fff;
+}
+
+.fulfilled_location h3 , .fulfilled_locationwhite h3  {
+    font-size: 14px;
+}
+
+ .fulfilled_location p ,.fulfilled_locationwhite p {
+    font-size: 9px !important;
+}
+
+.route_white {
+    background-color: #F7F7F7;
+    border-radius: 10%;
+}
+
+.route_purple {
+    background-color: #6406A8;
+    border-radius: 10%;
 }

@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('frontend/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
     <script src="{{ asset('frontend/jquery/jquery-3.2.1.min.js') }}" defer></script>
     <script src="{{ asset('frontend/bootstrap/js/bootstrap.min.js') }}" defer></script>
 

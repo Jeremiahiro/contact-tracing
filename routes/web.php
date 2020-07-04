@@ -21,6 +21,10 @@ Route::get('data_input', function () {
     return view('homepage.data_input');
 });
 
+Route::get('fulfilled', function () {
+    return view('homepage.fulfilled');
+});
+
 
 Auth::routes(['verify' => true]);
 
