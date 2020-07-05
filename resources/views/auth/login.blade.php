@@ -2,7 +2,6 @@
 
 @section('custom-style')
     <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
-    <link href="{{ asset('frontend/css/login.css') }}" rel="stylesheet">
 @endsection
 
 @section('header')
