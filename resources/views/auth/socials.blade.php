@@ -1,6 +1,6 @@
-<div class="container col-10 mx-auto  py-5">
+<div class="container col-8 mx-auto">
     <div class="d-flex justify-content-around align-items-center">
-        <p class="pt-4">CONNECT WITH</p>
+        <p class="pt-4 bold f-14x">CONNECT WITH</p>
         <a href="{{ route('social.login', 'facebook') }}">
             <img src="{{  asset('/frontend/img/svg/facebook.svg') }}" alt="facebook">
         </a>
@@ -11,13 +11,14 @@
             <img src="{{  asset('/frontend/img/svg/google.svg') }}" alt="google">
         </a>
     </div>
-
-    <div class="align-items-center text-center">
-        <a href="{{ route('register') }}" class="btn btn-outline-light btn-sm">
-            Register
-        </a>
-        <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm">
-            Login
-        </a>
+    <div class="col-6 mx-auto">
+        <div class="d-flex justify-content-around">
+            <div class="col col-12 border border-2 border-white py-1 px-3 rounded text-center m-1">
+                <a href="{{ route('register') }}" class="text-white">Register</a>
+            </div>
+            <div class="col col-12 border border-2 border-white py-1 px-3 rounded text-center m-1">
+                <a href="{{ route('login') }}" class="text-white">Login</a>
+            </div>
+        </div>
     </div>
 </div>

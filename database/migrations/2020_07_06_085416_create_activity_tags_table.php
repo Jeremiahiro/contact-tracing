@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateActivityPeopleTable extends Migration
+class CreateActivityTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,16 @@ class CreateActivityPeopleTable extends Migration
      */
     public function up()
     {
-        Schema::create('activity_people', function (Blueprint $table) {
+        Schema::create('activity_tags', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('owner_id');
-            $table->unsignedInteger('activity_id');
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('person_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('owner_id')->references('id')->on('users');
-            $table->foreign('activity_id')->references('id')->on('user_activities');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('activity_id')->constrained('activities');
 
         });
     }
@@ -36,6 +34,6 @@ class CreateActivityPeopleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activity_people');
+        Schema::dropIfExists('activity_tags');
     }
 }
