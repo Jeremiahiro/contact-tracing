@@ -10,6 +10,7 @@ p {
     line-height: 1.1 !important;
 }
 
+
 .carousel-indicators li {
     width: 10px;
     height: 10px;
@@ -30,6 +31,7 @@ p {
 .splash-1 {
     background-image: url('../img/cont.png');
 }
+
 .splash-2 {
     background-image: url('../img/cont1.png');
 }
@@ -78,7 +80,7 @@ p {
 .form-control:active {
     border: 0;
     outline: 0;
-    box-shadow : none; 
+    box-shadow: none;
     -webkit-appearance: none;
     -webkit-box-shadow: none;
     outline: -webkit-focus-ring-color auto 0px;
@@ -88,7 +90,7 @@ p {
 .btn:active {
     border: 0;
     outline: 0;
-    box-shadow : none; 
+    box-shadow: none;
     -webkit-appearance: none;
     -webkit-box-shadow: none;
     outline: -webkit-focus-ring-color auto 0px;
@@ -105,19 +107,41 @@ p {
     border-radius: 0;
 }
 
+.recordactivity{
+    color: #0B24FA;
+  }
+
+.input_label {
+    font-size: 24px;
+}
+
+.routeheader {
+    font-size: 9px !important;
+}
+
 .vl {
     border-left: 2px solid #0B24FA;
     height: 105px;
 }
 
-.fulfilled img{
-    border-radius: 50%;
-    height: 20px;
-    width: auto;
-    margin-left: 2px;
+.route_white,
+.route_purple {
+    border-radius: 20px;
+    width: 100%;
 }
 
-.fulfilled_location  {
+.route_white {
+    background-color: #F7F7F7;
+    color: #0B24FA;
+}
+
+.route_purple {
+    background-color: #6406A8;
+    color: #fff;
+}
+
+.fulfilled_location,
+.timeline {
     color: #0B24FA;
 }
 
@@ -125,20 +149,43 @@ p {
     color: #fff;
 }
 
-.fulfilled_location h3 , .fulfilled_locationwhite h3  {
-    font-size: 14px;
+.fulfilled_location h3,
+.fulfilled_locationwhite h3 {
+    font-size: 10px;
+    text-transform: uppercase;
 }
 
- .fulfilled_location p ,.fulfilled_locationwhite p {
-    font-size: 9px !important;
+.fulfilled_location p,
+.fulfilled_locationwhite p,
+.route_image a {
+    font-size: 6px !important;
 }
 
-.route_white {
-    background-color: #F7F7F7;
-    border-radius: 10%;
+.route_image img {
+    height: auto;
+    width: 64px;
 }
 
-.route_purple {
-    background-color: #6406A8;
-    border-radius: 10%;
+.fulfilled img {
+    border-radius: 50%;
+    height: 20px;
+    width: auto;
+    margin-left: 2px;
+}
+
+.fulfilled_notification {
+    color: #fff;
+    background-color: #FF0000;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    right: 0;
+}
+
+.activity h3 {
+    font-size: 18px;
+}
+
+.activity p {
+    font-size: 8px !important;
 }
