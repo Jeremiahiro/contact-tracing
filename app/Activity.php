@@ -4,9 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserActivity extends Model
+class Activity extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -31,16 +30,16 @@ class UserActivity extends Model
     /**
      * Get the user that owns the activity.
      */
-    public function user()
+    public function owner()
     {
-        return $this->belongsTo('App\User', 'owner_id');
+        return $this->belongsTo('App\User');
     }
 
     /**
      * Get the people attached to the  activity.
      */
-    public function people()
+    public function tags()
     {
-        return $this->hasMany('App\ActivityPeople');
+        return $this->hasMany('App\ActivityTags');
     }
 }

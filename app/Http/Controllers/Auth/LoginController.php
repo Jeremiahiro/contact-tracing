@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::DASHBOARD;
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Redirect the user to the social authentication page.
@@ -93,7 +93,7 @@ class LoginController extends Controller
         $username = strtoupper($string . $randomDigit);
 
         $user = new User();
-        $user->full_name = $userSocial->name;
+        $user->name = $userSocial->name;
         $user->username = $username;
         $user->email = $userSocial->email;
         $user->provider = $provider;

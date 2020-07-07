@@ -11,9 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('frontend/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
-    <script src="{{ asset('frontend/jquery/jquery-3.2.1.min.js') }}" defer></script>
-    <script src="{{ asset('frontend/bootstrap/js/bootstrap.min.js') }}" defer></script>
+
+    <script src="https://kit.fontawesome.com/cce62db690.js" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -39,9 +38,11 @@
         </main>
             @yield('footer')            
         @enddesktop
-        
     </div>
     
+    <script src="{{ asset('frontend/jquery/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('frontend/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('frontend/bootstrap/js/bootstrap.min.js') }}"></script>
     @yield('script')
 </body>
 </html>
