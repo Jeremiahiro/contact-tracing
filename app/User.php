@@ -16,8 +16,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'full_name', 'email', 'password',
-        'username', 'phone', 'role',
+        'name', 'email', 'password',
+        'username', 'phone', 'role', 'avatar',
         'longitude', 'latitude', 'location',
         'provider', 'provider_id', 'access_token',
     ];
@@ -44,8 +44,24 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the comments for the blog post.
      */
-    public function activity()
+    public function activities()
     {
-        return $this->hasMany('App\UserActivity');
+        return $this->hasMany('App\Activity');
     }
+
+    // public function getActivityCountAttribute(){
+    //     return $this->activities()->count();
+    // }
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function tags()
+    {
+        return $this->hasMany('App\ActivityTags');
+    }
+
+    // public function getTagCountAttribute(){
+    //     return $this->tags()->count();
+    // }
 }

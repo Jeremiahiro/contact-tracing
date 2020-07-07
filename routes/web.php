@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('homepage.index');
-});
+
 
 Route::get('index', function () {
     return view('activity.index');
@@ -32,7 +30,12 @@ Route::get('activitySelection', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::get('/', 'GeneralController@index')->name('home');
+
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::resource('/activity', 'ActivityController');
+Route::get('/check', 'UserController@userOnlineStatus');
 
 Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->name('social.login');
 Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');

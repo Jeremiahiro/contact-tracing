@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserActivitiesTable extends Migration
+class CreateActivitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateUserActivitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_activities', function (Blueprint $table) {
+        Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('owner_id');
             $table->string('from_location');
             $table->string('from_latitude');
             $table->string('from_longitude');
@@ -26,8 +25,7 @@ class CreateUserActivitiesTable extends Migration
             $table->dateTime('end_date', 0);
             $table->timestamps();
 
-            $table->foreign('owner_id')->references('id')->on('users');
-
+            $table->foreignId('user_id')->constrained();
         });
     }
 
@@ -38,6 +36,6 @@ class CreateUserActivitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_activities');
+        Schema::dropIfExists('activities');
     }
 }

@@ -6,8 +6,14 @@
 }
 
 p {
-    font-size: 12px !important;
-    line-height: 1.1 !important;
+    font-size: 12px;
+    line-height: 1.1;
+}
+.socials {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    right: 0;
 }
 
 
@@ -24,7 +30,7 @@ p {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height: 100%;
+    min-height: 100vh;
     color: #fff;
 }
 
@@ -68,24 +74,6 @@ p {
     font-weight: bold;
 }
 
-.white_input,
-.white_input:focus,
-.white_input::placeholder {
-    color: #fff;
-    font-weight: bold;
-}
-
-.form-control,
-.form-control:focus,
-.form-control:active {
-    border: 0;
-    outline: 0;
-    box-shadow: none;
-    -webkit-appearance: none;
-    -webkit-box-shadow: none;
-    outline: -webkit-focus-ring-color auto 0px;
-}
-
 .btn:focus,
 .btn:active {
     border: 0;
@@ -104,7 +92,6 @@ p {
 
 .login input {
     border-bottom: 2px solid #fff;
-    border-radius: 0;
 }
 
 .recordactivity{

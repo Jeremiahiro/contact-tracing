@@ -6,14 +6,17 @@
             </a>
         </div>
         @guest
-            <div class="avatar-icon">
-                <a href="">IC</a>
-            </div>
+        <div class="avatar-icon">
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ asset('frontend/img/jimi.png') }}" class="avatar" alt="default avatar">
+            </a>
+        </div>
         @else
-            <div class="avatar-icon">
-                <a href="">ON</a>
-            </div>
+        <div class="avatar-icon">
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ Auth::user()->avatar }}" class="avatar" alt="default avatar">
+            </a>
+        </div>
         @endguest
-        
     </div>
 </nav>
