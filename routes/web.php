@@ -28,6 +28,7 @@ Route::get('activitySelection', function () {
 });
 
 
+
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'GeneralController@index')->name('home');

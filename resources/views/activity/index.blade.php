@@ -48,7 +48,7 @@
                         <img src="{{ asset('/frontend/img/map.png')}}" alt="map">
                     </span>
                     <span class="mt-3">
-                        <a class="fulfilled_location" href="">VIEW MAP</a>
+                        <a class="fulfilled_location" data-toggle="modal" data-target=" ">VIEW MAP</a>
                     </span>
                 </div>
 
