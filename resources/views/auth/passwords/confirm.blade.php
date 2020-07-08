@@ -18,14 +18,14 @@
         @include('partials.mobile.header.header-transparent')
 
         <div class="container">
-            <div class="login py-5">
-                <h1 class="text-white f-40">{{ __('Confirm Your Password') }}</h1>
+            <div class="login pt-5">
+                <h1 class="text-white f-60">{{ __('Confirm Your Password') }}</h1>
                 <form method="POST" action="{{ route('password.confirm') }}">
                     @csrf
                     <div class="form-group row">
-                        <div class="col-md-6 my-5">
+                        <div class="col-md-6 mt-5 mb-2">
                             <input id="password" type="password"
-                                class="transparent-input input px-2 @error('password') is-invalid @enderror"
+                                class="transparent-input border-bottom input px-2 @error('password') is-invalid @enderror"
                                 name="password" value="{{ old('password') }}" required autocomplete="password"
                                 placeholder="&#xf023; password" autofocus>
 
@@ -38,21 +38,21 @@
                     </div>
                     <div class="form-group">
                         <button type="submit"
-                            class="f-18 btn btn-lg w-100 text-white border border-2 border-white text-center">
-                            {{ __('CONFIRM PASSWORD') }}
+                            class="f-18 btn btn-lg w-100 text-white border border-white text-center">
+                            CONFIRM PASSWORD
                         </button>
                     </div>
                 </form>
                 @if (Route::has('password.request'))
-                <div class="mb-5 d-flex justify-content-end">
-                    <a class="text-light" href="{{ route('password.request') }}">
+                <div class="mb-5 pb-5 d-flex justify-content-end">
+                    <a class="text-light f-14" href="{{ route('password.request') }}">
                         {{ __('Forgot Password?') }}
                     </a>
                 </div>
                 @endif
             </div>
 
-            <div class="py-5">
+            <div class="pb-5">
                 @include('auth.socials')
             </div>
         </div>

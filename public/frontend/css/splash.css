@@ -1,10 +1,4 @@
 /* GENERAL STYLE */
-
-@font-face {
-    font-family: 'HelveticaNeue';
-    src: url('../font/HelveticaNeue Light.ttf')format('truetype');
-}
-
 p {
     font-size: 12px;
     line-height: 1.1;
@@ -15,7 +9,6 @@ p {
     left: 0;
     right: 0;
 }
-
 
 .carousel-indicators li {
     width: 10px;
@@ -46,132 +39,21 @@ p {
     background-image: url('../img/cont2.png');
 }
 
-.trace_date h1 {
+.date {
     font-size: 238px;
     color: transparent;
     -webkit-text-stroke: 2px #fff;
     line-height: 0.9;
+    font-family: 'G-regular';
 }
 
-.trace_date h4 {
+.month {
     font-size: 31px;
     line-height: 0.8;
+    font-family: 'G-bold';
 }
 
-.trace_date h3 {
+.time {
     font-size: 47px;
-}
-
-.ct_name h1 {
-    font-size: 47px;
-    line-height: 1.1;
-}
-
-.blue_input,
-.blue_input:focus,
-.blue_input::placeholder {
-    color: #0B24FA;
-    font-weight: bold;
-}
-.btn:focus,
-.btn:active {
-    border: 0;
-    outline: 0;
-    box-shadow: none;
-    -webkit-appearance: none;
-    -webkit-box-shadow: none;
-    outline: -webkit-focus-ring-color auto 0px;
-}
-
-.blue-btn {
-    background-color: #0000FF;
-    color: #fff;
-    font-size: 14px;
-}
-
-.login input {
-    border-bottom: 2px solid #fff;
-}
-
-.recordactivity{
-    color: #0B24FA;
-  }
-
-.input_label {
-    font-size: 24px;
-}
-
-.routeheader {
-    font-size: 9px !important;
-}
-
-.vl {
-    border-left: 2px solid #0B24FA;
-    height: 105px;
-}
-
-.route_white,
-.route_purple {
-    border-radius: 20px;
-    width: 100%;
-}
-
-.route_white {
-    background-color: #F7F7F7;
-    color: #0B24FA;
-}
-
-.route_purple {
-    background-color: #6406A8;
-    color: #fff;
-}
-
-.fulfilled_location,
-.timeline {
-    color: #0B24FA;
-}
-
-.fulfilled_locationwhite {
-    color: #fff;
-}
-
-.fulfilled_location h3,
-.fulfilled_locationwhite h3 {
-    font-size: 10px;
-    text-transform: uppercase;
-}
-
-.fulfilled_location p,
-.fulfilled_locationwhite p,
-.route_image a {
-    font-size: 6px !important;
-}
-
-.route_image img {
-    height: auto;
-    width: 64px;
-}
-
-.fulfilled img {
-    border-radius: 50%;
-    height: 20px;
-    width: auto;
-    margin-left: 2px;
-}
-
-.fulfilled_notification {
-    color: #fff;
-    background-color: #FF0000;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    right: 0;
-}
-
-.activity h3 {
-    font-size: 18px;
-}
-
-.activity p {
-    font-size: 8px !important;
+    font-family: 'G-light';
 }

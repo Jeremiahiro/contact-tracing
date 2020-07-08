@@ -18,14 +18,14 @@
             @include('partials.mobile.header.header-transparent')
 
             <div class="container">
-                <div class="login pt-5">
+                <div class="pt-5">
                     <h1 class="text-white f-60">LOGIN</h1>
                     <form class="" method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group row">
                             <div class="col-md-6 mb-3">
                                 <input id="email" type="email"
-                                    class="transparent-input input px-2 @error('email') is-invalid @enderror" name="email"
+                                    class="transparent-input border-bottom input px-2 @error('email') is-invalid @enderror" name="email"
                                     value="{{ old('email') }}" required autocomplete="email"
                                     placeholder="&#xf007; iro@iro.com" autofocus>
 
@@ -40,7 +40,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 mb-3">
                                 <input id="password" type="password"
-                                    class="transparent-input input px-2 @error('password') is-invalid @enderror"
+                                    class="transparent-input border-bottom input px-2 @error('password') is-invalid @enderror"
                                     name="password" value="{{ old('password') }}" required autocomplete="password"
                                     placeholder="&#xf023; password" autofocus>
 
@@ -53,14 +53,14 @@
                         </div>
                         <div class="form-group">
                             <button type="submit"
-                                class="f-18 btn btn-lg w-100 text-white border border-2 border-white text-center">
+                                class="f-18 btn btn-lg w-100 text-white border border-white text-center">
                                 LOGIN
                             </button>
                         </div>
                     </form>
                     @if (Route::has('password.request'))
                     <div class="mb-5 pb-5 d-flex justify-content-end">
-                        <a class="text-light" href="{{ route('password.request') }}">
+                        <a class="text-light f-14" href="{{ route('password.request') }}">
                             {{ __('Forgot Password?') }}
                         </a>
                     </div>

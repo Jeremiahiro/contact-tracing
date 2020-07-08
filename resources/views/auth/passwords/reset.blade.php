@@ -19,7 +19,7 @@
 
         <div class="container">
             <div class="login py-5">
-                <h1 class="text-white f-40">{{ __('Reset Password') }}</h1>
+                <h1 class="text-white f-60">{{ __('Reset Password') }}</h1>
                 <form method="POST" action="{{ route('password.update') }}" class="py-3">
                     @csrf
 
@@ -28,7 +28,7 @@
                     <div class="form-group row">
                         <div class="col-md-6 mb-3">
                             <input id="email" type="email"
-                                class="transparent-input input px-2 @error('email') is-invalid @enderror" name="email"
+                                class="transparent-input border-bottom input px-2 @error('email') is-invalid @enderror" name="email"
                                 value="{{ old('email') }}" required autocomplete="email"
                                 placeholder="Email Address" autofocus>
 
@@ -43,7 +43,7 @@
                     <div class="form-group row">
                         <div class="col-md-6 mb-3">
                             <input id="password" type="password"
-                                class="transparent-input input px-2 @error('password') is-invalid @enderror"
+                                class="transparent-input border-bottom input px-2 @error('password') is-invalid @enderror"
                                 name="password" value="{{ old('password') }}" required autocomplete="password"
                                 placeholder="New Password" autofocus>
 
@@ -58,7 +58,7 @@
                     <div class="form-group row">
                         <div class="col-md-6 mb-3">
                             <input id="password-confirm" type="password-confirm"
-                                class="transparent-input input px-2 @error('password-confirm') is-invalid @enderror"
+                                class="transparent-input border-bottom input px-2 @error('password-confirm') is-invalid @enderror"
                                 name="password-confirm" value="{{ old('password-confirm') }}" required
                                 autocomplete="password-confirm" placeholder="Confirm Password" autofocus>
                         </div>

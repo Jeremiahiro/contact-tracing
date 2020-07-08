@@ -18,14 +18,14 @@
         @include('partials.mobile.header.header-transparent')
 
         <div class="container">
-            <div class="login py-5">
-                <h2 class="text-white">{{ __('Password Recovery') }}</h2>
+            <div class="login pt-5">
+                <h2 class="text-white f-60">{{ __('Password Recovery') }}</h2>
                 <form method="POST" action="{{ route('password.confirm') }}">
                     @csrf
                     <div class="form-group row">
                         <div class="col-md-6 mt-5 mb-3">
                             <input id="email" type="email"
-                                class="transparent-input input px-2 @error('email') is-invalid @enderror" name="email"
+                                class="transparent-input border-bottom input px-2 @error('email') is-invalid @enderror" name="email"
                                 value="{{ old('email') }}" required autocomplete="email"
                                 placeholder="Email Address" autofocus>
 
