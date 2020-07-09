@@ -23,8 +23,8 @@ Route::get('create', function () {
     return view('activity.create');
 });
 
-Route::get('activitySelection', function () {
-    return view('activity.modals.activitySelection');
+Route::get('networkActivity', function () {
+    return view('activity.modals.networkActivity');
 });
 
 

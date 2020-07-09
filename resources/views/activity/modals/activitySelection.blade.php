@@ -1,24 +1,8 @@
-@extends('layouts.app')
-
-@section('custom-style')
-<link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
-@endsection
-
-
-@section('header')
-
-@endsection
-
-@section('web-content')
-<h1 class="text-center">Please use a mobile device</h1>
-@endsection
-
-@section('mobile-content')
 <section>
-   
-    <div class=" route_purple" id="activityselectionModal" tabindex="-1" role="dialog" aria-labelledby="activitySelection"
+    <div class="modal fade pt-4" id="activityselectionModal" tabindex="-1" role="dialog" aria-labelledby="activitySelection"
         aria-hidden="true">
-        <div role="document">
+        
+        <div class="modal-dialog route_purple my-5 ml-0" style="pointer-events:auto;" role="document">
             <div class="container py-3 d-flex">
                 <div class="activity">
                     <span>
@@ -43,7 +27,7 @@
             </div>
             <div class="container pb-3">
                 <div id="activityselectionCarousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators position-absolute m-0">
+                    <ol class="carousel-indicators activityindicator position-absolute m-0">
                         <li data-target="#activityselectionCarousel" data-slide-to="0" class="active"></li>
                         <li data-target="#activityselectionCarousel" data-slide-to="1"></li>
                     </ol>
@@ -178,29 +162,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>   
     </div>
 </section>
 
-
-@endsection
-
-@section('script')
-<script>
-    jQuery(document).ready(function ($) {
-        $('.count').each(function () {
-            $(this).prop('Counter', 0).animate({
-                Counter: $(this).text()
-            }, {
-                duration: 4000,
-                easing: 'swing',
-                step: function (now) {
-                    $(this).text(Math.ceil(now));
-                }
-            });
-        });
-    });
-
-</script>
-{{-- your script goes here --}}
-@endsection
