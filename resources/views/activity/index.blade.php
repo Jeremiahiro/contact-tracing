@@ -2,6 +2,7 @@
 
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
 @endsection
 
 
@@ -19,6 +20,7 @@
     <section class="py-5">
         
         <div class="container py-3 d-flex justify-content-around">
+            @include('activity.modals.activitySelection')
             <div class="timeline">
                 <p class="m-0 py-1">08:00am</p>
                 <div class="vl ml-5"></div>
@@ -48,7 +50,7 @@
                         <img src="{{ asset('/frontend/img/map.png')}}" alt="map">
                     </span>
                     <span class="mt-3">
-                        <a class="fulfilled_location" href="">VIEW MAP</a>
+                        <a class="fulfilled_location" data-toggle="modal" data-target="#activityselectionModal">VIEW MAP</a>
                     </span>
                 </div>
 
@@ -67,7 +69,6 @@
                             <img class="text-right" src="{{ asset('/frontend/img/svg/add2.svg')}}" alt="add">
                         </a>
                     </span>
-
                 </div>
             </div>
         </div>

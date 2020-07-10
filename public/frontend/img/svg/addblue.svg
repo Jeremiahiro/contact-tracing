@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="73" height="73" viewBox="0 0 73 73">
+  <defs>
+    <filter id="bg" x="0" y="0" width="73" height="73" filterUnits="userSpaceOnUse">
+      <feOffset dy="12" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#455b63" flood-opacity="0.102"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <rect width="12" height="12" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_675" data-name="Group 675" transform="translate(-290 -464.437)">
+    <g transform="matrix(1, 0, 0, 1, 290, 464.44)" filter="url(#bg)">
+      <rect id="bg-2" data-name="bg" width="25" height="25" rx="12.5" transform="translate(24 12)" fill="blue"/>
+    </g>
+    <g id="icon_add" data-name="icon/add" transform="translate(320 481.437)" clip-path="url(#clip-path)">
+      <rect id="bg-3" data-name="bg" width="11" height="11" transform="translate(0 0)" fill="none"/>
+      <path id="union" d="M3.625,7.626V4.375H.375a.375.375,0,1,1,0-.75h3.25V.375a.375.375,0,1,1,.75,0v3.25h3.25a.375.375,0,0,1,0,.75H4.375V7.626a.375.375,0,0,1-.75,0Z" transform="translate(3 3)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

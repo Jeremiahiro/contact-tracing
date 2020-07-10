@@ -93,6 +93,14 @@ input:-webkit-autofill:focus,
 .bold {
     font-family: 'G-bold' !important;
 }
+.regular {
+    font-family: 'G-light' !important;
+}
+
+.f-8 {
+    font-size: 8px;
+}
+
 .f-12 {
     font-size: 12px;
 }

@@ -3,6 +3,7 @@ p {
     font-size: 12px;
     line-height: 1.1;
 }
+
 .socials {
     position: absolute;
     bottom: 60px;
@@ -55,5 +56,157 @@ p {
 
 .time {
     font-size: 47px;
+    line-height: 1.1;
     font-family: 'G-light';
+}
+
+.blue_input,
+.blue_input:focus,
+.blue_input::placeholder {
+    color: #0B24FA;
+    font-weight: bold;
+}
+
+.btn:focus,
+.btn:active {
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: none;
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+.blue-btn {
+    background-color: #0000FF;
+    color: #fff;
+    font-size: 14px;
+}
+
+.login input {
+    border-bottom: 2px solid #fff;
+}
+
+.recordactivity {
+    color: #0B24FA;
+}
+
+.input_label {
+    font-size: 24px;
+}
+
+.routeheader {
+    font-size: 9px !important;
+}
+
+.vl {
+    border-left: 2px solid #0B24FA;
+    height: 105px;
+}
+
+.route_white,
+.route_purple {
+    border-radius: 20px;
+    width: 100%;
+}
+
+.route_white {
+    background-color: #F7F7F7;
+    color: #0B24FA;
+}
+
+.route_purple {
+    background-color: #6406A8;
+    color: #fff;
+}
+
+.route_blue {
+    background-color: #0000FF;
+    color: #fff;
+    width: 100%;
+}
+
+.fulfilled_location,
+.timeline {
+    color: #0B24FA;
+}
+
+.fulfilled_locationwhite {
+    color: #fff;
+}
+
+.fulfilled_location h3,
+.fulfilled_locationwhite h3 {
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.fulfilled_location p,
+.fulfilled_locationwhite p,
+.route_image a {
+    font-size: 6px !important;
+}
+
+.route_image img {
+    height: auto;
+    width: 64px;
+}
+
+.fulfilled img {
+    border-radius: 50%;
+    height: 20px;
+    width: auto;
+    margin-left: 2px;
+}
+
+.fulfilled_notification {
+    color: #fff;
+    background-color: #FF0000;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    right: 0;
+}
+
+.connectionsmall img,
+.connectionlarge img {
+    display: block;
+    border-radius: 50%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.connectionsmall img {
+    width: 30px;
+    height: 30px;
+}
+
+.connectionlarge img {
+    width: 109px;
+    height: 109px;
+}
+
+.connectionlarge h1 {
+    font-size: 31px;
+}
+
+.connectionlarge h2 {
+    font-size: 15px;
+}
+
+.connectionlarge h3 {
+    font-size: 10px;
+    color: #E228C5;
+}
+
+.activityindicator {
+    top: 100%;
+    left: 90%;
+}
+
+.proximityimage img {
+    object-fit: cover;
+    width: 135px;
+    height: 120px;
+    border-radius: 15px;
 }

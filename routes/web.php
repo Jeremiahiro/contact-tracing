@@ -13,10 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('activitySelection', function () {
-    return view('activity.modals.activitySelection');
+
+
+Route::get('index', function () {
+    return view('activity.index');
 });
 
+Route::get('create', function () {
+    return view('activity.create');
+});
+
+Route::get('proximity', function () {
+    return view('activity.modals.proximity');
+});
+
+
+
+Auth::routes(['verify' => true]);
 
 Route::get('/', 'GeneralController@index')->name('home');
 
