@@ -23,7 +23,7 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="form-group row">
-                        <label for="name" class="f-12 col-md-4 col-form-label text-md-right">
+                        <label for="name" class="col-md-4 text-md-right">
                             {{ __('Full Name') }}
                         </label>
                         <div class="col-md-6">
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="email" class="f-12 col-md-4 col-form-label text-md-right">
+                        <label for="email" class="col-md-4 text-md-right">
                             {{ __('Email') }}
                         </label>
 
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="phone" class="col-md-4 col-form-label text-md-right">
+                        <label for="phone" class="col-md-4 text-md-right">
                             {{ __('Phone Number') }}
                         </label>
 
@@ -77,13 +77,16 @@
                         </div>
                     </div>
 
+                    
                     <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <label for="password" class="col-md-4 text-md-right">
+                            {{ __('Password') }}
+                        </label>
 
                         <div class="col-md-6">
                             <input id="password" type="password"
-                                class="blue_input input @error('password') is-invalid @enderror" name="password"
-                                required autocomplete="new-password" placeholder="**********">
+                                class="blue-input input @error('password') is-invalid @enderror" name="password"
+                                value="{{ old('password') }}" required autocomplete="password" placeholder="********">
 
                             @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -94,12 +97,15 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="password-confirm"
-                            class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                        <label for="password-confirm" class="col-md-4 text-md-right">
+                            {{ __('Confirm Password') }}
+                        </label>
 
                         <div class="col-md-6">
-                            <input id="password-confirm" type="password" class="blue_input input"
-                                name="password_confirmation" required autocomplete="new-password" placeholder="**********">
+                            <input id="password-confirm" type="password"
+                                class="blue-input input @error('password-confirm') is-invalid @enderror" name="password-confirm"
+                                value="{{ old('password-confirm') }}" required autocomplete="password-confirm" placeholder="********">
+
                         </div>
                     </div>
                     <div class="form-group mt-4">

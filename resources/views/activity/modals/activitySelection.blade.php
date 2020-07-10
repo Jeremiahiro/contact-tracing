@@ -1,20 +1,19 @@
-<section>
-    <div class="modal fade pt-4" id="activityselectionModal" tabindex="-1" role="dialog" aria-labelledby="activitySelection"
-        aria-hidden="true">
-        
+
+    <div  class="modal hide fade pt-4" id="activityselectionModal" tabindex="-1" role="dialog" aria-labelledby="activitySelection"
+        aria-hidden="true"> 
         <div class="modal-dialog route_purple my-5 ml-0" style="pointer-events:auto;" role="document">
             <div class="container py-3 d-flex">
-                <div class="activity">
+                <div>
                     <span>
-                        <p class="mb-2">Route & Interactions</p>
+                        <p class="f-8 mb-2">Route & Interactions</p>
                     </span>
                     <div class="d-flex">
                         <span>
                             <img src="{{ asset('/frontend/img/svg/map-pin-markedwhite.svg')}}" alt="map-pin">
                         </span>
                         <span class="pl-1">
-                            <h3 class="m-0">PARK & SHOP</h3>
-                            <p>147 Aba road, Port Harcourt , Rivers State</p>
+                            <h3 class="f-18 m-0">PARK & SHOP</h3>
+                            <p class="f-8">147 Aba road, Port Harcourt , Rivers State</p>
                         </span>
                     </div>
                 </div>
@@ -41,9 +40,9 @@
                     </div>
                 </div>
             </div>
-            <div class="container d-flex activity py-2">
-                <h3>16.05.20</h3>
-                <p class="ml-auto pt-1">8AM-11:30AM</p>
+            <div class="container d-flex py-2">
+                <h3 class="f-18">16.05.20</h3>
+                <p class="f-8 ml-auto pt-1">8AM-11:30AM</p>
             </div>
             <div class="container">
                 <div id="connectionsmallCarousel" class="carousel slide" data-ride="carousel">
@@ -51,7 +50,7 @@
                         <div class="carousel-item active">
                             <div class="connectionsmall d-flex justify-content-around py-2">
                                 <span class="d-flex">
-                                    <img src="/frontend/img/user1.jpg" alt="">
+                                    <a data-toggle="modal" href="#networkactivityModal"><img src="/frontend/img/user1.jpg" alt=""></a>
                                     <span class="ml-1">
                                         <p class="mb-1">John</p>
                                         <p class="routeheader m-0">08:00am</p>
@@ -164,5 +163,5 @@
             </div>
         </div>   
     </div>
-</section>
+    @include('activity.modals.networkActivity')
 
