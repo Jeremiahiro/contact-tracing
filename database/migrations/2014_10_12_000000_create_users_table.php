@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('phone');
             $table->string('avatar')->default('https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png');
+            $table->string('header')->default('https://res.cloudinary.com/iro/image/upload/v1594295895/samples/Rectangle_1547.png');
 
             $table->string('provider', 20)->nullable();
             $table->string('provider_id')->nullable();

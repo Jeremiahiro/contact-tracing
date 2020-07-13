@@ -1,0 +1,15 @@
+.inputWrapper {
+    position: relative
+}
+
+.inputWrapper .add,
+.inputWrapper .remove {
+    position: absolute;
+    bottom: -38px;
+    right: 0;
+}
+
+.inputWrapper .add {
+    margin-right: 2px;
+    right: 25px
+}

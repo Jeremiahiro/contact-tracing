@@ -38,8 +38,5 @@ Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->name
 Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
 
 
-Route::get('/check', 'UserController@userOnlineStatus');
-
-
 Route::resource('/activity', 'ActivityController');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

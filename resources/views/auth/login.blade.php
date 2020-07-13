@@ -18,8 +18,8 @@
             @include('partials.mobile.header.header-transparent')
 
             <div class="container">
-                <div class="pt-5">
-                    <h1 class="text-white f-60">LOGIN</h1>
+                <div class="">
+                    <h1 class="text-white f-60 py-5">LOGIN</h1>
                     <form class="" method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group row">

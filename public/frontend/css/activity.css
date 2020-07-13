@@ -1,8 +1,9 @@
 *{
     color: #0B24FA;
 }
-.where-to {
-    /* position: relative; */
+
+form .error {
+    color: #ff0000;
 }
 /* .where-to-icon {
     top: 25px;

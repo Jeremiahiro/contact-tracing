@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('custom-style')
-{{-- <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet"> --}}
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <link href="{{ asset('frontend/css/activity.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/css/jq.multiinput.min.css') }}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+<script src="{{ asset('frontend/jquery/jq.multiinput.min.js')}}"></script>
+<script src="{{ asset('frontend/jquery/activity.js')}}"></script>
 @endsection
-
 
 @section('header')
 
@@ -22,19 +23,23 @@
     <div class="container">
         <div class="py-5 activity">
             <p class="f-12 bold">Record Activity</p>
-            <form>
+            <form method="POST" action="{{ route('activity.store') }}" name="activity">
+                @csrf
                 <div class="d-flex justify-content-between align-items-center where-to">
                     <img src="{{ asset('/frontend/img/svg/left.svg') }}" alt="" class="mt-3 mr-2 where-to-icon">
                     <div class="form-group row">
-                        <label for="fromTo" class="f-24 col-md-4 text-md-right">
+                        <label for="from_location" class="f-24 col-md-4 text-md-right">
                             {{ __('Where') }}
                         </label>
                         <div class="col-md-6 mb-2">
                             <input id="from_location" type="search"
                                 class="blue-input input rounded-0 @error('from_location') is-invalid @enderror"
-                                name="from_location" value="{{ old('from_location') }}" required
-                                autocomplete="from_location" placeholder="">
-
+                                name="from_location" value="{{ old('from_location') }}" required autocomplete="off"
+                                placeholder="From">
+                            <input type="hidden" name="from_latitude" class="" id="from_latitude"
+                                value="{{ old('from_latitude') }}">
+                            <input type="hidden" name="from_longitude" class="" id="from_longitude"
+                                value="{{ old('from_longitude') }}">
                             @error('from_location')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -45,8 +50,11 @@
                             <input id="to_location" type="search"
                                 class="blue-input input rounded-0 @error('to_location') is-invalid @enderror"
                                 name="to_location" value="{{ old('to_location') }}" required autocomplete="to_location"
-                                placeholder="">
-
+                                placeholder="To">
+                            <input type="hidden" name="to_latitude" class="" id="to_latitude"
+                                value="{{ old('to_latitude') }}">
+                            <input type="hidden" name="to_longitude" class="" id="to_longitude"
+                                value="{{ old('to_longitude') }}">
                             @error('to_location')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -61,60 +69,31 @@
                             {{ __('When') }}
                         </label>
                         <div class="col-md-6 mb-2">
-                            <input id="from_location" type="text"
-                                class="blue-input input rounded-0 @error('start_date') is-invalid @enderror"
-                                name="start_date" value="{{ old('start_date') }}" required autocomplete="datetimes"
-                                placeholder="">
-
-                            @error('start_date')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                            <input id="date_range" type="text" class="blue-input input rounded-0" name="date_range"
+                                required autocomplete="datetimes" placeholder="" value="">
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="who" class="m-0 f-24 text-md-right">
+                            {{ __('Who') }}
+                        </label>
+                        <fieldset class="todos_labels">
+
+                            <textarea class="" id="activity_tags">
+                                {{-- [{"name":"","email":"","phone":""}] --}}
+                            </textarea>
+                        </fieldset>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="" for="wherefrom">Where</label>
-                    <input type="text" class="mb-1 blue-input bg-light" id="wherefrom" placeholder="From">
-                    <input type="text" class="blue-input bg-light" id="whereto" placeholder="To">
+                <div class="form-group mt-5 text-right">
+                    <button type="submit" class="btn f-14rounded blue-btn px-3 text-white">ADD</button>
                 </div>
-                <div class="form-group">
-                </div>
-                <div class="form-group">
-                    <label class="f-24" for="when">When</label>
-                    <input type="datetime-local" class="blue_input form-control bg-light" id="time">
-                </div>
+                <script type="text/template">
 
-                <div class="form-group mb-1">
-                    <label class="input_label" for="contacts">Who</label>
-                    <input type="text" class="blue_input form-control bg-light" id="contactname" placeholder="Name">
-                </div>
-
-                <div class="form-group mb-1">
-                    <input type="email" class="blue_input form-control bg-light" id="contactemail" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <input type="number" class="blue_input form-control bg-light" id="contactemail" placeholder="Phone">
-                </div>
-                <div class="d-flex justify-content-between pt-2">
-                    <p class="blue-btn rounded routeheader p-1">Peter Drobac</p>
-                    <p class="blue-btn rounded routeheader p-1">Peter Drobac</p>
-                    <p class="blue-btn rounded routeheader p-1">Peter Drobac</p>
-                    <p class="blue-btn rounded routeheader p-1">Peter Drobac</p>
-                    <p class="blue-btn rounded routeheader p-1">Peter Drobac</p>
-                </div>
-                <div class="form-group text-right">
-                    <button type="submit" class="btn"><img src="{{  asset('/frontend/img/svg/addcontact.svg') }}"
-                            alt="add contact"></button>
-                </div>
-
-                <div class="form-group text-right">
-                    <button type="submit" class="btn blue-btn">ADD</button>
-                </div>
-
+                </script>
             </form>
+
         </div>
     </div>
     @include('partials.mobile.footer.footer')
@@ -122,18 +101,41 @@
 
 @endsection
 @section('script')
+
 <script>
-    jQuery(document).ready(function ($) {
-        $(function () {
-            $('input[name="start_date"]').daterangepicker({
-                timePicker: true,
-                startDate: moment().startOf('hour'),
-                endDate: moment().startOf('hour').add(32, 'hour'),
-                locale: {
-                    format: 'DD-MM-YYYY hh:mm A'
-                }
-            });
+    function initialize() {
+        var options = {
+            types: ['(cities)'],
+        };
+        var fromLoc = document.getElementById('from_location');
+        var getFromLoc = new google.maps.places.Autocomplete(fromLoc);
+        getFromLoc.addListener('place_changed', function () {
+            var place = getFromLoc.getPlace();
+            if (!place.geometry) {
+                window.alert("'" + place.name + "' not available on Google Map");
+                fromLoc.value = "";
+                return;
+            } else {
+                $('#from_latitude').val(place.geometry['location'].lat());
+                $('#from_longitude').val(place.geometry['location'].lng());
+            }
         });
-    });
+
+        var toLoc = document.getElementById('to_location');
+        var getToLoc = new google.maps.places.Autocomplete(toLoc);
+        getToLoc.addListener('place_changed', function () {
+            var place = getToLoc.getPlace();
+            if (!place.geometry) {
+                window.alert("'" + place.name + "' not available on Google Map");
+                toLoc.value = "";
+                return;
+            } else {
+                $('#to_latitude').val(place.geometry['location'].lat());
+                $('#to_longitude').val(place.geometry['location'].lng());
+            }
+        });
+
+  }
+
 </script>
 @endsection

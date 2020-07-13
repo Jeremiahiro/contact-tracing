@@ -7,7 +7,11 @@
             <h3 class="time">{{ date('H:i A') }}</h3>
         </div>
         <div class="">
-            <h1 class="time">CONTACT TRACING</h1>
+            <h1 class="time">
+                <a href="{{ route('activity.create') }}" class="time text-white">
+                    CONTACT TRACING
+                </a>
+            </h1>
         </div>
     </div>
 </div>

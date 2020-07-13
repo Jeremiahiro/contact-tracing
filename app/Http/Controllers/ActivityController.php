@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Activity;
+use App\ActivityTags;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ActivityController extends Controller
 {
@@ -24,7 +27,8 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        $activities = Activity::where('user_id', Auth::user()->id)->get();
+        return view('activity.index', compact('activities'));
     }
 
     /**
@@ -45,7 +49,55 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validateActivity($request);
+
+        $date = $request->input('date_range');
+        $split = explode(' to ',$date);
+        $start_date = $split[0];
+        $end_date = $split[1];
+
+        $activity = new Activity();
+        $activity->from_location = $request->input('from_location');
+        $activity->from_latitude = $request->input('from_latitude');
+        $activity->from_longitude = $request->input('from_longitude');
+        $activity->to_location = $request->input('to_location');
+        $activity->to_latitude = $request->input('to_latitude');
+        $activity->to_longitude = $request->input('to_longitude');
+        $activity->start_date = $start_date;
+        $activity->end_date = $end_date;
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
+
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+
+        foreach($name as $key => $value) {
+            $user = User::where('email', '==', $request->input('email'))->first();
+            if ($user === null) {
+                $activityTag = new ActivityTags;
+                $activityTag->name          = $name[$key];
+                $activityTag->email         = $email[$key];
+                $activityTag->phone         = $phone[$key];
+                $activityTag->activity_id   = $activity->id;
+                $activityTag->user_id       = Auth::user()->id;
+                // dd($activityTag);
+                $activityTag->save();
+            } else {
+                $activityTag = new ActivityTags;
+                $activityTag->name          = $user->name;
+                $activityTag->email         = $user->email;
+                $activityTag->phone         = $user->phone;
+                $activityTag->activity_id   = $user->activity_id;
+                $activityTag->person_id     = $user->user_id;
+                $activityTag->userr_id      = Auth::user()->id;
+                // dd($activityTag);
+                $activityTag->save();
+            }
+        }
+
+        return view('activity.index')->with('success', 'Successful');
+
     }
 
     /**
@@ -91,5 +143,18 @@ class ActivityController extends Controller
     public function destroy(Activity $activity)
     {
         //
+    }
+
+    public function validateActivity(Request $request){
+
+		$rules = [
+            'from_location' => 'required',
+            'to_location' => 'required',
+            'activity_tags.*.name' => 'sometimes',
+            'activity_tags.*.email' => 'sometimes',
+            'activity_tags.*.phone' => 'sometimes',
+        ];
+         
+		$this->validate($request, $rules);
     }
 }

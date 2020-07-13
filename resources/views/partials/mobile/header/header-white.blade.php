@@ -6,11 +6,11 @@
             </a>
         </div>
         @guest
-        <div class="avatar-icon">
+        {{-- <div class="avatar-icon">
             <a href="{{ route('dashboard') }}">
                 <img src="{{ asset('frontend/img/jimi.png') }}" class="avatar" alt="default avatar">
             </a>
-        </div>
+        </div> --}}
         @else
         <div class="avatar-icon">
             <a href="{{ route('dashboard') }}">

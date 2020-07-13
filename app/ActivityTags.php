@@ -13,7 +13,7 @@ class ActivityTags extends Model
     */
     protected $fillable = [
         'user_id', 'activity_id', 'name',
-        'email', 'phone', 'person_id',
+        'email', 'phone', 'person_id', 'avatar',
     ];
 
     /**
@@ -21,10 +21,7 @@ class ActivityTags extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'start_date' => 'datetime',
-        'end_date' => 'datetime',
-    ];
+    protected $casts = [ ];
 
     /**
      * Get the user that owns the activity people.
