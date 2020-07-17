@@ -4,7 +4,6 @@
 <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <link href="{{ asset('frontend/css/activity.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/jq.multiinput.min.css') }}" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script src="{{ asset('frontend/jquery/jq.multiinput.min.js')}}"></script>
 <script src="{{ asset('frontend/jquery/activity.js')}}"></script>
 @endsection
@@ -23,7 +22,8 @@
     <div class="container">
         <div class="py-5 activity">
             <p class="f-12 bold">Record Activity</p>
-            <form method="POST" action="{{ route('activity.store') }}" name="activity">
+            <form method="POST" action="{{ route('activity.store') }}" name="activity" autocomplete="off">
+                <input autocomplete="false" name="hidden" type="text" style="display:none;">
                 @csrf
                 <div class="d-flex justify-content-between align-items-center where-to">
                     <img src="{{ asset('/frontend/img/svg/left.svg') }}" alt="" class="mt-3 mr-2 where-to-icon">
@@ -31,7 +31,7 @@
                         <label for="from_location" class="f-24 col-md-4 text-md-right">
                             {{ __('Where') }}
                         </label>
-                        <div class="col-md-6 mb-2">
+                        <div class="col-md-6 mb-1">
                             <input id="from_location" type="search"
                                 class="blue-input input rounded-0 @error('from_location') is-invalid @enderror"
                                 name="from_location" value="{{ old('from_location') }}" required autocomplete="off"
@@ -49,7 +49,7 @@
                         <div class="col-md-6">
                             <input id="to_location" type="search"
                                 class="blue-input input rounded-0 @error('to_location') is-invalid @enderror"
-                                name="to_location" value="{{ old('to_location') }}" required autocomplete="to_location"
+                                name="to_location" value="{{ old('to_location') }}" required autocomplete="off"
                                 placeholder="To">
                             <input type="hidden" name="to_latitude" class="" id="to_latitude"
                                 value="{{ old('to_latitude') }}">
@@ -69,8 +69,8 @@
                             {{ __('When') }}
                         </label>
                         <div class="col-md-6 mb-2">
-                            <input id="date_range" type="text" class="blue-input input rounded-0" name="date_range"
-                                required autocomplete="datetimes" placeholder="" value="">
+                            <input id="date_range" type="text" class="daterange blue-input input rounded-0" name="date_range"
+                                required placeholder="" value="">
                         </div>
                     </div>
                     <div class="form-group">
@@ -80,7 +80,7 @@
                         <fieldset class="todos_labels">
 
                             <textarea class="" id="activity_tags">
-                                {{-- [{"name":"","email":"","phone":""}] --}}
+                                [{"name":"","email":"","phone":""}]
                             </textarea>
                         </fieldset>
                     </div>
@@ -101,6 +101,9 @@
 
 @endsection
 @section('script')
+<script
+    src="https://maps.google.com/maps/api/js?key=AIzaSyDqlBzMgOyqWDAZUJacsncmGLnxoxED9wk&libraries=places&callback=initialize"
+    type="text/javascript" async defer></script>
 
 <script>
     function initialize() {
@@ -134,8 +137,7 @@
                 $('#to_longitude').val(place.geometry['location'].lng());
             }
         });
-
-  }
+    }
 
 </script>
 @endsection

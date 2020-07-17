@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('username');
-            $table->string('phone');
-            $table->string('avatar')->default('https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png');
+            $table->string('phone')->nullable();
+            $table->string('avatar')->default('https://res.cloudinary.com/iro/image/upload/v1582715045/images.png');
             $table->string('header')->default('https://res.cloudinary.com/iro/image/upload/v1594295895/samples/Rectangle_1547.png');
 
             $table->string('provider', 20)->nullable();

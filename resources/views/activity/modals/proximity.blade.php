@@ -16,9 +16,9 @@
 
 @section('mobile-content')
 <section>
-    
-    
-    <div class="" id="proximityalertModal" tabindex="-1" role="dialog" aria-labelledby="activitySelection"
+
+
+    <div class="" id="proximityalertModal"  role="dialog" aria-labelledby="activitySelection"
         aria-hidden="true">
         <div class="modal-dialog route_blue mt-5 ml-0" style="pointer-events:auto;" role="document">
             <div class="container py-3 d-flex">
@@ -36,7 +36,7 @@
             </div>
             <div class="container d-flex justify-content-around py-2">
                 <div class="proximityimage py-4 col-6">
-                   <a href=""><img src="/frontend/img/store.jpg" alt=""></a>
+                    <a href=""><img src="/frontend/img/store.jpg" alt=""></a>
                 </div>
                 <div class="col-6 p-0">
                     <span class="d-flex">
@@ -74,7 +74,7 @@
 
             <div class="container d-flex justify-content-around py-2">
                 <div class="proximityimage col-6">
-                   <a href=""><img src="/frontend/img/store.jpg" alt=""></a>
+                    <a href=""><img src="/frontend/img/store.jpg" alt=""></a>
                 </div>
                 <div class="col-6 p-0">
                     <span>
@@ -85,9 +85,9 @@
                     </span>
                     <div class="bg-white d-flex justify-content-between">
                         <div class="connectionsmall d-flex py-2">
-                                <img src="/frontend/img/user1.jpg" alt="">
-                                <img src="/frontend/img/user2.jpg" alt="">
-                                <img src="/frontend/img/user3.jpg" alt="">
+                            <img src="/frontend/img/user1.jpg" alt="">
+                            <img src="/frontend/img/user2.jpg" alt="">
+                            <img src="/frontend/img/user3.jpg" alt="">
                         </div>
                         <div class="mr-auto">
                             <h2 class="f-14 regular py-2 pl-2">+5</h2>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 

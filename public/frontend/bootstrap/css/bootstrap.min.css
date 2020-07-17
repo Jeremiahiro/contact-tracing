@@ -2046,29 +2046,29 @@ pre code {
 .table-primary,
 .table-primary>td,
 .table-primary>th {
-    background-color: #b8daff
+    background-color: #00B5AA
 }
 
 .table-primary tbody+tbody,
 .table-primary td,
 .table-primary th,
 .table-primary thead th {
-    border-color: #7abaff
+    border-color: #00B5AA
 }
 
 .table-hover .table-primary:hover {
-    background-color: #9fcdff
+    background-color: #00B5AA
 }
 
 .table-hover .table-primary:hover>td,
 .table-hover .table-primary:hover>th {
-    background-color: #9fcdff
+    background-color: #00B5AA
 }
 
 .table-secondary,
 .table-secondary>td,
 .table-secondary>th {
-    background-color: #d6d8db
+    background-color: #00B5AA
 }
 
 .table-secondary tbody+tbody,
@@ -8890,6 +8890,10 @@ button.bg-dark:hover {
     width: 75% !important
 }
 
+.w-80 {
+    width: 80% !important
+}
+
 .w-100 {
     width: 100% !important
 }
@@ -11254,6 +11258,10 @@ button.bg-dark:hover {
 
 .text-primary {
     color: #007bff !important
+}
+
+.text-gray {
+    color: #707070 !important
 }
 
 a.text-primary:focus,

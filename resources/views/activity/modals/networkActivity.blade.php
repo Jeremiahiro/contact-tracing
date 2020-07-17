@@ -1,5 +1,5 @@
 
-    <div class="modal hide fade" id="networkactivityModal" tabindex="-1" role="dialog" aria-labelledby="activitySelection"
+    <div class="modal hide fade" id="networkactivityModal" role="dialog" aria-labelledby="activitySelection"
         aria-hidden="true">
         <div class="modal-dialog route_purple mt-5 ml-0" style="pointer-events:auto;" role="document">
             <div class="container py-3 d-flex">

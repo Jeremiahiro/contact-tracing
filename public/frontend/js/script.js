@@ -5,6 +5,15 @@ jQuery(document).ready(function ($) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    // alert timeout
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 3000);
+
+
     $('.count').each(function () {
         var $this = $(this);
         jQuery({

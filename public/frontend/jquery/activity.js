@@ -5,10 +5,10 @@ jQuery(document).ready(function ($) {
         input: $(
             '<div class="form-group">\n' +
             '<div class="row inputElement">\n' +
-            '<div class="col-md-6 mb-2">\n' +
+            '<div class="col-md-6 mb-1">\n' +
             '<input class="blue-input input rounded-0 required" name="name[]" placeholder="Name" type="text" autocomplete="tag_detail">\n' +
             '</div>\n' +
-            '<div class="col-md-6 mb-2">\n' +
+            '<div class="col-md-6 mb-1">\n' +
             '<input class="blue-input input rounded-0" name="email[]" placeholder="Email" type="email"  autocomplete="tag_detail">\n' +
             '</div>\n' +
             '<div class="col-md-6 mb-2">\n' +
@@ -26,21 +26,21 @@ jQuery(document).ready(function ($) {
     });
 
     $(function () {
-        $('input[name="date_range"]').daterangepicker({
+        $('.daterange').daterangepicker({
             autoUpdateInput: false,
             timePicker: true,
-            // startDate: moment().startOf('hour'),
-            // endDate: moment().startOf('hour').add(32, 'hour'),
+            minYear: 2020,
+            startDate: moment().startOf('hour'),
             locale: {
                 cancelLabel: 'Clear',
                 format: 'DD-MM-YY hh:mm A'
             }
         });
-        $('input[name="date_range"]').on('apply.daterangepicker', function(ev, picker) {
+        $('.daterange').on('apply.daterangepicker', function(ev, picker) {
             $(this).val(picker.startDate.format('DD-MM-YY hh:mm A') + ' to ' + picker.endDate.format('DD-MM-YY hh:mm A'));
         });
 
-        $('input[name="date_range"]').on('cancel.daterangepicker', function(ev, picker) {
+        $('.daterange').on('cancel.daterangepicker', function(ev, picker) {
             $(this).val('');
         });
     });
@@ -54,7 +54,6 @@ jQuery(document).ready(function ($) {
                 // The key name on the left side is the name attribute
                 // of an input field. Validation rules are defined
                 // on the right side
-                "activity_tags": "required",
                 "date_range": "required",
                 "name": "required",
                 "email": {
@@ -64,7 +63,6 @@ jQuery(document).ready(function ($) {
             },
             // Specify validation error messages
             messages: {
-                "activity_tags[]": "Please select category",
                 "name": "Please enter a name",
                 "date_range": "Please enter a valid date and time",
                 "email": "Please enter a valid email address"

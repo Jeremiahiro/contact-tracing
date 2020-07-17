@@ -77,7 +77,6 @@
                         </div>
                     </div>
 
-                    
                     <div class="form-group row">
                         <label for="password" class="col-md-4 text-md-right">
                             {{ __('Password') }}
@@ -105,7 +104,6 @@
                             <input id="password-confirm" type="password"
                                 class="blue-input input @error('password-confirm') is-invalid @enderror" name="password-confirm"
                                 value="{{ old('password-confirm') }}" required autocomplete="password-confirm" placeholder="********">
-
                         </div>
                     </div>
                     <div class="form-group mt-4">

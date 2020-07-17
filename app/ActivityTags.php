@@ -28,7 +28,7 @@ class ActivityTags extends Model
      */
     public function owner()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User',);
     }
 
     /**
@@ -36,6 +36,14 @@ class ActivityTags extends Model
      */
     public function activity()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Activity');
+    }
+
+    /**
+     * Get the activity that the people belong to.
+     */
+    public function tagged()
+    {
+        return $this->belongsTo('App\User', 'person_id');
     }
 }

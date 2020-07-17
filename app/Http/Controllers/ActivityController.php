@@ -25,10 +25,21 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $activities = Activity::where('user_id', Auth::user()->id)->get();
-        return view('activity.index', compact('activities'));
+        $activities = Activity::where('user_id', Auth::user()->id)->latest('updated_at')->with('tags')->simplePaginate(50);
+        $users = User::get();
+
+        if($activities->count() > 0) {
+            if ($request->ajax()) {
+                $activities = view('activity.index', compact('activities'))->render();
+                return response()->json(['html'=>$activities]);
+            }
+    
+            return view('activity.index', compact('activities', 'users'));
+        }
+        return view('activity.create');
+
     }
 
     /**
@@ -73,30 +84,27 @@ class ActivityController extends Controller
         $phone = $request->input('phone');
 
         foreach($name as $key => $value) {
-            $user = User::where('email', '==', $request->input('email'))->first();
-            if ($user === null) {
+            $user = User::where('email', $email[$key])->first();
+            if ($user) {
+                $activityTag = new ActivityTags;
+                $activityTag->name          = $user->name;
+                $activityTag->email         = $user->email;
+                $activityTag->phone         = $user->phone;
+                $activityTag->activity_id   = $activity->id;
+                $activityTag->person_id     = $user->id;
+                $activityTag->user_id       = Auth::user()->id;
+                $activityTag->save();
+            } else {
                 $activityTag = new ActivityTags;
                 $activityTag->name          = $name[$key];
                 $activityTag->email         = $email[$key];
                 $activityTag->phone         = $phone[$key];
                 $activityTag->activity_id   = $activity->id;
                 $activityTag->user_id       = Auth::user()->id;
-                // dd($activityTag);
-                $activityTag->save();
-            } else {
-                $activityTag = new ActivityTags;
-                $activityTag->name          = $user->name;
-                $activityTag->email         = $user->email;
-                $activityTag->phone         = $user->phone;
-                $activityTag->activity_id   = $user->activity_id;
-                $activityTag->person_id     = $user->user_id;
-                $activityTag->userr_id      = Auth::user()->id;
-                // dd($activityTag);
                 $activityTag->save();
             }
         }
-
-        return view('activity.index')->with('success', 'Successful');
+        return redirect()->route('activity.index')->with('success', 'Successful!');
 
     }
 
