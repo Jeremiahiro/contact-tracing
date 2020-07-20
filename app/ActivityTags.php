@@ -13,7 +13,7 @@ class ActivityTags extends Model
     */
     protected $fillable = [
         'user_id', 'activity_id', 'name',
-        'email', 'phone', 'person_id',
+        'email', 'phone', 'person_id', 'avatar',
     ];
 
     /**
@@ -21,17 +21,14 @@ class ActivityTags extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'start_date' => 'datetime',
-        'end_date' => 'datetime',
-    ];
+    protected $casts = [ ];
 
     /**
      * Get the user that owns the activity people.
      */
     public function owner()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User',);
     }
 
     /**
@@ -39,6 +36,14 @@ class ActivityTags extends Model
      */
     public function activity()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Activity');
+    }
+
+    /**
+     * Get the activity that the people belong to.
+     */
+    public function tagged()
+    {
+        return $this->belongsTo('App\User', 'person_id');
     }
 }

@@ -28,18 +28,13 @@ Route::get('proximity', function () {
 });
 
 
-
 Auth::routes(['verify' => true]);
 
-Route::get('/', 'GeneralController@index')->name('home');
 
 Auth::routes(['verify' => true]);
 Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->name('social.login');
 Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
 
-
-Route::get('/check', 'UserController@userOnlineStatus');
-
-
+Route::get('/', 'GeneralController@index')->name('home');
 Route::resource('/activity', 'ActivityController');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

@@ -61,7 +61,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\ActivityTags');
     }
 
-    // public function getTagCountAttribute(){
-    //     return $this->tags()->count();
-    // }
+    /**
+     * Get the comments for the blog post.
+     */
+    public function isTagged()
+    {
+        return $this->hasMany('App\ActivityTags', 'person_id');
+    }
 }

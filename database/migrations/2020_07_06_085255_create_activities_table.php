@@ -13,6 +13,7 @@ class CreateActivitiesTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->string('from_location');
@@ -25,7 +26,7 @@ class CreateActivitiesTable extends Migration
             $table->dateTime('end_date', 0);
             $table->timestamps();
 
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 

@@ -42,12 +42,12 @@ class UserActivityController extends Controller
         $this->validateActivity($request);
         $activity = new UserActivity();
 
+        $activity->from_location = $request->input('from_location');
         $activity->from_latitude = $request->input('from_latitude');
         $activity->from_longitude = $request->input('from_longitude');
-        $activity->from_location = $request->input('from_location');
 
+        $activity->to_location = $request->input('to_location');
         $activity->to_latitude = $request->input('to_latitude');
-        $activity->to_longitude = $request->input('to_longitude');
         $activity->to_longitude = $request->input('to_longitude');
 
         $activity->start_date = $request->input('start_date');
@@ -138,7 +138,9 @@ class UserActivityController extends Controller
             'to_latitude' => 'required',
             'to_longitude' => 'required',
             'to_location' => 'required',
-            'persons.*.people' => 'sometimes',
+            'activity_tags.*.name' => 'sometimes',
+            'activity_tags.*.email' => 'sometimes',
+            'activity_tags.*.phone' => 'sometimes',
             'start_date' => 'required|date|before:end_date',
             'end_date' => 'required|date|after:start_date',
         ];

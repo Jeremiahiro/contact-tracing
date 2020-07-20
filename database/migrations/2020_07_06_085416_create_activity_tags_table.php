@@ -18,10 +18,11 @@ class CreateActivityTagsTable extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('person_id')->nullable();
+            $table->string('avatar')->default('https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png');
             $table->timestamps();
 
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('person_id')->nullable()->constrained('users');
             $table->foreignId('activity_id')->constrained('activities');
 
         });

@@ -16,9 +16,9 @@
 
 @section('mobile-content')
 <section>
-    
-    
-    <div class="" id="proximityalertModal" tabindex="-1" role="dialog" aria-labelledby="activitySelection"
+
+
+    <div class="" id="proximityalertModal"  role="dialog" aria-labelledby="activitySelection"
         aria-hidden="true">
         <div class="modal-dialog route_blue mt-5 ml-0" style="pointer-events:auto;" role="document">
             <div class="container py-3 d-flex">
@@ -36,7 +36,7 @@
             </div>
             <div class="container d-flex justify-content-around py-2">
                 <div class="proximityimage py-4 col-6">
-                   <a href=""><img src="/frontend/img/store.jpg" alt=""></a>
+                    <a href=""><img src="/frontend/img/store.jpg" alt=""></a>
                 </div>
                 <div class="col-6 p-0">
                     <span class="d-flex">
@@ -74,7 +74,7 @@
 
             <div class="container d-flex justify-content-around py-2">
                 <div class="proximityimage col-6">
-                   <a href=""><img src="/frontend/img/store.jpg" alt=""></a>
+                    <a href=""><img src="/frontend/img/store.jpg" alt=""></a>
                 </div>
                 <div class="col-6 p-0">
                     <span>
@@ -88,6 +88,7 @@
                             <img src="/frontend/img/user1.jpg" alt="">
                             <img src="/frontend/img/user2.jpg" alt="">
                             <img src="/frontend/img/user3.jpg" alt="">
+<<<<<<< HEAD
                         </div>
                         <h2 class="f-14 regular pt-3 pl-1 recordactivity mr-auto">+5</h2>
                         <a class="w-25 " href=""><img src="{{ asset('/frontend/img/svg/blueadd.svg')}}" alt="map-pin"></a>
@@ -117,6 +118,8 @@
                                 <img src="/frontend/img/user3.jpg" alt="">
                             </span>
                             <p class="regular f-8 py-1">Visited 4mins ago</p>
+=======
+>>>>>>> 50e26bf90c809fad62f09bb77955579d21ce68b4
                         </div>
                         <div class="mr-auto">
                             <h2 class="f-14 regular py-2 pl-2">+5</h2>
@@ -124,7 +127,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 

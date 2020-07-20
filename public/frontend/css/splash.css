@@ -83,36 +83,39 @@ p {
     font-size: 14px;
 }
 
-.login input {
+/* .login input {
     border-bottom: 2px solid #fff;
-}
+} */
 
-.recordactivity {
+/* .recordactivity {
     color: #0B24FA;
-}
+} */
 
-.input_label {
+/* .input_label {
     font-size: 24px;
-}
+} */
 
-.routeheader {
+/* .routeheader {
     font-size: 9px !important;
-}
+} */
 
 .vl {
     border-left: 2px solid #0B24FA;
     height: 105px;
 }
 
-.route_white,
-.route_purple {
+.route {
     border-radius: 20px;
     width: 100%;
 }
 
 .route_white {
     background-color: #F7F7F7;
-    color: #0B24FA;
+    color: #0000ff;
+}
+
+.route_white h6 {
+    color: #707070;
 }
 
 .route_purple {
@@ -120,6 +123,51 @@ p {
     color: #fff;
 }
 
+/* .route_purple .add-svg {
+    background-color: #6406A8;
+    color: #fff;
+} */
+
+.route_white .add-svg {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    fill: currentColor;
+    color: #fff;
+    padding: 0 3px 3px 3px;
+    margin: 0;
+    text-align: center;
+    background: #0000ff
+}
+.route_purple .add-svg {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    fill: currentColor;
+    color:  #6406A8;
+    padding: 0 3px 3px 3px;
+    text-align: center;
+    background: #fff
+}
+ /* {
+    background-color: #0000ff;
+    color: #fff;
+    padding: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+} */
+
+/* .proximityimage img {
+    object-fit: cover;
+    width: 135px;
+    height: 120px;
+    border-radius: 15px;
+} */
+/* 
 .route_blue {
     background-color: #0000FF;
     color: #fff;
@@ -145,11 +193,6 @@ p {
 .fulfilled_locationwhite p,
 .route_image a {
     font-size: 6px !important;
-}
-
-.route_image img {
-    height: auto;
-    width: 64px;
 }
 
 .fulfilled img {

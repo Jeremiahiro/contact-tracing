@@ -40,6 +40,14 @@ class Activity extends Model
      */
     public function tags()
     {
-        return $this->hasMany('App\ActivityTags');
+        return $this->hasMany('App\ActivityTags', 'activity_id')->orderBy('created_at');
+    }
+
+    /**
+     * Get the people attached to the  activity.
+     */
+    public function tagged()
+    {
+        return $this->hasMany('App\User', 'person_id')->orderBy('created_at');
     }
 }
