@@ -5,10 +5,6 @@
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
 @endsection
 
-@section('header')
-@include('partials.mobile.header.header-white')
-@endsection
-
 @section('web-content')
     <h1 class="text-center">Please use a mobile device</h1>
 @endsection
@@ -16,6 +12,7 @@
 @section('mobile-content')
 
 <section class="mb-5 py-3">
+    
     @foreach ($activities as $index => $activity)
     <div class="">
         <div class="container py-3 d-flex justify-content-around">
@@ -59,12 +56,9 @@
                         @endif
                     </div>
                     <div class="">
-                        <a href="{{ route('activity.edit', 1) }}" class="add-svg">
-                            <svg viewBox="0 0 469.33333 469.33333" width="15" height="15" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="m437.332031 192h-160v-160c0-17.664062-14.335937-32-32-32h-21.332031c-17.664062 0-32 14.335938-32 32v160h-160c-17.664062 0-32 14.335938-32 32v21.332031c0 17.664063 14.335938 32 32 32h160v160c0 17.664063 14.335938 32 32 32h21.332031c17.664063 0 32-14.335937 32-32v-160h160c17.664063 0 32-14.335937 32-32v-21.332031c0-17.664062-14.335937-32-32-32zm0 0" />
-                            </svg>
+                        <a href="{{ route('activity.edit', 1) }}" class="add_svg">
+                            <img class="icon_blue" src="{{ asset('frontend/img/svg/plus_blue.svg' )}}" alt="Edit Activity">
+                            <img class="icon_white" src="{{ asset('frontend/img/svg/plus_white.svg' )}}" alt="Edit Activity">
                         </a>
                     </div>
                 </div>

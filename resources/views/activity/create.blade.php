@@ -18,7 +18,6 @@
 
 @section('mobile-content')
 <section>
-    @include('partials.mobile.header.header-white')
     <div class="container">
         <div class="py-5 activity">
             <p class="f-12 bold">Record Activity</p>

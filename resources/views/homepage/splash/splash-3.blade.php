@@ -1,5 +1,5 @@
 <div class="">
-    @include('partials.mobile.header.header-transparent')
+    @include('partials.mobile.header.header')
 
     <div class="container pl-4">
         <div class="trace_date py-5">

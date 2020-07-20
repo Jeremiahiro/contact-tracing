@@ -38,3 +38,4 @@ Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCal
 Route::get('/', 'GeneralController@index')->name('home');
 Route::resource('/activity', 'ActivityController');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+// Route::get('/dashboard/settings/{$user_id}', 'DashboardController@show')->name('dashboard.settings');
