@@ -131,7 +131,7 @@ input:-webkit-autofill:focus,
 
 .bold {
     font-family: 'G-bold' !important;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .regular {

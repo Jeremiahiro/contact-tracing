@@ -4,10 +4,6 @@
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 @endsection
 
-@section('header')
-
-@endsection
-
 @section('web-content')
 <h1 class="text-center">Please use a mobile device</h1>
 @endsection
@@ -15,7 +11,7 @@
 @section('mobile-content')
 <section>
     <div class="splash splash-1">
-        @include('partials.mobile.header.header-transparent')
+        @include('partials.mobile.header.header')
 
         <div class="container">
             <div class="login py-5">
@@ -26,10 +22,10 @@
                     {{ __('A fresh verification link has been sent to your email address.') }}
                 </div>
                 @endif
-                <h5 class="py-5">
+                <h5 class="py-5 bold">
                     Before proceeding, please check your email for a verification link.
                 </h5>
-                <h5 class="">
+                <h5 class="bold">
                     If you did not receive the email
                 </h5>
                 <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">

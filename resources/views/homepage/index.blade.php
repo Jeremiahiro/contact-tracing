@@ -8,10 +8,6 @@ Homepage
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 @endsection
 
-@section('header')
-
-@endsection
-
 @section('web-content')
 <h1 class="text-center">Please use a mobile device</h1>
 @endsection
