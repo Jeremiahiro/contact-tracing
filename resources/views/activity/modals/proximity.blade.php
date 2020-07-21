@@ -83,17 +83,46 @@
                     <span>
                         <h2 class="f-12 bold mb-1">MILE 1 MARKET</h2>
                     </span>
-                    <div class="bg-white d-flex justify-content-between">
+                    <div class="bg-white proximityadd d-flex justify-content-between p-1">
                         <div class="connectionsmall d-flex py-2">
                             <img src="/frontend/img/user1.jpg" alt="">
                             <img src="/frontend/img/user2.jpg" alt="">
                             <img src="/frontend/img/user3.jpg" alt="">
+<<<<<<< HEAD
+                        </div>
+                        <h2 class="f-14 regular pt-3 pl-1 recordactivity mr-auto">+5</h2>
+                        <a class="w-25 " href=""><img src="{{ asset('/frontend/img/svg/blueadd.svg')}}" alt="map-pin"></a>
+                    </div>
+                    <p class="regular f-8 py-2 m-0">Visited 4mins ago</p>
+                </div>
+            </div>
+
+            <div class="container d-flex justify-content-around py-2">
+                <div class="proximityimage py-2 col-6">
+                   <a href=""><img src="/frontend/img/store.jpg" alt=""></a>
+                </div>
+                <div class="col-6 p-0">
+                    <span>
+                        <img src="{{ asset('/frontend/img/svg/map-pin.svg')}}" alt="map-pin">
+                        <img src="{{ asset('/frontend/img/svg/red-flag.svg')}}" alt="red-flag">
+                    </span>
+                    <span>
+                        <h2 class="f-12 bold mb-1">MESH MEDIA LAB</h2>
+                        <p class="f-8 regular m-0">147 Aba road, Port Harcourt , Rivers State</p>
+                    </span>
+                    <div class="d-flex justify-content-between">
+                        <div class="connectionsmall py-1">
+                            <span class=" d-flex py-1">
+                                <img src="/frontend/img/user1.jpg" alt="">
+                                <img src="/frontend/img/user2.jpg" alt="">
+                                <img src="/frontend/img/user3.jpg" alt="">
+                            </span>
+                            <p class="regular f-8 py-1">Visited 4mins ago</p>
+=======
+>>>>>>> 50e26bf90c809fad62f09bb77955579d21ce68b4
                         </div>
                         <div class="mr-auto">
                             <h2 class="f-14 regular py-2 pl-2">+5</h2>
-                        </div>
-                        <div class="proximityadd">
-                            <img src="{{ asset('/frontend/img/svg/addblue.svg')}}" alt="map-pin">
                         </div>
                     </div>
                 </div>
