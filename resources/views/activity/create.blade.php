@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="form-group mt-5 text-right">
-                    <button type="submit" class="btn f-14rounded blue-btn px-3 text-white">ADD</button>
+                    <button type="submit" class="btn f-14 rounded blue-btn px-3 text-white">ADD</button>
                 </div>
                 <script type="text/template">
 
