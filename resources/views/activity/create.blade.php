@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('custom-style')
-<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <link href="{{ asset('frontend/css/activity.css') }}" rel="stylesheet">
-<link href="{{ asset('frontend/css/jq.multiinput.min.css') }}" rel="stylesheet">
-<script src="{{ asset('frontend/jquery/jq.multiinput.min.js')}}"></script>
 <script src="{{ asset('frontend/jquery/activity.js')}}"></script>
 @endsection
 
@@ -21,8 +18,8 @@
     <div class="container">
         <div class="py-5 activity">
             <p class="f-12 bold">Record Activity</p>
-            <form method="POST" action="{{ route('activity.store') }}" name="activity" autocomplete="off">
-                <input autocomplete="false" name="hidden" type="text" style="display:none;">
+            <form method="POST" action="{{ route('activity.store') }}" id="activityForm" name="activity"
+                autocomplete="off">
                 @csrf
                 <div class="d-flex justify-content-between align-items-center where-to">
                     <img src="{{ asset('/frontend/img/svg/left.svg') }}" alt="" class="mt-3 mr-2 where-to-icon">
@@ -68,29 +65,21 @@
                             {{ __('When') }}
                         </label>
                         <div class="col-md-6 mb-2">
-                            <input id="date_range" type="text" class="daterange blue-input input rounded-0" name="date_range"
-                                required placeholder="" value="">
+                            <input id="date_range" type="text" class="daterange blue-input input rounded-0"
+                                name="date_range" required placeholder="" value="">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="who" class="m-0 f-24 text-md-right">
                             {{ __('Who') }}
                         </label>
-                        <fieldset class="todos_labels">
 
-                            <textarea class="" id="activity_tags">
-                                [{"name":"","email":"","phone":""}]
-                            </textarea>
-                        </fieldset>
                     </div>
                 </div>
 
-                <div class="form-group mt-5 text-right">
+                {{-- <div class="form-group mt-5 text-right">
                     <button type="submit" class="btn f-14rounded blue-btn px-3 text-white">ADD</button>
-                </div>
-                <script type="text/template">
-
-                </script>
+                </div> --}}
             </form>
 
         </div>
@@ -100,6 +89,7 @@
 
 @endsection
 @section('script')
+<script type="text/javascript" src="{{ asset('frontend/jquery/simpleform.min.js')}}"></script>
 <script
     src="https://maps.google.com/maps/api/js?key=AIzaSyDqlBzMgOyqWDAZUJacsncmGLnxoxED9wk&libraries=places&callback=initialize"
     type="text/javascript" async defer></script>
@@ -137,6 +127,6 @@
             }
         });
     }
-
 </script>
+
 @endsection
