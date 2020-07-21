@@ -6,7 +6,7 @@
                 $route = \Route::current()->getName();
                 @endphp
                 @if ($route == 'home' || $route == 'login' || $route == 'register' || $route == 'password.request' ||
-                $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice')
+                $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' || $route == 'profile.index' )
                     <img src="{{asset('frontend/img/logowhite.png')}}" alt="IAMVOCAL LOGO">
                 @else
                     <img src="{{asset('frontend/img/logo.png')}}" alt="IAMVOCAL LOGO">

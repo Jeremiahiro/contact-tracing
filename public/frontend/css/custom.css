@@ -32,6 +32,10 @@ body {
     color: #0000FF;
 }
 
+.blue-text {
+    color: #0000FF;
+}
+
 .input {
     font-family: 'G-regular';
     font-size: 18px;
@@ -87,6 +91,18 @@ footer {
     height: 40px;
 }
 
+.opacity-1 {
+    opacity: 1 !important;
+}
+
+.lh-08 {
+    line-height: 0.8;
+}
+
+.bg-blue {
+    background-color: #0000FF !important;
+}
+
 .transparent-input,
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -135,8 +151,13 @@ input:-webkit-autofill:focus,
 }
 
 .regular {
+    font-family: 'G-regular' !important;
+}
+
+.light {
     font-family: 'G-light' !important;
 }
+
 
 .f-6 {
     font-size: 6px;
@@ -180,6 +201,10 @@ input:-webkit-autofill:focus,
 
 .f-40 {
     font-size: 40px;
+}
+
+.f-46 {
+    font-size: 46px;
 }
 
 .f-60 {
@@ -292,7 +317,6 @@ input:-webkit-autofill:focus,
 .blue-btn {
     background-color: #0000FF;
     color: #fff;
-    font-size: 14px;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -311,4 +335,39 @@ input[type="search"]::-webkit-search-cancel-button {
 .map-lg {
     width: 100%;
     height: 250px;
+}
+
+.profile_avatar {
+    width: 123px;
+    height: 123px;
+    border: 5px solid #fff;
+}
+
+.profile_cover {
+    background-image: url('../img/cont1.png');
+    min-height: 100%;
+    border-bottom-left-radius: 43px;
+    border-bottom-right-radius: 43px;
+}
+
+.nav-item .active {
+    font-family: 'G-light' !important;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("../img/svg/prev-icon.svg");
+}
+
+.carousel-control-next-icon {
+    background-image: url("../img/svg/next-icon.svg");
+}
+
+.side-borders {
+    border-radius: 1px 15px;
+}
+
+.profile-places-img {
+    display: initial;
+    width: 40px;
+    height: 50px;
 }
