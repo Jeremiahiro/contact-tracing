@@ -82,7 +82,7 @@
                     <div class="carousel-inner px-5">
                         <div class="carousel-item active py-1">
                             <span>
-                                <img class="activity_avatar" src="/frontend/img/user1.jpg" alt="">
+                                <a href="{{ route('profile.index') }}"><img class="activity_avatar" src="/frontend/img/user1.jpg" alt=""></a> 
                                 <span>
                                     <p class="f-8 py-1 m-0">John</p>
                                 </span>
@@ -91,21 +91,13 @@
 
                         <div class="carousel-item py-1">
                             <span>
-                                <img class="activity_avatar" src="/frontend/img/user2.jpg" alt="">
+                                <a href="{{ route('profile.index') }}"><img class="activity_avatar" src="/frontend/img/user1.jpg" alt=""></a> 
                                 <span>
                                     <p class="f-8 pt-1">John</p>
                                 </span>
                             </span>
                         </div>
 
-                        <div class="carousel-item py-1 ">
-                            <span>
-                                <img class="activity_avatar" src="/frontend/img/user2.jpg" alt="">
-                                <span>
-                                    <p class="f-8 pt-1">John</p>
-                                </span>
-                            </span>
-                        </div>
                     </div>
                     <ol style="top:100%;" class="carousel-indicators m-0">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="bg-blue opacity-1"></li>

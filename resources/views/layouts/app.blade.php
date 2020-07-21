@@ -52,7 +52,8 @@
             @php
                 $route = \Route::current()->getName();
             @endphp
-            @if ($route == 'home' || $route == 'login' || $route == 'register' || $route == 'password.request' || $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' || $route == 'profile.index')
+            @if ($route == 'home' || $route == 'login' || $route == 'register' || $route == 'password.request' ||
+             $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' || $route == 'profile.index')
             @else
                 @include('partials.mobile.header.header')
             @endif

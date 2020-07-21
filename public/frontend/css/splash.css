@@ -187,3 +187,13 @@ p {
 .proximityadd{
     border-radius: 35px;
 }
+
+.side-borders {
+    border-radius: 1px 15px;
+}
+
+.profile-places-img {
+    display: initial;
+    width: 40px;
+    height: 50px;
+}

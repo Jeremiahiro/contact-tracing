@@ -32,7 +32,6 @@ Route::get('profile', function ()
     return view('profile.index');
 })->name('profile.index');
 
-
 Auth::routes(['verify' => true]);
 
 
