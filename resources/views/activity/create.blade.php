@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
 @section('title')
-    Add Activity
+Add Activity
 @endsection
 @section('custom-style')
 <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
 <link href="{{ asset('frontend/css/activity.css') }}" rel="stylesheet">
 <script src="{{ asset('frontend/jquery/activity.js')}}"></script>
+<script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
 
 {{-- multiple input --}}
 <link href="{{ asset('frontend/css/jq.multiinput.min.css') }}" rel="stylesheet">
@@ -30,6 +31,18 @@
 @endsection
 
 @section('mobile-content')
+<div id="alert">
+
+    @if ($errors->any())
+    <div class="alert alert-danger text-danger" role="alert">
+        <button type="button" class="close text-danger" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" class="text-danger">&times;</span>
+        </button>
+        <strong class="text-danger">Error! Select a valid location(s)</strong>
+    </div>
+    @endif
+</div>
+
 <section>
     <div class="container">
         <div class="py-5 activity">
@@ -44,29 +57,34 @@
                             {{ __('Where') }}
                         </label>
                         <div class="col-md-6 mb-1">
-                            <input id="from_location" type="search"
-                                class="blue-input input rounded-0 @error('from_location') is-invalid @enderror"
-                                name="from_location" value="{{ old('from_location') }}" required autocomplete="off"
+                            <input id="from_address" type="search"
+                                class="blue-input input rounded-0 @error('from_address') is-invalid @enderror"
+                                name="from_address" value="{{ old('from_address') }}" required autocomplete="off"
                                 placeholder="From">
+                            <input type="hidden" name="from_location" class="" id="from_location"
+                                value="{{ old('from_location') }}">
                             <input type="hidden" name="from_latitude" class="" id="from_latitude"
-                                value="{{ old('from_latitude', 12.3) }}">
+                                value="{{ old('from_latitude') }}">
                             <input type="hidden" name="from_longitude" class="" id="from_longitude"
-                                value="{{ old('from_longitude', 12.3) }}">
+                                value="{{ old('from_longitude') }}">
                             @error('from_location')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                             <span class="invalid-feedback" id="fromAlert" role="alert">
-                                <strong class="text-danger regular">Select a valid location</strong>
+                                <strong class="text-danger regular">Selected location not available on Google
+                                    Map</strong>
                             </span>
                         </div>
                         <div class="col-md-6">
-                            <input id="to_location" type="search"
-                                class="blue-input input rounded-0 @error('to_location') is-invalid @enderror"
-                                name="to_location" value="{{ old('to_location') }}" required autocomplete="off"
+                            <input id="to_address" type="search"
+                                class="blue-input input rounded-0 @error('to_address') is-invalid @enderror"
+                                name="to_address" value="{{ old('to_address') }}" required autocomplete="off"
                                 placeholder="To">
-                            <input type="hidden" name="to_latitude" class="" id="to_latitude"
+                            <input type="hidden" name="to_location" class="" id="to_location"
+                                value="{{ old('to_location') }}">
+                           <input type="hidden" name="to_latitude" class="" id="to_latitude"
                                 value="{{ old('to_latitude') }}">
                             <input type="hidden" name="to_longitude" class="" id="to_longitude"
                                 value="{{ old('to_longitude') }}">
@@ -76,7 +94,8 @@
                             </span>
                             @enderror
                             <span class="invalid-feedback" id="toAlert" role="alert">
-                                <strong class="text-danger regular">Select a valid location</strong>
+                                <strong class="text-danger regular">Selected location not available on Google
+                                    Map</strong>
                             </span>
                         </div>
                     </div>
@@ -91,9 +110,11 @@
                             <div class="col-md-6">
                                 <div class="input-group date input-daterange">
                                     <input type="text" class="f-14 regular input blue-input input1 rounded-0"
-                                        name="start_date" placeholder="Start Date/Time" id="startDate" value="{{ date('d-m-Y H:i', strtotime('+1 hour')) }}" readonly>
+                                        name="start_date" placeholder="Start Date/Time" id="startDate"
+                                        value="{{ date('d-m-Y H:i', strtotime('+1 hour')) }}" readonly>
                                     <input type="text" class="f-14 regular input blue-input ml-1 input2 rounded-0"
-                                        name="end_date" placeholder="End Date/Time" id="endDate" value="{{ date('d-m-Y H:i', strtotime('+2 hour +20 minutes')) }}" readonly>
+                                        name="end_date" placeholder="End Date/Time" id="endDate"
+                                        value="{{ date('d-m-Y H:i', strtotime('+2 hour +20 minutes')) }}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -112,14 +133,14 @@
                             </div>
                         </div>
 
-                        <div class="row form-group" id="existingLabel">
+                        <div class="row form-group" id="tab1">
                             <div class="col-md-6 mb-2">
                                 <input type="text" data-role="tagsinput" id="tags" name="tags" class="tags rounded-0"
                                     placeholder="People you met">
                                 <div id="tag_list" class="regular"></div>
                             </div>
                         </div>
-                        <div class="" id="newLabel">
+                        <div class="" id="tab2">
                             <fieldset class="">
                                 <textarea class="" id="activity_tags">
                                     [{"name":"","email":"","phone":""}]
@@ -139,31 +160,29 @@
 </section>
 @endsection
 @section('script')
-{{-- <script src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places&callback=initialize" type="text/javascript" async defer></script> --}}
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
-{{-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize" async defer></script> --}}
-
 
 <script>
     function initialize() {
         var options = {
             types: ['(cities)'],
         };
-        var fromLoc = document.getElementById('from_location');
+        var fromLoc = document.getElementById('from_address');
         var getFromLoc = new google.maps.places.Autocomplete(fromLoc);
         getFromLoc.addListener('place_changed', function () {
             var place = getFromLoc.getPlace();
             if (!place.geometry) {
+                // $('#fromAlert').toggleClass('show hide');
                 window.alert("'" + place.name + "' not available on Google Map");
                 fromLoc.value = "";
                 return;
             } else {
+                $('#from_location').val(place.name);
                 $('#from_latitude').val(place.geometry['location'].lat());
                 $('#from_longitude').val(place.geometry['location'].lng());
             }
         });
 
-        var toLoc = document.getElementById('to_location');
+        var toLoc = document.getElementById('to_address');
         var getToLoc = new google.maps.places.Autocomplete(toLoc);
         getToLoc.addListener('place_changed', function () {
             var place = getToLoc.getPlace();
@@ -172,12 +191,15 @@
                 toLoc.value = "";
                 return;
             } else {
+                $('#to_location').val(place.name);
                 $('#to_latitude').val(place.geometry['location'].lat());
                 $('#to_longitude').val(place.geometry['location'].lng());
             }
         });
     }
+
 </script>
-<script src="https://maps.google.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize" type="text/javascript" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize"
+    type="text/javascript" async defer></script>
 
 @endsection

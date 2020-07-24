@@ -28,10 +28,14 @@
                         <img src="{{ asset('frontend/img/svg/edit.svg') }}" alt="">
                         </a>
                     </p>
+                @else
+                    <a href="{{ url()->previous() }}" class="text-white">
+                        <img src="{{ asset('/frontend/img/svg/back.svg') }}" alt="go back">
+                    </a>
                 @endif
             @else
             <a href="{{ route('dashboard.index') }}">
-                <img src="{{ Auth::user()->avatar }}" class="avatar" alt="default avatar">
+                <img src="{{ Auth::user()->avatar }}" class="avatar avatar-md" alt="default avatar">
             </a>
             @endif
             @endauth

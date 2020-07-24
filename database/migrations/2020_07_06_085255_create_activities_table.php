@@ -16,10 +16,12 @@ class CreateActivitiesTable extends Migration
         
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->string('from_location');
+            $table->string('from_address');
+            $table->string('from_location')->nullable();
             $table->string('from_latitude');
             $table->string('from_longitude');
-            $table->string('to_location');
+            $table->string('to_address');
+            $table->string('to_location')->nullable();
             $table->string('to_latitude');
             $table->string('to_longitude');
             $table->dateTime('start_date', 0);

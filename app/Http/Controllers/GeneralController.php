@@ -51,7 +51,7 @@ class GeneralController extends Controller
                 foreach ($data as $user){
                     $output .= '<div class="d-flex align-items-center mb-3">';
                     $output .= '<div class="avatar-icon">';
-                    $output .= '<img src="'.$user->avatar.'" class="activity_avatar avatar-xl" alt="'.$user->username.'">';
+                    $output .= '<img src="'.$user->avatar.'" class="avatar avatar-md alt="'.$user->username.'">';
                     $output .= '</div>';
                     $output .= '<div class="ml-1 text-gray">';
                     $output .= '<a href="/dashboard/'.$user->id.'" class="text-uppercase "f-16 mb-0 bold ">'.$user->name.'';

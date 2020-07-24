@@ -37,7 +37,7 @@
 </head>
 
 <body>
-    <div id="app" style="background: none;">
+    <div id="" style="background: none;">
         @desktop
         @yield('web-content')
         @elsedesktop
@@ -52,9 +52,8 @@
                 @include('partials.mobile.header.header')
             @endif
 
-            <div id="alert">
-                @include('partials.alert.alert')
-            </div>
+            @include('partials.alert.alert')
+        
             @yield('mobile-content')
         </main>
         @yield('footer')
