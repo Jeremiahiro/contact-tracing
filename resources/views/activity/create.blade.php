@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
+@section('title')
+    Add Activity
+@endsection
 @section('custom-style')
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+
 <link href="{{ asset('frontend/css/activity.css') }}" rel="stylesheet">
 <script src="{{ asset('frontend/jquery/activity.js')}}"></script>
+
+{{-- multiple input --}}
+<link href="{{ asset('frontend/css/jq.multiinput.min.css') }}" rel="stylesheet">
+<script src="{{ asset('frontend/jquery/jq.multiinput.min.js')}}"></script>
+
+{{-- tagging --}}
+<link href="{{ asset('frontend/bootstrap/css/bootstrap-tagsinput.css') }}" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"
+    integrity="sha512-VvWznBcyBJK71YKEKDMpZ0pCVxjNuKwApp4zLF3ul+CiflQi6aIJR+aZCP/qWsoFBA28avL5T5HA+RE+zrGQYg=="
+    crossorigin="anonymous"></script>
+
 @endsection
 
 @section('header')
@@ -33,14 +49,17 @@
                                 name="from_location" value="{{ old('from_location') }}" required autocomplete="off"
                                 placeholder="From">
                             <input type="hidden" name="from_latitude" class="" id="from_latitude"
-                                value="{{ old('from_latitude') }}">
+                                value="{{ old('from_latitude', 12.3) }}">
                             <input type="hidden" name="from_longitude" class="" id="from_longitude"
-                                value="{{ old('from_longitude') }}">
+                                value="{{ old('from_longitude', 12.3) }}">
                             @error('from_location')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+                            <span class="invalid-feedback" id="fromAlert" role="alert">
+                                <strong class="text-danger regular">Select a valid location</strong>
+                            </span>
                         </div>
                         <div class="col-md-6">
                             <input id="to_location" type="search"
@@ -56,46 +75,74 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+                            <span class="invalid-feedback" id="toAlert" role="alert">
+                                <strong class="text-danger regular">Select a valid location</strong>
+                            </span>
                         </div>
                     </div>
                 </div>
+
                 <div class="ml-3">
-                    <div class="form-group row">
+                    <div class="row mb-2 form-group">
                         <label for="when" class="f-24 col-md-4 text-md-right">
                             {{ __('When') }}
                         </label>
-                        <div class="col-md-6 mb-2">
-                            <input id="date_range" type="text" class="daterange blue-input input rounded-0"
-                                name="date_range" required placeholder="" value="">
+                        <div class="flex-row d-flex justify-content-center">
+                            <div class="col-md-6">
+                                <div class="input-group date input-daterange">
+                                    <input type="text" class="f-14 regular input blue-input input1 rounded-0"
+                                        name="start_date" placeholder="Start Date/Time" id="startDate" value="{{ date('d-m-Y H:i', strtotime('+1 hour')) }}" readonly>
+                                    <input type="text" class="f-14 regular input blue-input ml-1 input2 rounded-0"
+                                        name="end_date" placeholder="End Date/Time" id="endDate" value="{{ date('d-m-Y H:i', strtotime('+2 hour +20 minutes')) }}" readonly>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="who" class="m-0 f-24 text-md-right">
-                            {{ __('Who') }}
-                        </label>
+                        <div class="d-flex justify-content-between">
+                            <div class="">
+                                <label for="who" class="m-0 f-24 text-md-right">
+                                    {{ __('Who') }}
+                                </label>
+                            </div>
+                            <div class="align-items-end mb-0 mt-3 f-12">
+                                <span class="bold text-primary" id="tab1Label">Existing</span>
+                                <span class="">|</span>
+                                <span class="light text-primary" id="tab2Label">New</span>
+                            </div>
+                        </div>
 
+                        <div class="row form-group" id="existingLabel">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" data-role="tagsinput" id="tags" name="tags" class="tags rounded-0"
+                                    placeholder="People you met">
+                                <div id="tag_list" class="regular"></div>
+                            </div>
+                        </div>
+                        <div class="" id="newLabel">
+                            <fieldset class="">
+                                <textarea class="" id="activity_tags">
+                                    [{"name":"","email":"","phone":""}]
+                                </textarea>
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group mt-5 text-right">
                     <button type="submit" class="btn f-14 rounded blue-btn px-3 text-white">ADD</button>
                 </div>
-                <script type="text/template">
-
-                </script>
             </form>
-
         </div>
     </div>
     @include('partials.mobile.footer.footer')
 </section>
-
 @endsection
 @section('script')
-<script type="text/javascript" src="{{ asset('frontend/jquery/simpleform.min.js')}}"></script>
-<script
-    src="https://maps.google.com/maps/api/js?key=AIzaSyDqlBzMgOyqWDAZUJacsncmGLnxoxED9wk&libraries=places&callback=initialize"
-    type="text/javascript" async defer></script>
+{{-- <script src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places&callback=initialize" type="text/javascript" async defer></script> --}}
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
+{{-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize" async defer></script> --}}
+
 
 <script>
     function initialize() {
@@ -131,5 +178,6 @@
         });
     }
 </script>
+<script src="https://maps.google.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize" type="text/javascript" async defer></script>
 
 @endsection

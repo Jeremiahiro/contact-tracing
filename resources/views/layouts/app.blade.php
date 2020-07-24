@@ -11,28 +11,25 @@
     <title>Contact Tracing | @yield('title')</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <script src="{{ asset('frontend/jquery/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('frontend/jquery/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('frontend/jquery/jquery-1.9.1.min.js') }}"></script>
     <script src="{{ asset('frontend/jquery/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('frontend/js/script.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+    {{-- bootstrap --}}
+    <link href="{{ asset('frontend/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <script src="{{ asset('frontend/bootstrap/js/bootstrap.min.js') }}"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    {{-- <script src="https://kit.fontawesome.com/cce62db690.js" crossorigin="anonymous"></script> --}}
 
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Styles -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-    <link href="{{ asset('frontend/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
 
     @yield('custom-style')
@@ -49,7 +46,8 @@
                 $route = \Route::current()->getName();
             @endphp
             @if ($route == 'home' || $route == 'login' || $route == 'register' || $route == 'password.request' ||
-             $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' || $route == 'profile.index')
+             $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' || $route == 'dashboard.index'
+             || $route == 'dashboard.show')
             @else
                 @include('partials.mobile.header.header')
             @endif
@@ -64,6 +62,7 @@
     </div>
 
     @yield('script')
+
 </body>
 
 </html>

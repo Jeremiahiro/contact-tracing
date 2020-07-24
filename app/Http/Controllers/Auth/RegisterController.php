@@ -73,7 +73,7 @@ class RegisterController extends Controller
         $string = substr($name, 0, 5);
         $randomDigit = rand(10,99);
 
-        $username = strtoupper($string . $randomDigit);
+        $username = strtoupper('@' . $string . $randomDigit);
 
         return User::create([
             'name' => $data['name'],

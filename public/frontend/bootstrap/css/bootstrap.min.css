@@ -5,7 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 :root {
-    --blue: #007bff;
+    --blue: #0000ff;
     --indigo: #6610f2;
     --purple: #6f42c1;
     --pink: #e83e8c;
@@ -2405,7 +2405,7 @@ pre code {
 }
 
 input[type=date].form-control,
-input[type=datetime-local].form-control,
+input[type=datetime-local].input,
 input[type=month].form-control,
 input[type=time].form-control {
     -webkit-appearance: none;
@@ -11257,7 +11257,7 @@ button.bg-dark:hover {
 }
 
 .text-primary {
-    color: #007bff !important
+    color: #0000ff !important
 }
 
 .text-gray {
@@ -11266,7 +11266,7 @@ button.bg-dark:hover {
 
 a.text-primary:focus,
 a.text-primary:hover {
-    color: #0056b3 !important
+    color: #0000ff !important
 }
 
 .text-secondary {

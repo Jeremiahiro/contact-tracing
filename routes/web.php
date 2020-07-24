@@ -27,11 +27,6 @@ Route::get('proximity', function () {
     return view('activity.modals.proximity');
 });
 
-Route::get('profile', function ()
- {
-    return view('profile.index');
-})->name('profile.index');
-
 Auth::routes(['verify' => true]);
 
 
@@ -39,7 +34,14 @@ Auth::routes(['verify' => true]);
 Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->name('social.login');
 Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
 
-Route::get('/', 'GeneralController@index')->name('home');
-Route::resource('/activity', 'ActivityController');
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/', 'GeneralController@index')->name('home');
+    Route::resource('/activity', 'ActivityController');
+    Route::resource('/dashboard', 'DashboardController');
+    // Route::get('/user/{id}', 'DashboardController@show')->name('user.profile');
+    Route::get('/search', 'GeneralController@search')->name('search');
+    Route::get('/search/result', 'GeneralController@searchResult')->name('search.query');
+    Route::post('follow', 'DashboardController@follwUserRequest')->name('follow');
+});
+
 // Route::get('/dashboard/settings/{$user_id}', 'DashboardController@show')->name('dashboard.settings');
