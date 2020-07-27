@@ -18,7 +18,7 @@
         <div class="container py-3 d-flex justify-content-around">
             <div class="w-25">
                 <p class="m-0 py-1 f-12 bold">{{ $activity['start_date']->format('H:i A') }}</p>
-                <div class="vl ml-5"></div>
+                <div class="vl ml-"></div>
                 <p class="m-0 py-1 f-12 bold">{{ $activity['end_date']->format('H:i A') }}</p>
             </div>
             <div class="{{ $index % 2 == 0 ? 'route_white' : 'route_purple' }} route p-3">
