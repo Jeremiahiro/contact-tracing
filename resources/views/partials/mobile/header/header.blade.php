@@ -34,7 +34,7 @@
                     </a>
                 @endif
             @else
-            <a href="{{ route('dashboard.index') }}">
+            <a href="" data-toggle="modal" data-target="#sideNav">
                 <img src="{{ Auth::user()->avatar }}" class="avatar avatar-md" alt="default avatar">
             </a>
             @endif

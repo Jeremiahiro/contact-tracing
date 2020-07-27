@@ -13,6 +13,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
+            'uuid' => substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0),
             'name' => 'Super Admin',
             'email' => 'admin@admin.com',
             'username' => '@admin',
@@ -26,6 +27,7 @@ class UserSeeder extends Seeder
             'role' => 'super admin'
         ]);
         User::create([
+            'uuid' => substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0),
             'name' => 'Daniel Eche',
             'email' => 'daniel@eche.com',
             'username' => '@daniel',

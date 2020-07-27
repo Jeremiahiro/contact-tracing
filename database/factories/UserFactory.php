@@ -29,5 +29,6 @@ $factory->define(User::class, function (Faker $faker) {
         'latitude' => $faker->Address->latitude,
         'longitude' => $faker->Address->longitude,
         'location' => $faker->Address->street_name,
+        'uuid' => substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0),
     ];
 });

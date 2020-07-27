@@ -91,8 +91,10 @@ class LoginController extends Controller
         $randomDigit = rand(100,999);
 
         $username = strtoupper($string . $randomDigit);
+        $uuid = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0);
 
         $user = new User();
+        $user->uuid = $uuid;
         $user->name = $userSocial->name;
         $user->username = $username;
         $user->email = $userSocial->email;

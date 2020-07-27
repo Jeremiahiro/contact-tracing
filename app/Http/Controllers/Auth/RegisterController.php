@@ -74,13 +74,15 @@ class RegisterController extends Controller
         $randomDigit = rand(10,99);
 
         $username = strtoupper('@' . $string . $randomDigit);
+        $uuid = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0);
 
         return User::create([
-            'name' => $data['name'],
+            'name'      => $data['name'],
             'email'     => $data['email'],
             'phone'     => $data['phone'],
             'password'  => Hash::make($data['password']),
             'username'  => $username,
+            'uuid'  => $uuid,
             'avatar'    => 'https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png',
         ]);
     }

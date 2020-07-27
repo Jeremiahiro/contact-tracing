@@ -62,65 +62,71 @@ class ActivityController extends Controller
     {
         $this->validateActivity($request);
 
-        $activity = new Activity();
-        $activity->from_address = $request->input('from_address');
-        $activity->from_location = $request->input('from_location');
-        $activity->from_latitude = $request->input('from_latitude');
-        $activity->from_longitude = $request->input('from_longitude');
+        $activity = Activity::firstOrCreate([
+            'from_address' => $request->from_address,
+            'from_location' => $request->from_location,
+            'from_latitude' => $request->from_latitude,
+            'from_longitude' => $request->from_longitude,
 
-        $activity->to_address = $request->input('to_address');
-        $activity->to_location = $request->input('to_location');
-        $activity->to_latitude = $request->input('to_latitude');
-        $activity->to_longitude = $request->input('to_longitude');
+            'to_address' => $request->to_address,
+            'to_location' => $request->to_location,
+            'to_latitude' => $request->to_latitude,
+            'to_longitude' => $request->to_longitude,
 
-        $activity->start_date = $request->input('start_date');
-        $activity->end_date = $request->input('end_date');
-        $activity->user_id = Auth::user()->id;
-        $activity->save();
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
 
-        if ($request->has('tags')){
-            // dd($request->has('tags');
-            $tags = explode(",", $request->tags);
-            foreach($tags as $person) {
-                $user = User::where('name', 'LIKE', $person.'%')
-                        ->orWhere('username', 'LIKE', $person.'%')
-                        ->first();
-                if ($user) {
-                    $activityTag = new ActivityTags;
-                    $activityTag->activity_id   = $activity->id;
-                    $activityTag->person_id     = $user->id;
-                    $activityTag->user_id       = Auth::user()->id;
-                    $activityTag->save();
-                } 
-            }
-        }
+            'user_id' => auth()->user()->id,
+        ]);
 
-        // for users not on the platform
-        if($request->has('name')){
-            $name = $request->input('name');
-            $email = $request->input('email');
-            $phone = $request->input('phone');
+        if ($activity->wasRecentlyCreated) {
+            // for existing users
+            if($request->tags != null) {
+                $tags = explode(",", $request->tags);
+                foreach($tags as $person) {
+                    $existingUser = User::where('name', 'LIKE', $person.'%')
+                            ->orWhere('username', 'LIKE', $person.'%')
+                            ->first();
+                    if ($existingUser) {
+                        $activityTag = new ActivityTags;
+                        $activityTag->activity_id   = $activity->id;
+                        $activityTag->person_id     = $existingUser->id;
+                        $activityTag->user_id       = Auth::user()->id;
+                        $activityTag->save();
+                    } 
+                }
+            } 
 
-            foreach($name as $key => $value) {
-                $user = User::where('email', $email[$key])->first();
-                if ($user) {
-                    $activityTag = new ActivityTags;
-                    $activityTag->activity_id   = $activity->id;
-                    $activityTag->person_id     = $user->id;
-                    $activityTag->user_id       = Auth::user()->id;
-                    $activityTag->save();
-                } else {
-                    $activityTag = new ActivityTags;
-                    $activityTag->name          = $name[$key];
-                    $activityTag->email         = $email[$key];
-                    $activityTag->phone         = $phone[$key];
-                    $activityTag->activity_id   = $activity->id;
-                    $activityTag->user_id       = Auth::user()->id;
-                    $activityTag->save();
+            // for users not on the platform
+            if($request->name != null) {
+                $name = $request->name;
+                $email = $request->email;
+                $phone = $request->phone;
+
+                foreach($name as $key => $value) {
+                    $existingUser = User::where('email', $email[$key])->first();
+                    if ($existingUser) {
+                        $activityTag = new ActivityTags;
+                        $activityTag->activity_id   = $activity->id;
+                        $activityTag->person_id     = $existingUser->id;
+                        $activityTag->user_id       = Auth::user()->id;
+                        $activityTag->save();
+                    } elseif ($name[$key] != null) {
+                        $activityTag = new ActivityTags;
+                        $activityTag->name          = $name[$key];
+                        $activityTag->email         = $email[$key];
+                        $activityTag->phone         = $phone[$key];
+                        $activityTag->activity_id   = $activity->id;
+                        $activityTag->user_id       = Auth::user()->id;
+                        $activityTag->save();
+                    } 
                 }
             }
+        
+        } else {
+            return redirect()->back()->with('error', 'Activity was recently created');
         }
-
+        
         return redirect()->route('activity.index')->with('success', 'Successful!');
 
     }
@@ -185,7 +191,8 @@ class ActivityController extends Controller
         ];
 
         $messages = [
-            'from_latitude' => 'Select a valid location.',
+            'from_latitude' => 'Select location from the menu',
+            'to_latitude' => 'Select location from the menu',
         ];
          
 		$this->validate($request, $rules, $messages);

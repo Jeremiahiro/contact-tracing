@@ -57,6 +57,9 @@
             @yield('mobile-content')
         </main>
         @yield('footer')
+        @auth
+        @include('partials.modals.sideNav')
+        @endauth
         @enddesktop
     </div>
 
