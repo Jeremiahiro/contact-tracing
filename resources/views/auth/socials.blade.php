@@ -1,17 +1,29 @@
-<div class="form-group">
-
-    <label for="name" class="col-md-4 control-label">Login With</label>
-
-    <div class="col-md-6">
-
-        <a href="{{ route('social.login', 'facebook') }}" class="btn btn-social-icon btn-facebook">facebook</a>
-
-        <a href="{{ route('social.login', 'twitter') }}" class="btn btn-social-icon btn-twitter">Twitter</a>
-
-        <a href="{{ route('social.login', 'google') }}" class="btn btn-social-icon btn-google-plus">Google</a>
-
-        <a href="{{ route('social.login', 'github') }}" class="btn btn-social-icon btn-github">Github</a>
-
+<div class="container col-8 mx-auto">
+    <div class="d-flex justify-content-around align-items-center">
+        <p class="pt-4 f-14">CONNECT WITH</p>
+        <a href="{{ route('social.login', 'facebook') }}">
+            <img src="{{  asset('/frontend/img/svg/facebook.svg') }}" alt="facebook">
+        </a>
+        <a href="{{ route('social.login', 'twitter') }}">
+            <img src="{{  asset('/frontend/img/svg/twitter.svg') }}" alt="twitter">
+        </a>
+        <a href="{{ route('social.login', 'google') }}">
+            <img src="{{  asset('/frontend/img/svg/google.svg') }}" alt="google">
+        </a>
     </div>
+    <div class="row mx-auto">
+        <div class="col m-1 py-1 px-3 rounded text-center border border-white">
+            <a href="{{ route('register') }}" class="text-white f-14">Register</a>
+        </div>
+        <div class="col m-1 py-1 px-3 rounded text-center border border-white">
+            <a href="{{ route('login') }}" class="text-white f-14">Login</a>
+        </div>
 
+        {{-- <div class="col col-6">
+            <a href="{{ route('register') }}" class="m-1 py-1 px-3 rounded text-center border border-white text-white f-14">Register</a>
+        </div>
+        <div class="col col-6 border border-2 border-white py-1 px-2 rounded text-center">
+            <a href="{{ route('login') }}" class="text-white f-14">Login</a>
+        </div> --}}
+    </div>
 </div>

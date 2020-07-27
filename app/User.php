@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Overtrue\LaravelFollow\Followable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Followable, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,8 +17,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'full_name', 'email', 'password',
-        'username', 'phone', 'role',
+        'name', 'email', 'password', 'header',
+        'username', 'phone', 'role', 'avatar',
         'longitude', 'latitude', 'location',
         'provider', 'provider_id', 'access_token',
     ];
@@ -44,8 +45,24 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the comments for the blog post.
      */
-    public function activity()
+    public function activities()
     {
-        return $this->hasMany('App\UserActivity');
+        return $this->hasMany('App\Activity');
+    }
+    
+    /**
+     * Get the comments for the blog post.
+     */
+    public function tags()
+    {
+        return $this->hasMany('App\ActivityTags');
+    }
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function isTagged()
+    {
+        return $this->hasMany('App\ActivityTags', 'person_id');
     }
 }

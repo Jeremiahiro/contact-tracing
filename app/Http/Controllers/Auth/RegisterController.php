@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::DASHBOARD;
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -50,7 +50,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'full_name' =>  ['required', 'string', 'max:255'],
+            'name' =>  ['required', 'string', 'max:255'],
             'email'     =>  ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'  =>  ['required', 'string', 'min:8', 'confirmed', 'regex:/(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'],
             'username'  =>  ['string'],
@@ -69,18 +69,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $full_name = $data['full_name'];
-        $string = substr($full_name, 0, 5);
+        $name = $data['name'];
+        $string = substr($name, 0, 5);
         $randomDigit = rand(10,99);
 
-        $username = strtoupper($string . $randomDigit);
+        $username = strtoupper('@' . $string . $randomDigit);
 
         return User::create([
-            'full_name' => $data['full_name'],
+            'name' => $data['name'],
             'email'     => $data['email'],
             'phone'     => $data['phone'],
             'password'  => Hash::make($data['password']),
             'username'  => $username,
+            'avatar'    => 'https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png',
         ]);
     }
 }

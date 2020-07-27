@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::DASHBOARD;
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Redirect the user to the social authentication page.
@@ -51,8 +51,8 @@ class LoginController extends Controller
     public function handleProviderCallback($provider)
     {
         try {
-            // $userSocial = Socialite::driver($provider)->user();
-            $userSocial = Socialite::driver($provider)->stateless()->user();
+            $userSocial = Socialite::driver($provider)->user();
+            // $userSocial = Socialite::driver($provider)->stateless()->user();
         } catch (Exception $e) {
             return $this->sendFailedResponse($e->getMessage());
         }
@@ -63,7 +63,7 @@ class LoginController extends Controller
             return redirect()->intended('/');
         }
 
-        return redirect('/register')->with('error', 'Unable to Login, try another login option!');
+        return redirect('/login')->with('error', 'Unable to Login, try another login option!');
     }
 
     /**
@@ -93,7 +93,7 @@ class LoginController extends Controller
         $username = strtoupper($string . $randomDigit);
 
         $user = new User();
-        $user->full_name = $userSocial->name;
+        $user->name = $userSocial->name;
         $user->username = $username;
         $user->email = $userSocial->email;
         $user->provider = $provider;

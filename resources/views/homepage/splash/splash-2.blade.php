@@ -1,37 +1,56 @@
-<div class="carousel-item splash splash-2">
-    @include('partials.mobile.header.header-transparent')
+<div class="">
+    @include('partials.mobile.header.header')
 
-    <div class="container">
+    <div class="container pl-4">
         <div class="trace_date py-5">
-            <h1>16</h1>
-            <h4 class="pl-4">June, 2020</h4>
-            <h3 class="pl-4">10:15PM</h3>
+            @include('homepage.splash.extra.time')
         </div>
-    </div>
 
-    <div class="container">
         <div class="d-flex justify-content-around align-items-center">
-            <span>
-                <a href="#"><img src="assets/img/map-pin-marked.png" alt="marker"></a>
-                <p class="py-2">23 Locations</p>
+            <span class="text-center">
+                <a href="#"><img src="{{  asset('/frontend/img/svg/marker.svg') }}" alt="marker"></a>
+                <div class="py-2 f-12 bold">
+                    @guest
+                        0
+                    @else
+                        <span class="count">{{ Auth::user()->activities->count() }}</span>
+                    @endguest
+                    Locations
+                </div>
             </span>
-            <span class="pt-1"> 
-                <a href="#"><img src="assets/img/Icon material-people.png" alt="contacts"></a>
-                <p class="py-2">248 Contacts</p>
+            <span class="text-center pt-2">
+                <a href="#"><img src="{{  asset('/frontend/img/svg/person.svg') }}" alt="contacts"></a>
+                <div class="py-2 f-12 bold">
+                    @guest
+                        0
+                    @else
+                        <span class="count">{{ Auth::user()->tags->count() }}</span>
+                    @endguest
+                    Contacts
+                </div>
             </span>
-            <span class="pt-1">
-                <a href="#"><img src="assets/img/Icon material-people1.png" alt="Active"></a>
-                <p class="py-2">2.6m Active</p>
+            <span class="text-center pt-2">
+                <a href="#"><img src="{{  asset('/frontend/img/svg/people.svg') }}" alt="Active"></a>
+                <div class="py-2 f-12 bold">
+                    @if ($count > 999 && $count <= 999999)
+                        {{ $count/1000 . ' K' }}
+                    @else
+                    @if ($count > 999999)
+                        {{ $count/1000000 . ' M' }}
+                    @else
+                        {{ $count }}
+                    @endif
+                    @endif
+                    Active
+                </div>
             </span>
+        </div>
+
+        <div class="pl-4">
+            <a href="{{ route('activity.index') }}" class="f-14 border border-white py-1 px-3 rounded text-white">
+                VIEW
+            </a>
         </div>
     </div>
 
-    <div class="container">
-        <div class="pl-4">
-            <button type="button" class="btn border-2 border-white btn-sm btn-transparent text-white px-3">
-                VIEW
-            </button>
-        </div>
-        
-    </div>
-  </div>
+</div>

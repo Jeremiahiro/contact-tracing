@@ -15,12 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
+            $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('username');
-            $table->string('phone');
+            $table->string('phone')->nullable();
+            $table->string('avatar')->default('https://res.cloudinary.com/iro/image/upload/v1595613322/avatar.png');
+            $table->string('header')->default('https://res.cloudinary.com/iro/image/upload/v1594295895/samples/Rectangle_1547.png');
 
             $table->string('provider', 20)->nullable();
             $table->string('provider_id')->nullable();
@@ -30,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             
-            $table->string('role')->default(2);
+            $table->string('role')->default('user');
             $table->boolean('show_location')->default(true);
             $table->rememberToken();
             $table->timestamps();

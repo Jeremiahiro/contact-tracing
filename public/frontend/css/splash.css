@@ -1,19 +1,24 @@
 /* GENERAL STYLE */
-
-@font-face {
-    font-family: 'HelveticaNeue';
-    src: url('../font/HelveticaNeue Light.ttf')format('truetype');
+p {
+    font-size: 12px;
+    line-height: 1.1;
 }
 
-p {
-    font-size: 12px !important;
-    line-height: 1.1 !important;
+.socials {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    right: 0;
 }
 
 .carousel-indicators li {
     width: 10px;
     height: 10px;
     border-radius: 100%;
+}
+
+.carousel-indicators li.blue{
+    color: #0000FF;
 }
 
 .splash {
@@ -23,13 +28,14 @@ p {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
     color: #fff;
 }
 
 .splash-1 {
     background-image: url('../img/cont.png');
 }
+
 .splash-2 {
     background-image: url('../img/cont1.png');
 }
@@ -38,23 +44,159 @@ p {
     background-image: url('../img/cont2.png');
 }
 
-.trace_date h1 {
+.date {
     font-size: 238px;
     color: transparent;
     -webkit-text-stroke: 2px #fff;
     line-height: 0.9;
+    font-family: 'G-regular';
 }
 
-.trace_date h4 {
+.month {
     font-size: 31px;
     line-height: 0.8;
+    font-family: 'G-bold';
 }
 
-.trace_date h3 {
-    font-size: 47px;
-}
-
-.ct_name h1 {
+.time {
     font-size: 47px;
     line-height: 1.1;
+    font-family: 'G-light';
 }
+
+.blue_input,
+.blue_input:focus,
+.blue_input::placeholder {
+    color: #0B24FA;
+    font-weight: bold;
+}
+
+.btn:focus,
+.btn:active {
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: none;
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+.blue-btn {
+    background-color: #0000FF;
+    color: #fff;
+    font-size: 14px;
+}
+
+/* .login input {
+    border-bottom: 2px solid #fff;
+} */
+
+/* .recordactivity {
+    color: #0B24FA;
+} */
+
+/* .input_label {
+    font-size: 24px;
+} */
+
+/* .routeheader {
+    font-size: 9px !important;
+} */
+
+.vl {
+    border-left: 2px solid #0B24FA;
+    height: 105px;
+}
+
+.route {
+    border-radius: 20px;
+    width: 100%;
+}
+
+.route_white {
+    background-color: #F7F7F7;
+    color: #0000ff;
+}
+
+.route_white h6 {
+    color: #707070;
+}
+
+.route_purple {
+    background-color: #6406A8;
+    color: #fff;
+}
+
+.route_white .add_svg .icon_blue{
+    display: none;
+}
+
+.route_purple .add_svg .icon_white{
+    display: none;
+}
+
+.fulfilled_notification {
+    color: #fff;
+    background-color: #FF0000;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    right: 0;
+}
+
+.connectionsmall img,
+.connectionlarge img {
+    display: block;
+    border-radius: 50%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.connectionsmall img {
+    width: 30px;
+    height: 30px;
+}
+
+.connectionlarge img {
+    width: 109px;
+    height: 109px;
+}
+
+.connectionlarge h1 {
+    font-size: 31px;
+}
+
+.connectionlarge h2 {
+    font-size: 15px;
+}
+
+.connectionlarge h3 {
+    font-size: 10px;
+    color: #E228C5;
+}
+
+.activityindicator {
+    top: 100%;
+    left: 90%;
+}
+
+.proximityimage img {
+    object-fit: cover;
+    width: 135px;
+    height: 120px;
+    border-radius: 15px;
+}
+
+.proximityadd{
+    border-radius: 35px;
+}
+
+.side-borders {
+    border-radius: 1px 20px;
+}
+
+/* .profile-places-img {
+    display: initial;
+    width: 40px;
+    height: 50px;
+} */

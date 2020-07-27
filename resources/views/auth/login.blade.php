@@ -1,93 +1,93 @@
 @extends('layouts.app')
 
 @section('custom-style')
-    <link href="{{ asset('frontend/css/auth.css') }}" rel="stylesheet">
-@endsection
-
-@section('header')
-
+    <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 @endsection
 
 @section('web-content')
-    <h1 class="text-center">Please use a mobile device</h1>
+<h1 class="text-center">Please use a mobile device</h1>
 @endsection
 
 @section('mobile-content')
 <section>
     <div class="splash splash-1">
-        @include('partials.mobile.header.header-transparent')
+        @include('partials.mobile.header.header')
 
-        Login
-    </div>
-</section>
-
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+        <div class="container">
+            <div class="">
+                <h1 class="text-white f-60 py-5">LOGIN</h1>
+                <form class="" method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="form-group row">
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text transparent-input border-bottom" id="login-user-icon">
+                                    <i class="fa fa-user"></i>
+                                </span>
                             </div>
+                            <input id="email" type="email"
+                                class="transparent-input border-bottom input @error('email') is-invalid @enderror"
+                                name="email" value="{{ old('email') }}" required autocomplete="email"
+                                placeholder="iro@iro.com" autofocus aria-label="Email"
+                                aria-describedby="login-user-icon">
+
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                    <div class="form-group row">
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text transparent-input border-bottom" id="login-pass-icon">
+                                    <i class="fa fa-lock"></i>
+                                </span>
                             </div>
+                            <input id="password" type="password"
+                                class="transparent-input border-bottom input @error('password') is-invalid @enderror"
+                                name="password" value="" required autocomplete="new password" placeholder="**********"
+                                autofocus aria-label="Password" aria-describedby="login-pass-icon">
+
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <div class="checkbox">
+                        <label class="d-none">
+                            <input type="checkbox" name="remember" checked> Remember Me
+                        </label>
+                    </div>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                    <div class="form-group">
+                        <button type="submit" class="f-18 btn btn-lg w-100 text-white border border-white text-center">
+                            LOGIN
+                        </button>
+                    </div>
+                </form>
+                @if (Route::has('password.request'))
+                <div class="d-flex justify-content-end">
+                    <a class="text-light f-14" href="{{ route('password.request') }}">
+                        {{ __('Forgot Password?') }}
+                    </a>
                 </div>
+                @endif
+            </div>
+
+            <div class="py-5">
+                @include('auth.socials')
             </div>
         </div>
     </div>
-</div> --}}
+</section>
+
+@endsection
+@section('script')
+
 @endsection

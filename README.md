@@ -1,14 +1,37 @@
 #### TASK LIST 
-- *Login Window*
+
+Auth Folder
 - *Register Window*
 - *Login*
-- *Splash Screen*
-- *Splash Screen 1*
-- *Data Input*
-- *Fulfiled Entry*
-- *Activity Selection | slide up*
-- *Network Selection | modal*
-- *Proximity Alert | modal*
+- *confirm email*
+- *confirm password*
+- *reset password*
+
+Homepage Folder
+- *Index* <br/>
+Homepage/Splash
+- *Splash Screen -1*
+- *Splash Screen -2*
+- *Splash Screen -3*
+
+Activity Folder
+- *Index = View all Activity*
+- *Create = Add Activity* <br/>
+Activity/Modal Folder
+- *ActivtiySelection = Activity Selection Modal *
+- *NetworkActivity = Network Activity Modal*
+- *proximity = Proximity Alert Modal*
+
+Search Folder
+- *index = search page*
+
+Profile Page
+- *index = Users Profile*
+- *show = Users Public Profile*
+- *edit = Edit Users Profile*
+
+This will be updated as we progress
+
 
 #### PERSONS ON PROJECT
 > Daniel Eche (danieleche7@gmail.com) - NielEche<br/>

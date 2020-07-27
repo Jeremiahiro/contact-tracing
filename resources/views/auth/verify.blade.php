@@ -1,40 +1,43 @@
 @extends('layouts.app')
 
 @section('custom-style')
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-@endsection
-
-@section('header')
-    @include('partials.mobile.header.header-white')
+<link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 @endsection
 
 @section('web-content')
-    <h1 class="text-center">Please use a mobile device</h1>
+<h1 class="text-center">Please use a mobile device</h1>
 @endsection
 
 @section('mobile-content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+<section>
+    <div class="splash splash-1">
+        @include('partials.mobile.header.header')
 
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
+        <div class="container">
+            <div class="login py-5">
+                <h2 class="text-white">{{ __('Verify Your Email Address') }}</h2>
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
+                @if (session('resent'))
+                <div class="alert alert-success" role="alert">
+                    {{ __('A fresh verification link has been sent to your email address.') }}
                 </div>
+                @endif
+                <h5 class="py-5 bold">
+                    Before proceeding, please check your email for a verification link.
+                </h5>
+                <h5 class="bold">
+                    If you did not receive the email
+                </h5>
+                <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                    @csrf
+                    <button type="submit"
+                        class="f-18 btn btn-lg w-100 text-white border border-2 border-white text-center">
+                        {{ __('Request Another Link') }}
+                    </button>
+                </form>
             </div>
         </div>
     </div>
-</div>
+</section>
+
 @endsection

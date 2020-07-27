@@ -1,0 +1,8 @@
+<svg id="map-pin-marked" xmlns="http://www.w3.org/2000/svg" width="30.107" height="40" viewBox="0 0 30.107 44.592">
+  <g id="Group_301" data-name="marker">
+    <g id="Group_300" data-name="marker">
+      <path id="Path_165" data-name="Path 165" d="M41.491,15.172a15.054,15.054,0,0,0-30.107,0c0,11.912,15.053,29.539,15.053,29.539S41.491,27.023,41.491,15.172Zm-22.478-.9A7.425,7.425,0,1,1,26.438,21.7,7.425,7.425,0,0,1,19.013,14.273Z" transform="translate(-11.384 -0.119)" fill="#fff"/>
+      <ellipse id="Ellipse_34" data-name="Ellipse 34" cx="3.651" cy="3.651" rx="3.651" ry="3.651" transform="translate(11.402 10.504)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
