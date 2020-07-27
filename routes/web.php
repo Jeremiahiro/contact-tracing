@@ -27,10 +27,14 @@ Route::get('proximity', function () {
     return view('activity.modals.proximity');
 });
 
-Route::get('profile', function ()
- {
+Route::get('profile', function () {
     return view('profile.index');
 })->name('profile.index');
+
+Route::get('alert', function () {
+    return view('alert.index');
+});
+
 
 Auth::routes(['verify' => true]);
 

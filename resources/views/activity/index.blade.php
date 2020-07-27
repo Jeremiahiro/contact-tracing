@@ -11,8 +11,8 @@
 
 @section('mobile-content')
 
+@include('activity.calender.headerCalender')
 <section class="mb-5 py-3">
-    
     @foreach ($activities as $index => $activity)
     <div class="">
         <div class="container py-3 d-flex justify-content-around">
@@ -228,6 +228,39 @@
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer>
 </script>
+
+    <script>
+        $(function () {
+
+            // Multiple instantiation (divs 1 and 2)
+           
+            $('#my_calendar_calSize').rescalendar({
+                id: 'my_calendar_calSize',
+                jumpSize: 2,
+                calSize: 4,
+                //data: [{
+                 //       id: 1,
+                 //       name: 'item1',
+                   //     startDate: '2019-03-01',
+                   //     endDate: '2019-03-03',
+                    //    customClass: 'greenClass'
+                    //},
+                   // {
+                    //    id: 2,
+                     //   name: 'item2',
+                     //   startDate: '2019-03-05',
+                     //   endDate: '2019-03-15',
+                      //  customClass: 'blueClass',
+                       // title: 'Title 2 en'
+                    //}
+               // ],
+
+                dataKeyField: 'name',
+                dataKeyValues: ['item1', 'item2', 'item3', 'item4', 'item5']
+            });
+
+        });
+    </script>
 
 @endsection
 @section('footer')

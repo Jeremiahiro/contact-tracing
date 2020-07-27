@@ -13,6 +13,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <script src="{{ asset('frontend/js/moment-with-locales.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/rescalendar.min.js') }}"></script>
+
     <script src="{{ asset('frontend/jquery/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('frontend/jquery/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('frontend/js/script.js') }}"></script>
@@ -38,6 +41,7 @@
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('frontend/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontend/css/rescalendar.min.css') }}" rel="stylesheet">
 
     @yield('custom-style')
 
