@@ -30,6 +30,17 @@ class DashboardController extends Controller
     }
 
     /**
+     * Show a users settings page.
+     *
+     */
+    public function userSettings()
+    {
+        // dd('here');
+        $user = Auth::user();
+        return view('profile.setting', compact('user'));
+    }
+
+    /**
      * Show user profile.
      *
      * @return \Illuminate\Contracts\Support\Renderable

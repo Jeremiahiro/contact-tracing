@@ -7,7 +7,7 @@
                 @endphp
                 @if ($route == 'home' || $route == 'login' || $route == 'register' || $route == 'password.request' ||
                 $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' ||
-                $route == 'dashboard.index' || $route == 'dashboard.show')
+                $route == 'dashboard.index' || $route == 'dashboard.show' || $route == 'user.setting')
                     <img src="{{asset('frontend/img/logowhite.png')}}" alt="IAMVOCAL LOGO">
                 @else
                     <img src="{{asset('frontend/img/logo.png')}}" alt="IAMVOCAL LOGO">
@@ -16,10 +16,10 @@
         </div>
         <div class="avatar-icon">
             @auth
-            @if ($route == 'dashboard.index' || $route == 'dashboard.show')
+            @if ($route == 'dashboard.index' || $route == 'dashboard.show' || $route == 'user.setting')
                 @if($user->id === Auth::user()->id)
                     <p class="mb-2">
-                        <a href="{{ route('dashboard.index') }}">
+                        <a href="{{ route('user.setting') }}">
                         <img src="{{ asset('frontend/img/svg/setting.svg') }}" alt="">
                         </a>
                     </p>
