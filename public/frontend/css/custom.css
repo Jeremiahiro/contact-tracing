@@ -35,7 +35,7 @@ body {
 .blue-text {
     color: #0000FF;
 }
-
+/* .bootstrap-tagsinput, */
 .input {
     font-family: 'G-regular';
     font-size: 18px;
@@ -50,6 +50,21 @@ body {
     appearance: none;
     display: block;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.input-group>.input {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    margin-bottom: 0
+}
+.input1 {
+    text-align: left !important
+}
+
+.input2 {
+    text-align: right !important
 }
 
 label {
@@ -74,29 +89,32 @@ footer {
 
 .avatar {
     vertical-align: middle;
-    width: 50px;
-    height: 50px;
     border-radius: 50%;
+    background-position: center;
 }
 
-.activity_avatar {
-    vertical-align: middle;
+.avatar-xs {
     width: 25px;
     height: 25px;
-    border-radius: 50%;
 }
 
-.avatar-lg {
+.avatar-sm {
     width: 40px;
     height: 40px;
 }
 
-.opacity-1 {
-    opacity: 1 !important;
+.avatar-md {
+    width: 50px;
+    height: 50px;
 }
 
-.lh-08 {
-    line-height: 0.8;
+.avatar-xl {
+    width: 120px;
+    height: 120px;
+}
+
+.opacity-1 {
+    opacity: 1 !important;
 }
 
 .bg-blue {
@@ -129,17 +147,26 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 .blue-input::placeholder {
-    border: 0;
-    background-color: #F7F7F7;
-    color: #0000FF;
-    -webkit-text-fill-color: #0000FF;
-    -webkit-box-shadow: 0 0 0px 1000px #F7F7F7 inset;
+    border: 0 !important;
+    background-color: #F7F7F7 !important;
+    color: #0000FF !important;
+    -webkit-text-fill-color: #0000FF !important;
+    -webkit-box-shadow: 0 0 0px 1000px #F7F7F7 inset !important;
 }
 
 .invalid-feedback {
     color: red;
-    font-weight: bold;
 }
+
+.hide {
+    display: none
+}
+
+.show {
+    display: block;
+    opacity: 1
+}
+
 
 .heavy {
     font-family: 'G-heavy' !important;
@@ -147,7 +174,7 @@ input:-webkit-autofill:focus,
 
 .bold {
     font-family: 'G-bold' !important;
-    /* font-weight: bold; */
+    font-weight: bold;
 }
 
 .regular {
@@ -181,22 +208,18 @@ input:-webkit-autofill:focus,
 
 .f-14 {
     font-size: 14px;
-    font-family: 'G-bold';
 }
 
 .f-16 {
     font-size: 16px;
-    font-family: 'G-bold';
 }
 
 .f-18 {
     font-size: 18px;
-    font-family: 'G-bold';
 }
 
 .f-24 {
     font-size: 24px;
-    font-family: 'G-bold';
 }
 
 .f-40 {
@@ -281,7 +304,7 @@ input:-webkit-autofill:focus,
 
 .menu-open:checked~.menu-item {
     visibility: visible;
-    transform: translate3d(0, 0, 0)rotate(8deg);
+    transform: translate3d(0, 0, 0)rotate(1deg);
     transition-timing-function: linear;
     transition-duration: 600ms;
 }
@@ -322,8 +345,8 @@ input:-webkit-autofill:focus,
 input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none;
     cursor: pointer;
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
     background-image: url("../img/svg/times.svg");
 }
 
@@ -337,21 +360,19 @@ input[type="search"]::-webkit-search-cancel-button {
     height: 250px;
 }
 
-.profile_avatar {
-    width: 123px;
-    height: 123px;
+.border-5 {
     border: 5px solid #fff;
 }
 
 .profile_cover {
-    background-image: url('../img/cont1.png');
-    min-height: 100%;
+    min-height: 350px;
     border-bottom-left-radius: 43px;
     border-bottom-right-radius: 43px;
 }
 
-.nav-item .active {
-    font-family: 'G-light' !important;
+.nav-item .nav-active {
+    font-weight: bolder;
+    font-family: 'G-heavy' !important;
 }
 
 .carousel-control-prev-icon {
@@ -362,3 +383,160 @@ input[type="search"]::-webkit-search-cancel-button {
     background-image: url("../img/svg/next-icon.svg");
 }
 
+.bg-gray {
+    background-color: #E2E2E2;
+}
+
+.white-input {
+    border: 0 !important;
+    background-color: #FFFFFF !important;
+    color: #0000FF !important;
+    -webkit-text-fill-color: #0000FF !important;
+    -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
+}
+.text-gray {
+}
+.search-result a {
+    color: #707070 !important;
+}
+
+
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem
+}
+
+.alert-heading {
+    color: inherit
+}
+
+.alert-link {
+    font-weight: 700
+}
+
+.alert-dismissible {
+    padding-right: 4rem
+}
+
+.alert-dismissible .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .75rem 1.25rem;
+    color: inherit
+}
+
+.alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff
+}
+
+.alert-primary hr {
+    border-top-color: #9fcdff
+}
+
+.alert-primary .alert-link {
+    color: #002752
+}
+
+.alert-secondary {
+    color: #383d41;
+    background-color: #e2e3e5;
+    border-color: #d6d8db
+}
+
+.alert-secondary hr {
+    border-top-color: #c8cbcf
+}
+
+.alert-secondary .alert-link {
+    color: #202326
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb
+}
+
+.alert-success hr {
+    border-top-color: #b1dfbb
+}
+
+.alert-success .alert-link {
+    color: #0b2e13
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb
+}
+
+.alert-info hr {
+    border-top-color: #abdde5
+}
+
+.alert-info .alert-link {
+    color: #062c33
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba
+}
+
+.alert-warning hr {
+    border-top-color: #ffe8a1
+}
+
+.alert-warning .alert-link {
+    color: #533f03
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb
+}
+
+.alert-danger hr {
+    border-top-color: #f1b0b7
+}
+
+.alert-danger .alert-link {
+    color: #491217
+}
+
+.alert-light {
+    color: #818182;
+    background-color: #fefefe;
+    border-color: #fdfdfe
+}
+
+.alert-light hr {
+    border-top-color: #ececf6
+}
+
+.alert-light .alert-link {
+    color: #686868
+}
+
+.alert-dark {
+    color: #1b1e21;
+    background-color: #d6d8d9;
+    border-color: #c6c8ca
+}
+
+.alert-dark hr {
+    border-top-color: #b9bbbe
+}
+
+.alert-dark .alert-link {
+    color: #040505
+}

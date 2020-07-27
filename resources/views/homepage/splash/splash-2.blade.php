@@ -3,9 +3,7 @@
 
     <div class="container pl-4">
         <div class="trace_date py-5">
-            <h1 class="date">{{ date('d') }}</h1>
-            <h4 class="month">{{ date('M, Y') }}</h4>
-            <h3 class="time">{{ date('H:i A') }}</h3>
+            @include('homepage.splash.extra.time')
         </div>
 
         <div class="d-flex justify-content-around align-items-center">

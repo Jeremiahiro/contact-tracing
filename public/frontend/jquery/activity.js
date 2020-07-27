@@ -1,12 +1,28 @@
 jQuery(document).ready(function ($) {
 
+    var startDate = $('#startDate');
+    var endDate = $('#endDate');
+    startDate.datetimepicker({
+        format: 'd-m-Y H:i',
+        hours12: false,
+        yearStart: 2020,
+        step: 5,
+    });
+
+    endDate.datetimepicker({
+        format: 'd-m-Y H:i',
+        // minDateTime: new Date(startDate.val()),
+        hours12: false,
+        step: 5,
+    });
+
     $('#activity_tags').multiInput({
         json: true,
         input: $(
             '<div class="form-group">\n' +
             '<div class="row inputElement">\n' +
             '<div class="col-md-6 mb-1">\n' +
-            '<input class="blue-input input rounded-0 required" name="name[]" placeholder="Name" type="text" autocomplete="tag_detail">\n' +
+            '<input class="blue-input input rounded-0" name="name[]" placeholder="Name" type="text" autocomplete="tag_detail">\n' +
             '</div>\n' +
             '<div class="col-md-6 mb-1">\n' +
             '<input class="blue-input input rounded-0" name="email[]" placeholder="Email" type="email"  autocomplete="tag_detail">\n' +
@@ -26,46 +42,41 @@ jQuery(document).ready(function ($) {
     });
 
     $(function () {
-        $('.daterange').daterangepicker({
-            autoUpdateInput: false,
-            timePicker: true,
-            minYear: 2020,
-            startDate: moment().startOf('hour'),
-            locale: {
-                cancelLabel: 'Clear',
-                format: 'DD-MM-YY hh:mm A'
-            }
-        });
-        $('.daterange').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('DD-MM-YY hh:mm A') + ' to ' + picker.endDate.format('DD-MM-YY hh:mm A'));
-        });
-
-        $('.daterange').on('cancel.daterangepicker', function(ev, picker) {
-            $(this).val('');
-        });
-    });
-
-    $(function () {
         // Initialize form validation on the registration form.
         // It has the name attribute "registration"
         $("form[name='activity']").validate({
+            ignore: "input[name='from_latitude']:hidden",
             // Specify validation rules
             rules: {
                 // The key name on the left side is the name attribute
                 // of an input field. Validation rules are defined
                 // on the right side
-                "date_range": "required",
-                "name": "required",
-                "email": {
-                    required: true,
-                    email: true
+                // "start_date": "required",
+                // "end_date": "required",
+                from_latitude: {
+                    number:true,
+                    min:1,
+                    required:true
                 },
+                to_latitude: {
+                    number:true,
+                    min:1,
+                    required:true
+                },
+                // "name": "required",
+                // "email[]": {
+                //     required: true,
+                //     email: true
+                // },
             },
             // Specify validation error messages
             messages: {
-                "name": "Please enter a name",
-                "date_range": "Please enter a valid date and time",
-                "email": "Please enter a valid email address"
+                // "start_date": "Please enter a valid date and time",
+                // "end_date": "Please enter a valid date and time",
+                "from_latitude": "Google Map: select a valid address",
+                "to_latitude": "Google Map: select a valid address",
+                // "name[]": "Please enter a valid name",
+                // "email[]": "Please enter a valid email address",
             },
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid

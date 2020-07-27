@@ -1,0 +1,55 @@
+
+fieldset {
+	border: none;
+	padding: 0;
+    margin: 0 0 10px;
+    width: 100%;
+}
+
+.simple-form-button {
+	-moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: -moz-linear-gradient(center top , #FFFFFF, #EEEEEE) repeat scroll 0 0 transparent;
+    background: -webkit-linear-gradient(center top , #FFFFFF, #EEEEEE) repeat scroll 0 0 transparent;
+    border-color: #E2E2E2 #DDDDDD #CCCCCC;
+    border-left: 1px solid #DDDDDD;
+    border-radius: 5px 5px 5px 5px;
+    border-right: 1px solid #DDDDDD;
+    border-style: solid;
+    border-width: 1px 1px 2px;
+    color: #000000;
+    cursor: pointer;
+    font-size: 9pt;
+    margin: 0;
+    padding: 8px 18px;
+    width: auto;
+    height: auto;
+}
+.submit-button {
+	background: -moz-linear-gradient(center top , #FFFFFF, #2a8db4) repeat scroll 0 0 transparent;
+    float: right;
+    display: none;
+}
+
+.form-controls {
+    clear: both;
+}
+
+.previous-fieldset {
+	display: none;
+	float: left;
+}
+.next-fieldset {
+	float: right;
+},
+a.next-fieldset,
+a.previous-fieldset {
+	color: #ccc;
+}
+
+.clear {
+	clear: both;
+}

@@ -59,6 +59,12 @@
                         </div>
                     </div>
 
+                    <div class="checkbox">
+                        <label class="d-none">
+                            <input type="checkbox" name="remember" checked> Remember Me
+                        </label>
+                    </div>
+
                     <div class="form-group">
                         <button type="submit" class="f-18 btn btn-lg w-100 text-white border border-white text-center">
                             LOGIN

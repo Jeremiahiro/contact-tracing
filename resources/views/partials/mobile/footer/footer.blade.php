@@ -11,12 +11,12 @@
                     <span class="hamburger hamburger-2"></span>
                 </label>
                 <a href="{{ route('activity.create') }}" class="menu-item menu-item-1">
-                    <img src="{{  asset('/frontend/img/svg/marker-1.svg') }}" alt="Contact Tracing">
+                    <img src="{{  asset('/frontend/img/svg/plus1.svg') }}" alt="Contact Tracing">
                 </a>
                 <a href="{{ route('activity.create') }}" class="menu-item menu-item-2">
                     <img src="{{  asset('/frontend/img/svg/marker-1.svg') }}" alt="Contact Tracing">
                 </a>
-                <a href="" class="menu-item menu-item-3">
+                <a href="{{ route('search') }}" class="menu-item menu-item-3">
                     <img src="{{  asset('/frontend/img/svg/ct.svg') }}" alt="Contact Tracing">
                 </a>
             </div>
