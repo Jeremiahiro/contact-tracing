@@ -35,6 +35,10 @@ Route::get('alert', function () {
     return view('alert.index');
 });
 
+Route::get('calender', function () {
+    return view('activity.calender.headerCalender');
+});
+
 
 Auth::routes(['verify' => true]);
 
