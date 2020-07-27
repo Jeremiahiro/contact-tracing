@@ -11,15 +11,21 @@
     <title>Contact Tracing | @yield('title')</title>
 
     <!-- Scripts -->
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+
+    <script src="{{ asset('frontend/js/moment-with-locales.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/rescalendar.min.js') }}"></script>
+
     <script src="{{ asset('frontend/jquery/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('frontend/jquery/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('frontend/jquery/jquery-1.9.1.min.js') }}"></script>
     <script src="{{ asset('frontend/jquery/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
     <script src="{{ asset('frontend/js/script.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js" crossorigin="anonymous"></script>
+    
 
     {{-- bootstrap --}}
     <link href="{{ asset('frontend/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -31,6 +37,7 @@
     <!-- Styles -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontend/css/rescalendar.min.css') }}" rel="stylesheet">
 
     @yield('custom-style')
 
@@ -47,7 +54,7 @@
             @endphp
             @if ($route == 'home' || $route == 'login' || $route == 'register' || $route == 'password.request' ||
              $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' || $route == 'dashboard.index'
-             || $route == 'dashboard.show')
+             || $route == 'dashboard.show' || $route == 'user.setting')
             @else
                 @include('partials.mobile.header.header')
             @endif

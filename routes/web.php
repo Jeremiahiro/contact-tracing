@@ -27,6 +27,19 @@ Route::get('proximity', function () {
     return view('activity.modals.proximity');
 });
 
+Route::get('profile', function () {
+    return view('profile.index');
+})->name('profile.index');
+
+Route::get('alert', function () {
+    return view('alert.index');
+});
+
+// Route::get('settings', function () {
+//     return view('profile.settings');
+// });
+
+
 Auth::routes(['verify' => true]);
 
 
@@ -42,6 +55,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/search', 'GeneralController@search')->name('search');
     Route::get('/search/result', 'GeneralController@searchResult')->name('search.query');
     Route::post('follow', 'DashboardController@follwUserRequest')->name('follow');
+    Route::get('/user/setting', 'DashboardController@userSettings')->name('user.setting');
 });
 
 // Route::get('/dashboard/settings/{$user_id}', 'DashboardController@show')->name('dashboard.settings');
