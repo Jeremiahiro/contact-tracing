@@ -1,6 +1,6 @@
 /node_modules
 /public/hot
-/public/storage
+/public/storagerf
 /storage/*.key
 /vendor
 .envf
