@@ -27,7 +27,6 @@ Route::get('proximity', function () {
     return view('activity.modals.proximity');
 });
 
-<<<<<<< HEAD
 Route::get('profile', function () {
     return view('profile.index');
 })->name('profile.index');
@@ -37,8 +36,6 @@ Route::get('alert', function () {
 });
 
 
-=======
->>>>>>> b7892892548b9a37907e7e73182dcdb81c66dae5
 Auth::routes(['verify' => true]);
 
 
