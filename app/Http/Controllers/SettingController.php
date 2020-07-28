@@ -64,11 +64,11 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function location(Request $request){
-
-        $user = User::find($request->userID);
+    public function location(Request $request)
+    {
+        $user = User::where('uuid', $request->userID);
         if($user){
-            // $user->status = $request->status;
+            $user->show_location = $request->status;
             return response()->json(['success'=>'Status change successfully.']);
         }
         return response()->json(['error'=>'oops something went wrong!']);
