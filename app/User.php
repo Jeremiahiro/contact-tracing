@@ -16,12 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password', 'header',
-        'username', 'phone', 'role', 'avatar',
-        'longitude', 'latitude', 'location',
-        'provider', 'provider_id', 'access_token',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -43,7 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Get the comments for the blog post.
+     * User has many activities
      */
     public function activities()
     {
@@ -51,7 +46,8 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     
     /**
-     * Get the comments for the blog post.
+     * a user has many taggs.
+     * 
      */
     public function tags()
     {
@@ -59,11 +55,19 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Get the comments for the blog post.
+     * a user can be tagged.
      */
     public function isTagged()
     {
         return $this->hasMany('App\ActivityTags', 'person_id');
+    }
+
+    /**
+     * user has a location
+     */
+    public function location()
+    {
+        return $this->hasOne('App\UserLocation', 'user_id');
     }
 
 }

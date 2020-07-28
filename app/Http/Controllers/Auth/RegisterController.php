@@ -55,9 +55,6 @@ class RegisterController extends Controller
             'password'  =>  ['required', 'string', 'min:8', 'confirmed', 'regex:/(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'],
             'username'  =>  ['string'],
             'phone'     =>  ['phone:AUTO,NG'],
-            'longitude' =>  ['string'],
-            'latitude'  =>  ['string'],
-            'location'  =>  ['string'],
         ]);
     }
 

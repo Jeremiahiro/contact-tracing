@@ -7,8 +7,6 @@ Profile Page
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
-<script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
-
 @endsection
 
 @section('web-content')
@@ -38,26 +36,32 @@ Profile Page
                     <p class="m-0">Location</p>
                 </span>
                 <span class="px-2">
-                    <span class="">{{ $user->followings()->count() }}</span>
-                    <p class="m-0">Followers</p>
+                    <a href="" class="text-white" data-dismiss="modal" data-toggle="modal" data-target="#userFollowing">
+                        <span class="">{{ count($user->followings) }}</span>
+                        <p class="m-0">Following</p>
+                    </a>
                 </span>
                 <span class="px-2">
-                    <span class="tl-follower">{{ $user->followers()->count() }}</span>
-                    <p class="m-0">Following</p>
+                    <a href="" class="text-white" data-dismiss="modal" data-toggle="modal" data-target="#userFollowers">
+                        <span class="tl-follower">{{ count($user->followers) }}</span>
+                        <p class="m-0">Followers</p>
+                    </a>
                 </span>
             </div>
             @if ($user->id != auth()->user()->id)
             <button class="text-center mt-3 btn f-12 rounded blue-btn text-white action-follow"
                 data-id="{{ $user->id }}">
-                <input type="hidden" class="hidden F-status"
-                    value="{{ auth()->user()->isFollowing($user) ? 1 : 0 }}">
+                <input type="hidden" class="hidden F-status" value="{{ auth()->user()->isFollowing($user) ? 1 : 0 }}">
                 <strong>
                     @if(auth()->user()->isFollowing($user))
-                    Following
+                    UNFOLLOW
                     @else
-                    Follow
+                    FOLLOW
                     @endif
                 </strong>
+                <div class="spinner-border text-white ml-2 spinner-border-sm d-none" id="follow-spinner" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
             </button>
             @endif
         </div>
@@ -68,14 +72,17 @@ Profile Page
     <div class="container px-3 py-5">
         <p class="f-14">ROUTE HISTORY</p>
         @if ($user->activities->count())
-        <div id="activityView">
-            <div class="align-items-end mb-0 mt-3 f-12">
-                <span class="bold text-primary" id="tab1Label">Places</span>
-                <span class="">|</span>
-                <span class="light text-primary" id="tab2Label">People</span>
+
+        <div class="activityView">
+            <div class="activity">
+                <ul class="mb-0 mt-3 f-12 nav">
+                    <li class="active"><a data-toggle="tab" href="#tab1" class="text-primary active">Places</a></li>
+                    <span class="mx-1">|</span>
+                    <li><a data-toggle="tab" href="#tab2" class="text-primary">People</a></li>
+                </ul>
             </div>
-            <div class="py-3">
-                <div class="" id="tab1">
+            <div class="py-3 tab-content">
+                <div class="tab-pane fade in active" id="tab1">
                     <div class="row px-2">
                         @foreach($user->activities as $activity)
                         <div class="col-6 p-1">
@@ -111,7 +118,7 @@ Profile Page
                     </div>
 
                 </div>
-                <div class="hide" id="tab2">
+                <div class="tab-pane fade" id="tab2">
                     <div id="activityTaggedControls" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
                             @foreach ($user->tags->chunk(12) as $tags)
@@ -158,8 +165,7 @@ Profile Page
         @else
         @if ($user->id === auth()->user()->id)
         <div class="text-center">
-            <a href="{{ route('activity.create') }}"
-                class="text-center mt-3 btn f-14 rounded blue-btn text-white">Add
+            <a href="{{ route('activity.create') }}" class="text-center mt-3 btn f-14 rounded blue-btn text-white">Add
                 an Activity </a>
         </div>
         @endif
@@ -177,42 +183,4 @@ Profile Page
 
 @include('activity.partials.mapScript')
 
-<script>
-    jQuery(document).ready(function ($) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('.action-follow').click(function () {
-            var userID = $(this).data('id');
-            var status = $('.F-status').val();
-            var cObj = $(this);
-            var c = $(this).parent("div").find(".tl-follower").text();
-
-            $.ajax({
-                type: 'POST',
-                url: '/follow',
-                data: {
-                    userID: userID,
-                    status: status
-                },
-                success: function (data) {
-                    // console.log(data);
-                    if (data.status == 0) {
-                        cObj.find("strong").text("Follow");
-                        cObj.parent("div").find(".tl-follower").text(parseInt(c) - 1);
-                        $('.F-status').val(0);
-                    } else {
-                        cObj.find("strong").text("Following");
-                        cObj.parent("div").find(".tl-follower").text(parseInt(c) + 1);
-                        $('.F-status').val(1);
-                    }
-                }
-            });
-        });
-    });
-
-</script>
 @endsection

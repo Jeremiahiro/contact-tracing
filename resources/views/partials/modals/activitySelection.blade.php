@@ -56,13 +56,13 @@
                                             <p class="f-12 mb-0 bold text-capitalize">{{ $person->name }}</p>
                                         </div>
                                         @else
-                                        <a href="{{ route('dashboard.show', $person->tagged->id) }}"
+                                        <a href="{{ route('dashboard.show', $person->tagged->uuid) }}"
                                             class="f-9 bold text-primary">
                                             <img src="{{ $person->tagged->avatar }}" class="avatar avatar-sm"
                                                 alt="Activity Tag">
                                         </a>
                                         <div class="ml-2">
-                                            <a href="{{ route('dashboard.show', $person->tagged->id) }}"
+                                            <a href="{{ route('dashboard.show', $person->tagged->uuid) }}"
                                                 class="f-9 bold text-primary">
                                                 <p class="f-12 mb-2 bold text-capitalize text-white">
                                                     {{ $person->tagged->username }}</p>

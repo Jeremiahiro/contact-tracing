@@ -19,21 +19,30 @@
                         <p class="m-0">Location</p>
                     </span>
                     <span class="px-1">
-                        <span class="">{{ count(auth()->user()->followings) }}</span>
-                        <p class="m-0">Followers</p>
+                        <a href="" class="text-white" data-dismiss="modal" data-toggle="modal"
+                            data-target="#userFollowing">
+                            <span class="">{{ count(auth()->user()->followings) }}</span>
+                            <p class="m-0">Following</p>
+                        </a>
                     </span>
                     <span class="px-1">
-                        <span class="">{{ count(auth()->user()->followers) }}</span>
-                        <p class="m-0">Following</p>
+                        <a href="" class="text-white" data-dismiss="modal" data-toggle="modal"
+                            data-target="#userFollowers">
+                            <span class="tl-follower">{{ count(auth()->user()->Followers) }}</span>
+                            <p class="m-0">Followers</p>
+                        </a>
                     </span>
                 </div>
             </div>
 
             <div class="">
                 <nav class="nav flex-column">
-                    <a class="nav-link text-white bold f-16" href="{{ route('dashboard.index') }}">Dashboard <i class="ml-2 fa fa-dashboard"></i></a>
-                    <a class="nav-link text-white bold f-16" href="{{ route('user.setting') }}">Settings <i class="ml-2 fa fa-cog"></i></a>
-                    <a class="nav-link text-white bold f-16" href="#">Edit Profile <i class="ml-2 fa fa-user"></i></a>
+                    <a class="nav-link text-white bold f-16" href="{{ route('dashboard.index') }}">Dashboard <i
+                            class="ml-2 fa fa-dashboard"></i></a>
+                    <a href="{{ route('dashboard.setting', auth()->user()->uuid) }}" class="nav-link text-white bold f-16"> 
+                        Settings <i class="ml-2 fa fa-cog"></i>
+                    </a>
+                    <a class="nav-link text-white bold f-16" href="{{ route('dashboard.edit', auth()->user()->uuid) }}">Edit Profile <i class="ml-2 fa fa-user"></i></a>
                     <a class="nav-link text-white bold f-16" href="#">Privacy Policy <i class="ml-2 fa fa-file"></i></a>
                 </nav>
             </div>

@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
 @section('title')
-Profile Page
+Settings Page
 @endsection
 
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
-<script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
 
 @endsection
 
@@ -121,45 +120,6 @@ Profile Page
 </script>
 
 @include('activity.partials.mapScript')
-
-<script>
-    jQuery(document).ready(function ($) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('.action-follow').click(function () {
-            var userID = $(this).data('id');
-            var status = $('.F-status').val();
-            var cObj = $(this);
-            var c = $(this).parent("div").find(".tl-follower").text();
-
-            $.ajax({
-                type: 'POST',
-                url: '/follow',
-                data: {
-                    userID: userID,
-                    status: status
-                },
-                success: function (data) {
-                    // console.log(data);
-                    if (data.status == 0) {
-                        cObj.find("strong").text("Follow");
-                        cObj.parent("div").find(".tl-follower").text(parseInt(c) - 1);
-                        $('.F-status').val(0);
-                    } else {
-                        cObj.find("strong").text("Following");
-                        cObj.parent("div").find(".tl-follower").text(parseInt(c) + 1);
-                        $('.F-status').val(1);
-                    }
-                }
-            });
-        });
-    });
-
-</script>
 
 <script>
     function readURL(input) {
