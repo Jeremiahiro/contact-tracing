@@ -104,8 +104,8 @@ p {
 } */
 
 .vl {
-    border-left: 2px solid #0B24FA;
-    height: 105px;
+    border-right: 2px solid #0B24FA;
+    min-height: 115px;
 }
 
 .route {

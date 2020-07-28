@@ -563,16 +563,17 @@ input[type="search"]::-webkit-search-cancel-button {
     top: calc(100% - 200px);
 }
 
-.modal.right.fade .modal-dialog {
-    /* right: -100px; */
-    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-    -o-transition: opacity 0.3s linear, right 0.3s ease-out;
-    transition: opacity 0.3s linear, right 0.3s ease-out;
+.modal.fade:not(.in).right .modal-dialog {
+	-webkit-transform: translate3d(-2%, 0, 0);
+    transform: translate3d(-2%, 0, 0);
+    /* -webkit-transition: opacity 0.3s linear, right 0.3s ease-out; */
+    /* -moz-transition: opacity 0.3s linear, right 0.3s ease-out; */
+    /* -o-transition: opacity 0.3s linear, right 0.3s ease-out; */
+    /* transition: opacity 0.3s linear, right 0.3s ease-out; */
 }
 
-.side-nav{
-    min-width:275px;
+.side-nav {
+    /* min-width:275px; */
     max-width:280px;
     position:absolute;
 	top:0;

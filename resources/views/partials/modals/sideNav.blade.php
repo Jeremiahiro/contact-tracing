@@ -1,4 +1,4 @@
-<div class="modal right show fade" id="sideNav" tabindex="-1" role="dialog" aria-labelledby="sideNavlLabel">
+<div class="modal fade right" id="sideNav" tabindex="-1" role="dialog" aria-labelledby="sideNavlLabel">
     <div class="modal-dialog side-nav m-0 p-0" role="document">
         <div class="modal-content side-nav-content route_purple text-white text-right">
 
@@ -31,6 +31,7 @@
 
             <div class="">
                 <nav class="nav flex-column">
+                    <a class="nav-link text-white bold f-16" href="{{ route('dashboard.index') }}">Dashboard <i class="ml-2 fa fa-dashboard"></i></a>
                     <a class="nav-link text-white bold f-16" href="{{ route('user.setting') }}">Settings <i class="ml-2 fa fa-cog"></i></a>
                     <a class="nav-link text-white bold f-16" href="#">Edit Profile <i class="ml-2 fa fa-user"></i></a>
                     <a class="nav-link text-white bold f-16" href="#">Privacy Policy <i class="ml-2 fa fa-file"></i></a>
