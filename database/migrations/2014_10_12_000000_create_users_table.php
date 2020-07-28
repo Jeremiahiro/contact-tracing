@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('username');
+            $table->string('age_range')->nullable();
+            $table->string('gender')->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->default('https://res.cloudinary.com/iro/image/upload/v1595613322/avatar.png');
             $table->string('header')->default('https://res.cloudinary.com/iro/image/upload/v1594295895/samples/Rectangle_1547.png');
@@ -28,13 +30,8 @@ class CreateUsersTable extends Migration
             $table->string('provider', 20)->nullable();
             $table->string('provider_id')->nullable();
             $table->string('access_token')->nullable();
-
-            $table->string('location')->nullable()->default(null);
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
             
             $table->string('role')->default('user');
-            $table->boolean('show_location')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -25,10 +25,10 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js" crossorigin="anonymous"></script>
-    
 
     {{-- bootstrap --}}
     <link href="{{ asset('frontend/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('frontend/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <!-- Fonts -->
@@ -38,6 +38,9 @@
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
     {{-- <link rel="stylesheet" href="{{ asset('frontend/css/rescalendar.min.css') }}" rel="stylesheet"> --}}
+
+    <script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
+    <script src="{{ asset('frontend/jquery/followToggle.js')}}"></script>
 
     @yield('custom-style')
 
@@ -54,7 +57,7 @@
             @endphp
             @if ($route == 'home' || $route == 'login' || $route == 'register' || $route == 'password.request' ||
              $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' || $route == 'dashboard.index'
-             || $route == 'dashboard.show' || $route == 'user.setting')
+             || $route == 'dashboard.show' || $route == 'dashboard.setting' || $route == 'dashboard.edit')
             @else
                 @include('partials.mobile.header.header')
             @endif
@@ -66,6 +69,8 @@
         @yield('footer')
         @auth
         @include('partials.modals.sideNav')
+        @include('partials.modals.userFollowers')
+        @include('partials.modals.userFollowings')
         @endauth
         @enddesktop
     </div>
