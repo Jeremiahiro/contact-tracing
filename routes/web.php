@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/search/result', 'GeneralController@searchResult')->name('search.query');
     Route::get('/dashboard/{id}/setting', 'SettingController@setting')->name('dashboard.setting');
     Route::post('/dashboard/password', 'SettingController@updatePassword')->name('dashboard.password');
+    Route::get('/changeStatus', 'SettingController@location')->name('changeStatus');
 });
 
 // Route::get('/dashboard/settings/{$user_id}', 'DashboardController@show')->name('dashboard.settings');

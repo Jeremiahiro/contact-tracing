@@ -58,4 +58,20 @@ class SettingController extends Controller
         return redirect()->back()->with('error', 'Current Password is required');  
 
     }
+
+    /**
+     * Deactivate and Activate request.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function location(Request $request){
+
+        $user = User::find($request->userID);
+        if($user){
+            // $user->status = $request->status;
+            return response()->json(['success'=>'Status change successfully.']);
+        }
+        return response()->json(['error'=>'oops something went wrong!']);
+
+    }
 }

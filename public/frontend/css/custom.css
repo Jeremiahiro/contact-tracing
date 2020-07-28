@@ -565,6 +565,18 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .modal.fade:not(.in).right .modal-dialog {
+<<<<<<< HEAD
+    -webkit-transform: translate3d(-2%, 0, 0);
+    transform: translate3d(-2%, 0, 0);
+    /* -webkit-transition: opacity 0.3s linear, right 0.3s ease-out; */
+    /* -moz-transition: opacity 0.3s linear, right 0.3s ease-out; */
+    /* -o-transition: opacity 0.3s linear, right 0.3s ease-out; */
+    /* transition: opacity 0.3s linear, right 0.3s ease-out; */
+}
+
+.side-nav {
+    /* min-width:275px; */
+=======
     -webkit-transform: translate3d(0, 0, 1%);
     transform: translate3d(0, 0, 1%);
     -webkit-transition: opacity 0.3s linear, right 0.3s ease-in-out;
@@ -575,6 +587,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .side-nav {
     min-width: 275px;
+>>>>>>> 90ed228e3b05db284e282ac2f772f7abec4ad499
     max-width: 280px;
     position: absolute;
     top: 0;
@@ -592,6 +605,8 @@ input[type="search"]::-webkit-search-cancel-button {
     right: 0;
 }
 
+<<<<<<< HEAD
+=======
 .full-modal {
     min-width: 100%;
     position: absolute;
@@ -615,6 +630,7 @@ input[type="search"]::-webkit-search-cancel-button {
     font-family: 'G-heavy';
 }
 
+>>>>>>> 90ed228e3b05db284e282ac2f772f7abec4ad499
 .switch {
     position: relative;
     display: inline-block;
@@ -678,3 +694,48 @@ input:checked+.toggle-slider:before {
     height: 22px;
     width: 22px;
 }
+
+.avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: 50px auto;
+}
+
+.avatar-edit {
+    position: absolute;
+    z-index: 1;
+    left: 40%;
+    top: 50%;
+}
+
+.bgImage-edit {
+    left: 45% !important;
+    top: 60%;
+}
+
+.avatar-edit input {
+    display: none;
+}
+
+.avatar-edit label {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    text-align: center;
+    margin-bottom: 0;
+    border-radius: 100%;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all .2s ease-in-out;
+}
+
+.avatar-edit label:after {
+    content: url("../img/svg/Icon-camera.svg");
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+}
+
