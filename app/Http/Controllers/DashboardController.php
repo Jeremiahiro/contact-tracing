@@ -68,4 +68,22 @@ class DashboardController extends Controller
         }
         return response()->json(['success'=>$response, 'status' => $status]);
     }
+
+     /**
+     * Deactivate and Activate request.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    
+    public function ProfileChangeStatus(Request $request){
+
+        $user = User::find($request->userID);
+        if($user){
+            // $user->status = $request->status;
+            return response()->json(['success'=>'Status change successfully.']);
+        }
+        return response()->json(['error'=>'oops something went wrong!']);
+
+
+    }
 }

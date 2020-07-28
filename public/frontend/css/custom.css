@@ -564,7 +564,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .modal.fade:not(.in).right .modal-dialog {
-	-webkit-transform: translate3d(-2%, 0, 0);
+    -webkit-transform: translate3d(-2%, 0, 0);
     transform: translate3d(-2%, 0, 0);
     /* -webkit-transition: opacity 0.3s linear, right 0.3s ease-out; */
     /* -moz-transition: opacity 0.3s linear, right 0.3s ease-out; */
@@ -574,37 +574,39 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .side-nav {
     /* min-width:275px; */
-    max-width:280px;
-    position:absolute;
-	top:0;
-    right:0;
-    margin:0;
+    max-width: 280px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
 }
+
 .side-nav-content {
-    min-height:100vh;
-    border:0;
-    border-radius:0;
+    min-height: 100vh;
+    border: 0;
+    border-radius: 0;
 }
 
 .modal.right.fade.in .modal-dialog {
     right: 0;
 }
+
 .switch {
     position: relative;
     display: inline-block;
     width: 55px;
     height: 30px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
+}
+
+/* Hide default HTML checkbox */
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  /* The slider */
-  .toggle-slider {
+}
+
+/* The slider */
+.toggle-slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -614,9 +616,9 @@ input[type="search"]::-webkit-search-cancel-button {
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  .toggle-slider:before {
+}
+
+.toggle-slider:before {
     position: absolute;
     content: "";
     height: 26px;
@@ -626,29 +628,73 @@ input[type="search"]::-webkit-search-cancel-button {
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  input:checked + .toggle-slider {
+}
+
+input:checked+.toggle-slider {
     background-color: #0000FF;
-  }
-  
-  input:focus + .slider {
+}
+
+input:focus+.slider {
     box-shadow: 0 0 1px #0000FF;
-  }
-  
-  input:checked + .toggle-slider:before {
+}
+
+input:checked+.toggle-slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
-  }
-  
-  /* Rounded sliders */
-  .toggle-slider {
+}
+
+.toggle-slider {
     border-radius: 50px;
-  }
-  
-  .toggle-slider:before {
+}
+
+.toggle-slider:before {
     border-radius: 50%;
-    height:22px;
+    height: 22px;
     width: 22px;
-  }
+}
+
+.avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: 50px auto;
+}
+
+.avatar-edit {
+    position: absolute;
+    z-index: 1;
+    left: 40%;
+    top: 50%;
+}
+
+.bgImage-edit {
+    left: 45% !important;
+    top: 60%;
+}
+
+.avatar-edit input {
+    display: none;
+}
+
+.avatar-edit label {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    text-align: center;
+    margin-bottom: 0;
+    border-radius: 100%;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all .2s ease-in-out;
+}
+
+.avatar-edit label:after {
+    content: url("../img/svg/Icon-camera.svg");
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+}
+

@@ -54,8 +54,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Route::get('/user/{id}', 'DashboardController@show')->name('user.profile');
     Route::get('/search', 'GeneralController@search')->name('search');
     Route::get('/search/result', 'GeneralController@searchResult')->name('search.query');
-    Route::post('follow', 'DashboardController@follwUserRequest')->name('follow');
+    Route::post('/follow', 'DashboardController@follwUserRequest')->name('follow');
     Route::get('/user/setting', 'DashboardController@userSettings')->name('user.setting');
+    Route::get('/changeStatus', 'DashboardController@ProfileChangeStatus')->name('changeStatus');
 });
 
 // Route::get('/dashboard/settings/{$user_id}', 'DashboardController@show')->name('dashboard.settings');
