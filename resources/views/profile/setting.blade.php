@@ -60,7 +60,7 @@ Settings Page
             </span>
             <span>
                 <label class="switch">
-                    <input data-id="1" class="toggle-class box-status" type="checkbox" checked />
+                    <input data-id="1" class="toggle-class" type="checkbox" checked />
                     <span class="toggle-slider"></span>
                 </label>
             </span>
