@@ -37,33 +37,29 @@ Settings Page
     </div>
 </section>
 
-<section>
-    <div class="container">
-        <div>
-            <h1 class="f-24 bold pt-4">Settings</h1>
+
+<section class="py-3 mb-5">
+    <h4 class="m-2 px-3 bold f-24">Settings</h4>
+    <div class="container p-3">
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+            <p class="f-18 bold">Preferences</p>
+            <img src="{{ asset('/frontend/img/svg/side-arrow.svg')}}" alt="">
         </div>
-        <div class="d-flex justify-content-between">
-            <span>
-                <p class="f-18 bold">Preferences</p>
-            </span>
-            <span>
-                <img src="{{ asset('/frontend/img/svg/side-arrow.svg')}}" alt="">
-            </span>
-        </div>
-        <div class="d-flex justify-content-between">
-            <span>
-                <p class="f-14 bold m-0 pt-3">Deactivate Account</p>
-            </span>
-            <span class="ml-auto">
-                <div style="display:none;" class=" spinner-border" role="status">
-                </div>
-            </span>
-            <span>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <p class="f-14 bold m-0">Others Can See My Activity</p>
+            </div>
+            <div class="">
                 <label class="switch">
-                    <input data-id="1" class="toggle-class" type="checkbox" checked />
+                    <input type="checkbox" data-id="{{ $user->uuid }}" name="show_location" id="show_location"
+                        class="show_location" {{ $user->show_location == true ? 'checked' : '' }} />
                     <span class="toggle-slider"></span>
                 </label>
-            </span>
+                <div class="spinner-border text-primary ml-2 spinner-border-sm d-none" id="location-spinner"
+                    role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
         </div>
         <hr>
     </div>
@@ -85,34 +81,29 @@ Settings Page
             }
         });
 
-        $('.toggle-class').change(function () {
+        $('#show_location').change(function () {
+            $('#location-spinner').removeClass('d-none');
 
-            var status = $(this).prop('checked') === true ? 1 : 0;
             var userID = $(this).data('id');
+            var status = $(this).is(':checked') ? 1 : 0;
 
             $.ajax({
-                type: "GET",
-                beforeSend: function () {
-                    $('.spinner-border').css("display", "block");
-                },
-                dataType: "json",
-                url: '/changeStatus',
+                type: 'GET',
+                url: `/location/visibility`,
                 data: {
                     'status': status,
                     'userID': userID
                 },
-
                 success: function (data) {
-                    console.log(data.success);
-                    $('.spinner-border').css("display", "none");
                     if (data.success) {
+                        $('#location-spinner').addClass('d-none');
                         alert(data.success);
                     } else {
-                        alert(data.error);
+                        $('#location-spinner').addClass('d-none');
+                        $(this).prop("checked", !this.checked);
+                        alert(data.success);
                     }
                 }
-
-
             });
         });
     });
@@ -120,52 +111,5 @@ Settings Page
 </script>
 
 @include('activity.partials.mapScript')
-
-<script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#bgPreview').css('background-image', 'url(' + e.target.result + ')');
-                $('#bgPreview').hide();
-                $('#bgPreview').fadeIn(650);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $("#bgUpload").change(function () {
-        readURL(this);
-    });
-
-</script>
-
-
-<script>
-    $(document).ready(function () {
-
-        var readURL = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#imagePreview').attr('src', e.target.result);
-                    $('#imagePreview').hide();
-                    $('#imagePreview').fadeIn(650);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#imageUpload").on('change', function () {
-            readURL(this);
-        });
-
-        $("avatar-edit").on('click', function () {
-            $("#imageUpload").click();
-        });
-    });
-
-</script>
 
 @endsection
