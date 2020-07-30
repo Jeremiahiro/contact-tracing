@@ -10,20 +10,21 @@ Add Activity
 <script src="{{ asset('frontend/jquery/activity.js')}}"></script>
 <script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
 
+<link href="{{ asset('frontend/css/simpleform.css') }}" rel="stylesheet" type="text/css">
+
+
 {{-- multiple input --}}
 <link href="{{ asset('frontend/css/jq.multiinput.min.css') }}" rel="stylesheet">
 <script src="{{ asset('frontend/jquery/jq.multiinput.min.js')}}"></script>
 
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/amsify.suggestags.css') }}">
-
-
 <script type="text/javascript" src="{{ asset('frontend/jquery/jquery.amsify.suggestags.js')}}"></script>
 
 {{-- tagging --}}
-<link href="{{ asset('frontend/bootstrap/css/bootstrap-tagsinput.css') }}" rel="stylesheet">
+{{-- <link href="{{ asset('frontend/bootstrap/css/bootstrap-tagsinput.css') }}" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"
     integrity="sha512-VvWznBcyBJK71YKEKDMpZ0pCVxjNuKwApp4zLF3ul+CiflQi6aIJR+aZCP/qWsoFBA28avL5T5HA+RE+zrGQYg=="
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> --}}
 
 @endsection
 
@@ -53,7 +54,7 @@ Add Activity
     <div class="container">
         <div class="py-5 activity">
             <p class="f-12 bold">Record Activity</p>
-            <form method="POST" action="{{ route('activity.store') }}" id="activityForm" name="activity"
+            <form method="POST" action="{{ route('activity.store') }}" id="activitForm" name="activity"
                 autocomplete="off">
                 @csrf
                 <div class="d-flex justify-content-between align-items-center where-to">
@@ -139,34 +140,32 @@ Add Activity
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="tags" id="tags" value="" readonly />
-                        </div>
-
-                        <div>
+                        <div id="tab1">
                             <div class="form-group">
-                                <input type="search" class="user-data blue-input input" name="users" id="user-data"
-                                    value="" autocomplete="off">
+                                <input type="search" class="user-data blue-input input" name="user" id="user" value=""
+                                    autocomplete="off" placeholder="People you met">
                             </div>
-                            <div id="user_list"></div>
+                            <div id="user_list" class="search-result"></div>
+
+                            <div class="form-group">
+                                <input type="text" class="" name="tags" id="tags" value="" placeholder="" />
+                            </div>
                         </div>
 
-                        <div class="row form-group" id="tab1">
-                            <div class="col-md-6 mb-2">
-                                <div id="tag_list" class="regular"></div>
-                            </div>
-                        </div>
                         <div class="" id="tab2">
-                            <fieldset class="">
+                            <div id="testform2">
+                                @include('activity.partials.form')
+                            </div>
+                            {{-- <fieldset class="">
                                 <textarea class="" id="activity_tags">
                                     [{"name":"","email":"","phone":""}]
                                 </textarea>
-                            </fieldset>
+                            </fieldset> --}}
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group mt-5 text-right">
+                <div class="form-group mt-4 text-right">
                     <button type="submit" class="btn f-14 rounded blue-btn px-3 text-white">ADD</button>
                 </div>
             </form>
@@ -176,21 +175,19 @@ Add Activity
 </section>
 @endsection
 @section('script')
+<script type="text/javascript" src="{{ asset('frontend/jquery/simpleform.min.js')}}"></script>
 
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
-        // var data = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupitor', 'Uranus', 'Neptune', 'Pluto']
 
-        $('#user-data').on('keyup', function () {
+        $('#user').on('keyup', function () {
             var query = $(this).val();
             if (query.length > 0) {
-            console.log(query);
-
                 $.ajax({
                     url: "{{ route('users.search') }}",
                     type: "GET",
                     data: {
-                        'users': query
+                        'user': query
                     },
                     success: function (data) {
                         $('#user_list').html(data);
@@ -199,21 +196,28 @@ Add Activity
             }
         });
 
+        var data = [];
+        var tag = $('#tags');
+
+        tag.hide();
+
         $(document).on('click', '.data', function () {
             var username = $(this).find("p").text();
-            console.log(username);
-            $('#tags').val(username);
+            data.push(username);
+            tag.show();
+            tag.val(data);
             $('#user_list').html("");
-            $('#user-data').val("");
+            $('#user').val("");
+
+            $('input[name="tags"]').amsifySuggestags({
+                suggestions: data,
+                whiteList: true,
+                tagLimit: 15
+            });
         });
 
-        // $('input[name="planets"]').amsifySuggestags({
-        //     suggestions: data,
-        //     whiteList: true,
-        //     tagLimit: 5
-        // });
     });
 
 </script>
- <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize" type="text/javascript" async defer></script> 
+
 @endsection

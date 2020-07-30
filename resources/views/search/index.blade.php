@@ -13,8 +13,7 @@
 
 <section class="mb-5 p-3 mt-3 bg-gray splash rounded">
     <div class="rounded">
-        <input id="search" type="search" class="px-3 white-input input rounded-pill" name="search" value=""
-            placeholder="People" autocomplete="off">
+        <input id="search" type="search" class="px-3 white-input input rounded-pill" name="search" value="" placeholder="People" autocomplete="off">
     </div>
     <div id="search_result" class="p-3 search-result"></div>
 </section>

@@ -40,8 +40,8 @@ class GeneralController extends Controller
     public function searchUser(Request $request) 
     {
         if($request->ajax()) {
-            $data = User::where('name', 'LIKE', $request->search.'%')
-                        ->orWhere('username', 'LIKE', $request->search.'%')
+            $data = User::where('name', 'LIKE', $request->user.'%')
+                        ->orWhere('username', 'LIKE', $request->user.'%')
                         ->get();
             $output = '';
             if (count($data)>0) {
