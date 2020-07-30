@@ -649,7 +649,6 @@ input:checked+.toggle-slider:before {
 }
 
 .avatar-edit {
-    position: absolute;
     z-index: 1;
     left: 40%;
     top: 50%;
@@ -657,7 +656,7 @@ input:checked+.toggle-slider:before {
 
 .bgImage-edit {
     left: 45% !important;
-    top: 60%;
+    top: 35%;
 }
 
 .avatar-edit input {
@@ -684,5 +683,5 @@ input:checked+.toggle-slider:before {
     right: 0;
     text-align: center;
     margin: auto;
-}
+    }
 

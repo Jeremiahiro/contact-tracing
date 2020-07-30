@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard/{id}/setting', 'SettingController@setting')->name('dashboard.setting');
     Route::post('/dashboard/password', 'SettingController@updatePassword')->name('dashboard.password');
     Route::get('/location/visibility', 'SettingController@location')->name('changeStatus');
+    Route::get('/deactivate/account', 'SettingController@deactivate')->name('deactivateAccount');
 });
 
 // Route::get('/dashboard/settings/{$user_id}', 'DashboardController@show')->name('dashboard.settings');

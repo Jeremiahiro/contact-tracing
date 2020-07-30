@@ -60,7 +60,7 @@ class SettingController extends Controller
     }
 
     /**
-     * Deactivate and Activate request.
+     * Show and Hide Location request.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -69,6 +69,22 @@ class SettingController extends Controller
         $user = User::where('uuid', $request->userID);
         if($user){
             $user->show_location = $request->status;
+            return response()->json(['success'=>'Status change successfully.']);
+        }
+        return response()->json(['error'=>'oops something went wrong!']);
+
+    }
+
+    /**
+     * Deactivate and Activate request.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function deactivate(Request $request)
+    {
+        $user = User::where('uuid', $request->userID);
+        if($user){
+            $user->deactivate_acc = $request->status;
             return response()->json(['success'=>'Status change successfully.']);
         }
         return response()->json(['error'=>'oops something went wrong!']);
