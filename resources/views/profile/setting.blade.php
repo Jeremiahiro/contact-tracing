@@ -19,7 +19,7 @@ Settings Page
     @include('partials.mobile.header.header')
     <div class="container text-center text-white py-4">
         <div class="avatar-upload">
-            <div class="avatar-edit">
+            <div class="avatar-edit  position-absolute">
                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
                 <label for="imageUpload"></label>
             </div>

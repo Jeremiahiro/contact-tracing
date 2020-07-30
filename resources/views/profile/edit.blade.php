@@ -15,19 +15,30 @@ Edit Profile
 @endsection
 
 @section('mobile-content')
-<section class="splash profile_cover" style="background-image: url({{ $user->header }})">
+<section class="splash profile_cover" id="bgPreview" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
-
     <div class="container text-center text-white py-4">
-        <div>
-            <img src="{{ $user->avatar }}" class="avatar avatar-xl border-5" alt="{{ $user->username }}">
+        <div class="avatar-upload">
+            <div class="avatar-edit position-absolute">
+                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                <label for="imageUpload"></label>
+            </div>
+            <div>
+                <img id="imagePreview" src="{{ $user->avatar }}" class="avatar avatar-xl border-5"
+                    alt="{{ $user->username }}">
+            </div>
         </div>
     </div>
-
+    <div class="container">
+        <div class="avatar-edit bgImage-edit ">
+            <input type='file' id="bgUpload" accept=".png, .jpg, .jpeg" />
+            <label for="bgUpload"></label>
+        </div>
+    </div>
 </section>
 
 <section class="py-3 mb-5">
-    <h4 class="m-2 px-3 bold f-24">Detials</h4>
+    <h4 class="m-2 px-3 bold f-24">Details</h4>
 
     <div class="accordion" id="editProfileAccordion">
         <div class="card">
@@ -43,8 +54,7 @@ Edit Profile
             <div class="card-body p-0 m-0">
                 <div id="collapsePersonalInfo" class="collapse" aria-labelledby="personalInfo"
                     data-parent="#editProfileAccordion">
-                    <form action="{{ route('dashboard.update') }}" id="updateDetails" method="post"
-                        class="p-3">
+                    <form action="{{ route('dashboard.update') }}" id="updateDetails" method="post" class="p-3">
                         @csrf
                         <div class="form-group mb-1">
                             <label for="email" class="m-0 p-0">Email:</label>
@@ -163,15 +173,14 @@ Edit Profile
             <div class="card-body p-0 m-0 ">
                 <div id="collapseLocationDetials" class="collapse" aria-labelledby="locationDetails"
                     data-parent="#editProfileAccordion">
-                    <form action="{{ route('location.update') }}" id="locationDetails" method="post"
-                        class="p-3">
+                    <form action="{{ route('location.update') }}" id="locationDetails" method="post" class="p-3">
                         @csrf
                         <div class="form-group mb-1">
                             <label for="home_address" class="m-0 p-0">Address (Home):</label>
                             <input id="home_address" type="search"
                                 class="blue-input input rounded-0 @error('home_address') is-invalid @enderror"
-                                name="home_address" value="{{ $user->location->home_address ?? '' }}" required autocomplete="off"
-                                placeholder="Address (Home)">
+                                name="home_address" value="{{ $user->location->home_address ?? '' }}" required
+                                autocomplete="off" placeholder="Address (Home)">
                             <input type="hidden" name="home_location" class="" id="home_location"
                                 value="{{ $user->location->home_location ?? '' }}">
                             <input type="hidden" name="home_latitude" class="" id="home_latitude"
@@ -184,7 +193,8 @@ Edit Profile
                             </span>
                             @enderror
                             <span class="invalid-feedback" id="fromAlert" role="alert">
-                                <strong class="text-danger regular"> Selected location not available on Google Map</strong>
+                                <strong class="text-danger regular"> Selected location not available on Google
+                                    Map</strong>
                             </span>
                         </div>
 
@@ -192,8 +202,8 @@ Edit Profile
                             <label for="office_address" class="m-0 p-0">Address (Office):</label>
                             <input id="office_address" type="search"
                                 class="blue-input input rounded-0 @error('office_address') is-invalid @enderror"
-                                name="office_address" value="{{ $user->location->office_address ?? '' }}" autocomplete="off"
-                                placeholder="Address (Office)">
+                                name="office_address" value="{{ $user->location->office_address ?? '' }}"
+                                autocomplete="off" placeholder="Address (Office)">
                             <input type="hidden" name="office_location" class="" id="office_location"
                                 value="{{ $user->location->office_location ?? '' }}">
                             <input type="hidden" name="office_latitude" class="" id="office_latitude"
@@ -263,8 +273,64 @@ Edit Profile
                 </div>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-header p-2" id="settingsCollapse">
+                <h5 class="mb-0">
+                    <button class="btn text-primary collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapseSettings" aria-expanded="true" aria-controls="collapseSettings">
+                        <i class="fa fa-lock mr-2"></i> Preferences
+                    </button>
+                </h5>
+            </div>
+
+            <div class="card-body p-0 m-0">
+                <div id="collapseSettings" class="collapse" aria-labelledby="settingsCollapse"
+                    data-parent="#editProfileAccordion">
+                    <div class="container p-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="f-14 bold m-0">Others Can See My Activity</p>
+                            </div>
+                            <div class="">
+                                <label class="switch">
+                                    <input type="checkbox" data-id="{{ $user->uuid }}" name="show_location"
+                                        id="show_location" class="show_location"
+                                        {{ $user->show_location == true ? 'checked' : '' }} />
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <div class="spinner-border text-primary ml-2 spinner-border-sm d-none"
+                                    id="location-spinner" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container p-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="f-14 bold m-0">Deactivate Account</p>
+                            </div>
+                            <div class="">
+                                <label class="switch">
+                                    <input type="checkbox" data-id="{{ $user->uuid }}" name="deactivate_acc"
+                                        id="deactivate_acc" class="deactivate_acc"
+                                        {{ $user->deactivate_acc == true ? 'checked' : '' }} />
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <div class="spinner-border text-primary ml-2 spinner-border-sm d-none"
+                                    id="deactivate-spinner" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+@include('partials.modals.deactivateAccount')
 
 @endsection
 
@@ -313,4 +379,92 @@ Edit Profile
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize"
     type="text/javascript" async defer></script>
+
+<script>
+    jQuery(document).ready(function ($) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#show_location').change(function () {
+            $('#location-spinner').removeClass('d-none');
+
+            var userID = $(this).data('id');
+            var status = $(this).is(':checked') ? 1 : 0;
+
+            $.ajax({
+                type: 'GET',
+                url: `/location/visibility`,
+                data: {
+                    'status': status,
+                    'userID': userID
+                },
+                success: function (data) {
+                    if (data.success) {
+                        $('#location-spinner').addClass('d-none');
+                        alert(data.success);
+                    } else {
+                        $('#location-spinner').addClass('d-none');
+                        $(this).prop("checked", !this.checked);
+                        alert(data.success);
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+
+<script>
+    jQuery(document).ready(function ($) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#deactivate_acc').change(function () {
+            $('#deactivate-modal').modal('show');
+        });
+
+        $("#deactivate_acc").on('hidden.bs.modal', function () {
+            alert("Hello World!");
+        });
+
+        $('#cancel').click(function () {
+            $('#deactivate_acc').prop("checked", !this.checked);
+        });
+
+        $('#deactivateAccount').click(function () {
+            $('#deactivate-spinner').removeClass('d-none');
+
+            var userID = $(this).data('id');
+            var status = $(this).is(':checked') ? 1 : 0;
+
+            $.ajax({
+                type: 'GET',
+                url: `/deactivate/account`,
+                data: {
+                    'status': status,
+                    'userID': userID
+                },
+                success: function (data) {
+                    if (data.success) {
+                        $('#deactivate-spinner').addClass('d-none');
+                        $('#deactivate-modal').modal('hide');
+                        alert(data.success);
+                    } else {
+                        $('#deactivate-spinner').addClass('d-none');
+                        $(this).prop("checked", !this.checked);
+                        alert(data.success);
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+
 @endsection
