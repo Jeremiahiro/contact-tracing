@@ -39,9 +39,6 @@
                 <nav class="nav flex-column">
                     <a class="nav-link text-white bold f-16" href="{{ route('dashboard.index') }}">Dashboard <i
                             class="ml-2 fa fa-dashboard"></i></a>
-                    <a href="{{ route('dashboard.setting', auth()->user()->uuid) }}" class="nav-link text-white bold f-16"> 
-                        Settings <i class="ml-2 fa fa-cog"></i>
-                    </a>
                     <a class="nav-link text-white bold f-16" href="{{ route('dashboard.edit', auth()->user()->uuid) }}">Edit Profile <i class="ml-2 fa fa-user"></i></a>
                     <a class="nav-link text-white bold f-16" href="#">Privacy Policy <i class="ml-2 fa fa-file"></i></a>
                 </nav>
