@@ -14,6 +14,11 @@ Add Activity
 <link href="{{ asset('frontend/css/jq.multiinput.min.css') }}" rel="stylesheet">
 <script src="{{ asset('frontend/jquery/jq.multiinput.min.js')}}"></script>
 
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/amsify.suggestags.css') }}">
+
+
+<script type="text/javascript" src="{{ asset('frontend/jquery/jquery.amsify.suggestags.js')}}"></script>
+
 {{-- tagging --}}
 <link href="{{ asset('frontend/bootstrap/css/bootstrap-tagsinput.css') }}" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"
@@ -31,8 +36,9 @@ Add Activity
 @endsection
 
 @section('mobile-content')
-<div id="alert">
+@include('activity.partials.googlePlace')
 
+<div id="alert">
     @if ($errors->any())
     <div class="alert alert-danger text-danger" role="alert">
         <button type="button" class="close text-danger" data-dismiss="alert" aria-label="Close">
@@ -84,7 +90,7 @@ Add Activity
                                 placeholder="To">
                             <input type="hidden" name="to_location" class="" id="to_location"
                                 value="{{ old('to_location') }}">
-                           <input type="hidden" name="to_latitude" class="" id="to_latitude"
+                            <input type="hidden" name="to_latitude" class="" id="to_latitude"
                                 value="{{ old('to_latitude') }}">
                             <input type="hidden" name="to_longitude" class="" id="to_longitude"
                                 value="{{ old('to_longitude') }}">
@@ -133,10 +139,20 @@ Add Activity
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="tags" id="tags" value="" readonly />
+                        </div>
+
+                        <div>
+                            <div class="form-group">
+                                <input type="search" class="user-data blue-input input" name="users" id="user-data"
+                                    value="" autocomplete="off">
+                            </div>
+                            <div id="user_list"></div>
+                        </div>
+
                         <div class="row form-group" id="tab1">
                             <div class="col-md-6 mb-2">
-                                <input type="text" data-role="tagsinput" id="tags" name="tags" class="tags rounded-0"
-                                    placeholder="People you met">
                                 <div id="tag_list" class="regular"></div>
                             </div>
                         </div>
@@ -161,43 +177,43 @@ Add Activity
 @endsection
 @section('script')
 
-<script>
-    function initialize() {
-        var options = {
-            types: ['(cities)'],
-        };
-        var fromLoc = document.getElementById('from_address');
-        var getFromLoc = new google.maps.places.Autocomplete(fromLoc);
-        getFromLoc.addListener('place_changed', function () {
-            var place = getFromLoc.getPlace();
-            if (!place.geometry) {
-                // $('#fromAlert').toggleClass('show hide');
-                window.alert("'" + place.name + "' not available on Google Map");
-                fromLoc.value = "";
-                return;
-            } else {
-                $('#from_location').val(place.name);
-                $('#from_latitude').val(place.geometry['location'].lat());
-                $('#from_longitude').val(place.geometry['location'].lng());
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        // var data = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupitor', 'Uranus', 'Neptune', 'Pluto']
+
+        $('#user-data').on('keyup', function () {
+            var query = $(this).val();
+            if (query.length > 0) {
+            console.log(query);
+
+                $.ajax({
+                    url: "{{ route('users.search') }}",
+                    type: "GET",
+                    data: {
+                        'users': query
+                    },
+                    success: function (data) {
+                        $('#user_list').html(data);
+                    }
+                })
             }
         });
 
-        var toLoc = document.getElementById('to_address');
-        var getToLoc = new google.maps.places.Autocomplete(toLoc);
-        getToLoc.addListener('place_changed', function () {
-            var place = getToLoc.getPlace();
-            if (!place.geometry) {
-                window.alert("'" + place.name + "' not available on Google Map");
-                toLoc.value = "";
-                return;
-            } else {
-                $('#to_location').val(place.name);
-                $('#to_latitude').val(place.geometry['location'].lat());
-                $('#to_longitude').val(place.geometry['location'].lng());
-            }
+        $(document).on('click', '.data', function () {
+            var username = $(this).find("p").text();
+            console.log(username);
+            $('#tags').val(username);
+            $('#user_list').html("");
+            $('#user-data').val("");
         });
-    }
+
+        // $('input[name="planets"]').amsifySuggestags({
+        //     suggestions: data,
+        //     whiteList: true,
+        //     tagLimit: 5
+        // });
+    });
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize" type="text/javascript" async defer></script>
+
 @endsection

@@ -34,5 +34,7 @@ class UserSeeder extends Seeder
             'phone' => '+2348136478020',
             'role' => 'admin'
         ]);
+
+        factory(App\User::class, 50)->create();
     }
 }

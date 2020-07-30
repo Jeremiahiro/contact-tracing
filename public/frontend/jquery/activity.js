@@ -22,7 +22,7 @@ jQuery(document).ready(function ($) {
             '<div class="form-group">\n' +
             '<div class="row inputElement">\n' +
             '<div class="col-md-6 mb-1">\n' +
-            '<input class="blue-input input rounded-0" name="name[]" placeholder="Name" type="text" autocomplete="tag_detail">\n' +
+            '<input class="blue-input input rounded-0 new-user" name="name[]" placeholder="Name" type="text" autocomplete="tag_detail">\n' +
             '</div>\n' +
             '<div class="col-md-6 mb-1">\n' +
             '<input class="blue-input input rounded-0" name="email[]" placeholder="Email" type="email"  autocomplete="tag_detail">\n' +

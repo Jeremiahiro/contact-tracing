@@ -37,7 +37,6 @@ Settings Page
     </div>
 </section>
 
-
 <section class="py-3 mb-5">
     <h4 class="m-2 px-3 bold f-24">Settings</h4>
     <div class="container p-3">
