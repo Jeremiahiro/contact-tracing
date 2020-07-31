@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div id="ActivityConnectionCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                       <div class="container">
