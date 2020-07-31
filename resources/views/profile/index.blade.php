@@ -147,6 +147,7 @@ Profile Page
                                 </div>
                                 @endforeach
                             </div>
+                            @include('partials.modals.activityConnection')
                             @endforeach
                         </div>
 

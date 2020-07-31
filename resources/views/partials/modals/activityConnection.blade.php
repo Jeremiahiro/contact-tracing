@@ -1,21 +1,5 @@
 
-
-@extends('layouts.app')
-
-@section('custom-style')
-<link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
-<link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
-@endsection
-
-@section('web-content')
-<h1 class="text-center">Please use a mobile device</h1>
-@endsection
-
-@section('mobile-content')
-
-<section>
-
-    <div class="" id="connectionAccModal" role="dialog" aria-labelledby="connectionActivity"
+<div class="modal show" id="connectionAccModal-{{ $person->id }}" role="dialog" aria-labelledby="activityConnection"
     aria-hidden="true">
     <div class="modal-dialog route_purple mt-5 mx-0 px-3 py-4" style="pointer-events:auto;" role="document">
         <div class="">
@@ -28,23 +12,27 @@
             </div>
             <div class="d-flex justify-content-between bold mb-3">
                 <div>
-                    <img src="{{ asset('frontend/img/user1.jpg') }}" class="avatar avatar-md" alt="Activity Tag">
+                    <img src="{{ $person->avatar }}" class="avatar avatar-md" alt="Activity Tag">
                 </div>
                 <div class="d-flex mr-auto p-1">
-                    <h3 class="f-30 bold m-0">P</h3>
+                    <h3 class="f-30 bold m-0">{{ $firstStringCharacter = substr($person->name, 0, 1) }}</h3>
                     <span style="padding-top:10px;">
-                        <p class="f-18 bold bg-white px-1 m-0 purple-text rounded">s</p>
+                        <p class="f-18 bold bg-white px-1 m-0 purple-text rounded">{{ $firstStringCharacter = substr($person->name, 1, 1) }}</p>
                     </span>
                 </div>
             </div>
 
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                  <div class="carousel-item active">
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                       <div class="container">
                         <div class="row">
                             <div class="col-6 p-1">
-                                <p class="p-8 bold m-0 py-1">8AM-11:30AM</p>
+                                <div class="d-flex">
+                                     <p class="p-8 bold m-0 py-1">8AM</p>
+                                    <p class="p-8 bold m-0 py-1">-11:30AM</p>
+                                </div>
+                               
                                 <div class="bg-blue p-1 text-white text-center position-relative"
                                     style="height:122px; background-image: url('')">
                                     <div class="map-img-overlay">
@@ -54,7 +42,7 @@
                                                     data-target="#tagModal">
                                                     <div class="text-left">
                                                         <h4 class="month bold f-12 m-0">
-                                                            29 Jul, 2019</h4>
+                                                            June, 2020</h4>
                                                         <h3 class="time light f-12">
                                                             10:54 AM</h3>
                                                     </div>
@@ -92,7 +80,6 @@
                             </div>
                         </div>
                       </div>
-                      
                   </div>
                 </div>
             </div>
@@ -100,10 +87,3 @@
     </div>
 </div>
 </section>
-
-@endsection
-
-
-@section('footer')
-@include('partials.mobile.footer.footer')
-@endsection

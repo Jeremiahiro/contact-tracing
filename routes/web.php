@@ -21,7 +21,7 @@ Route::get('index', function () {
 
 Route::get('create', function () {
     return view('activity.create');
-});
+})->name('activity.create');
 
 Route::get('proximity', function () {
     return view('activity.modals.proximity');
