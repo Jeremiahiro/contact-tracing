@@ -51,7 +51,7 @@ Add Activity
 </div>
 
 <section>
-    <div class="container">
+    <div class="container text-primary">
         <div class="py-5 activity">
             <p class="f-12 bold">Record Activity</p>
             <form method="POST" action="{{ route('activity.store') }}" id="activitForm" name="activity"
@@ -219,5 +219,4 @@ Add Activity
     });
 
 </script>
-
 @endsection

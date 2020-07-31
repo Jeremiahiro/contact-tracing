@@ -21,7 +21,7 @@ Route::get('index', function () {
 
 Route::get('create', function () {
     return view('activity.create');
-});
+})->name('activity.create');
 
 Route::get('proximity', function () {
     return view('activity.modals.proximity');
@@ -33,6 +33,10 @@ Route::get('profile', function () {
 
 Route::get('alert', function () {
     return view('alert.index');
+});
+
+Route::get('activityConnection', function () {
+    return view('partials.modals.activityConnection');
 });
 
 // Route::get('settings', function () {
