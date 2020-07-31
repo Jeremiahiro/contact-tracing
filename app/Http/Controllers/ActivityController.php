@@ -50,6 +50,8 @@ class ActivityController extends Controller
      */
     public function create()
     {
+        // $users = User::where('id', '!=', auth()->id())->pluck('username');
+        // $data = response()->json($users['content']);
         return view('activity.create');
     }
 

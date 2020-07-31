@@ -28,10 +28,10 @@
 
     @if ($message = Session::get('info'))
     <div class="alert alert-info alert-block" role="alert">
-        <button type="button" class="close text-danger" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true" class="text-danger">&times;</span>
+        <button type="button" class="close text-info" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" class="text-info">&times;</span>
         </button>
-        <strong class="text-danger">{{ $message }}!</strong>
+        <strong class="text-info">{{ $message }}!</strong>
     </div>
     @endif
 

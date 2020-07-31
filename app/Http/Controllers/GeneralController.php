@@ -33,15 +33,49 @@ class GeneralController extends Controller
     }
 
     /**
-     * Show list of existing users in tag list.
+     * Show list of existing users search field.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchUser(Request $request) 
+    {
+        if($request->ajax()) {
+            $data = User::where('name', 'LIKE', $request->user.'%')
+                        ->orWhere('username', 'LIKE', $request->user.'%')
+                        ->get();
+            $output = '';
+            if (count($data)>0) {
+                $output = '<div class="m-2">';
+                foreach ($data as $user){
+                    if($user->id != auth()->user()->id && $user->role != 'super admin'){
+                        $output .= '<div class="d-flex mb-2 data" data-id="'.$user->uuid.'">';
+                        $output .= '<img src="'.$user->avatar.'" class="avatar avatar-xs alt=">';
+                        $output .= '<div class="ml-2">';
+                        $output .= '<h6 class="p-0 m-0 bold f-12">'.$user->name.'</h6>';
+                        $output .= '<p class="p-0 m-0 regular f-12">'.$user->username.'</p>';
+                        $output .= '</div>';
+                        $output .= '</div>';
+                   }
+                }
+                $output .= '</div>';
+            }
+            else {
+                $output .= '<p class="p-0 m-0 bold f-10">'.'No Results'.'</p>';
+            }
+            return $output;
+        }
+    }
+
+    /**
+     * Show list of existing users in search field.
      *
      * @return \Illuminate\Http\Response
      */
     public function searchResult(Request $request)
     {
-        $user = Auth::user();
         if($request->ajax()) {
             $data = User::where('id', '!=', 1)
+                ->where('role', '!=', 'super admin')
                 ->where('name', 'LIKE', $request->search.'%')
                 ->orWhere('username', 'LIKE', $request->search.'%')
                 ->get();
@@ -54,10 +88,10 @@ class GeneralController extends Controller
                     $output .= '<img src="'.$user->avatar.'" class="avatar avatar-md alt="'.$user->username.'">';
                     $output .= '</div>';
                     $output .= '<div class="ml-1 text-gray">';
-                    $output .= '<a href="/dashboard/'.$user->id.'" class="text-uppercase "f-16 mb-0 bold ">'.$user->name.'';
+                    $output .= '<a href="/dashboard/'.$user->uuid.'" class="text-uppercase "f-16 mb-0 bold ">'.$user->name.'';
                     $output .= '</a>';
                     $output .= '<p class="">';
-                    $output .= '<a href="/dashboard/'.$user->id.' class="text-capitalize f-14 regular">'.$user->username.'';
+                    $output .= '<a href="/dashboard/'.$user->uuid.' class="text-capitalize f-14 regular">'.$user->username.'';
                     $output .= '</a>';
                     $output .= '</p>';
                     $output .= '</div>';

@@ -16,29 +16,37 @@ jQuery(document).ready(function ($) {
         step: 5,
     });
 
-    $('#activity_tags').multiInput({
-        json: true,
-        input: $(
-            '<div class="form-group">\n' +
-            '<div class="row inputElement">\n' +
-            '<div class="col-md-6 mb-1">\n' +
-            '<input class="blue-input input rounded-0" name="name[]" placeholder="Name" type="text" autocomplete="tag_detail">\n' +
-            '</div>\n' +
-            '<div class="col-md-6 mb-1">\n' +
-            '<input class="blue-input input rounded-0" name="email[]" placeholder="Email" type="email"  autocomplete="tag_detail">\n' +
-            '</div>\n' +
-            '<div class="col-md-6 mb-2">\n' +
-            '<input class="blue-input input rounded-0" name="phone[]" placeholder="Phone" type="tel"  autocomplete="tag_detail">\n' +
-            '</div>\n' +
-            '</div>\n' +
-            '</div>\n'),
-        limit: 10,
-        onElementAdd: function (el, plugin) {
-            console.log(plugin.elementCount);
-        },
-        onElementRemove: function (el, plugin) {
-            console.log(plugin.elementCount);
-        }
+    // $('#activity_tags').multiInput({
+    //     json: true,
+    //     input: $(
+    //         '<div class="form-group">\n' +
+    //         '<div class="row inputElement">\n' +
+    //         '<div class="col-md-6 mb-1">\n' +
+    //         '<input class="blue-input input rounded-0 new-user" name="name[]" placeholder="Name" type="text" autocomplete="tag_detail">\n' +
+    //         '</div>\n' +
+    //         '<div class="col-md-6 mb-1">\n' +
+    //         '<input class="blue-input input rounded-0" name="email[]" placeholder="Email" type="email"  autocomplete="tag_detail">\n' +
+    //         '</div>\n' +
+    //         '<div class="col-md-6 mb-2">\n' +
+    //         '<input class="blue-input input rounded-0" name="phone[]" placeholder="Phone" type="tel"  autocomplete="tag_detail">\n' +
+    //         '</div>\n' +
+    //         '</div>\n' +
+    //         '</div>\n'),
+    //     limit: 10,
+    //     onElementAdd: function (el, plugin) {
+    //         console.log(plugin.elementCount);
+    //     },
+    //     onElementRemove: function (el, plugin) {
+    //         console.log(plugin.elementCount);
+    //     }
+    // });
+    
+    $("#testform2").simpleform({
+        speed: 500,
+        transition: 'slide',
+        progressBar: true,
+        showProgressText: true,
+        validate: false
     });
 
     $(function () {

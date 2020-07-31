@@ -5,3 +5,7 @@
 form .error {
     color: #ff0000;
 }
+form {
+    position: relative;
+    overflow: hidden;
+}
