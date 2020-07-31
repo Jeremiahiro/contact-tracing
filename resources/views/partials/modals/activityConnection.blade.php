@@ -1,5 +1,5 @@
 
-<div class="modal show" id="connectionAccModal-{{ $person->id }}" role="dialog" aria-labelledby="activityConnection"
+<div class="modal fade" id="connectionAccModal-{{ $person->id }}" role="dialog" aria-labelledby="activityConnection"
     aria-hidden="true">
     <div class="modal-dialog route_purple mt-5 mx-0 px-3 py-4" style="pointer-events:auto;" role="document">
         <div class="">

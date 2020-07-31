@@ -1,6 +1,6 @@
 <div class="modal fade right" id="userFollowers" tabindex="-1" role="dialog" aria-labelledby="sideNavlLabel">
     <div class="modal-dialog full-modal m-0 p-0" role="document">
-        <div class="modal-content full-modal-content route_white text-primary">
+        <div class="modal-content full-modal-content side_nav_white text-primary">
             <div class="modal-body">
                 <button type="button" class="close opacity-1 float-right" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><img src="{{ asset('/frontend/img/svg/back_blue.svg') }}"
