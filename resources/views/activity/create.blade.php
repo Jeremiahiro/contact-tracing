@@ -199,6 +199,6 @@ Add Activity
     }
 
 </script>
-{{--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqlBzMgOyqWDAZUJacsncmGLnxoxED9wk&libraries=places&callback=initialize" type="text/javascript" async defer></script>--}}
- <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize" type="text/javascript" async defer></script> 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqlBzMgOyqWDAZUJacsncmGLnxoxED9wk&libraries=places&callback=initialize" type="text/javascript" async defer></script>
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize" type="text/javascript" async defer></script> --}}
 @endsection

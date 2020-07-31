@@ -1,5 +1,5 @@
 <div class="modal fade right" id="sideNav" tabindex="-1" role="dialog" aria-labelledby="sideNavlLabel">
-    <div class="modal-dialog side-nav m-0 p-0" role="document">
+    <div class="modal-dialog side-nav m-0 p-0 w-100"  style="left: 100px;" role="document">
         <div class="modal-content side-nav-content route_purple text-white text-right">
 
             <div class="text-right p-3">

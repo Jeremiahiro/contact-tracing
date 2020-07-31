@@ -35,6 +35,10 @@ Route::get('alert', function () {
     return view('alert.index');
 });
 
+Route::get('activityConnection', function () {
+    return view('partials.modals.activityConnection');
+});
+
 // Route::get('settings', function () {
 //     return view('profile.settings');
 // });
