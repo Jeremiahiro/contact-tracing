@@ -1,0 +1,33 @@
+.shepherd-footer {
+    justify-content: space-around;
+    position: relative;
+    background-color: #fff !important;
+}
+
+
+.shepherd-button:hover,
+.shepherd-button:focus {
+    text-decoration: none !important;
+    outline: 0;
+}
+
+.shepherd-button {
+    color: #fff !important;
+    background-color: #0B24FA !important;
+}
+
+.shepherd-button-secondary {
+    color: #000 !important;
+    background-color: #ccc !important;
+}
+
+.shepherd-text {
+    text-align: left;
+    font-size: 12px !important;
+    line-height: 1 !important;
+}
+
+.tippy-tooltip {
+    border: 3px solid #000;
+}
+

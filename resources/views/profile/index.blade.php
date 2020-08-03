@@ -7,6 +7,7 @@ Profile Page
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/bootstrap/css/bootstrap-tour.css') }}" rel="stylesheet">
 @endsection
 
 @section('web-content')
@@ -17,15 +18,15 @@ Profile Page
 <section class="splash profile_cover" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
 
-    <div class="container text-center text-white py-4">
-        <div>
+    <div class="container content text-center text-white py-4">
+        <div id="panel1">
             <img src="{{ $user->avatar }}" class="avatar avatar-xl border-5" alt="{{ $user->username }}">
         </div>
         <div class="py-2">
             <h6 class="bold m-0 f-18">{{ $user->name }}</h6>
             <p class="bold">{{ $user->username }}</p>
         </div>
-        <div>
+        <div id="panel2">
             <div class="d-flex justify-content-around">
                 <span class="px-2">
                     <span class="">{{ count($user->tags) }}</span>
@@ -182,6 +183,9 @@ Profile Page
 
 @section('script')
 
+<script src="{{ asset('frontend/js/walkthrough.js') }}"></script>
+
 @include('activity.partials.mapScript')
+
 
 @endsection
