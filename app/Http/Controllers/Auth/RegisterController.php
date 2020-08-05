@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Illuminate\Support\Facades\Cookie;
 
 class RegisterController extends Controller
 {
@@ -82,5 +83,7 @@ class RegisterController extends Controller
             'uuid'  => $uuid,
             'avatar'    => 'https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png',
         ]);
+
+        Cookie::queue('is_first_time_user', $user->id);
     }
 }

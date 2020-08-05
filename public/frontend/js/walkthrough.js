@@ -1,6 +1,4 @@
 
-
-
   const tour = new Shepherd.Tour({
     defaultStepOptions: {
       cancelIcon: {
@@ -12,10 +10,28 @@
   });
   
   tour.addStep({
-    text: `Creating a Shepherd tour is easy. too!\
-    Just create a \`Tour\` instance, and add as many steps as you want.`,
+    text: `WELCOME !!
+     You can take this tour to get started , click next to continue the tour. 
+     You could end tour by clicking on the close icon.`,
     attachTo: {
-      element: '#panel1',
+      element: '#startTour',
+      on: 'bottom'
+    },
+    buttons: [
+      {
+        action() {
+          return this.next();
+        },
+        text: 'Next'
+      }
+    ],
+    id: 'creating'
+  });
+    
+  tour.addStep({
+    text: `Click here to go to your Dashboard.`,
+    attachTo: {
+      element: '#tourStep1',
       on: 'bottom'
     },
     buttons: [
@@ -37,10 +53,9 @@
   });
   
   tour.addStep({
-    text: `Creating a Shepherd tour is easy. too!\
-    Just create a \`Tour\` instance, and add as many steps as you want.`,
+    text: `Click here to add an already existing user on the platform as a connection.`,
     attachTo: {
-      element: '#panel2',
+      element: '.tourStep2',
       on: 'bottom'
     },
     buttons: [
@@ -60,5 +75,31 @@
     ],
     id: 'creating'
   });
+
+      
+  tour.addStep({
+    text: `Click here to add a new user as a connection.`,
+    attachTo: {
+      element: '.tourStep3',
+      on: 'bottom'
+    },
+    buttons: [
+      {
+        action() {
+          return this.back();
+        },
+        classes: 'shepherd-button-secondary',
+        text: 'Back'
+      },
+      {
+        action() {
+          return this.next();
+        },
+        text: 'DONE'
+      }
+    ],
+    id: 'creating'
+  });
+  
   
   tour.start();

@@ -7,7 +7,6 @@ Profile Page
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
-<link href="{{ asset('frontend/bootstrap/css/bootstrap-tour.css') }}" rel="stylesheet">
 @endsection
 
 @section('web-content')
@@ -182,8 +181,6 @@ Profile Page
 @endsection
 
 @section('script')
-
-<script src="{{ asset('frontend/js/walkthrough.js') }}"></script>
 
 @include('activity.partials.mapScript')
 

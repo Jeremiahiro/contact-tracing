@@ -1,7 +1,6 @@
 .shepherd-footer {
-    justify-content: space-around;
     position: relative;
-    background-color: #fff !important;
+    background-color: #ccc !important;
 }
 
 
@@ -18,7 +17,7 @@
 
 .shepherd-button-secondary {
     color: #000 !important;
-    background-color: #ccc !important;
+    background-color: #fff !important;
 }
 
 .shepherd-text {
@@ -27,7 +26,14 @@
     line-height: 1 !important;
 }
 
-.tippy-tooltip {
-    border: 3px solid #000;
+.shepherd-content {
+    background-color: #ccc !important;
 }
 
+.tippy-arrow {
+    border-bottom-color: #ccc !important;
+}
+
+.shepherd {
+    max-width: 70%;
+}

@@ -24,7 +24,7 @@
                 <div class="f-14 pb-2">
                     <h6 class="m-0 bold f-10">Route & Interactions</h6>
                     <a class="" data-toggle="modal" data-target="#tagModal-{{ $activity->id }}">
-                        <div class="mb-0 pb-0 bold text-uppercase">
+                        <div id="panel1" class="mb-0 pb-0 bold text-uppercase">
                             {{ \Illuminate\Support\Str::limit($activity->to_location, 25) }}</div>
                         <div class="f-12 m-0 regular">{{ \Illuminate\Support\Str::limit($activity->to_address, 40) }}
                         </div>
