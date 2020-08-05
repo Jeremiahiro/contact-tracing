@@ -20,7 +20,6 @@
     <script src="{{ asset('frontend/jquery/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('frontend/jquery/jquery-1.9.1.min.js') }}"></script>
     <script src="{{ asset('frontend/jquery/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('frontend/js/script.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
@@ -28,9 +27,10 @@
 
     {{-- bootstrap --}}
     <link href="{{ asset('frontend/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontend/css/tourGuide.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('frontend/bootstrap/js/bootstrap.min.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/shepherd.js@5.0.1/dist/js/shepherd.js"></script>
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 

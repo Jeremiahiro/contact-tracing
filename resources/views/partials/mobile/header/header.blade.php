@@ -14,7 +14,7 @@
                 @endif
             </a>
         </div>
-        <div class="avatar-icon">
+        <div id="tourStep1" class="avatar-icon">
             @auth
                 @if ($route == 'dashboard.index' || $route == 'dashboard.show' || $route ==
                 'dashboard.edit')

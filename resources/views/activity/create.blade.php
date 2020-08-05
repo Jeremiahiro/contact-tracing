@@ -57,7 +57,7 @@ Add Activity
             <form method="POST" action="{{ route('activity.store') }}" id="activitForm" name="activity"
                 autocomplete="off">
                 @csrf
-                <div class="d-flex justify-content-between align-items-center where-to">
+                <div id="startTour" class="d-flex justify-content-between align-items-center where-to">
                     <img src="{{ asset('/frontend/img/svg/left.svg') }}" alt="" class="mt-3 mr-2 where-to-icon">
                     <div class="form-group row">
                         <label for="from_location" class="f-24 col-md-4 text-md-right">
@@ -134,9 +134,9 @@ Add Activity
                                 </label>
                             </div>
                             <div class="align-items-end mb-0 mt-3 f-12">
-                                <span class="bold text-primary" id="tab1Label">Existing</span>
+                                <span class="bold text-primary tourStep2" id="tab1Label">Existing</span>
                                 <span class="">|</span>
-                                <span class="light text-primary" id="tab2Label">New</span>
+                                <span class="light text-primary tourStep3" id="tab2Label">New</span>
                             </div>
                         </div>
 
@@ -176,6 +176,117 @@ Add Activity
 @endsection
 @section('script')
 <script type="text/javascript" src="{{ asset('frontend/jquery/simpleform.min.js')}}"></script>
+
+
+@if (Cookie::get('is_first_time_user') )
+<script>
+
+  const tour = new Shepherd.Tour({
+    defaultStepOptions: {
+      cancelIcon: {
+        enabled: true
+      },
+      classes: 'class-1 class-2',
+      scrollTo: { behavior: 'smooth', block: 'center' }
+    }
+  });
+  
+  tour.addStep({
+    text: `WELCOME !!
+     You can take this tour to get started , click next to continue the tour. 
+     You could end tour by clicking on the close icon.`,
+    attachTo: {
+      element: '#startTour',
+      on: 'bottom'
+    },
+    buttons: [
+      {
+        action() {
+          return this.next();
+        },
+        text: 'Next'
+      }
+    ],
+    id: 'creating'
+  });
+    
+  tour.addStep({
+    text: `Click here to go to your Dashboard.`,
+    attachTo: {
+      element: '#tourStep1',
+      on: 'bottom'
+    },
+    buttons: [
+      {
+        action() {
+          return this.back();
+        },
+        classes: 'shepherd-button-secondary',
+        text: 'Back'
+      },
+      {
+        action() {
+          return this.next();
+        },
+        text: 'Next'
+      }
+    ],
+    id: 'creating'
+  });
+  
+  tour.addStep({
+    text: `Click here to add an already existing user on the platform as a connection.`,
+    attachTo: {
+      element: '.tourStep2',
+      on: 'bottom'
+    },
+    buttons: [
+      {
+        action() {
+          return this.back();
+        },
+        classes: 'shepherd-button-secondary',
+        text: 'Back'
+      },
+      {
+        action() {
+          return this.next();
+        },
+        text: 'Next'
+      }
+    ],
+    id: 'creating'
+  });
+
+      
+  tour.addStep({
+    text: `Click here to add a new user as a connection.`,
+    attachTo: {
+      element: '.tourStep3',
+      on: 'bottom'
+    },
+    buttons: [
+      {
+        action() {
+          return this.back();
+        },
+        classes: 'shepherd-button-secondary',
+        text: 'Back'
+      },
+      {
+        action() {
+          return this.next();
+        },
+        text: 'DONE'
+      }
+    ],
+    id: 'creating'
+  });
+  
+  
+  tour.start();
+</script>
+@endif
 
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
