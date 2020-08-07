@@ -123,17 +123,25 @@ p {
 }
 
 
+.route_white .add_svg .icon_blue{
+    display: none;
+}
+
+.route_white .sub-menu {
+    color: #0000FF;
+}
+
 .route_purple {
     background-color: #6406A8;
     color: #fff;
 }
 
-.route_white .add_svg .icon_blue{
+.route_purple .add_svg .icon_white{
     display: none;
 }
 
-.route_purple .add_svg .icon_white{
-    display: none;
+.route_purple .sub-menu {
+    color: #fff;
 }
 
 .fulfilled_notification {

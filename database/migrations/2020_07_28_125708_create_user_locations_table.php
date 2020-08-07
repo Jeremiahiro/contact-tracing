@@ -26,7 +26,7 @@ class CreateUserLocationsTable extends Migration
             $table->boolean('show_location')->default(true);
             $table->timestamps();
 
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
 
         });
     }
