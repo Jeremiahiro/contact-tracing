@@ -31,6 +31,8 @@ class CreateUsersTable extends Migration
             $table->string('provider_id')->nullable();
             $table->string('access_token')->nullable();
 
+            $table->boolean('show_location')->default(true);
+            $table->boolean('status')->default(true);
             $table->boolean('first_time_login')->default(0);
             
             $table->string('role')->default('user');

@@ -20,18 +20,17 @@ class UserLocation extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'show_location' => 'boolean',
-    ];
+    // protected $hidden = [
+    //     'show_location' => 'boolean',
+    // ];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = [
-        'show_location' => 'boolean',
-    ];
+    // protected $casts = [
+    // ];
 
     /**
      * Get the user that owns the activity.

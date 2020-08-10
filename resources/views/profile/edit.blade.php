@@ -7,7 +7,6 @@ Edit Profile
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
-<link href="{{ asset('frontend/css/profile.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
 @endsection
 
@@ -16,7 +15,7 @@ Edit Profile
 @endsection
 
 @section('mobile-content')
-<section class="splash profile_cover" id="bgPreview" style="background-image: url({{ $user->header }})">
+<section class="splash profile_cover" id="header-image" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
 
     <div class="" id="upload-alert">
@@ -27,7 +26,7 @@ Edit Profile
             <label for="changeAvatar">
                 <div class="profile-pic avatar avatar-xl border" id="profile-pic"
                     style="background-image: url({{ $user->avatar }})">
-                    <span>
+                    <span class="profile-pic-cam">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 23 23">
                             <g id="Group_410" data-name="Group 410" transform="translate(-288.137 -382.226)">
                                 <g id="Icon_feather-camera" data-name="Icon feather-camera"
@@ -51,6 +50,28 @@ Edit Profile
         <div class="py-2">
             <h6 class="bold m-0 f-18">{{ $user->name }}</h6>
             <p class="bold">{{ $user->username }}</p>
+        </div>
+        <div class="mt-4">
+            <label for="changeHeader" class="headerImage">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 23 23">
+                        <g id="Group_410" data-name="Group 410" transform="translate(-288.137 -382.226)">
+                            <g id="Icon_feather-camera" data-name="Icon feather-camera"
+                                transform="translate(293.5 388.715)" style="isolation: isolate">
+                                <path id="Path_207" data-name="Path 207"
+                                    d="M13.445,13.187a1.086,1.086,0,0,1-1.086,1.086H2.586A1.086,1.086,0,0,1,1.5,13.187V7.215A1.086,1.086,0,0,1,2.586,6.129H4.758L5.844,4.5H9.1l1.086,1.629h2.172a1.086,1.086,0,0,1,1.086,1.086Z"
+                                    transform="translate(-1.5 -4.5)" fill="none" stroke="#fff" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="2" />
+                                <path id="Path_208" data-name="Path 208"
+                                    d="M16.344,15.672A2.172,2.172,0,1,1,14.172,13.5,2.172,2.172,0,0,1,16.344,15.672Z"
+                                    transform="translate(-8.199 -10.242)" fill="none" stroke="#fff"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                            </g>
+                        </g>
+                    </svg>
+                </span>
+            </label>
+            <input type="File" name="header" class="avatar-input" id="changeHeader" value="">
         </div>
     </div>
 
@@ -76,13 +97,13 @@ Edit Profile
                     <form action="{{ route('dashboard.update') }}" id="updateDetails" method="post" class="p-3">
                         @csrf
                         <div class="form-group mb-1">
-                            <label for="email" class="m-0 p-0">Email:</label>
+                            <label for="email" class="m-0 p-0 bold">Email:</label>
                             <input type="email" class="blue-input input rounded-0" name="email"
                                 value="{{ $user->email }}" id="email" readonly>
                         </div>
 
                         <div class="form-group mb-1">
-                            <label for="name" class="m-0 p-0">Full Name:</label>
+                            <label for="name" class="m-0 p-0 bold">Full Name:</label>
                             <input type="text" class="blue-input input rounded-0 @error('name') is invalid @enderror"
                                 name="name" value="{{ old('name', $user->name) }}" id="name" required>
                             @error('name')
@@ -93,7 +114,7 @@ Edit Profile
                         </div>
 
                         <div class="form-group mb-1">
-                            <label for="username" class="m-0 p-0">Username:</label>
+                            <label for="username" class="m-0 p-0 bold">Username:</label>
                             <input type="text"
                                 class="blue-input input rounded-0 @error('username') is invalid @enderror"
                                 name="username" value="{{ old('username', $user->username) }}" id="username" required>
@@ -105,7 +126,7 @@ Edit Profile
                         </div>
 
                         <div class="form-group mb-1">
-                            <label for="phone" class="m-0 p-0">Phone Number:</label>
+                            <label for="phone" class="m-0 p-0 bold">Phone Number:</label>
                             <input type="tel" class="blue-input input rounded-0 @error('phone') is invalid @enderror"
                                 name="phone" value="{{ old('phone', $user->phone) }}" id="phone" required>
                             @error('phone')
@@ -116,7 +137,7 @@ Edit Profile
                         </div>
 
                         <div class="form-group mb-1">
-                            <label for="gender" class="m-0 p-0">Gender:</label>
+                            <label for="gender" class="m-0 p-0 bold">Gender:</label>
                             <select class="input blue-input @error('gender') is-invalid @enderror" name="gender"
                                 id="gender">
                                 <option value="" selected disabled hidden>Select Gender...</option>
@@ -139,7 +160,7 @@ Edit Profile
                         </div>
 
                         <div class="form-group mb-2">
-                            <label for="age_range" class="m-0 p-0">Age Range:</label>
+                            <label for="age_range" class="m-0 p-0 bold">Age Range:</label>
                             <select class="blue-input input @error('age_range') is-invalid @enderror" name="age_range"
                                 id="age_range">
                                 <option class="regular" value="" selected disabled hidden>Select Age Range...</option>
@@ -195,11 +216,11 @@ Edit Profile
                     <form action="{{ route('location.update') }}" id="locationDetails" method="post" class="p-3">
                         @csrf
                         <div class="form-group mb-1">
-                            <label for="home_address" class="m-0 p-0">Address (Home):</label>
+                            <label for="home_address" class="m-0 p-0 bold">Address (Home):</label>
                             <input id="home_address" type="search"
                                 class="blue-input input rounded-0 @error('home_address') is-invalid @enderror"
                                 name="home_address" value="{{ $user->location->home_address ?? '' }}" required
-                                autocomplete="off" placeholder="Address (Home)">
+                                autocomplete="off" placeholder="Home Address">
                             <input type="hidden" name="home_location" class="" id="home_location"
                                 value="{{ $user->location->home_location ?? '' }}">
                             <input type="hidden" name="home_latitude" class="" id="home_latitude"
@@ -218,11 +239,11 @@ Edit Profile
                         </div>
 
                         <div class="form-group mb-2">
-                            <label for="office_address" class="m-0 p-0">Address (Office):</label>
+                            <label for="office_address" class="m-0 p-0 bold">Address (Office):</label>
                             <input id="office_address" type="search"
                                 class="blue-input input rounded-0 @error('office_address') is-invalid @enderror"
                                 name="office_address" value="{{ $user->location->office_address ?? '' }}"
-                                autocomplete="off" placeholder="Address (Office)">
+                                autocomplete="off" placeholder="Office Address">
                             <input type="hidden" name="office_location" class="" id="office_location"
                                 value="{{ $user->location->office_location ?? '' }}">
                             <input type="hidden" name="office_latitude" class="" id="office_latitude"
@@ -264,12 +285,14 @@ Edit Profile
                     <form action="{{ route('dashboard.password') }}" id="updatePassword" method="post" class="p-3">
                         @csrf
                         <div class="form-group mb-1">
+                            <label for="age_range" class="m-0 p-0 bold">Current Password:</label>
                             <input type="password"
                                 class="blue-input input rounded-0 @error('current_password') is invalid @enderror"
                                 name="current_password" value="" placeholder="Current Password">
                         </div>
 
                         <div class="form-group mb-1">
+                            <label for="age_range" class="m-0 p-0 bold">New Password:</label>
                             <input type="password"
                                 class="blue-input input rounded-0 @error('password') is invalid @enderror"
                                 name="password" value="" placeholder="New Password" required
@@ -278,6 +301,7 @@ Edit Profile
                         </div>
 
                         <div class="form-group mb-1">
+                            <label for="age_range" class="m-0 p-0 bold">Confirm New Password:</label>
                             <input type="password"
                                 class="blue-input input rounded-0 @error('password-confirm') is invalid @enderror"
                                 name="password_confirmation" value="" placeholder="Confirm New Password" required
@@ -293,54 +317,67 @@ Edit Profile
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header p-2" id="settingsCollapse">
+        <div class="card mb-5">
+            <div class="card-header p-2" id="settingCollapse">
                 <h5 class="mb-0">
                     <button class="btn text-primary collapsed" type="button" data-toggle="collapse"
-                        data-target="#collapseSettings" aria-expanded="true" aria-controls="collapseSettings">
-                        <i class="fa fa-lock mr-2"></i> Preferences
+                        data-target="#collapseSetting" aria-expanded="true" aria-controls="collapseSetting">
+                        <i class="fa fa-cog mr-2"></i> Preferences
                     </button>
                 </h5>
             </div>
 
             <div class="card-body p-0 m-0">
-                <div id="collapseSettings" class="collapse" aria-labelledby="settingsCollapse"
+                <div id="collapseSetting" class="collapse" aria-labelledby="settingCollapse"
                     data-parent="#editProfileAccordion">
-                    <div class="container p-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <p class="f-14 bold m-0">Others Can See My Activity</p>
-                            </div>
-                            <div class="">
-                                <label class="switch">
-                                    <input type="checkbox" data-id="{{ $user->uuid }}" name="show_location"
-                                        id="show_location" class="show_location"
-                                        {{ $user->show_location == true ? 'checked' : '' }} />
-                                    <span class="toggle-slider"></span>
-                                </label>
-                                <div class="spinner-border text-primary ml-2 spinner-border-sm d-none"
-                                    id="location-spinner" role="status">
-                                    <span class="sr-only">Loading...</span>
+                    <div id="updatePrefrences" method="post" class="p-4">
+                        <div class="form-group mb-1 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="f-14 bold m-0">Others Can See My Activity</p>
                                 </div>
+                                <div class="">
+                                    <label class="switch">
+                                        <input type="checkbox" data-id="{{ $user->uuid }}" name="show_location"
+                                            id="show_location" class="show_location"
+                                            {{ $user->show_location == true ? 'checked' : '' }} />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <div class="spinner-border text-primary ml-2 spinner-border-sm d-none"
+                                        id="location-spinner" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-muted">
+                                @if ($user->status != true)
+                                    Pariatur deserunt excepteur pariatur fugiat duis do id officia quis duis culpa.
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="container p-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <p class="f-14 bold m-0">Deactivate Account</p>
-                            </div>
-                            <div class="">
-                                <label class="switch">
-                                    <input type="checkbox" data-id="{{ $user->uuid }}" name="deactivate_acc"
-                                        id="deactivate_acc" class="deactivate_acc"
-                                        {{ $user->deactivate_acc == true ? 'checked' : '' }} />
-                                    <span class="toggle-slider"></span>
-                                </label>
-                                <div class="spinner-border text-primary ml-2 spinner-border-sm d-none"
-                                    id="deactivate-spinner" role="status">
-                                    <span class="sr-only">Loading...</span>
+
+                        <div class="form-group my-1 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="f-14 bold m-0">Deactivate Account</p>
                                 </div>
+                                <div class="">
+                                    <label class="switch">
+                                        <input type="checkbox" data-id="{{ $user->uuid }}" name="status"
+                                            id="account_status" class="account_status"
+                                            {{ $user->status == true ? 'checked' : '' }} />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <div class="spinner-border text-primary ml-2 spinner-border-sm d-none"
+                                        id="deactivate-spinner" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-muted">
+                                @if ($user->status != true)
+                                    Pariatur deserunt excepteur pariatur fugiat duis do id officia quis duis culpa.
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -360,7 +397,8 @@ Edit Profile
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.js" crossorigin="anonymous"></script>
 
-<script src="{{ asset('frontend/jquery/imgUpload.js') }}"></script>
+<script src="{{ asset('frontend/jquery/editProfile.js') }}"></script>
+{{-- <script src="{{ asset('frontend/jquery/tog.js') }}"></script> --}}
 
 <script>
     function initialize() {
@@ -402,83 +440,4 @@ Edit Profile
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize"
     type="text/javascript" async defer></script>
-
-<script>
-    jQuery(document).ready(function ($) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('#show_location').change(function () {
-            $('#location-spinner').removeClass('d-none');
-
-            var userID = $(this).data('id');
-            var status = $(this).is(':checked') ? 1 : 0;
-
-            $.ajax({
-                type: 'GET',
-                url: `/location/visibility`,
-                data: {
-                    'status': status,
-                    'userID': userID
-                },
-                success: function (data) {
-                    if (data.success) {
-                        $('#location-spinner').addClass('d-none');
-                        alert(data.success);
-                    } else {
-                        $('#location-spinner').addClass('d-none');
-                        $(this).prop("checked", !this.checked);
-                        alert(data.success);
-                    }
-                }
-            });
-        });
-
-
-        $('#deactivate_acc').change(function () {
-            $('#deactivate-modal').modal('show');
-        });
-
-        $("#deactivate_acc").on('hidden.bs.modal', function () {
-            alert("Hello World!");
-        });
-
-        $('#cancel').click(function () {
-            $('#deactivate_acc').prop("checked", !this.checked);
-        });
-
-        $('#deactivateAccount').click(function () {
-            $('#deactivate-spinner').removeClass('d-none');
-
-            var userID = $(this).data('id');
-            var status = $(this).is(':checked') ? 1 : 0;
-
-            $.ajax({
-                type: 'GET',
-                url: `/deactivate/account`,
-                data: {
-                    'status': status,
-                    'userID': userID
-                },
-                success: function (data) {
-                    if (data.success) {
-                        $('#deactivate-spinner').addClass('d-none');
-                        $('#deactivate-modal').modal('hide');
-                        alert(data.success);
-                    } else {
-                        $('#deactivate-spinner').addClass('d-none');
-                        $(this).prop("checked", !this.checked);
-                        alert(data.success);
-                    }
-                }
-            });
-        });
-    });
-
-</script>
-
-
 @endsection

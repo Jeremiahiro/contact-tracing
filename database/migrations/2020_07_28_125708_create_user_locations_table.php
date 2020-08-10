@@ -23,7 +23,6 @@ class CreateUserLocationsTable extends Migration
             $table->string('office_location')->nullable();
             $table->string('office_latitude')->nullable();;
             $table->string('office_longitude')->nullable();;
-            $table->boolean('show_location')->default(true);
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
