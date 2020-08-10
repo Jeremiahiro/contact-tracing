@@ -37,12 +37,25 @@
 
             <div class="">
                 <nav class="nav flex-column">
-                 
-                    <a class="nav-link text-white bold f-16" href="{{ route('dashboard.index') }}">Dashboard <i
-                            class="ml-2 fa fa-dashboard"></i></a>
-                    <a class="nav-link text-white bold f-16" href="{{ route('dashboard.edit', auth()->user()->uuid) }}">Edit Profile <i class="ml-2 fa fa-user"></i></a>
-                    <a class="nav-link text-white bold f-16" href="#">Privacy Policy <i class="ml-2 fa fa-file"></i></a>
-                    
+                    <a class="nav-link text-white bold f-16" href="{{ route('dashboard.index') }}">
+                        Dashboard <i class="ml-2 fa fa-dashboard"></i>
+                    </a>
+                    <a class="nav-link text-white bold f-16" href="{{ route('dashboard.edit', auth()->user()->uuid) }}">
+                        Edit Profile <i class="ml-2 fa fa-user"></i>
+                    </a>
+                    <a class="nav-link text-white bold f-16" href="{{ route('about')}}">
+                        About <i class="ml-2 fa fa-info-circle"></i>
+                    </a>
+                    <a class="nav-link text-white bold f-16" href="{{ route('privacy')}}">
+                        Privacy Policy <i class="ml-2 fa fa-file"></i>
+                    </a>
+                    <a href="{{ route('logout') }}" class="nav-link text-white bold f-16"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout <i class="ml-2 fa fa-sign-out"></i>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </nav>
             </div>
         </div>

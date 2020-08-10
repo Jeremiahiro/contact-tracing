@@ -105,9 +105,6 @@ class LoginController extends Controller
         $user->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
         $user->save();
 
-        Cookie::queue('is_first_time_user', $user->id);
-
-
         return $user;
     }
 

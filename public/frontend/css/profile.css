@@ -1,87 +1,17 @@
-/* .avatar-upload {
-    position: relative;
-    max-width: 205px;
-    margin: 50px auto;
+.profile-pic:hover {
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 10000;
+    color: #fff;
+    transition: all .3s ease;
+    text-decoration: none;
 }
 
-.avatar-edit {
-    z-index: 1;
-    left: 40%;
-    top: 50%;
-}
-
-.bgImage-edit {
-    left: 45% !important;
-    top: 35%;
-}
-
-.avatar-edit input {
-    display: none;
-}
-
-.avatar-edit label {
+.profile-pic span {
     display: inline-block;
-    width: 34px;
-    height: 34px;
-    text-align: center;
-    margin-bottom: 0;
-    border-radius: 100%;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
-    cursor: pointer;
-    font-weight: normal;
-    transition: all .2s ease-in-out;
+    padding-top: 2.5em;
 }
 
-.avatar-edit label:after {
-    content: url("../img/svg/Icon-camera.svg");
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin: auto;
-} */
-
-.avatar-upload {
-    position: relative;
+.avatar-input {
+    display: none;
     cursor: pointer;
-    text-align: center;
-}
-.avatar-edit {
-    background-color: #999999;
-    border: 4px solid #CCCCCC;
-    color: #FFFFFF;
-    margin: 0px auto;
-    overflow: hidden;
-    transition: all 0.2s;
-    -webkit-transition: all 0.2s;
-}
-.picture:hover{
-    border-color: #2ca8ff;
-}
-.content.ct-wizard-green .picture:hover{
-    border-color: #05ae0e;
-}
-.content.ct-wizard-blue .picture:hover{
-    border-color: #3472f7;
-}
-.content.ct-wizard-orange .picture:hover{
-    border-color: #ff9500;
-}
-.content.ct-wizard-red .picture:hover{
-    border-color: #ff3b30;
-}
-.picture input[type="file"] {
-    cursor: pointer;
-    display: block;
-    height: 100%;
-    left: 0;
-    opacity: 0 !important;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-.picture-src{
-    width: 100%;
-    
 }

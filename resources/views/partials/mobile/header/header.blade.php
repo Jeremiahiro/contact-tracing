@@ -16,11 +16,10 @@
         </div>
         <div id="tourStep1" class="avatar-icon">
             @auth
-                @if ($route == 'dashboard.index' || $route == 'dashboard.show' || $route ==
-                'dashboard.edit')
+                @if ($route == 'dashboard.index' || $route == 'dashboard.show' || $route == 'dashboard.edit')
                     @if($user->id === Auth::user()->id)
                         @if ($route == 'dashboard.edit')
-                        <p class="mb-2">
+                        <p class="mb-2 pb-4">
                             <a href="{{ url()->previous() }}" class="text-white">
                                 <img src="{{ asset('/frontend/img/svg/back.svg') }}" alt="go back">
                             </a>

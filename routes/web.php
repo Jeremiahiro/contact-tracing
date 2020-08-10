@@ -53,16 +53,21 @@ Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCal
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/', 'GeneralController@index')->name('home');
+    Route::get('/search', 'GeneralController@search')->name('search');
+    Route::get('/search/result', 'GeneralController@searchResult')->name('search.query');
+    Route::get('/about-us', 'GeneralController@about')->name('about');
+    Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
+
     Route::resource('/activity', 'ActivityController');
+    
     Route::get('/dashboard', 'UserController@index')->name('dashboard.index');
     Route::get('/dashboard/{id}/show', 'UserController@show')->name('dashboard.show');
     Route::get('/dashboard/{id}/edit', 'UserController@edit')->name('dashboard.edit');
     Route::post('/dashboard/update', 'UserController@update')->name('dashboard.update');
     Route::post('/follow', 'UserController@follow')->name('follow');
+    
     Route::post('/dashboard/location/update', 'UserLocationController@update')->name('location.update');
-    Route::get('/search', 'GeneralController@search')->name('search');
-    Route::get('/search/result', 'GeneralController@searchResult')->name('search.query');
-    Route::get('/users/search', 'GeneralController@searchUser')->name('users.search');
+
     Route::get('/dashboard/{id}/setting', 'SettingController@setting')->name('dashboard.setting');
     Route::post('/dashboard/password', 'SettingController@updatePassword')->name('dashboard.password');
     Route::get('/location/visibility', 'SettingController@location')->name('changeStatus');
