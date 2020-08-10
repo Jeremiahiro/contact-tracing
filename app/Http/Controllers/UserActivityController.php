@@ -147,4 +147,5 @@ class UserActivityController extends Controller
          
 		$this->validate($request, $rules);
     }
+
 }
