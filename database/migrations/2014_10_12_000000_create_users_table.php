@@ -30,6 +30,8 @@ class CreateUsersTable extends Migration
             $table->string('provider', 20)->nullable();
             $table->string('provider_id')->nullable();
             $table->string('access_token')->nullable();
+
+            $table->boolean('first_time_login')->default(0);
             
             $table->string('role')->default('user');
             $table->rememberToken();
