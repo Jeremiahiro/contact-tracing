@@ -42,6 +42,9 @@
     <script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
     <script src="{{ asset('frontend/jquery/followToggle.js')}}"></script>
 
+    <script src="{{ asset('frontend/js/moment-with-locales.min.js')}}"></script>
+    
+
     @yield('custom-style')
 
 </head>

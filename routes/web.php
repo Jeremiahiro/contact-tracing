@@ -19,6 +19,10 @@ Route::get('index', function () {
     return view('activity.index');
 });
 
+Route::get('calender', function () {
+    return view('activity.calender');
+});
+
 Route::get('create', function () {
     return view('activity.create');
 })->name('activity.create');
