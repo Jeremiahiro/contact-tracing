@@ -40,7 +40,12 @@ Add Activity
 
 <section>
     <div class="container text-primary">
-        <div class="py-5 activity">
+        <div class="pt-3 pb-5 activity">
+            <p class="mx-2">
+                <a href="{{ url()->previous() }}" class="">
+                    <img src="{{ asset('/frontend/img/svg/back_blue.svg') }}" alt="go back">
+                </a>
+            </p>
             <p class="f-12 bold">Update Activity</p>
             <form method="POST" action="{{ route('activity.update', $activity->id) }}"
                 id="activitForm" name="activity" autocomplete="off">

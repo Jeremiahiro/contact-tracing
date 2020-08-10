@@ -76,7 +76,7 @@ Profile Page
         @if($user->activities->count())
 
         <div class="activityView">
-            <div class="activity">
+            <div class="activityTab">
                 <ul class="mb-0 mt-3 f-12 nav">
                     <li class="active"><a data-toggle="tab" href="#tab1" class="text-primary active">Places</a></li>
                     <span class="mx-1">|</span>

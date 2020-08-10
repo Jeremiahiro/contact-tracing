@@ -14,12 +14,13 @@
         </div>
     </div>
 
-    <div id="tab1">
+    <div class="" id="tab1">
         <div class="form-group">
             <input type="search" class="user-data blue-input input" name="user" id="user" value="" autocomplete="off"
                 placeholder="People you met">
         </div>
-        <div id="user_list" class="search-result"></div>
+        <div id="user_list" class="search-result">
+        </div>
 
         <div class="form-group">
             <input type="text" class="" name="tags" id="tags" value="" placeholder="" />
@@ -29,22 +30,25 @@
     <div class="" id="tab2">
         <div id="duplicator">
             <fieldset class="form-dup mb-3" data-step="1">
+                <input style="display:none">
+                <input type="password" style="display:none">
                 <div class="form-group mb-1">
-                    <input type="text" class="input blue-input" name="name[]" placeholder="Name" autocomplete="off"  value=""/>
+                    <input type="text" class="input blue-input" name="name[]" placeholder="Name" autocomplete="nope"
+                        value="" />
                 </div>
                 <div class="form-group mb-1">
-                    <input type="email" class="input blue-input" name="email[]" placeholder="Email"
-                        autocomplete="off" value="" />
+                    <input type="email" class="input blue-input" name="email[]" placeholder="Email" autocomplete="yepee"
+                        value="" />
                 </div>
                 <div class="form-group mb-1">
                     <input type="tel" class="input blue-input" name="phone[]" placeholder="Phone Number"
-                        autocomplete="off" />
+                        autocomplete="dont" />
                 </div>
             </fieldset>
         </div>
         <div class=" buttonBox">
             <div class="pull-left">
-                <button type="button" class="btn btn-success add">+</button>
+                <button type="button" class="btn btn-success add py-1">+</button>
                 <button type="button" class="btn btn-danger remove">-</button>
             </div>
         </div>

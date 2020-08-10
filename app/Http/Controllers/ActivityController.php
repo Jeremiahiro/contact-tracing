@@ -36,10 +36,9 @@ class ActivityController extends Controller
                 $activities = view('activity.index', compact('activities'))->render();
                 return response()->json(['html'=>$activities]);
             }
-    
             return view('activity.index', compact('activities', 'users'));
         }
-        return redirect()->route('activity.create')->with('info', 'You need to add an Activity!');
+        return redirect()->route('activity.create')->with('warning', 'You need to add an Activity!');
 
     }
 
@@ -135,7 +134,7 @@ class ActivityController extends Controller
             return redirect()->route('activity.index')->with('success', 'Successful!');
 
         } catch (\Throwable $th) {
-             return redirect()->back()->with('error', 'OOps something went wrong');
+             return redirect()->back()->with('error', 'OOPS something went wrong');
          } 
 
     }
@@ -254,7 +253,7 @@ class ActivityController extends Controller
     public function destroy(Activity $activity)
     {
         $activity->delete();
-        return redirect()->back()->with('success', 'Operation successful');
+        return redirect()->back()->with('success', 'Successful');
     }
 
     public function validateActivity(Request $request){

@@ -398,7 +398,6 @@ Edit Profile
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.js" crossorigin="anonymous"></script>
 
 <script src="{{ asset('frontend/jquery/editProfile.js') }}"></script>
-{{-- <script src="{{ asset('frontend/jquery/tog.js') }}"></script> --}}
 
 <script>
     function initialize() {

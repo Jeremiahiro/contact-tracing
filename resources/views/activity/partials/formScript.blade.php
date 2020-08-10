@@ -22,7 +22,7 @@
 
         tag.hide();
 
-        $(document).on('click', '.data', function () {
+        $(document).on('click', '.userInfo', function () {
             var username = $(this).find("p").text();
             data.push(username);
             tag.show();

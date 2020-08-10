@@ -142,7 +142,7 @@ jQuery(document).ready(function ($) {
                             showAlertMessage('success', 'Successful');
                         }
                     }).fail(e => {
-                        console.log(e);
+                        location.reload(true);
                         showAlertMessage('danger', 'file format or size not supported');
                     });
                 });
@@ -193,13 +193,6 @@ jQuery(document).ready(function ($) {
             showAlertMessage('danger', 'file format or size not supported');
         });
     });
-
-
-    $("#deactivate_acc").on('hidden.bs.modal', function () {
-        alert("Hello World!");
-    });
-
-
 
     $('#account_status').change(function () {
         $('#deactivateMdal').modal('show');
