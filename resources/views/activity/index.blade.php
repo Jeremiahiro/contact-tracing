@@ -105,7 +105,7 @@
 @include('activity.partials.mapScript')
 
 <script type="text/javascript" src="{{ asset('frontend/js/rescalendar.min.js')}}"></script>
-<script>
+    <script>
         $(function () {
 
             // Multiple instantiation (divs 1 and 2)
@@ -138,7 +138,6 @@
         });
     </script>
 
-  
 
 @endsection
 @section('footer')

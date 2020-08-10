@@ -136,6 +136,9 @@ Add Activity
 </section>
 @endsection
 @section('script')
+  
+  <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
+
 
 @if(Cookie::get('is_first_time_user') )
     <script>
