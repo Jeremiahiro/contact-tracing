@@ -34,6 +34,8 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
+
     <!-- Styles -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
@@ -41,6 +43,10 @@
 
     <script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
     <script src="{{ asset('frontend/jquery/followToggle.js')}}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+    <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
 
     @yield('custom-style')
 

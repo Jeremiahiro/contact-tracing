@@ -48,6 +48,16 @@ Edit Profile
         </div>
     </div>
 
+    <div class="container">
+        <div class="imageIcon">
+            <input type="file" class="cause-image-upload" id="cause-image-upload" name="cause_image"
+                accept="image/*">
+            <img src="{{ asset('/img/icon/folder.png') }}" />
+        </div>
+    </div>
+
+    @extends('partials.modals.uploadModal')
+
 </section>
 
 <section class="py-3 mb-5">
