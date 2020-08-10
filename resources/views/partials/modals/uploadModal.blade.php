@@ -7,7 +7,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
-            <div class="modal-body my-5">
+            <div class="modal-body my-3 mx-0">
                 <div id="resizer" class="text-center"></div>
                 <div class="d-flex justify-content-between align-items-center mt-4">
                     <div>

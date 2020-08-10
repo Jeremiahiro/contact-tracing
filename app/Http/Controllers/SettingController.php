@@ -61,35 +61,21 @@ class SettingController extends Controller
     }
 
     /**
-     * Show and Hide Location request.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function location(Request $request)
-    {
-        $user = User::where('uuid', $request->userID);
-        if($user){
-            $user->show_location = $request->status;
-            return response()->json(['success'=>'Status change successfully.']);
-        }
-        return response()->json(['error'=>'oops something went wrong!']);
-
-    }
-
-    /**
      * Deactivate and Activate request.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function deactivate(Request $request)
     {
-        $user = User::where('uuid', $request->userID);
-        if($user){
-            $user->deactivate_acc = $request->status;
-            return response()->json(['success'=>'Status change successfully.']);
-        }
-        return response()->json(['error'=>'oops something went wrong!']);
+        $user = Auth::user();
+        $user->status = $request->status;
+        $user->save();
 
+        $response = [
+            'success' => true,
+            "message" => 'Successful'
+        ];
+        return response()->json($response, 201);
     }
 
     /** 
@@ -104,7 +90,7 @@ class SettingController extends Controller
         ]);
 
         $avatar = $request->file('avatar')->getRealPath();
-        $upload = Cloudder::upload($avatar, null, ['folder' => 'SOP_Images']);
+        $upload = Cloudder::upload($avatar, null, ['folder' => 'SOP_Profile_Pictures']);
 
         if($upload){
             list($width, $height) = getimagesize($avatar);
@@ -117,6 +103,40 @@ class SettingController extends Controller
             $response = [
                 'success' => true,
                 'img_url' => $image_url,
+                "message" => 'Successful'
+            ];
+            return response()->json($response, 201);
+
+        } else {
+            return response()->json(['error' => 'Oops! Something went wrong.']);
+        }
+    }
+
+    /** 
+     * Lets a user update profile header image
+     * * @param  \Illuminate\Http\Request  $request
+     * 
+     */
+    public function uploadHeader(Request $request)
+    {
+        $request->validate([
+            'header' => 'required|image|mimes:jpeg,bmp,jpg,png|between:1, 6000',
+        ]);
+
+        $header = $request->file('header')->getRealPath();
+        $upload = Cloudder::upload($header, null, ['folder' => 'SOP_Header_Pictures']);
+
+        if($upload){
+            list($width, $height) = getimagesize($header);
+            $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
+            
+            $user = Auth::user();
+            $user->header = $image_url;
+            $user->save();
+    
+            $response = [
+                'success' => true,
+                'header' => $image_url,
                 "message" => 'Successful'
             ];
             return response()->json($response, 201);

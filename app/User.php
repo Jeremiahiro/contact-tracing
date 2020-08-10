@@ -25,8 +25,9 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $hidden = [
         'password', 'remember_token',
-        'show_location' => 'boolean',
         'first_time_login' => 'boolean',
+        'show_location' => 'boolean',
+        'status' => 'boolean',
     ];
 
     /**
@@ -35,6 +36,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $casts = [
+        'status' => 'boolean',
+        'show_location' => 'boolean',
         'email_verified_at' => 'datetime',
     ];
 

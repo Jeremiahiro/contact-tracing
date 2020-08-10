@@ -91,9 +91,26 @@ class UserLocationController extends Controller
             $location->user_id = Auth::user()->id;
             $location->save();
             return redirect()->back()->with('success', 'Successful');
-
         }
+    }
 
+    /**
+     * Show and Hide Location request.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function locationVisibility(Request $request)
+    {
+        $user = Auth::user();
+        $user->show_location = $request->status;
+        $user->save();
+
+        $response = [
+            'success' => true,
+            "message" => 'Successful'
+        ];
+        return response()->json($response, 201);
+   
     }
 
     /**

@@ -1,16 +1,39 @@
-    <div class="modal fade" id="deactivate-modal" tabindex="-1" role="dialog" aria-labelledby="deactivateAccountLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-bottom route_purple text-center m-0 py-4" style="pointer-events:auto;" role="document">
-            <p class="f-18 m-0 py-2">ARE YOU SURE ABOUT THIS ?</p>
-            <div class="py-3">
-                <span>
-                    <button data-id="{{ $user->uuid }}" class="deactivateAccount btn blue-btn " type="button"
-                    id="deactivateAccount">YES</button>
-                </span>
+<div class="modal fade" tabindex="1" id="deactivateMdal" role="dialog" aria-labelledby="deactivateMdalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-bottom route_purple m-0 p-3" style="pointer-events:auto;" role="document">
+        <div class="d-flex justify-content-between mb-0">
+            @if ($user->status == true)
+            <h3 class="m-0 bold f-14">Deactivate Account</h3>
+            @else
+            <h3 class="m-0 bold f-14">Re-Activate Account</h3>
+            @endif
+            <button type="button" style="opacity:1;" class="btn close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><img src="{{ asset('/frontend/img/svg/Icon-close-circle.svg')}}"
+                        alt="map-pin"></span>
+            </button>
+        </div>
+        <div class="my-2 text-center">
+            <div>
+                @if ($user->status == true)
+                <p class="f-18 m-0 py-2">
+                    Ad do aliquip enim irure deserunt velit et amet ea ea eiusmod.
+                </p>
+                @else
+                <p class="f-18 m-0 py-2">
+                    Esse esse tempor ad incididunt tempor amet culpa ut cillum exercitation nulla.
+                </p>
+                @endif
+            </div>
+            <div class="m-1">
+                <button type="button" class="mx-2 btn blue-btn text-white" id="cancel" data-dismiss="modal">
+                    Cancel
+                </button>
 
-                <span>
-                    <button type="button" class="btn border-0 btn-danger" id="cancel" data-dismiss="modal">NO</button>
-                </span>
-        
+                <button type="button" class="mx-2 btn red-btn text-white" data-id="{{ $user->uuid }}" id="proceed">
+                    Proceed
+                </button>
             </div>
         </div>
+
     </div>
+</div>

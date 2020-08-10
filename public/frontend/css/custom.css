@@ -322,7 +322,7 @@ input:-webkit-autofill:focus,
 
 #alert,
 #upload-alert {
-    position: absolute;
+    position: fixed;
     width: 95%;
     z-index: 100;
     top: 10px;
@@ -369,6 +369,10 @@ input:-webkit-autofill:focus,
     background-color: #0000FF;
     color: #fff;
 }
+.red-btn {
+    background-color: #c20303;
+    color: #fff;
+}
 
 input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none;
@@ -390,12 +394,6 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .border-4 {
     border: 4px solid #CCCCCC;
-}
-
-.profile_cover {
-    min-height: 350px;
-    border-bottom-left-radius: 43px;
-    border-bottom-right-radius: 43px;
 }
 
 .nav-item .nav-active {
@@ -578,7 +576,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .modal-dialog-bottom {
-    top: calc(100% - 200px);
+    top: calc(100% - 220px);
 }
 
 .modal.fade:not(.in).right .modal-dialog {
@@ -683,3 +681,21 @@ input:checked+.toggle-slider:before {
     background-position: right calc(.375em + .1875rem) center;
     background-size: calc(.75em + .375rem) calc(.75em + .375rem)
 }
+.profile-pic:hover {
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 10000;
+    color: #fff;
+    transition: all .3s ease;
+    text-decoration: none;
+}
+
+.profile-pic span {
+    display: inline-block;
+    padding-top: 2.5em;
+}
+
+.avatar-input {
+    display: none;
+    cursor: pointer;
+}
+
