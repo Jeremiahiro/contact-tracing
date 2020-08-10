@@ -7,6 +7,7 @@ Edit Profile
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/css/profile.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -17,24 +18,23 @@ Edit Profile
 @section('mobile-content')
 <section class="splash profile_cover" id="bgPreview" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
-    <div class="container text-center text-white py-4">
-        <div class="avatar-upload">
-            <div class="avatar-edit position-absolute">
-                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                <label for="imageUpload"></label>
-            </div>
-            <div>
-                <img id="imagePreview" src="{{ $user->avatar }}" class="avatar avatar-xl border-5"
-                    alt="{{ $user->username }}">
-            </div>
+
+    <div class="container content text-center text-white py-4">
+        <div id="panel1">
+            <img src="{{ $user->avatar }}" class="avatar avatar-xl border" alt="{{ $user->username }}">
+        </div>
+        <div class="py-2">
+            <h6 class="bold m-0 f-18">{{ $user->name }}</h6>
+            <p class="bold">{{ $user->username }}</p>
+        </div>
+
+        <div class="py-2 text-left">
+            <h6 class="bold m-0 pb-2 f-14"><span class="regular">HOME:</span> {{ $user->home_address }}</h6>
+            <h6 class="bold m-0 f-14"><span class="regular">Office:</span> {{ $user->home_address }}</h6>
         </div>
     </div>
-    <div class="container">
-        <div class="avatar-edit bgImage-edit ">
-            <input type='file' id="bgUpload" accept=".png, .jpg, .jpeg" />
-            <label for="bgUpload"></label>
-        </div>
-    </div>
+    
+
 </section>
 
 <section class="py-3 mb-5">

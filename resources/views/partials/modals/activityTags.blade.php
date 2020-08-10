@@ -1,5 +1,4 @@
-
-<div class="modal fade" id="activityConn-{{ $person->id }}" role="dialog" aria-labelledby="activityConnectionModal" aria-hidden="true">
+<div class="modal fade show" id="activityTags-{{ $person->id }}" role="dialog" aria-labelledby="activityTagsModal" aria-hidden="true">
     <div class="modal-dialog route_purple mt-5 mx-0 px-3 py-4" style="pointer-events:auto;" role="document">
         <div class="">
             <div class="d-flex justify-content-between mb-0">
@@ -9,6 +8,9 @@
                             alt="map-pin"></span>
                 </button>
             </div>
+            {{-- @foreach ($collection as $item)
+                
+            @endforeach --}}
             rhfkj
             {{-- <div class="d-flex justify-content-between bold mb-3">
                 <div>

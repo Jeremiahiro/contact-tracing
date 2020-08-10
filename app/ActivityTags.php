@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class ActivityTags extends Model
@@ -36,7 +37,7 @@ class ActivityTags extends Model
      */
     public function activity()
     {
-        return $this->belongsTo('App\Activity');
+        return $this->belongsTo('App\Activity', 'activity_id');
     }
 
     /**
@@ -45,5 +46,21 @@ class ActivityTags extends Model
     public function tagged()
     {
         return $this->belongsTo('App\User', 'person_id');
+    }
+
+    /**
+     * Get the activity that the people belong to.
+     */
+    public function tagging()
+    {
+        return $this->belongsTo('App\Activity');
+    }
+
+    /**
+     * Get the activity that the people belong to.
+     */
+    public function tag_count()
+    {
+        return $this->groupBy('name');
     }
 }

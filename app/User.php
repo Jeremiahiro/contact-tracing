@@ -55,6 +55,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * a user has many taggs.
+     * 
+     */
+    public function tagging()
+    {
+        return $this->hasMany('App\ActivityTags')->groupBy('name');
+    }
+
+    /**
      * a user can be tagged.
      */
     public function isTagged()

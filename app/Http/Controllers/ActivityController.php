@@ -67,7 +67,6 @@ class ActivityController extends Controller
 
         $start = Carbon::parse($request->start_date)->format('Y-m-d H:i');
         $end = Carbon::parse($request->end_date)->format('Y-m-d H:i');
-        // dd($start);
         try {
             $activity = Activity::firstOrCreate([
                 'from_address' => $request->from_address,
@@ -91,12 +90,11 @@ class ActivityController extends Controller
                 if($request->tags != null) {
                     $tags = explode(",", $request->tags);
                     foreach($tags as $person) {
-                        $existingUser = User::where('name', 'LIKE', $person.'%')
-                                ->orWhere('username', 'LIKE', $person.'%')
-                                ->first();
+                        $existingUser = User::where('username', $person)->first();
                         if ($existingUser) {
                             $activityTag = new ActivityTags;
                             $activityTag->activity_id   = $activity->id;
+                            $activityTag->name          = $existingUser->name;
                             $activityTag->person_id     = $existingUser->id;
                             $activityTag->user_id       = Auth::user()->id;
                             $activityTag->save();
@@ -116,6 +114,7 @@ class ActivityController extends Controller
                             $activityTag = new ActivityTags;
                             $activityTag->activity_id   = $activity->id;
                             $activityTag->person_id     = $existingUser->id;
+                            $activityTag->name          = $existingUser->name;
                             $activityTag->user_id       = Auth::user()->id;
                             $activityTag->save();
                         } elseif ($name[$key] != null) {
@@ -160,7 +159,7 @@ class ActivityController extends Controller
      */
     public function edit(Activity $activity)
     {
-        //
+        return view('activity.edit', compact('activity'));
     }
 
     /**
@@ -172,7 +171,78 @@ class ActivityController extends Controller
      */
     public function update(Request $request, Activity $activity)
     {
-        //
+        if($activity->user_id == auth()->user()->id){
+
+            if($request->name[0] != null || $request->tags != null)
+            {
+                try {
+                    // for existing users
+                    if($request->tags != null) {
+                        $tags = explode(",", $request->tags);
+                        foreach($tags as $person) {
+                            $existingUser = User::where('username', $person)->first();
+                            if ($existingUser) {
+                                $existingTag = ActivityTags::where('person_id', $existingUser->id)->where('activity_id', $activity->id)->first();
+                                // dd($existingTag);
+                                if(!$existingTag){
+                                    $activityTag = new ActivityTags;
+                                    $activityTag->activity_id   = $activity->id;
+                                    $activityTag->person_id     = $existingUser->id;
+                                    $activityTag->name          = $existingUser->name;
+                                    $activityTag->user_id       = Auth::user()->id;
+                                    $activityTag->save();
+                                } 
+                            } 
+                        }
+                    }
+        
+                    // for users not on the platform
+                    $name = $request->name;
+                    $email = $request->email;
+                    $phone = $request->phone;
+    
+                    if($name != null) {
+                        foreach($name as $key => $value) {
+                            $existingUser = User::where('email', $email[$key])->first();
+                            if ($existingUser) {
+                                $existingTag = ActivityTags::where('person_id', $existingUser->id)->where('activity_id', $activity->id)->first();
+                                if(!$existingTag){
+                                    $activityTag = new ActivityTags;
+                                    $activityTag->activity_id   = $activity->id;
+                                    $activityTag->person_id     = $existingUser->id;
+                                    $activityTag->name          = $existingUser->name;
+                                    $activityTag->user_id       = Auth::user()->id;
+                                    $activityTag->save();
+                                }
+                             
+                            } elseif ($name[$key] != null) {
+                                $existingTag = ActivityTags::where('name', $name[$key])->where('activity_id', $activity->id)->first();
+                                if(!$existingTag){
+                                    $activityTag = new ActivityTags;
+                                    $activityTag->name          = $name[$key];
+                                    $activityTag->email         = $email[$key];
+                                    $activityTag->phone         = $phone[$key];
+                                    $activityTag->activity_id   = $activity->id;
+                                    $activityTag->user_id       = Auth::user()->id;
+                                    $activityTag->save();
+                                }
+                            }
+                        }
+                    }
+
+                    return redirect()->route('activity.index')->with('success', 'Activity Updated Successfuly!');
+    
+                } catch (\Throwable $th) {
+
+                    dd($th);
+                    return redirect()->back()->with('error', 'OOps something went wrong');
+                } 
+            } else {
+                return redirect()->back()->with('error', 'Entry fields cannot be null');
+            }
+        }
+        return redirect()->back()->with('info', 'Unauthorized Access!');
+
     }
 
     /**
@@ -183,7 +253,8 @@ class ActivityController extends Controller
      */
     public function destroy(Activity $activity)
     {
-        //
+        $activity->delete();
+        return redirect()->back()->with('success', 'Operation successful');
     }
 
     public function validateActivity(Request $request){
