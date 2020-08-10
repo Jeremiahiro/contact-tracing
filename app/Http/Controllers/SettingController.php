@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cloudder;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,5 +90,39 @@ class SettingController extends Controller
         }
         return response()->json(['error'=>'oops something went wrong!']);
 
+    }
+
+    /** 
+     * Lets a user update profile image
+     * * @param  \Illuminate\Http\Request  $request
+     * 
+     */
+    public function uploadAvatar(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,bmp,jpg,png|between:1, 6000',
+        ]);
+
+        $avatar = $request->file('avatar')->getRealPath();
+        $upload = Cloudder::upload($avatar, null, ['folder' => 'SOP_Images']);
+
+        if($upload){
+            list($width, $height) = getimagesize($avatar);
+            $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
+            
+            $user = Auth::user();
+            $user->avatar = $image_url;
+            $user->save();
+    
+            $response = [
+                'success' => true,
+                'img_url' => $image_url,
+                "message" => 'Successful'
+            ];
+            return response()->json($response, 201);
+
+        } else {
+            return response()->json(['error' => 'Oops! Something went wrong.']);
+        }
     }
 }
