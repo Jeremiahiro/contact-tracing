@@ -5,6 +5,9 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    $("#uploadHeader").addClass('d-none');
+    $("#uploadAvatar").addClass('d-none');
+
     $(function () {
         var croppie = null;
         var el = document.getElementById('resizer');
@@ -50,13 +53,13 @@ jQuery(document).ready(function ($) {
         // update profile picture
         $("#changeAvatar").on("change", function (event) {
             $("#uploadModal").modal();
-            $(".modal-body #uploadHeader").hide();
-            $(".modal-body #uploadAvatar").show();
+            $("#uploadAvatar").removeClass('d-none');
+            $("#uploadHeader").addClass('d-none');
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
-                    width: 300,
-                    height: 300,
+                    width: 250,
+                    height: 250,
                     type: 'circle',
                 },
                 boundary: {
@@ -105,13 +108,13 @@ jQuery(document).ready(function ($) {
         // update profile header
         $("#changeHeader").on("change", function (event) {
             $("#uploadModal").modal();
-            $(".modal-body #uploadHeader").show();
-            $(".modal-body #uploadAvatar").hide();
+            $("#uploadHeader").removeClass('d-none');
+            $("#uploadAvatar").addClass('d-none');
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
-                    width: 320,
-                    height: 320,
+                    width: 300,
+                    height: 300,
                     type: 'square',
                     size: 'original'
                 },
