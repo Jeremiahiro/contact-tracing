@@ -81,10 +81,13 @@ class UserController extends Controller
             'age_range'    => ['required'],
         ]);
 
+        $trim_username = ltrim($request->username, '@');
+        $username = '@'. $trim_username;
+
         try {
             $user = Auth::user();
             $user->name = $request->get('name');
-            $user->username = '@'.$request->get('username');
+            $user->username = $username;
             $user->phone = $request->get('phone');
             $user->gender = $request->get('gender');
             $user->age_range = $request->get('age_range');
