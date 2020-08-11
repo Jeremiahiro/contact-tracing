@@ -8,7 +8,7 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body my-3 mx-0">
-                <div id="resizer" class="text-center"></div>
+                <div id="resizer" class="text-center m-0 p-0"></div>
                 <div class="d-flex justify-content-between align-items-center mt-4">
                     <div>
                         <button class="rotate btn blue-btn text-white" data-deg="-90">
@@ -16,7 +16,10 @@
                         </button>
                     </div>
                     <div>
-                        <button class="btn blue-btn text-white" id="upload">
+                        <button class="btn blue-btn text-white" id="uploadAvatar">
+                            <i class="fa fa-upload text-white"></i> Upload
+                        </button>
+                        <button class="btn blue-btn text-white" id="uploadHeader">
                             <i class="fa fa-upload text-white"></i> Upload
                         </button>
                     </div>

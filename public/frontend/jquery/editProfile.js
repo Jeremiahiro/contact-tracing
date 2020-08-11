@@ -50,26 +50,26 @@ jQuery(document).ready(function ($) {
         // update profile picture
         $("#changeAvatar").on("change", function (event) {
             $("#uploadModal").modal();
+            $(".modal-body #uploadHeader").hide();
+            $(".modal-body #uploadAvatar").show();
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
-                    width: 250,
-                    height: 250,
-                    type: 'circle'
+                    width: 345,
+                    height: 345,
+                    type: 'circle',
                 },
                 boundary: {
-                    width: 300,
-                    height: 300
+                    width: 350,
+                    height: 350
                 },
-                enableExif: true,
-                showZoomer: false,
                 enableOrientation: true
             });
             $.getImage(event.target, croppie);
 
             var oldAvatar = $('#profile-pic').css('background-image');
 
-            $("#upload").on("click", function () {
+            $("#uploadAvatar").on("click", function () {
                 croppie.result('base64').then(function (base64) {
                     $("#uploadModal").modal("hide");
                     $('.profile-pic-cam').hide();
@@ -96,7 +96,7 @@ jQuery(document).ready(function ($) {
                         }
                     }).fail(e => {
                         $('#profile-pic').css('background-image', oldAvatar);
-                        showAlertMessage('danger', 'file format or size not supported');
+                        showAlertMessage('danger', 'Unsupported Image Size or Format');
                     });
                 });
             });
@@ -105,26 +105,27 @@ jQuery(document).ready(function ($) {
         // update profile header
         $("#changeHeader").on("change", function (event) {
             $("#uploadModal").modal();
+            $(".modal-body #uploadHeader").show();
+            $(".modal-body #uploadAvatar").hide();
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
-                    width: 340,
-                    height: 350,
-                    type: 'square'
+                    width: 345,
+                    height: 345,
+                    type: 'square',
+                    size: 'original'
                 },
                 boundary: {
                     width: 350,
-                    height: 400
+                    height: 350
                 },
-                enableExif: true,
-                showZoomer: false,
                 enableOrientation: true
             });
             $.getImage(event.target, croppie);
 
             var oldHeader = $('#header-image').css('background-image');
 
-            $("#upload").on("click", function () {
+            $("#uploadHeader").on("click", function () {
                 croppie.result('base64').then(function (base64) {
                     $("#uploadModal").modal("hide");
                     $('#header-image').css('background-image', 'url(/frontend/loader.gif)');
@@ -149,7 +150,7 @@ jQuery(document).ready(function ($) {
                         }
                     }).fail(e => {
                         $('#header-image').css('background-image', oldHeader);
-                        showAlertMessage('danger', 'Image file too large or too small');
+                        showAlertMessage('danger', 'Unsupported Image Size or Format');
                         // location.reload(true);
                     });
                 });

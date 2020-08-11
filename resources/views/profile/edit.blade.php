@@ -33,11 +33,11 @@ Edit Profile
                                     transform="translate(293.5 388.715)" style="isolation: isolate">
                                     <path id="Path_207" data-name="Path 207"
                                         d="M13.445,13.187a1.086,1.086,0,0,1-1.086,1.086H2.586A1.086,1.086,0,0,1,1.5,13.187V7.215A1.086,1.086,0,0,1,2.586,6.129H4.758L5.844,4.5H9.1l1.086,1.629h2.172a1.086,1.086,0,0,1,1.086,1.086Z"
-                                        transform="translate(-1.5 -4.5)" fill="none" stroke="#A9A9A9"
+                                        transform="translate(-1.5 -4.5)" fill="none" stroke="#d3d3d3"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
                                     <path id="Path_208" data-name="Path 208"
                                         d="M16.344,15.672A2.172,2.172,0,1,1,14.172,13.5,2.172,2.172,0,0,1,16.344,15.672Z"
-                                        transform="translate(-8.199 -10.242)" fill="none" stroke="#A9A9A9"
+                                        transform="translate(-8.199 -10.242)" fill="none" stroke="#d3d3d3"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
                                 </g>
                             </g>
@@ -45,7 +45,7 @@ Edit Profile
                     </span>
                 </div>
             </label>
-            <input type="File" name="avatar" class="d-none avatar-input" id="changeAvatar" value="">
+            <input type="File" name="avatar" class="d-none avatar-input" id="changeAvatar" value="" accept="image/*">
         </div>
         <div class="py-2">
             <h6 class="bold m-0 f-18">{{ $user->name }}</h6>
@@ -71,7 +71,7 @@ Edit Profile
                     </svg>
                 </span>
             </label>
-            <input type="File" name="header" class="d-none avatar-input" id="changeHeader" value="">
+            <input type="File" name="header" class="d-none avatar-input" id="changeHeader" value="" accept="image/*">
         </div>
     </div>
 
@@ -387,7 +387,7 @@ Edit Profile
     </div>
 </section>
 @include('partials.modals.deactivateAccount')
-@include('partials.modals.uploadModal')
+@include('partials.modals.upload.uploadModal')
 
 @endsection
 
@@ -395,7 +395,7 @@ Edit Profile
 @include('partials.mobile.footer.footer')
 @endsection
 @section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" crossorigin="anonymous"></script>
 
 <script src="{{ asset('frontend/jquery/editProfile.js') }}"></script>
 

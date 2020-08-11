@@ -691,10 +691,9 @@ input:checked+.toggle-slider:before {
     text-decoration: none;
 }
 
-.profile-pic span,
 .profile-pic-cam {
     display: inline-block;
-    padding-top: 2.5em;
+    padding-top: 28%;
 }
 
 .avatar-input {

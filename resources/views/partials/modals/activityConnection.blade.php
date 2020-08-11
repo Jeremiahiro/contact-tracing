@@ -9,7 +9,6 @@
                             alt="map-pin"></span>
                 </button>
             </div>
-            rhfkj
             {{-- <div class="d-flex justify-content-between bold mb-3">
                 <div>
                     <img src="{{ $person->avatar }}" class="avatar avatar-md" alt="Activity Tag">
