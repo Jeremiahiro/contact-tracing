@@ -55,8 +55,8 @@ jQuery(document).ready(function ($) {
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
-                    width: 345,
-                    height: 345,
+                    width: 300,
+                    height: 300,
                     type: 'circle',
                 },
                 boundary: {

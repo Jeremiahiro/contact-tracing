@@ -7,7 +7,7 @@ Edit Profile
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
 @endsection
 
 @section('web-content')
@@ -350,7 +350,7 @@ Edit Profile
                                 </div>
                             </div>
                             <div class="text-muted">
-                                @if ($user->status != true)
+                                @if ($user->show_location != true)
                                     Pariatur deserunt excepteur pariatur fugiat duis do id officia quis duis culpa.
                                 @endif
                             </div>
