@@ -21,10 +21,6 @@ class GeneralController extends Controller
         $count = DB::table("users")->count();
 
         $user = Auth::user();
-        if ($user->first_time_login != true) {
-            $user->first_time_login = 1; // Flip the flag to true
-            $user->save(); // By that you tell it to save the new flag value into the users table
-        }
         return view('homepage.index', compact('count'));
     }
 
@@ -65,7 +61,7 @@ class GeneralController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function searchUser(Request $request) 
+    public function userSearch(Request $request) 
     {
         if($request->ajax()) {
             $data = User::where('name', 'LIKE', $request->user.'%')
@@ -76,8 +72,10 @@ class GeneralController extends Controller
                 $output = '<div class="m-2">';
                 foreach ($data as $user){
                     if($user->id != auth()->user()->id && $user->role != 'super admin'){
-                        $output .= '<div class="d-flex mb-2 data" data-id="'.$user->uuid.'">';
+                        $output .= '<div class="d-flex mb-2 userInfo" data-id="'.$user->uuid.'">';
+                        $output .= '<div>';
                         $output .= '<img src="'.$user->avatar.'" class="avatar avatar-xs alt=">';
+                        $output .= '</div>';
                         $output .= '<div class="ml-2">';
                         $output .= '<h6 class="p-0 m-0 bold f-12">'.$user->name.'</h6>';
                         $output .= '<p class="p-0 m-0 regular f-12">'.$user->username.'</p>';
@@ -99,7 +97,7 @@ class GeneralController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function searchResult(Request $request)
+    public function generalSearch(Request $request)
     {
         if($request->ajax()) {
             $data = User::where('id', '!=', 1)
@@ -111,16 +109,14 @@ class GeneralController extends Controller
             if (count($data)>0) {
                 $output = '<div class="row" style="display: block; position: relative; z-index: 1">';
                 foreach ($data as $user){
-                    $output .= '<div class="d-flex align-items-center mb-3">';
+                    $output .= '<div class="d-flex align-items-center">';
                     $output .= '<div class="avatar-icon">';
                     $output .= '<img src="'.$user->avatar.'" class="avatar avatar-md alt="'.$user->username.'">';
                     $output .= '</div>';
                     $output .= '<div class="ml-1 text-gray">';
-                    $output .= '<a href="/dashboard/'.$user->uuid.'" class="text-uppercase "f-16 mb-0 bold ">'.$user->name.'';
-                    $output .= '</a>';
+                    $output .= '<a href="/dashboard/'.$user->uuid.'/show" class="text-uppercase "f-14 mb-0 bold ">'.$user->name.'</a>';
                     $output .= '<p class="">';
-                    $output .= '<a href="/dashboard/'.$user->uuid.' class="text-capitalize f-14 regular">'.$user->username.'';
-                    $output .= '</a>';
+                    $output .= '<a href="/dashboard/'.$user->uuid.'/show" class="text-capitalize f-12 regular">'.$user->username.'</a>';
                     $output .= '</p>';
                     $output .= '</div>';
                     $output .= '</div>';

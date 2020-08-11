@@ -50,24 +50,26 @@ jQuery(document).ready(function ($) {
         // update profile picture
         $("#changeAvatar").on("change", function (event) {
             $("#uploadModal").modal();
+            $(".modal-body #uploadHeader").hide();
+            $(".modal-body #uploadAvatar").show();
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
-                    width: 250,
-                    height: 250,
-                    type: 'circle'
+                    width: 300,
+                    height: 300,
+                    type: 'circle',
                 },
                 boundary: {
-                    width: 300,
-                    height: 300
+                    width: 350,
+                    height: 350
                 },
-                enableExif: true,
-                showZoomer: false,
                 enableOrientation: true
             });
             $.getImage(event.target, croppie);
 
-            $("#upload").on("click", function () {
+            var oldAvatar = $('#profile-pic').css('background-image');
+
+            $("#uploadAvatar").on("click", function () {
                 croppie.result('base64').then(function (base64) {
                     $("#uploadModal").modal("hide");
                     $('.profile-pic-cam').hide();
@@ -85,15 +87,16 @@ jQuery(document).ready(function ($) {
                         contentType: false,
                     }).done(response => {
                         if (response.success != true) {
-                            $('#profile-pic').css('background-image', 'url(' + response.img_url + ')');
+                            $('#profile-pic').css('background-image', oldAvatar);
                             showAlertMessage('danger', 'Oops! something went wrong');
                         } else {
-                            $('#profile-pic').css('background-image', 'url(' + response.img_url + ')');
+                            $('#profile-pic').css('background-image', 'url(' + base64 + ')');
                             $('.profile-pic-cam').show();
                             showAlertMessage('success', 'Successful');
                         }
                     }).fail(e => {
-                        showAlertMessage('danger', 'file format or size not supported');
+                        $('#profile-pic').css('background-image', oldAvatar);
+                        showAlertMessage('danger', 'Unsupported Image Size or Format');
                     });
                 });
             });
@@ -102,24 +105,27 @@ jQuery(document).ready(function ($) {
         // update profile header
         $("#changeHeader").on("change", function (event) {
             $("#uploadModal").modal();
+            $(".modal-body #uploadHeader").show();
+            $(".modal-body #uploadAvatar").hide();
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
-                    width: 340,
-                    height: 350,
-                    type: 'square'
+                    width: 320,
+                    height: 320,
+                    type: 'square',
+                    size: 'original'
                 },
                 boundary: {
                     width: 350,
-                    height: 400
+                    height: 350
                 },
-                enableExif: true,
-                showZoomer: false,
                 enableOrientation: true
             });
             $.getImage(event.target, croppie);
 
-            $("#upload").on("click", function () {
+            var oldHeader = $('#header-image').css('background-image');
+
+            $("#uploadHeader").on("click", function () {
                 croppie.result('base64').then(function (base64) {
                     $("#uploadModal").modal("hide");
                     $('#header-image').css('background-image', 'url(/frontend/loader.gif)');
@@ -136,14 +142,16 @@ jQuery(document).ready(function ($) {
                         contentType: false,
                     }).done(response => {
                         if (response.success != true) {
+                            $('#header-image').css('background-image', oldHeader);
                             showAlertMessage('danger', 'Oops! something went wrong');
                         } else {
                             $('#header-image').css('background-image', 'url(' + base64 + ')');
                             showAlertMessage('success', 'Successful');
                         }
                     }).fail(e => {
-                        console.log(e);
-                        showAlertMessage('danger', 'file format or size not supported');
+                        $('#header-image').css('background-image', oldHeader);
+                        showAlertMessage('danger', 'Unsupported Image Size or Format');
+                        // location.reload(true);
                     });
                 });
             });
@@ -194,13 +202,6 @@ jQuery(document).ready(function ($) {
         });
     });
 
-
-    $("#deactivate_acc").on('hidden.bs.modal', function () {
-        alert("Hello World!");
-    });
-
-
-
     $('#account_status').change(function () {
         $('#deactivateMdal').modal('show');
 
@@ -245,7 +246,7 @@ jQuery(document).ready(function ($) {
 function removeAlertMessage() {
     setTimeout(function () {
         $(".alert").remove();
-    }, 3000);
+    }, 4000);
 }
 
 function showAlertMessage(type, message) {

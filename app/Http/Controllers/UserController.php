@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\UserLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,6 +62,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('uuid', $id)->first();
+        if ($user->first_time_login != true) {
+            $user->first_time_login = 1; // Flip the flag to true
+            $user->save(); // By that you tell it to save the new flag value into the users table
+        }
         return view('profile.edit', compact('user'));
     }
 
@@ -81,10 +86,13 @@ class UserController extends Controller
             'age_range'    => ['required'],
         ]);
 
+        $trim_username = ltrim($request->username, '@');
+        $username = '@'. $trim_username;
+
         try {
             $user = Auth::user();
             $user->name = $request->get('name');
-            $user->username = '@'.$request->get('username');
+            $user->username = $username;
             $user->phone = $request->get('phone');
             $user->gender = $request->get('gender');
             $user->age_range = $request->get('age_range');

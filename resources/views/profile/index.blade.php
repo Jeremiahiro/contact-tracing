@@ -27,7 +27,15 @@ Profile Page
             <h6 class="bold m-0 f-18">{{ $user->name }}</h6>
             <p class="bold">{{ $user->username }}</p>
         </div>
-        <div id="panel2">
+        <div class="py-2">
+            @if(!$user->location->home_location)
+                <a href="{{ route('dashboard.edit', auth()->user()->uuid) }}" class="btn blue-btn text-white">Update Address</a>
+            @else
+                <h6 class="bold m-0 f-12">Home: {{ $user->location->home_location }}</h6>
+                <h6 class="bold m-0 f-12">Office: {{ $user->location->office_location }}</h6>
+            @endif
+        </div>
+        <div id="panel2" class="py-2">
             <div class="d-flex justify-content-around">
                 <span class="px-2">
                     <span class="">{{ count($user->tags) }}</span>
@@ -76,7 +84,7 @@ Profile Page
         @if($user->activities->count())
 
         <div class="activityView">
-            <div class="activity">
+            <div class="activityTab">
                 <ul class="mb-0 mt-3 f-12 nav">
                     <li class="active"><a data-toggle="tab" href="#tab1" class="text-primary active">Places</a></li>
                     <span class="mx-1">|</span>

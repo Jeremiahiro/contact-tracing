@@ -90,7 +90,8 @@ class LoginController extends Controller
         $string = substr($name, 0 , 5);
         $randomDigit = rand(100,999);
 
-        $username = strtoupper($string . $randomDigit);
+        $username = '@'.$string.$randomDigit;
+
         $uuid = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0);
 
         $user = new User();
@@ -104,6 +105,10 @@ class LoginController extends Controller
         $user->avatar = $userSocial->avatar;
         $user->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
         $user->save();
+
+        $location = new UserLocation();
+        $location->user_id = $user->id;
+        $location->save();
 
         return $user;
     }

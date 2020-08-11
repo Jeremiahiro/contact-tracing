@@ -8,7 +8,7 @@
                 </button>
                 <div class="text-uppercase">Connections</div>
                 <div class="activityView">
-                    <div class="activity">
+                    <div class="activityTab">
                         <ul class="mb-0 mt-3 f-12 nav">
                             <li class="active"><a data-toggle="tab" href="#FSmutual"
                                     class="text-primary active">Mutual</a></li>
@@ -24,8 +24,8 @@
                                     <img class="avatar avatar-md border border-primary" src="{{ $user->avatar }}"
                                         alt="{{ $user->name }}">
                                     <div class="ml-2">
-                                        <h6 class="bold m-0 f-18">{{ $user->name }}</h6>
-                                        <p class="bold">{{ $user->username }}</p>
+                                        <h6 class="bold m-0 f-16">{{ $user->name }}</h6>
+                                        <p class="light">{{ $user->username }}</p>
                                     </div>
                                 </div>
                                 <div>
@@ -56,8 +56,8 @@
                                     <img class="avatar avatar-md border border-primary" src="{{ $user->avatar }}"
                                         alt="{{ $user->name }}">
                                     <div class="ml-2">
-                                        <h6 class="bold m-0 f-18">{{ $user->name }}</h6>
-                                        <p class="bold">{{ $user->username }}</p>
+                                        <h6 class="bold m-0 f-16">{{ $user->name }}</h6>
+                                        <p class="light">{{ $user->username }}</p>
                                     </div>
                                 </div>
                                 <div>

@@ -87,22 +87,6 @@ p {
     font-size: 14px;
 }
 
-/* .login input {
-    border-bottom: 2px solid #fff;
-} */
-
-/* .recordactivity {
-    color: #0B24FA;
-} */
-
-/* .input_label {
-    font-size: 24px;
-} */
-
-/* .routeheader {
-    font-size: 9px !important;
-} */
-
 .vl {
     border-right: 2px solid #0B24FA;
     min-height: 115px;
@@ -209,3 +193,11 @@ p {
     border-bottom-left-radius: 43px;
     border-bottom-right-radius: 43px;
 }
+
+/* form .error {
+    color: #ff0000;
+}
+form {
+    position: relative;
+    overflow: hidden;
+} */

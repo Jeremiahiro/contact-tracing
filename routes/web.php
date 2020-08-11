@@ -54,8 +54,8 @@ Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCal
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/', 'GeneralController@index')->name('home');
     Route::get('/search', 'GeneralController@search')->name('search');
-    Route::get('/search/result', 'GeneralController@searchResult')->name('search.query');
-    Route::get('/users/search', 'GeneralController@searchUser')->name('users.search');
+    Route::get('/search/result', 'GeneralController@generalSearch')->name('search.query');
+    Route::get('/users/search', 'GeneralController@userSearch')->name('users.search');
     Route::get('/about-us', 'GeneralController@about')->name('about');
     Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
 
