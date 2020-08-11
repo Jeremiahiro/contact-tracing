@@ -277,4 +277,54 @@ class ActivityController extends Controller
          
 		$this->validate($request, $rules, $messages);
     }
+
+     /**
+     * Show the search page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function calendar()
+    {
+        return view('activity.calendar');
+    }
+
+
+    /**
+     * Show list of Activities based on calendar Sort.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function calendarActivity(Request $request)
+    {
+
+        // $date = Carbon::parse($request->query)->format('Y-m-d H:i');
+        $date = ($request->query);
+
+        $response = [
+            'success' => true,
+            'date' => $date,
+            "message" => 'Successful'
+        ];
+        return response()->json($response, 201);
+        // if($request->ajax()) {
+        //     $data = Activity::where('created_at', 'LIKE', $request->day_cell.'%')
+        //         ->get();
+        //     $output = '';
+        //     if (count($data)>0) {
+        //         $output = '<div class="row" style="display: block; position: relative; z-index: 1">';
+        //         foreach ($data as $activity){
+        //             $output .= '<div class="container">';
+        //             $output .= '<div class="py-1">';
+        //             $output .= '<p>'.$activity->from_location.'';
+        //             $output .= '</p>';
+        //             $output .= '</div>';
+        //             $output .= '</div>';
+        //         }
+        //         $output .= '</div>';
+        //     } else {
+        //         $output .= '<p class="regular text-gray f-16">'.'No Activity'.'</p>';
+        //     }
+        //     return $output;
+        // }
+    }
 }
