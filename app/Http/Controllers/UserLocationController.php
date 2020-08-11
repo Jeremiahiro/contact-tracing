@@ -85,7 +85,7 @@ class UserLocationController extends Controller
             $location->update($request->all());
             return redirect()->back()->with('success', 'Successful');
         } else {
-            $location = new UserLocation();
+            $location = UserLocation::where('user_id', Auth()->user()->id);
             $input = $request->all();
             $location->fill($input);
             $location->user_id = Auth::user()->id;

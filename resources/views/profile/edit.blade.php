@@ -22,7 +22,7 @@ Edit Profile
     </div>
 
     <div class="container text-center py-4">
-        <div>
+        <div class="">
             <label for="changeAvatar">
                 <div class="profile-pic avatar avatar-xl border" id="profile-pic"
                     style="background-image: url({{ $user->avatar }})">
@@ -45,13 +45,13 @@ Edit Profile
                     </span>
                 </div>
             </label>
-            <input type="File" name="avatar" class="avatar-input" id="changeAvatar" value="">
+            <input type="File" name="avatar" class="d-none avatar-input" id="changeAvatar" value="">
         </div>
         <div class="py-2">
             <h6 class="bold m-0 f-18">{{ $user->name }}</h6>
             <p class="bold">{{ $user->username }}</p>
         </div>
-        <div class="mt-4">
+        <div class="mt-4 ">
             <label for="changeHeader" class="headerImage">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 23 23">
@@ -71,7 +71,7 @@ Edit Profile
                     </svg>
                 </span>
             </label>
-            <input type="File" name="header" class="avatar-input" id="changeHeader" value="">
+            <input type="File" name="header" class="d-none avatar-input" id="changeHeader" value="">
         </div>
     </div>
 

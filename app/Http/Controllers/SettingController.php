@@ -86,7 +86,7 @@ class SettingController extends Controller
     public function uploadAvatar(Request $request)
     {
         $request->validate([
-            'avatar' => 'required|image|mimes:jpeg,bmp,jpg,png|between:1, 6000',
+            'avatar' => 'required|image|mimes:jpeg,bmp,jpg,png|between:50,6000',
         ]);
 
         $avatar = $request->file('avatar')->getRealPath();
@@ -102,7 +102,6 @@ class SettingController extends Controller
     
             $response = [
                 'success' => true,
-                'img_url' => $image_url,
                 "message" => 'Successful'
             ];
             return response()->json($response, 201);
@@ -120,7 +119,7 @@ class SettingController extends Controller
     public function uploadHeader(Request $request)
     {
         $request->validate([
-            'header' => 'required|image|mimes:jpeg,bmp,jpg,png|between:1, 6000',
+            'header' => 'required|image|mimes:jpeg,bmp,jpg,png|between:50,6000',
         ]);
 
         $header = $request->file('header')->getRealPath();
@@ -136,7 +135,6 @@ class SettingController extends Controller
     
             $response = [
                 'success' => true,
-                'header' => $image_url,
                 "message" => 'Successful'
             ];
             return response()->json($response, 201);

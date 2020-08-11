@@ -67,6 +67,8 @@ jQuery(document).ready(function ($) {
             });
             $.getImage(event.target, croppie);
 
+            var oldAvatar = $('#profile-pic').css('background-image');
+
             $("#upload").on("click", function () {
                 croppie.result('base64').then(function (base64) {
                     $("#uploadModal").modal("hide");
@@ -85,14 +87,15 @@ jQuery(document).ready(function ($) {
                         contentType: false,
                     }).done(response => {
                         if (response.success != true) {
-                            $('#profile-pic').css('background-image', 'url(' + response.img_url + ')');
+                            $('#profile-pic').css('background-image', oldAvatar);
                             showAlertMessage('danger', 'Oops! something went wrong');
                         } else {
-                            $('#profile-pic').css('background-image', 'url(' + response.img_url + ')');
+                            $('#profile-pic').css('background-image', 'url(' + base64 + ')');
                             $('.profile-pic-cam').show();
                             showAlertMessage('success', 'Successful');
                         }
                     }).fail(e => {
+                        $('#profile-pic').css('background-image', oldAvatar);
                         showAlertMessage('danger', 'file format or size not supported');
                     });
                 });
@@ -119,6 +122,8 @@ jQuery(document).ready(function ($) {
             });
             $.getImage(event.target, croppie);
 
+            var oldHeader = $('#header-image').css('background-image');
+
             $("#upload").on("click", function () {
                 croppie.result('base64').then(function (base64) {
                     $("#uploadModal").modal("hide");
@@ -136,14 +141,16 @@ jQuery(document).ready(function ($) {
                         contentType: false,
                     }).done(response => {
                         if (response.success != true) {
+                            $('#header-image').css('background-image', oldHeader);
                             showAlertMessage('danger', 'Oops! something went wrong');
                         } else {
                             $('#header-image').css('background-image', 'url(' + base64 + ')');
                             showAlertMessage('success', 'Successful');
                         }
                     }).fail(e => {
-                        location.reload(true);
-                        showAlertMessage('danger', 'file format or size not supported');
+                        $('#header-image').css('background-image', oldHeader);
+                        showAlertMessage('danger', 'Image file too large or too small');
+                        // location.reload(true);
                     });
                 });
             });
@@ -238,7 +245,7 @@ jQuery(document).ready(function ($) {
 function removeAlertMessage() {
     setTimeout(function () {
         $(".alert").remove();
-    }, 3000);
+    }, 4000);
 }
 
 function showAlertMessage(type, message) {

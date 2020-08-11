@@ -109,6 +109,7 @@ footer {
     -webkit-transition: all 0.2s;
     text-decoration: none;
     cursor: pointer;
+    background-repeat: no-repeat;
 }
 
 .avatar-xs {
@@ -681,6 +682,7 @@ input:checked+.toggle-slider:before {
     background-position: right calc(.375em + .1875rem) center;
     background-size: calc(.75em + .375rem) calc(.75em + .375rem)
 }
+
 .profile-pic:hover {
     background-color: rgba(0, 0, 0, .5);
     z-index: 10000;
@@ -689,7 +691,8 @@ input:checked+.toggle-slider:before {
     text-decoration: none;
 }
 
-.profile-pic span {
+.profile-pic span,
+.profile-pic-cam {
     display: inline-block;
     padding-top: 2.5em;
 }
@@ -697,6 +700,7 @@ input:checked+.toggle-slider:before {
 .avatar-input {
     display: none;
     cursor: pointer;
+    visibility: hidden;
 }
 
 .activityTab ul li .active,
