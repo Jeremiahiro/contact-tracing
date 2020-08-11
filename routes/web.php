@@ -19,10 +19,6 @@ Route::get('index', function () {
     return view('activity.index');
 });
 
-Route::get('calender', function () {
-    return view('activity.calender');
-});
-
 Route::get('create', function () {
     return view('activity.create');
 })->name('activity.create');
@@ -64,6 +60,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
 
     Route::resource('/activity', 'ActivityController');
+
+    Route::get('/calendar', 'ActivityController@calendar')->name('calendar');
+    
+    Route::get('/sort', 'ActivityController@calendarActivity')->name('date_sort');
     
     Route::get('/dashboard', 'UserController@index')->name('dashboard.index');
     Route::get('/dashboard/{id}/show', 'UserController@show')->name('dashboard.show');
