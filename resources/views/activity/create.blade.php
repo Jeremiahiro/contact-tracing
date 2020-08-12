@@ -135,7 +135,7 @@ Add Activity
 @endsection
 @section('script')
 
-@if(Cookie::get('is_first_time_user') )
+@if(is_new_user())
     <script>
         const tour = new Shepherd.Tour({
             defaultStepOptions: {
@@ -163,6 +163,12 @@ Add Activity
                     return this.next();
                 },
                 text: 'Next'
+            },
+            {
+                action() {
+                    return this.complete();
+                },
+                text: 'Skip'
             }],
             id: 'creating'
         });

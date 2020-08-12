@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 class SettingController extends Controller
 {
@@ -21,6 +22,17 @@ class SettingController extends Controller
     {
         $user = User::where('uuid', $id)->first();
         return view('profile.setting', compact('user'));
+    }
+
+    public function skipWalkthrough()
+    {
+        # code...
+        $user = Auth::user();
+        if ($user->first_time_login != true) {
+            $user->first_time_login = 1; 
+            $user->save();
+            return response()->json('success', true);
+        }
     }
 
     /**
