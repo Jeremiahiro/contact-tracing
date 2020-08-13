@@ -94,7 +94,9 @@ Dashboard
                     <li class="active"><a data-toggle="tab" href="#tab1" class="text-primary active">Places</a></li>
                     <span class="mx-1">|</span>
                     <li><a data-toggle="tab" href="#tab2" class="text-primary">People</a></li>
+                    @if ($user->id === auth()->user()->id)
                     <li class="ml-auto"><a data-toggle="tab" href="#tab3" class="text-primary">Archive</a></li>
+                    @endif
                 </ul>
             </div>
             <div class="py-3 tab-content">
@@ -157,6 +159,7 @@ Dashboard
                 </div>
                 <div class="tab-pane fade" id="tab3">
                     <div class="row px-2">
+                        @if ($user->id === auth()->user()->id)
                         @if ($archives->count())
                         @foreach($archives as $activity)
                         <div class="col-6 p-1">
@@ -192,6 +195,7 @@ Dashboard
                         @include('partials.modals.unarchiveActivity')
                         @include('partials.modals.activitySelection')
                         @endforeach
+                        @endif
                         @endif
                     </div>
                 </div>
