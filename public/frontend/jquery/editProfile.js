@@ -5,8 +5,8 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    $("#uploadHeader").addClass('d-none');
-    $("#uploadAvatar").addClass('d-none');
+    $("#uploadAvatar").hide();
+    $("#uploadHeader").hide();
 
     $(function () {
         var croppie = null;
@@ -53,8 +53,7 @@ jQuery(document).ready(function ($) {
         // update profile picture
         $("#changeAvatar").on("change", function (event) {
             $("#uploadModal").modal();
-            $("#uploadAvatar").removeClass('d-none');
-            $("#uploadHeader").addClass('d-none');
+            $("#uploadAvatar").show();
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
@@ -108,8 +107,7 @@ jQuery(document).ready(function ($) {
         // update profile header
         $("#changeHeader").on("change", function (event) {
             $("#uploadModal").modal();
-            $("#uploadHeader").removeClass('d-none');
-            $("#uploadAvatar").addClass('d-none');
+            $("#uploadHeader").show();
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
@@ -171,6 +169,8 @@ jQuery(document).ready(function ($) {
             setTimeout(function () {
                 croppie.destroy();
             }, 100);
+            $("#uploadAvatar").hide();
+            $("#uploadHeader").hide();
         })
     });
 
@@ -192,16 +192,19 @@ jQuery(document).ready(function ($) {
                 $(this).prop("checked", !this.checked);
                 $('#location-spinner').addClass('d-none');
                 showAlertMessage('danger', 'Oops! something went wrong');
+                location.reload();
             } else {
                 showAlertMessage('success', 'Successful');
                 $(this).removeAttr("disabled")
                 $('#location-spinner').addClass('d-none');
+                location.reload();
             }
         }).fail(e => {
             $(this).removeAttr("disabled")
             $(this).prop("checked", !this.checked);
             $('#location-spinner').addClass('d-none');
             showAlertMessage('danger', 'file format or size not supported');
+            location.reload();
         });
     });
 
@@ -231,15 +234,18 @@ jQuery(document).ready(function ($) {
                     $('#account_status').prop("checked", !this.checked);
                     $('#deactivate-spinner').addClass('d-none');
                     showAlertMessage('danger', 'Oops! something went wrong');
+                    location.reload();
                 } else {
                     showAlertMessage('success', 'Successful');
                     $(this).removeAttr("disabled")
                     $('#deactivate-spinner').addClass('d-none');
+                    location.reload();
                 }
             }).fail(e => {
                 $('#account_status').prop("checked", !this.checked);
                 $('#deactivate-spinner').addClass('d-none');
                 showAlertMessage('danger', 'file format or size not supported');
+                location.reload();
             });
         });
     });

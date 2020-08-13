@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Profile Page
+Dashboard
 @endsection
 
 @section('custom-style')
@@ -16,12 +16,15 @@ Profile Page
 @section('mobile-content')
 <section class="splash profile_cover" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
-
     <div class="container content text-center text-white py-4">
         <div id="panel1">
+            @if($user->id === auth()->user()->id)
             <a href="{{ route('dashboard.edit', auth()->user()->uuid) }}">
                 <img src="{{ $user->avatar }}" class="avatar avatar-xl border" alt="{{ $user->username }}">
             </a>
+            @else
+                <img src="{{ $user->avatar }}" class="avatar avatar-xl border" alt="{{ $user->username }}">
+            @endif
         </div>
         <div class="py-2">
             <h6 class="bold m-0 f-18">{{ $user->name }}</h6>
@@ -29,10 +32,11 @@ Profile Page
         </div>
         <div class="py-2">
             @if(!$user->location->home_location)
-                <a href="{{ route('dashboard.edit', auth()->user()->uuid) }}" class="btn blue-btn text-white">Update Address</a>
+            <a href="{{ route('dashboard.edit', auth()->user()->uuid) }}" class="btn blue-btn text-white">Update
+                Address</a>
             @else
-                <h6 class="bold m-0 f-12">Home: {{ $user->location->home_location }}</h6>
-                <h6 class="bold m-0 f-12">Office: {{ $user->location->office_location }}</h6>
+            <h6 class="bold m-0 f-12">Home: {{ $user->location->home_location }}</h6>
+            <h6 class="bold m-0 f-12">Office: {{ $user->location->office_location }}</h6>
             @endif
         </div>
         <div id="panel2" class="py-2">
@@ -82,7 +86,6 @@ Profile Page
     <div class="container px-3 py-5">
         <p class="f-14">ROUTE HISTORY</p>
         @if($user->activities->count())
-
         <div class="activityView">
             <div class="activityTab">
                 <ul class="mb-0 mt-3 f-12 nav">
@@ -128,7 +131,6 @@ Profile Page
                         @include('partials.modals.activitySelection')
                         @endforeach
                     </div>
-
                 </div>
                 <div class="tab-pane fade" id="tab2">
                     <div id="activityTaggedControls" class="carousel slide" data-ride="carousel">
@@ -140,7 +142,7 @@ Profile Page
                                     @foreach($persons as $person)
                                     <div class="col-2 text-center p-0 mx-0">
                                         <div class="m-1">
-                                            @if($person->person_id != null )
+                                            @if($person->person_id != null)
                                             <a href="" data-toggle="modal" data-target="#activityTags-{{ $person->id }}"
                                                 class="text-primary">
                                                 <img src="{{ $person->tagged->avatar }}"
@@ -163,11 +165,12 @@ Profile Page
                                 </div>
                                 @endforeach
                             </div>
+
                             @endforeach
                         </div>
 
                         <ol class="carousel-indicators" style="top: 90%">
-                            @foreach($user->tags->chunk(12) as $tags)
+                            @foreach($user->tagging->chunk(12) as $tags)
                             <li data-target="#activityTaggedIndicators" data-slide-to="{{ $loop->index }}"
                                 class="bg-blue {{ $loop->first ? 'active' : '' }}">
                             </li>
@@ -177,12 +180,12 @@ Profile Page
                 </div>
             </div>
         </div>
-
         @else
         @if($user->id === auth()->user()->id)
         <div class="text-center">
-            <a href="{{ route('activity.create') }}" class="text-center mt-3 btn f-14 rounded blue-btn text-white">Add
-                an Activity </a>
+            <a href="{{ route('activity.create') }}" class="text-center mt-3 btn f-14 rounded blue-btn text-white">
+                Add an Activity
+            </a>
         </div>
         @endif
         @endif
