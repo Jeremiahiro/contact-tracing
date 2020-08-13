@@ -62,10 +62,6 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('uuid', $id)->first();
-        if ($user->first_time_login != true) {
-            $user->first_time_login = 1; // Flip the flag to true
-            $user->save(); // By that you tell it to save the new flag value into the users table
-        }
         return view('profile.edit', compact('user'));
     }
 

@@ -107,7 +107,7 @@
             font-size: 14px;
             text-decoration: none;
             text-transform: uppercase;
-            background: #18e06f;
+            background: #0000ff;
             display: inline-block;
             padding: 15px 30px;
             border-radius: 5px;
