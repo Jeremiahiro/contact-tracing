@@ -71,22 +71,6 @@ p {
     font-weight: bold;
 }
 
-.btn:focus,
-.btn:active {
-    border: 0;
-    outline: 0;
-    box-shadow: none;
-    -webkit-appearance: none;
-    -webkit-box-shadow: none;
-    outline: -webkit-focus-ring-color auto 0px;
-}
-
-.blue-btn {
-    background-color: #0000FF;
-    color: #fff;
-    font-size: 14px;
-}
-
 .vl {
     border-right: 2px solid #0B24FA;
     min-height: 115px;

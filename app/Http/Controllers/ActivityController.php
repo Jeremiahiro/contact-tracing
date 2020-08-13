@@ -28,12 +28,13 @@ class ActivityController extends Controller
      */
     public function index(Request $request)
     {
-        $activities = Activity::where('user_id', Auth::user()->id)->latest('updated_at')->with('tags')->simplePaginate(50);
+        $activities = Activity::where('user_id', Auth::user()->id)->latest('updated_at')->simplePaginate(50);
+                
         $users = User::get();
 
         if($activities->count() > 0) {
             if ($request->ajax()) {
-                $activities = view('activity.index', compact('activities'))->render();
+                $activities = view('activity.partials.list', compact('activities'))->render();
                 return response()->json(['html'=>$activities]);
             }
             return view('activity.index', compact('activities', 'users'));
@@ -250,9 +251,33 @@ class ActivityController extends Controller
      * @param  \App\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Activity $activity)
+    public function destroy(Request $request, $id)
     {
-        $activity->delete();
+        $activity = Activity::withTrashed()->find($id)->forceDelete();
+        return redirect()->back()->with('success', 'Successful');
+    }
+
+    /**
+     * Archive activity using softDelete.
+     *
+     * @param  \App\Activity  $activity
+     * @return \Illuminate\Http\Response
+     */
+    public function archive(Request $request, $id)
+    {
+        $activity = Activity::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Successful');
+    }
+
+    /**
+     * Unarchive activity using softDelete.
+     *
+     * @param  \App\Activity  $activity
+     * @return \Illuminate\Http\Response
+     */
+    public function unarchive(Request $request, $id)
+    {
+        $activity = Activity::withTrashed()->find($id)->restore();
         return redirect()->back()->with('success', 'Successful');
     }
 

@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Activity extends Model
 {
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
@@ -27,6 +29,7 @@ class Activity extends Model
     protected $dates = [
         'start_date',
         'end_date',
+        'deleted_at',
     ];
 
     /**

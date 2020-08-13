@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
 
     Route::resource('/activity', 'ActivityController');
+    Route::delete('/archive/activity/{id}', 'ActivityController@archive')->name('archive.activity');
+    Route::get('/archive/activity/{id}', 'ActivityController@unarchive')->name('unarchive.activity');
 
     Route::get('/calendar', 'ActivityController@calendar')->name('calendar');
     
