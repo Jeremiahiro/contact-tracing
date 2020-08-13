@@ -28,16 +28,14 @@ class ActivityController extends Controller
      */
     public function index(Request $request)
     {
-        $activities = Activity::where('user_id', Auth::user()->id)->latest('updated_at')->simplePaginate(50);
+        $activities = Activity::where('user_id', Auth::user()->id)->latest('updated_at')->simplePaginate(10);
                 
-        $users = User::get();
-
         if($activities->count() > 0) {
             if ($request->ajax()) {
                 $activities = view('activity.partials.list', compact('activities'))->render();
                 return response()->json(['html'=>$activities]);
             }
-            return view('activity.index', compact('activities', 'users'));
+            return view('activity.index', compact('activities'));
         }
         return redirect()->route('activity.create')->with('warning', 'You need to add an Activity!');
 
@@ -50,8 +48,6 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        // $users = User::where('id', '!=', auth()->id())->pluck('username');
-        // $data = response()->json($users['content']);
         return view('activity.create');
     }
 
@@ -281,7 +277,8 @@ class ActivityController extends Controller
         return redirect()->back()->with('success', 'Successful');
     }
 
-    public function validateActivity(Request $request){
+    public function validateActivity(Request $request)
+    {
 
 		$rules = [
             'from_location' => 'required',
@@ -322,7 +319,7 @@ class ActivityController extends Controller
     public function calendarActivity(Request $request)
     {
 
-        // $date = Carbon::parse($request->query)->format('Y-m-d H:i');
+        // $date = Carbon::parse($request->query)->format('Y-m-d');
         $date = ($request->query);
 
         $response = [

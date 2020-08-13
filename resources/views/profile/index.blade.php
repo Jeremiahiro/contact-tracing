@@ -44,12 +44,16 @@ Dashboard
         <div id="panel2" class="py-2">
             <div class="d-flex justify-content-around">
                 <span class="px-2">
-                    <span class="">{{ count($user->tags) }}</span>
-                    <p class="m-0">Connections</p>
+                    <a href="#tab-view" class="text-white active">
+                        <span class="">{{ count($user->tags) }}</span>
+                        <p class="m-0">Connections</p>
+                    </a>
                 </span>
                 <span class="px-2 bold">
-                    <span class="">{{ count($user->activities) }}</span>
-                    <p class="m-0">Location</p>
+                    <a href="#tab-view" class="text-white">
+                        <span class="">{{ count($user->activities) }}</span>
+                        <p class="m-0">Location</p>
+                    </a>
                 </span>
                 <span class="px-2">
                     <a href="" class="text-white" data-dismiss="modal" data-toggle="modal" data-target="#userFollowing">
@@ -85,13 +89,15 @@ Dashboard
 </section>
 
 <section class="">
-    <div class="container px-3 py-5">
+    <div class="container px-3 py-5" id="tab-view">
         <p class="f-14">ROUTE HISTORY</p>
         @if($user->activities->count())
         <div class="activityView">
             <div class="activityTab">
                 <ul class="mb-0 mt-3 f-12 nav">
-                    <li class="active"><a data-toggle="tab" href="#tab1" class="text-primary active">Places</a></li>
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab1" class="text-primary active">Places</a>
+                    </li>
                     <span class="mx-1">|</span>
                     <li><a data-toggle="tab" href="#tab2" class="text-primary">People</a></li>
                     @if ($user->id === auth()->user()->id)
@@ -101,19 +107,18 @@ Dashboard
             </div>
             <div class="py-3 tab-content">
                 <div class="tab-pane fade in active" id="tab1">
-                    <div class="row px-2">
-                        @foreach($user->activities as $activity)
+                    <div class="row px-2" id="activity-list">
                         @include('profile.activity')
-                        @include('partials.modals.activityMenu')
-                        @include('partials.modals.deleteActivity')
-                        @include('partials.modals.archiveActivity')
-                        @include('partials.modals.activitySelection')
-                        @endforeach
+                    </div>
+                    <div class="text-center mb-5">
+                        <div class="spinner-grow text-primary load-activity d-none" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="tab2">
                     <div id="activityTaggedControls" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner" role="listbox">
+                        <div class="carousel-inner mb-5" role="listbox">
                             @foreach($user->tagging->chunk(12) as $tags)
                             <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                 @foreach($tags->chunk(6) as $persons)
@@ -144,10 +149,8 @@ Dashboard
                                 </div>
                                 @endforeach
                             </div>
-
                             @endforeach
                         </div>
-
                         <ol class="carousel-indicators" style="top: 90%">
                             @foreach($user->tagging->chunk(12) as $tags)
                             <li data-target="#activityTaggedIndicators" data-slide-to="{{ $loop->index }}"
@@ -223,5 +226,35 @@ Dashboard
 
 @include('activity.partials.mapScript')
 
+<script type="text/javascript">
+    var page = 1;
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            page++;
+            loadMoreData(page);
+        }
+    });
 
+    function loadMoreData(page) {
+        $.ajax({
+                url: '?page=' + page,
+                type: "get",
+                beforeSend: function () {
+                    $('.load-activity').removeClass('d-none');
+                }
+            })
+            .done(function (data) {
+                if (data.html == " ") {
+                    $('.load-activity').html("No more records found");
+                    return;
+                }
+                $('.load-activity').addClass('d-none');
+                $("#activity-list").append(data.html);
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                alert('server not responding...');
+            });
+    }
+
+</script>
 @endsection

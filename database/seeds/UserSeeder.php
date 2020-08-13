@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use App\Activity;
 use App\UserLocation;
 use Illuminate\Database\Seeder;
 
@@ -46,5 +47,6 @@ class UserSeeder extends Seeder
         ]);
 
         // factory(App\User::class, 50)->create();
+        // factory(App\Activity::class, 50)->create();
     }
 }

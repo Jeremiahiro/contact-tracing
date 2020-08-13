@@ -12,6 +12,40 @@
 
 @section('mobile-content')
 <div class="container ">
+
+    <div class="my-5">
+        @php
+            $d = date("j"); // todays date
+            $m = date("m"); // month
+            $y = date("Y"); // year
+            $t = cal_days_in_month(CAL_GREGORIAN, $m, $y); //total days in current month
+            $s = $t - $d;
+        @endphp
+
+        {{ $d }}<br />
+        {{ $m }}<br />
+        {{ $y }}<br />
+        {{ $t }}<br />
+        {{ $s }}<br />
+
+        @for($j = 0; $j < $s; $j--)
+            <p class="btn blue-btn">
+                {{ $j }}
+            </p>
+        @endfor
+
+        <br />
+        <br />
+        <br />
+
+        @for($i = $d; $i < $t; $i++)
+            <p class="btn blue-btn">
+                {{ $i }}
+            </p>
+        @endfor
+    </div>
+
+
     <div class="wrapper">
         <div class="rescalendar" id="my_calendar_calSize"></div>
     </div>

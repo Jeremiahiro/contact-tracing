@@ -39,11 +39,6 @@ Route::get('activityConnection', function () {
     return view('partials.modals.activityConnection');
 });
 
-// Route::get('settings', function () {
-//     return view('profile.settings');
-// });
-
-
 Auth::routes(['verify' => true]);
 
 

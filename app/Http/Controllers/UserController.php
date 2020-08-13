@@ -15,11 +15,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
+
+        $activities = Activity::where('user_id', Auth::user()->id)->latest('deleted_at')->withTrashed()->simplePaginate(10);
         $archives = Activity::where('user_id', Auth::user()->id)->where('deleted_at', '!=', null)->latest('deleted_at')->withTrashed()->simplePaginate(50);
-        return view('profile.index', compact('user', 'archives'));
+
+        if ($request->ajax()) {
+            $activities = view('profile.activity', compact('activities'))->render();
+            return response()->json(['html'=>$activities]);
+        }
+
+        return view('profile.index', compact('user', 'activities', 'archives'));
     }
 
     /**
