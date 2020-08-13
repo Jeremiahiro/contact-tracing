@@ -49,7 +49,7 @@
         <div class="buttonBox">
             <div class="pull-left">
                 <button type="button" class="btn add"><img src="{{ asset('/frontend/img/svg/addbtn.svg') }}" alt="add"></button>
-                <button type="button" class="btn"><img src="{{ asset('/frontend/img/svg/removebtn.svg') }}" alt="remove"></button>
+                <button type="button" class="btn remove"><img src="{{ asset('/frontend/img/svg/removebtn.svg') }}" alt="remove"></button>
             </div>
         </div>
     </div>

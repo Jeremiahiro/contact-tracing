@@ -6,7 +6,6 @@ Add Activity
 @section('custom-style')
 <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
-<link href="{{ asset('frontend/css/activity.css') }}" rel="stylesheet">
 <script src="{{ asset('frontend/jquery/activityValidation.js') }}"></script>
 <script src="{{ asset('frontend/jquery/tabToggle.js') }}"></script>
 
