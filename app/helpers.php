@@ -15,5 +15,7 @@ if (!function_exists('is_new_user')) {
             return true;
         }
         return false;
+
+       
     }
 }
