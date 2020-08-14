@@ -39,8 +39,8 @@ Add Activity
 </div>
 
 <section>
-    <div class="container text-primary">
-        <div class="py-5 activity">
+    <div class="container text-primary mb-5">
+        <div class="py-5 mb-5 activity">
             <p class="f-12 bold">Record Activity</p>
             <form method="POST" action="{{ route('activity.store') }}" id="activitForm"
                 name="activity" autocomplete="off">

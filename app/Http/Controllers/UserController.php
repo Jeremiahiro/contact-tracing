@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Activity;
 use App\UserLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,10 +15,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        return view('profile.index', compact('user'));
+
+        $activities = Activity::where('user_id', Auth::user()->id)->latest('deleted_at')->withTrashed()->simplePaginate(10);
+        $archives = Activity::where('user_id', Auth::user()->id)->where('deleted_at', '!=', null)->latest('deleted_at')->withTrashed()->simplePaginate(50);
+
+        if ($request->ajax()) {
+            $activities = view('profile.activity', compact('activities'))->render();
+            return response()->json(['html'=>$activities]);
+        }
+
+        return view('profile.index', compact('user', 'activities', 'archives'));
     }
 
     /**

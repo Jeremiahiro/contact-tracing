@@ -6,6 +6,7 @@ use Auth;
 use App\User;
 use Socialite;
 use Carbon\Carbon;
+use App\UserLocation;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;

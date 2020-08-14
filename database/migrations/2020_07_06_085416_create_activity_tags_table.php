@@ -18,7 +18,7 @@ class CreateActivityTagsTable extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('avatar')->default('https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png');
+            $table->string('avatar')->default('https://res.cloudinary.com/iro/image/upload/v1595613322/avatar.png');
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');

@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Activity extends Model
 {
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
@@ -27,6 +29,7 @@ class Activity extends Model
     protected $dates = [
         'start_date',
         'end_date',
+        'deleted_at',
     ];
 
     /**
@@ -63,11 +66,4 @@ class Activity extends Model
         return $this->hasMany('App\User', 'person_id')->orderBy('created_at');
     }
 
-    // /**
-    //  * Get the people attached to the  activity.
-    //  */
-    // public function calender($query)
-    // {
-    //     return $this->where('created_at', $query)->orderBy('created_at');
-    // }
 }

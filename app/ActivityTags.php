@@ -53,14 +53,6 @@ class ActivityTags extends Model
      */
     public function tagging()
     {
-        return $this->belongsTo('App\Activity');
-    }
-
-    /**
-     * Get the activity that the people belong to.
-     */
-    public function tag_count()
-    {
-        return $this->groupBy('name');
+        return $this->belongsTo('App\Activity', 'user_id');
     }
 }

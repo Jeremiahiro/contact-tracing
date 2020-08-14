@@ -5,6 +5,9 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    $("#uploadAvatar").hide();
+    $("#uploadHeader").hide();
+
     $(function () {
         var croppie = null;
         var el = document.getElementById('resizer');
@@ -50,13 +53,12 @@ jQuery(document).ready(function ($) {
         // update profile picture
         $("#changeAvatar").on("change", function (event) {
             $("#uploadModal").modal();
-            $(".modal-body #uploadHeader").hide();
-            $(".modal-body #uploadAvatar").show();
+            $("#uploadAvatar").show();
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
-                    width: 300,
-                    height: 300,
+                    width: 250,
+                    height: 250,
                     type: 'circle',
                 },
                 boundary: {
@@ -105,13 +107,12 @@ jQuery(document).ready(function ($) {
         // update profile header
         $("#changeHeader").on("change", function (event) {
             $("#uploadModal").modal();
-            $(".modal-body #uploadHeader").show();
-            $(".modal-body #uploadAvatar").hide();
+            $("#uploadHeader").show();
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
-                    width: 320,
-                    height: 320,
+                    width: 300,
+                    height: 300,
                     type: 'square',
                     size: 'original'
                 },
@@ -168,6 +169,8 @@ jQuery(document).ready(function ($) {
             setTimeout(function () {
                 croppie.destroy();
             }, 100);
+            $("#uploadAvatar").hide();
+            $("#uploadHeader").hide();
         })
     });
 
@@ -189,16 +192,19 @@ jQuery(document).ready(function ($) {
                 $(this).prop("checked", !this.checked);
                 $('#location-spinner').addClass('d-none');
                 showAlertMessage('danger', 'Oops! something went wrong');
+                location.reload();
             } else {
                 showAlertMessage('success', 'Successful');
                 $(this).removeAttr("disabled")
                 $('#location-spinner').addClass('d-none');
+                location.reload();
             }
         }).fail(e => {
             $(this).removeAttr("disabled")
             $(this).prop("checked", !this.checked);
             $('#location-spinner').addClass('d-none');
             showAlertMessage('danger', 'file format or size not supported');
+            location.reload();
         });
     });
 
@@ -228,15 +234,18 @@ jQuery(document).ready(function ($) {
                     $('#account_status').prop("checked", !this.checked);
                     $('#deactivate-spinner').addClass('d-none');
                     showAlertMessage('danger', 'Oops! something went wrong');
+                    location.reload();
                 } else {
                     showAlertMessage('success', 'Successful');
                     $(this).removeAttr("disabled")
                     $('#deactivate-spinner').addClass('d-none');
+                    location.reload();
                 }
             }).fail(e => {
                 $('#account_status').prop("checked", !this.checked);
                 $('#deactivate-spinner').addClass('d-none');
                 showAlertMessage('danger', 'file format or size not supported');
+                location.reload();
             });
         });
     });

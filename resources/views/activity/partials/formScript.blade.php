@@ -45,10 +45,10 @@
 
         $(".add").click(function () {
             var reqInp = $('.form-dup').last().find('input[name="name[]"]');
-            reqInp.removeClass("error");
+            reqInp.removeClass("invalid");
             if (reqInp.val().trim() === "") {
                 var clone = $(".form-dup:first").clone(false);
-                reqInp.addClass("error");
+                reqInp.addClass("invalid");
             } else {
                 if ($('.form-dup').length === 10) {
                     alert('You cannot add more than 10 persons at once');

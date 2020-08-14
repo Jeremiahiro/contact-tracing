@@ -8,6 +8,8 @@ Edit Profile
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" crossorigin="anonymous"></script>
+<script src="{{ asset('frontend/jquery/editProfile.js') }}"></script>
 @endsection
 
 @section('web-content')
@@ -395,9 +397,6 @@ Edit Profile
 @include('partials.mobile.footer.footer')
 @endsection
 @section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" crossorigin="anonymous"></script>
-
-<script src="{{ asset('frontend/jquery/editProfile.js') }}"></script>
 
 <script>
     function initialize() {

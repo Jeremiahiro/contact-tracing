@@ -28,15 +28,14 @@ class ActivityController extends Controller
      */
     public function index(Request $request)
     {
-        $activities = Activity::where('user_id', Auth::user()->id)->latest('updated_at')->with('tags')->simplePaginate(50);
-        $users = User::get();
-
+        $activities = Activity::where('user_id', Auth::user()->id)->latest('updated_at')->simplePaginate(10);
+                
         if($activities->count() > 0) {
             if ($request->ajax()) {
-                $activities = view('activity.index', compact('activities'))->render();
+                $activities = view('activity.partials.list', compact('activities'))->render();
                 return response()->json(['html'=>$activities]);
             }
-            return view('activity.index', compact('activities', 'users'));
+            return view('activity.index', compact('activities'));
         }
         return redirect()->route('activity.create')->with('warning', 'You need to add an Activity!');
 
@@ -49,8 +48,6 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        // $users = User::where('id', '!=', auth()->id())->pluck('username');
-        // $data = response()->json($users['content']);
         return view('activity.create');
     }
 
@@ -250,13 +247,38 @@ class ActivityController extends Controller
      * @param  \App\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Activity $activity)
+    public function destroy(Request $request, $id)
     {
-        $activity->delete();
+        $activity = Activity::withTrashed()->find($id)->forceDelete();
         return redirect()->back()->with('success', 'Successful');
     }
 
-    public function validateActivity(Request $request){
+    /**
+     * Archive activity using softDelete.
+     *
+     * @param  \App\Activity  $activity
+     * @return \Illuminate\Http\Response
+     */
+    public function archive(Request $request, $id)
+    {
+        $activity = Activity::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Successful');
+    }
+
+    /**
+     * Unarchive activity using softDelete.
+     *
+     * @param  \App\Activity  $activity
+     * @return \Illuminate\Http\Response
+     */
+    public function unarchive(Request $request, $id)
+    {
+        $activity = Activity::withTrashed()->find($id)->restore();
+        return redirect()->back()->with('success', 'Successful');
+    }
+
+    public function validateActivity(Request $request)
+    {
 
 		$rules = [
             'from_location' => 'required',
@@ -297,7 +319,7 @@ class ActivityController extends Controller
     public function calendarActivity(Request $request)
     {
 
-        // $date = Carbon::parse($request->query)->format('Y-m-d H:i');
+        // $date = Carbon::parse($request->query)->format('Y-m-d');
         $date = ($request->query);
 
         $response = [
