@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $activities = Activity::where('user_id', Auth::user()->id)->latest('deleted_at')->withTrashed()->simplePaginate(10);
+        $activities = Activity::where('user_id', Auth::user()->id)->latest()->simplePaginate(10);
         $archives = Activity::where('user_id', Auth::user()->id)->where('deleted_at', '!=', null)->latest('deleted_at')->withTrashed()->simplePaginate(50);
 
         if ($request->ajax()) {

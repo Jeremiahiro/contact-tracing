@@ -129,4 +129,15 @@ class GeneralController extends Controller
         }
     }
 
+    /**
+     * General Map view using google map
+     */
+    public function mapView()
+    {
+        // $locations = UserLocations::where('home_address', '!=', null)->get();
+        // dd($locations);
+        $count = DB::table("users")->count();
+        $user = Auth::user();
+        return view('activity.partials.map', compact('count'));
+    }
 }
