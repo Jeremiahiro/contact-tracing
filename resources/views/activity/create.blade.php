@@ -48,8 +48,8 @@ Add Activity
                 <div id="startTour" class="d-flex justify-content-between align-items-center where-to">
                     <img src="{{ asset('/frontend/img/svg/left.svg') }}" alt=""
                         class="mt-3 mr-2 where-to-icon">
-                    <div class="form-group row">
-                        <label for="from_location" class="f-24 col-md-4 text-md-right">
+                    <div class="form-group row w-100">
+                        <label for="from_location" class="f-24 col-md-12 text-md-left">
                             {{ __('Where') }}
                         </label>
                         <div class="col-md-6 mb-1">
@@ -99,11 +99,11 @@ Add Activity
 
                 <div class="ml-3">
                     <div class="row mb-4 form-group">
-                        <label for="when" class="f-24 col-md-4 text-md-right">
+                        <label for="when" class="f-24 col-md-12 text-md-left">
                             {{ __('When') }}
                         </label>
-                        <div class="flex-row d-flex justify-content-center">
-                            <div class="col-md-6">
+                        <div class="flex-row d-flex justify-content-center w-100">
+                            <div class="col-md-12">
                                 <div class="input-group date input-daterange">
                                     <input type="text" class="f-14 regular input blue-input input1 rounded-0"
                                         name="start_date" placeholder="Start Date/Time" id="startDate"
