@@ -28,7 +28,7 @@
     </div>
 
     <div class="" id="tab2">
-        <div id="duplicator">
+        <div id="">
             <fieldset class="form-dup mb-3" data-step="1">
                 <input style="display:none">
                 <input type="password" style="display:none">
@@ -48,8 +48,8 @@
         </div>
         <div class="buttonBox">
             <div class="pull-left">
-                <button type="button" class="btn add"><img src="{{ asset('/frontend/img/svg/addbtn.svg') }}" alt="add"></button>
-                <button type="button" class="btn remove"><img src="{{ asset('/frontend/img/svg/removebtn.svg') }}" alt="remove"></button>
+                <button type="button" class="btn add m-0 p-0"><img src="{{ asset('/frontend/img/svg/addbtn.svg') }}" alt="add"></button>
+                <button type="button" class="btn remove m-0 p-0"><img src="{{ asset('/frontend/img/svg/removebtn.svg') }}" alt="remove"></button>
             </div>
         </div>
     </div>

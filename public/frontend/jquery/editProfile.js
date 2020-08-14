@@ -239,7 +239,7 @@ jQuery(document).ready(function ($) {
                     showAlertMessage('success', 'Successful');
                     $(this).removeAttr("disabled")
                     $('#deactivate-spinner').addClass('d-none');
-                    location.reload();
+                    document.getElementById('logout-form').submit();
                 }
             }).fail(e => {
                 $('#account_status').prop("checked", !this.checked);

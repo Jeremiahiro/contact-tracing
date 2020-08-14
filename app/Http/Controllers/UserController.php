@@ -18,9 +18,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-
-        $activities = Activity::where('user_id', Auth::user()->id)->latest()->simplePaginate(10);
-        $archives = Activity::where('user_id', Auth::user()->id)->where('deleted_at', '!=', null)->latest('deleted_at')->withTrashed()->simplePaginate(50);
+        $activities = Activity::where('user_id', $user->id)->where('')->latest()->simplePaginate(10);
+        $archives = Activity::where('user_id', $user->id)->where('deleted_at', '!=', null)->latest('deleted_at')->withTrashed()->simplePaginate(50);
 
         if ($request->ajax()) {
             $activities = view('profile.activity', compact('activities'))->render();

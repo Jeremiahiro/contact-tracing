@@ -20,7 +20,7 @@
                     @if($user->id === Auth::user()->id)
                         @if ($route == 'dashboard.edit')
                         <p class="mb-2 pb-4">
-                            <a href="{{ url()->previous() }}" class="text-white">
+                            <a href="{{ route('dashboard.index') }}" class="text-white">
                                 <img src="{{ asset('/frontend/img/svg/back.svg') }}" alt="go back">
                             </a>
                         </p>

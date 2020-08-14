@@ -85,7 +85,7 @@
 
               this.defaultLabel             = ($(this.selector).attr('placeholder') !== undefined)? $(this.selector).attr('placeholder'): this.defaultLabel;
               var sTagsInput                = '<input type="text" class="'+this.classes.sTagsInput.substring(1)+'" placeholder="'+this.defaultLabel+'">';
-              this.selectors.sTagsInput     = $(sTagsInput).appendTo(this.selectors.inputArea).attr('autocomplete', 'off');
+              this.selectors.sTagsInput     = $(sTagsInput).appendTo(this.selectors.inputArea).attr('autocomplete', 'off').attr('readonly', 'readonly');
 
               var listArea              = '<div class="'+this.classes.listArea.substring(1)+'"></div>';
               this.selectors.listArea   = $(listArea).appendTo(this.selectors.sTagsArea);
@@ -105,7 +105,7 @@
                 $(this).closest(_self.classes.inputArea).addClass(_self.classes.focus.substring(1));
                 if(settings.type == 'materialize') {
                   $(this).css({
-                    'border-bottom': 'none',
+                    'border-bottom': '2px solid',
                     '-webkit-box-shadow': 'none',
                     'box-shadow': 'none',
                   });

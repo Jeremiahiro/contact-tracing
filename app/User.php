@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -82,5 +83,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne('App\UserLocation', 'user_id');
     }
+    
 
 }

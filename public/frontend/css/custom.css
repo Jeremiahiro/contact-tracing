@@ -722,8 +722,8 @@ input:checked+.toggle-slider:before {
     font-family: 'G-light';
 }
 
-#map_wrapper_div {
-    height: 90vh;
+#iro_map_div {
+    height: 100vh;
   }
    
 #iro_map {

@@ -10,12 +10,33 @@ Map View
 @endsection
 
 @section('web-content')
-<h1 class="text-center">Please use a mobile device</h1>
+<section class="bg-primary">
+    <div class="mx-3 p-2 text-white d-flex align-items-end justify-content-between">
+        <div></div>
+        <div>
+            <i class="fa fa-user fa-2x mr-1"></i>
+            <span class="f-18 count">
+                @if($count > 999 && $count <= 999999)
+                    {{ $count/1000 . ' K' }}
+                @else
+                    @if($count > 999999)
+                        {{ $count/1000000 . ' M' }}
+                    @else
+                        {{ $count }}
+                    @endif
+                @endif
+            </span>
+        </div>
+    </div>
+    <div id="iro_map_div">
+        <div id="iro_map"></div>
+    </div>
+</section>
 @endsection
 
 @section('mobile-content')
 
-<section class="py-3 my-4 bg-primary">
+<section class="py-3 mt-2 mb-4 bg-primary">
     <div class="mx-3 mb-2 text-white d-flex align-items-end justify-content-end">
         <i class="fa fa-user fa-2x mr-1"></i>
         <span class="f-18 count">
@@ -30,7 +51,7 @@ Map View
             @endif
         </span>
     </div>
-    <div id="map_wrapper_div">
+    <div id="iro_map_div">
         <div id="iro_map"></div>
     </div>
 
@@ -39,10 +60,6 @@ Map View
 @endsection
 @section('script')
 <script>
-    var maps = $('#iro_map');
-
-    var markers = [];
-
     var style = [{
             elementType: "geometry",
             stylers: [{
@@ -168,6 +185,8 @@ Map View
         }
     ]
 
+    var locations = @JSON($data);
+
     function initMap() {
 
         if (navigator.geolocation) {
@@ -176,40 +195,37 @@ Map View
                 var longitude = position.coords.longitude;
                 var geolocpoint = new google.maps.LatLng(latitude, longitude);
 
-                var mapOptions = {
-                    zoom: 8,
+                var map = new google.maps.Map(document.getElementById('iro_map'), {
+                    zoom: 6,
                     center: geolocpoint,
-                    mapTypeId: google.maps.MapTypeId.HYBRID
-                }
-                // Place a marker
-                var geolocation = new google.maps.Marker({
-                    position: geolocpoint,
-                    map: map,
-                    title: 'Your geolocation',
-                    icon: 'http://labs.google.com/ridefinder/images/mm_20_green.png'
+                    styles: style,
+                    mapTypeControl: false,
+                    disableDefaultUI: true,
                 });
+
+                var infowindow = new google.maps.InfoWindow();
+
+                var marker, i, contentString;
+
+                for (i = 0; i < locations.length; i++) {
+                    contentString = '<div id="content" class="regular"><h6>' + locations[i]['home_location'] +
+                        '</h6></div>';
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i]['home_latitude'], locations[i][
+                            'home_longitude'
+                        ]),
+                        map: map
+                    });
+
+                    google.maps.event.addListener(marker, 'click', (function (marker, i, contentString) {
+                        return function () {
+                            infowindow.setContent(contentString, 200);
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i, contentString));
+                }
             });
         }
-
-        // navigator.geolocation.getCurrentPosition(function (position) {
-        //     var lat = position.coords.latitude;
-        //     var lng = position.coords.longitude;
-        //     // var geolocpoint = new google.maps.LatLng(latitude, longitude);
-        //     // map.setCenter(geolocpoint );
-        // });
-
-        // var center = {
-        //     lat: -25.344,
-        //     lng: 131.036
-        // };
-
-        // map = new google.maps.Map(document.getElementById('iro_map'), {
-        //     zoom: 6,
-        //     center: center,
-        //     styles: style,
-        //     mapTypeControl: false,
-        //     disableDefaultUI: true
-        // });
 
     }
 

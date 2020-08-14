@@ -7,6 +7,7 @@ use App\User;
 use Socialite;
 use Carbon\Carbon;
 use App\UserLocation;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -135,4 +136,12 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function authenticated(Request $request, User $user) 
+    {
+        $user->status = 1; 
+        $user->save();
+
+        return redirect()->intended($this->redirectPath());
+     }
 }

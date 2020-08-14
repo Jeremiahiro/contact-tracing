@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Cookie;
 if (!function_exists('is_new_user')) {
 
     /**
-     * Check if logged in user is a super admin
+     * Check if new user
      *
      * @return boolean
      */
@@ -15,7 +15,18 @@ if (!function_exists('is_new_user')) {
             return true;
         }
         return false;
+    }
 
-       
+    /**
+     * Check if user is active
+     *
+     * @return boolean
+     */
+    function is_active()
+    {
+        if (Auth::user()->status == true) {
+            return true;
+        }
+        return false;
     }
 }

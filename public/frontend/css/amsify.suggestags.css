@@ -156,7 +156,7 @@ li.amsify-item-pad.active {
 .amsify-select-tag.col-bg {
 	background: #0000ff;
 	color: #fff;
-	border-radius: 10px;
+	/* border-radius: 10px; */
 }
 
 /*.amsify-suggestags-input-area
@@ -174,7 +174,7 @@ li.amsify-item-pad.active {
 
 .amsify-suggestags-input-area
 .flash.amsify-select-tag {
-    background-color: #f57f7f;
+    background-color: #cc0033;
     -webkit-transition: background-color 200ms linear;
     -ms-transition: background-color 200ms linear;
     transition: background-color 200ms linear;
@@ -183,5 +183,5 @@ li.amsify-item-pad.active {
 .amsify-suggestags-input-area
 .amsify-remove-tag {
 	cursor: pointer;
-	color: #f57f7f;
+	color: #cc0033;
 }
