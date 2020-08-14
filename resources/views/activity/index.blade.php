@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Activities
+@endsection
+
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">

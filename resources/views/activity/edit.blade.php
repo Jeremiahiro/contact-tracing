@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('title')
-Add Activity
+Update Activity
 @endsection
+
 @section('custom-style')
 <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
