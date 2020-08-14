@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/users/search', 'GeneralController@userSearch')->name('users.search');
     Route::get('/about-us', 'GeneralController@about')->name('about');
     Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
+    Route::get('/activity/map/view', 'GeneralController@mapView')->name('map.view');
 
     Route::resource('/activity', 'ActivityController');
     Route::delete('/archive/activity/{id}', 'ActivityController@archive')->name('archive.activity');

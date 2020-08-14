@@ -28,21 +28,15 @@
         {{ $t }}<br />
         {{ $s }}<br />
 
-        @for($j = 0; $j < $s; $j--)
-            <p class="btn blue-btn">
-                {{ $j }}
-            </p>
+        <input type="hidden" id="date" value="{{ date('Y-M-') }}">
+
+        @for($i = 1; $i <= $d; $i++)
+            <input class="btn blue-btn day text-white" type="text" value="{{ $i }}" readonly>
         @endfor
 
         <br />
         <br />
         <br />
-
-        @for($i = $d; $i < $t; $i++)
-            <p class="btn blue-btn">
-                {{ $i }}
-            </p>
-        @endfor
     </div>
 
 
@@ -60,6 +54,15 @@
 <script type="text/javascript" src="{{ asset('frontend/js/rescalendar.min.js') }}"></script>
 <script>
     jQuery(document).ready(function ($) {
+
+        var date = $('#date').val();
+        var day = $('.day');
+
+        day.click(function() {
+            console.log(date);
+            var act = date + day.val();
+            console.log(act);
+        });
 
         // $.ajaxSetup({
         //     headers: {
