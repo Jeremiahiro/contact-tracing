@@ -353,7 +353,7 @@ Edit Profile
                             </div>
                             <div class="text-muted">
                                 @if ($user->show_location != true)
-                                    Pariatur deserunt excepteur pariatur fugiat duis do id officia quis duis culpa.
+                                    If turned off, other users cannot see your activities
                                 @endif
                             </div>
                         </div>

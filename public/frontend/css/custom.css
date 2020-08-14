@@ -721,7 +721,6 @@ input:checked+.toggle-slider:before {
 .activityTab ul li a {
     font-family: 'G-light';
 }
-
 #map_wrapper_div {
     height: 90vh;
   }
