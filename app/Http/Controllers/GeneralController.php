@@ -42,7 +42,7 @@ class GeneralController extends Controller
     public function about()
     {
         $count = DB::table("users")->count();
-        return view('homepage.index', compact('count'));
+        return view('homepage.about', compact('count'));
     }
 
     /**
@@ -53,7 +53,7 @@ class GeneralController extends Controller
     public function privacy()
     {
         $count = DB::table("users")->count();
-        return view('homepage.index', compact('count'));
+        return view('homepage.privacyPolicy', compact('count'));
     }
 
     /**

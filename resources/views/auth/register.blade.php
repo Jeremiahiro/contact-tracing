@@ -13,7 +13,7 @@
     <div class="splash splash-1">
         @include('partials.mobile.header.header')
 
-        <div class="container">
+        <div class="container col-md-6">
             <div class="register pt-5">
                 <h1 class="text-white f-60">REGISTER</h1>
                 <form method="POST" action="{{ route('register') }}">
@@ -22,7 +22,7 @@
                         <label for="name" class="col-md-4 text-md-right">
                             {{ __('Full Name') }}
                         </label>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <input id="name" type="text"
                                 class="blue-input input @error('name') is-invalid @enderror"
                                 name="name" value="{{ old('name') }}" required autocomplete="name"
@@ -41,7 +41,7 @@
                             {{ __('Email') }}
                         </label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <input id="email" type="text"
                                 class="blue-input input @error('email') is-invalid @enderror" name="email"
                                 value="{{ old('email') }}" required autocomplete="email"
@@ -60,7 +60,7 @@
                             {{ __('Phone Number') }}
                         </label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <input id="phone" type="tel"
                                 class="blue-input input @error('phone') is-invalid @enderror" name="phone"
                                 value="{{ old('phone') }}" required autocomplete="phone" placeholder="+2348123456789">
@@ -78,7 +78,7 @@
                             {{ __('Password') }}
                         </label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <input id="password" type="password"
                                 class="blue-input input @error('password') is-invalid @enderror" name="password"
                                 value="{{ old('password') }}" required autocomplete="password" placeholder="********">
@@ -96,7 +96,7 @@
                             {{ __('Confirm Password') }}
                         </label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <input id="password-confirm" type="password"
                                 class="blue-input input @error('password-confirm') is-invalid @enderror" name="password_confirmation"
                                 value="{{ old('password_confirmation') }}" required autocomplete="password-confirm" placeholder="********">
