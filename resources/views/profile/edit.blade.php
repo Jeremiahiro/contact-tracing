@@ -365,8 +365,8 @@ Edit Profile
                                 </div>
                             </div>
                             <div class="text-muted">
-                                @if($user->show_location != true)
-                                    Pariatur deserunt excepteur pariatur fugiat duis do id officia quis duis culpa.
+                                @if ($user->show_location != true)
+                                    Others cannot see your activities
                                 @endif
                             </div>
                         </div>

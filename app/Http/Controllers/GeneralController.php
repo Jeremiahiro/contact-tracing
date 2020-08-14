@@ -43,19 +43,32 @@ class GeneralController extends Controller
     public function about()
     {
         $count = DB::table("users")->count();
-        return view('homepage.index', compact('count'));
+        return view('homepage.about', compact('count'));
     }
 
     /**
-     * Show the search page.
+     * Show the Privacy Policy page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function privacy()
     {
         $count = DB::table("users")->count();
-        return view('homepage.index', compact('count'));
+        return view('homepage.privacyPolicy', compact('count'));
     }
+
+
+      /**
+     * Show the Terms Of Service page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function terms()
+    {
+        $count = DB::table("users")->count();
+        return view('homepage.tos', compact('count'));
+    }
+
 
     /**
      * Show list of existing users search field.

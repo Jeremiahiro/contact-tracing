@@ -1,6 +1,6 @@
 <div class="modal fade" tabindex="1" id="deactivateMdal" role="dialog" aria-labelledby="deactivateMdalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-bottom route_purple m-0 p-3" style="pointer-events:auto;" role="document">
+    <div class="modal-dialog modal-dialog-bottom-lg route_purple m-0 p-3" style="pointer-events:auto;" role="document">
         <div class="d-flex justify-content-between mb-0">
             @if ($user->status == true)
             <h3 class="m-0 bold f-14">Deactivate Account</h3>
@@ -15,11 +15,11 @@
         <div class="my-2 text-center">
             <div>
                 @if ($user->status == true)
-                <p class="f-18 m-0 py-2">
-                    Ad do aliquip enim irure deserunt velit et amet ea ea eiusmod.
+                <p class="f-16 m-0 py-2">
+                    If you deactivate your account, you will not receive emails and users will not be able to interact with you.
                 </p>
                 @else
-                <p class="f-18 m-0 py-2">
+                <p class="f-16 m-0 py-2">
                     Esse esse tempor ad incididunt tempor amet culpa ut cillum exercitation nulla.
                 </p>
                 @endif

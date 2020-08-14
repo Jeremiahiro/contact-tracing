@@ -49,6 +49,9 @@
                     <a class="nav-link text-white bold f-16" href="{{ route('privacy')}}">
                         Privacy Policy <i class="ml-2 fa fa-file"></i>
                     </a>
+                    <a class="nav-link text-white bold f-16" href="{{ route('tos')}}">
+                        Terms Of Service <i class="ml-2 fa fa-file"></i>
+                    </a>
                     <a href="{{ route('logout') }}" class="nav-link text-white bold f-16"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Logout <i class="ml-2 fa fa-sign-out"></i>
