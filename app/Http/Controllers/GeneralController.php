@@ -46,7 +46,7 @@ class GeneralController extends Controller
     }
 
     /**
-     * Show the search page.
+     * Show the Privacy Policy page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -55,6 +55,19 @@ class GeneralController extends Controller
         $count = DB::table("users")->count();
         return view('homepage.privacyPolicy', compact('count'));
     }
+
+
+      /**
+     * Show the Terms Of Service page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function terms()
+    {
+        $count = DB::table("users")->count();
+        return view('homepage.tos', compact('count'));
+    }
+
 
     /**
      * Show list of existing users search field.

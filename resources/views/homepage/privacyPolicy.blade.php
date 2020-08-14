@@ -224,18 +224,18 @@ Privacy Policy
     </div>
 </section>
 
-<style>
-    .privacy li:before{
-        position: absolute;
-        left: 20px;
-        content: "\2022";
-    }
+    <style>
+        .privacy li:before{
+            position: absolute; 
+            left: 20px;
+            content: "\2022";
+        }
 
-    .privacy li {
-        list-style: none;
-    }
+        .privacy li {
+            list-style: none;
+        }
 
-</style>
+    </style>
 
 @endsection
 
