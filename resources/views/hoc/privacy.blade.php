@@ -38,7 +38,7 @@ Privacy Policy
 </div>
 @endsection
 
-@section('mobile-content')
+@section('content')
 <section>
     <div class="container py-5 privacy">
         @include('hoc.partials.privacy-content')

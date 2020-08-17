@@ -26,7 +26,7 @@ About Us
 </div>
 @endsection
 
-@section('mobile-content')
+@section('content')
 
 <section class="">
     <div class="container py-5">

@@ -40,7 +40,7 @@ Map View
 </section>
 @endsection
 
-@section('mobile-content')
+@section('content')
 <section class="py-3 mt-2 mb-4 bg-primary">
     <div class="mx-3 mb-2 text-white d-flex align-items-end justify-content-end">
         <i class="fa fa-user fa-2x mr-1"></i>

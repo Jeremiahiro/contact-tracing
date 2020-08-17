@@ -15,7 +15,7 @@ Activities
 </script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 
 <section class="mb-5 py-3">
 

@@ -10,7 +10,7 @@
 </script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 <div class="container">
 <div>
     <a class="" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

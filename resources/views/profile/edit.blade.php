@@ -18,7 +18,7 @@ Edit Profile
 </script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 <section class="splash profile_cover" id="header-image" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
 

@@ -16,7 +16,7 @@ Dashboard
 </script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 <section class="splash profile_cover" id="startTour" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
     @include('partials.modals.views.profile-picture')

@@ -16,7 +16,7 @@ Settings Page
 </script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 <section class="splash profile_cover" id="bgPreview" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
     <div class="container text-center text-white py-4">

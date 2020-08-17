@@ -11,7 +11,7 @@
 </script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 
 <section class="mb-5 p-3 mt-3 bg-gray splash rounded">
     <div class="rounded">

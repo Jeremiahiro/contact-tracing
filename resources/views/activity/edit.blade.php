@@ -26,7 +26,7 @@ Update Activity
 </script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 @include('activity.partials.formScript')
 
 <div id="alert">

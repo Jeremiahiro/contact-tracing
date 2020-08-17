@@ -25,7 +25,7 @@ Add Activity
 </script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 @include('activity.partials.googlePlace')
 @include('activity.partials.formScript')
 

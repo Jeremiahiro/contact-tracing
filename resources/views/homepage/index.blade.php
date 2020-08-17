@@ -14,7 +14,7 @@ Homepage
 </script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 
 <section class="">
     <div id="splashCarousel" class="carousel slide" data-ride="carousel">

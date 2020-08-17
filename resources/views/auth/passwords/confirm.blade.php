@@ -8,7 +8,7 @@
 <h1 class="text-center">Please use a mobile device</h1>
 @endsection
 
-@section('mobile-content')
+@section('content')
 <section>
     <div class="splash splash-1">
         @include('partials.mobile.header.header')

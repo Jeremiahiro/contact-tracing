@@ -12,7 +12,7 @@
 </script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 <div class="container ">
 
     <div class="my-5">

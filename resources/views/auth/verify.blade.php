@@ -10,7 +10,7 @@
 </script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 <section>
     <div class="splash splash-1">
         @include('partials.mobile.header.header')

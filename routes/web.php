@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::get('/calendar', 'ActivityController@calendar')->name('calendar');
     Route::get('/sort', 'ActivityController@calendarActivity')->name('date_sort');
     
-    Route::get('/dashboard', 'UserController@index')->name('dashboard.index');
+    Route::get('/w', 'UserController@index')->name('dashboard.index');
     Route::get('/dashboard/{id}/show', 'UserController@show')->name('dashboard.show');
     Route::get('/dashboard/{id}/edit', 'UserController@edit')->name('dashboard.edit');
     Route::post('/dashboard/update', 'UserController@update')->name('dashboard.update');

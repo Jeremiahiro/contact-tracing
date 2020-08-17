@@ -14,7 +14,7 @@
 @endsection
 
 {{-- for mobile view --}}
-@section('mobile-content')
+@section('content')
 <section>
     <div class="container">
         <div class="py-5 mt-5">
