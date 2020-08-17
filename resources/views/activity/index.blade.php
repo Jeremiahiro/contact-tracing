@@ -10,7 +10,9 @@ Activities
 @endsection
 
 @section('web-content')
-<h1 class="text-center">Please use a mobile device</h1>
+<script type="text/javascript">
+    window.location = "{{ route('map.view') }}";//here double curly bracket
+</script>
 @endsection
 
 @section('mobile-content')

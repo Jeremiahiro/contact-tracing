@@ -72,7 +72,12 @@ jQuery(document).ready(function ($) {
             var oldAvatar = $('#profile-pic').css('background-image');
 
             $("#uploadAvatar").on("click", function () {
-                croppie.result('base64').then(function (base64) {
+                croppie.result('base64', {
+                    type: "canvas",
+                    size: "original", 
+                    format: "png", 
+                    quality: 1
+                }).then(function (base64) {
                     $("#uploadModal").modal("hide");
                     $('.profile-pic-cam').hide();
                     $('#profile-pic').css('background-image', 'url(/frontend/loader.gif)');
@@ -94,7 +99,7 @@ jQuery(document).ready(function ($) {
                         } else {
                             $('#profile-pic').css('background-image', 'url(' + base64 + ')');
                             $('.profile-pic-cam').show();
-                            showAlertMessage('success', 'Successful');
+                            // showAlertMessage('success', 'Successful');
                         }
                     }).fail(e => {
                         $('#profile-pic').css('background-image', oldAvatar);
@@ -114,7 +119,6 @@ jQuery(document).ready(function ($) {
                     width: 300,
                     height: 300,
                     type: 'square',
-                    size: 'original'
                 },
                 boundary: {
                     width: 350,
@@ -127,7 +131,12 @@ jQuery(document).ready(function ($) {
             var oldHeader = $('#header-image').css('background-image');
 
             $("#uploadHeader").on("click", function () {
-                croppie.result('base64').then(function (base64) {
+                croppie.result('base64', {
+                    type: "canvas",
+                    size: "original", 
+                    format: "png", 
+                    quality: 1
+                }).then(function (base64) {
                     $("#uploadModal").modal("hide");
                     $('#header-image').css('background-image', 'url(/frontend/loader.gif)');
 
@@ -147,7 +156,7 @@ jQuery(document).ready(function ($) {
                             showAlertMessage('danger', 'Oops! something went wrong');
                         } else {
                             $('#header-image').css('background-image', 'url(' + base64 + ')');
-                            showAlertMessage('success', 'Successful');
+                            // showAlertMessage('success', 'Successful');
                         }
                     }).fail(e => {
                         $('#header-image').css('background-image', oldHeader);
@@ -211,13 +220,12 @@ jQuery(document).ready(function ($) {
     $('#account_status').change(function () {
         $('#deactivateMdal').modal('show');
 
-        $('#cancel').click(function () {
-            $('#deactivateMdal').modal('hide');
+        $('#deactivateMdal').on('hidden.bs.modal', function (e) {
             $('#account_status').prop("checked", !this.checked);
-        });
+        })
 
         $('#proceed').click(function () {
-            $('#deactivateMdal').modal('hide');
+            $('#deactivateModal').modal('hide');
             $('#deactivate-spinner').removeClass('d-none');
 
             var status = $('#account_status').is(':checked') ? 1 : 0;
@@ -236,7 +244,8 @@ jQuery(document).ready(function ($) {
                     showAlertMessage('danger', 'Oops! something went wrong');
                     location.reload();
                 } else {
-                    showAlertMessage('success', 'Successful');
+                    $('#account_status').prop("checked", !this.checked);
+                    // showAlertMessage('success', 'Successful');
                     $(this).removeAttr("disabled")
                     $('#deactivate-spinner').addClass('d-none');
                     document.getElementById('logout-form').submit();
@@ -244,7 +253,7 @@ jQuery(document).ready(function ($) {
             }).fail(e => {
                 $('#account_status').prop("checked", !this.checked);
                 $('#deactivate-spinner').addClass('d-none');
-                showAlertMessage('danger', 'file format or size not supported');
+                showAlertMessage('danger', 'Oops! something went wrong');
                 location.reload();
             });
         });

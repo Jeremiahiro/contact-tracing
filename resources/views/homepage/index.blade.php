@@ -9,13 +9,14 @@ Homepage
 @endsection
 
 @section('web-content')
-<h1 class="text-center">Please use a mobile device</h1>
+<script type="text/javascript">
+    window.location = "{{ route('map.view') }}";//here double curly bracket
+</script>
 @endsection
 
 @section('mobile-content')
 
 <section class="">
-
     <div id="splashCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators pb-5">
             <li data-target="#splashCarousel" data-slide-to="0" class="active"></li>

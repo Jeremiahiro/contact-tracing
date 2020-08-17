@@ -43,7 +43,7 @@ class GeneralController extends Controller
     public function about()
     {
         $count = DB::table("users")->count();
-        return view('homepage.about', compact('count'));
+        return view('hoc.about', compact('count'));
     }
 
     /**
@@ -54,11 +54,10 @@ class GeneralController extends Controller
     public function privacy()
     {
         $count = DB::table("users")->count();
-        return view('homepage.privacyPolicy', compact('count'));
+        return view('hoc.privacy', compact('count'));
     }
 
-
-      /**
+    /**
      * Show the Terms Of Service page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -66,9 +65,8 @@ class GeneralController extends Controller
     public function terms()
     {
         $count = DB::table("users")->count();
-        return view('homepage.tos', compact('count'));
+        return view('hoc.terms-of-use', compact('count'));
     }
-
 
     /**
      * Show list of existing users search field.
@@ -78,13 +76,18 @@ class GeneralController extends Controller
     public function userSearch(Request $request) 
     {
         if($request->ajax()) {
-            $data = User::whereNot('id', Auth::user()->id)
-                ->whereNot('role', 'super admin')
-                ->whereNot('status', true)
-                ->where('name', 'LIKE', $request->user.'%')
-                ->orWhere('username', 'LIKE', $request->user.'%')
+
+            $trim_query = ltrim($request->user, '@');
+            $search = '@'. $trim_query;
+
+            $data = User::where('id', '!=', Auth::user()->id)
+                ->where('role', '!=', 'super admin')
+                ->where('status', '!=', false)
+                ->where('username', 'LIKE', $search.'%')
                 ->simplePaginate(30);
+
             $output = '';
+
             if (count($data)>0) {
                 $output = '<div class="m-2">';
                 foreach ($data as $user){
@@ -117,12 +120,16 @@ class GeneralController extends Controller
     public function generalSearch(Request $request)
     {
         if($request->ajax()) {
+
+            $trim_query = ltrim($request->search, '@');
+            $search = '@'. $trim_query;
+
             $data = User::where('id', '!=', Auth::user()->id)
                 ->where('role', '!=', 'super admin')
                 ->where('status', '!=', false)
-                ->where('name', 'LIKE', $request->search.'%')
-                ->orWhere('username', 'LIKE', $request->search.'%')
+                ->where('username', 'LIKE', $search.'%')
                 ->simplePaginate(30);
+
             $output = '';
             if (count($data)>0) {
                 $output = '<div class="row" style="display: block; position: relative; z-index: 1">';
@@ -158,6 +165,6 @@ class GeneralController extends Controller
          
         $count = DB::table("users")->count();
         $user = Auth::user();
-        return view('activity.partials.map', compact('count', 'data'));
+        return view('hoc.map', compact('count', 'data'));
     }
 }

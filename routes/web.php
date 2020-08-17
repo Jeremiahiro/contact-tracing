@@ -41,27 +41,26 @@ Route::get('activityConnection', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::get('/activity/map/view', 'GeneralController@mapView')->name('map.view');
+Route::get('/about-us', 'GeneralController@about')->name('about');
+Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
+Route::get('/terms-of-use', 'GeneralController@terms')->name('tos');
 
 Auth::routes(['verify' => true]);
 Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->name('social.login');
 Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::get('/', 'GeneralController@index')->name('home');
     Route::get('/search', 'GeneralController@search')->name('search');
     Route::get('/search/result', 'GeneralController@generalSearch')->name('search.query');
     Route::get('/users/search', 'GeneralController@userSearch')->name('users.search');
-    Route::get('/about-us', 'GeneralController@about')->name('about');
-    Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
-    Route::get('/tos', 'GeneralController@terms')->name('tos');
-    Route::get('/activity/map/view', 'GeneralController@mapView')->name('map.view');
 
     Route::resource('/activity', 'ActivityController');
     Route::delete('/archive/activity/{id}', 'ActivityController@archive')->name('archive.activity');
     Route::get('/archive/activity/{id}', 'ActivityController@unarchive')->name('unarchive.activity');
 
     Route::get('/calendar', 'ActivityController@calendar')->name('calendar');
-    
     Route::get('/sort', 'ActivityController@calendarActivity')->name('date_sort');
     
     Route::get('/dashboard', 'UserController@index')->name('dashboard.index');
@@ -78,7 +77,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/deactivate/account', 'SettingController@deactivate')->name('deactivateAccount');
     Route::post('/avatar-upload', 'SettingController@uploadAvatar')->name('uploadAvatar');
     Route::post('/header-upload', 'SettingController@uploadHeader')->name('uploadHeader');
-
 
 });
 

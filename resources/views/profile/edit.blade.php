@@ -13,7 +13,9 @@ Edit Profile
 @endsection
 
 @section('web-content')
-<h1 class="text-center">Please use a mobile device</h1>
+<script type="text/javascript">
+    window.location = "{{ route('map.view') }}";//here double curly bracket
+</script>
 @endsection
 
 @section('mobile-content')
@@ -76,7 +78,6 @@ Edit Profile
             <input type="File" name="header" class="d-none avatar-input" id="changeHeader" value="" accept="image/*">
         </div>
     </div>
-
 </section>
 
 <section class="py-3 mb-5">
@@ -94,7 +95,7 @@ Edit Profile
             </div>
 
             <div class="card-body p-0 m-0">
-                <div id="collapsePersonalInfo" class="collapse" aria-labelledby="personalInfo"
+                <div id="collapsePersonalInfo" class="collapse show" aria-labelledby="personalInfo"
                     data-parent="#editProfileAccordion">
                     <form action="{{ route('dashboard.update') }}" id="updateDetails" method="post"
                         class="p-3">
@@ -397,7 +398,7 @@ Edit Profile
     </div>
 </section>
 
-@include('partials.modals.deactivateAccount')
+@include('partials.modals.account.deactivateAccount')
 @include('partials.modals.upload.uploadModal')
 
 @endsection

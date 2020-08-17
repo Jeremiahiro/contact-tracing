@@ -1,7 +1,6 @@
-
 <div class="modal fade" id="activityConn-{{ $person->id }}" role="dialog" aria-labelledby="activityConnectionModal" aria-hidden="true">
     <div class="modal-dialog route_purple mt-5 mx-0 px-3 py-4" style="pointer-events:auto;" role="document">
-        <div class="">
+        <div class="mt-5">
             <div class="d-flex justify-content-between mb-0">
                 <h6 class="m-0 bold f-10">Route & Interactions</h6>
                 <button type="button" style="opacity:1;" class="btn close" data-dismiss="modal" aria-label="Close">

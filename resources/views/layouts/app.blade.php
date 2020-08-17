@@ -70,9 +70,10 @@
         </main>
         @yield('footer')
         @auth
-        @include('partials.modals.sideNav')
-        @include('partials.modals.userFollowers')
-        @include('partials.modals.userFollowings')
+        @include('partials.modals.views.sideNav')
+        @include('partials.modals.views.settings')
+        @include('partials.modals.views.userFollowers')
+        @include('partials.modals.views.userFollowings')
         @endauth
         @enddesktop
     </div>

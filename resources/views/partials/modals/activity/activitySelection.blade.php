@@ -1,6 +1,6 @@
 <div class="modal fade" id="activitySelectionModal-{{ $activity->id }}" role="dialog"
     aria-labelledby="activitySelection" aria-hidden="true">
-    <div class="modal-dialog route_purple mt-4 mx-0 px-3 py-4" style="pointer-events:auto;" role="document">
+    <div class="modal-dialog route_purple mt-5 mx-0 px-3 py-4" style="pointer-events:auto;" role="document">
         <div class="">
             <div class="d-flex justify-content-between mb-3">
                 <h6 class="m-0 bold f-10">Route & Interactions</h6>

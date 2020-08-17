@@ -18,14 +18,13 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $activities = Activity::where('user_id', $user->id)->where('')->latest()->simplePaginate(10);
+        $activities = Activity::where('user_id', $user->id)->latest()->simplePaginate(10);
         $archives = Activity::where('user_id', $user->id)->where('deleted_at', '!=', null)->latest('deleted_at')->withTrashed()->simplePaginate(50);
 
         if ($request->ajax()) {
             $activities = view('profile.activity', compact('activities'))->render();
             return response()->json(['html'=>$activities]);
         }
-
         return view('profile.index', compact('user', 'activities', 'archives'));
     }
 
@@ -56,10 +55,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $user = User::where('uuid', $id)->first();
-        return view('profile.index', compact('user'));
+
+        $activities = Activity::where('user_id', $user->id)->latest()->simplePaginate(10);
+        $archives = Activity::where('user_id', $user->id)->where('deleted_at', '!=', null)->latest('deleted_at')->withTrashed()->simplePaginate(50);
+
+        if ($request->ajax()) {
+            $activities = view('profile.activity', compact('activities'))->render();
+            return response()->json(['html'=>$activities]);
+        }
+        return view('profile.index', compact('user', 'activities'));
     }
 
     /**
@@ -71,6 +78,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('uuid', $id)->first();
+
         return view('profile.edit', compact('user'));
     }
 
@@ -138,5 +146,12 @@ class UserController extends Controller
             $status = 0;
         }
         return response()->json(['success'=>$response, 'status' => $status]);
+    }
+
+    public function anonymizeAGroupOfUsers() {
+    	$users = User::where('last_activity', '<=', carbon::now()->submonths(config('gdpr.settings.ttl')))->get();
+    	foreach ($users as $user) {
+            $user->anonymize();
+        }
     }
 }

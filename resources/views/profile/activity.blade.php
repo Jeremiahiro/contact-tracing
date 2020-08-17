@@ -26,8 +26,8 @@
         </div>
     </div>
 </div>
-@include('partials.modals.activityMenu')
-@include('partials.modals.deleteActivity')
-@include('partials.modals.archiveActivity')
-@include('partials.modals.activitySelection')
+@include('partials.modals.activity.activityMenu')
+@include('partials.modals.activity.deleteActivity')
+@include('partials.modals.activity.archiveActivity')
+@include('partials.modals.activity.activitySelection')
 @endforeach

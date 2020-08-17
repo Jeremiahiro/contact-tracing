@@ -12,19 +12,25 @@ Map View
 @section('web-content')
 <section class="bg-primary">
     <div class="mx-3 p-2 text-white d-flex align-items-end justify-content-between">
-        <div></div>
         <div>
+            <div class="d-flex">
+                <a href="{{ route('about') }}" class="text-white">About</a>
+                <a href="{{ route('privacy') }}" class="text-white px-4">Privacy Policy</a>
+                <a href="{{ route('tos') }}" class="text-white">Terms of Use</a>
+            </div>
+        </div>
+        <div class="text-center">
+            <h6 class="">For Best experience on the platform, kindly use a mobile device</h6>
+        </div>
+        <div class="">
             <i class="fa fa-user fa-2x mr-1"></i>
             <span class="f-18 count">
-                @if($count > 999 && $count <= 999999)
-                    {{ $count/1000 . ' K' }}
-                @else
-                    @if($count > 999999)
-                        {{ $count/1000000 . ' M' }}
+                @if($count > 999 && $count <= 999999) {{ $count/1000 . ' K' }} @else @if($count> 999999)
+                    {{ $count/1000000 . ' M' }}
                     @else
-                        {{ $count }}
+                    {{ $count }}
                     @endif
-                @endif
+                    @endif
             </span>
         </div>
     </div>
@@ -35,20 +41,16 @@ Map View
 @endsection
 
 @section('mobile-content')
-
 <section class="py-3 mt-2 mb-4 bg-primary">
     <div class="mx-3 mb-2 text-white d-flex align-items-end justify-content-end">
         <i class="fa fa-user fa-2x mr-1"></i>
         <span class="f-18 count">
-            @if($count > 999 && $count <= 999999)
-                {{ $count/1000 . ' K' }}
-            @else
-                @if($count > 999999)
-                    {{ $count/1000000 . ' M' }}
+            @if($count > 999 && $count <= 999999) {{ $count/1000 . ' K' }} @else @if($count> 999999)
+                {{ $count/1000000 . ' M' }}
                 @else
-                    {{ $count }}
+                {{ $count }}
                 @endif
-            @endif
+                @endif
         </span>
     </div>
     <div id="iro_map_div">
@@ -230,8 +232,7 @@ Map View
     }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&callback=initMap"
-    async defer>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&callback=initMap" async defer>
 </script>
 @endsection
 @section('footer')

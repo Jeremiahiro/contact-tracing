@@ -98,7 +98,6 @@ footer {
 .avatar {
     border-radius: 50%;
     background-position: center;
-    background-color: #999999;
     background-size: cover;
     vertical-align: middle;
     text-align: center;
@@ -135,6 +134,11 @@ footer {
 .avatar-xl {
     width: 120px;
     height: 120px;
+}
+
+.avatar-xxl {
+    width: 350px;
+    height: 350px;
 }
 
 .opacity-1 {
@@ -375,6 +379,7 @@ input:-webkit-autofill:focus,
 .red-btn {
     background-color: #c20303;
     color: #fff;
+    font-size: 14px;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -729,5 +734,8 @@ input:checked+.toggle-slider:before {
 #iro_map {
     width: 100%;
     height: 100%;
+}
+.underline {
+    text-decoration: underline
 }
 

@@ -7,10 +7,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Overtrue\LaravelFollow\Followable;
+use Dialect\Gdpr\Portable;
+use Dialect\Gdpr\Anonymizable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Followable, Notifiable;
+    use Followable, Notifiable, Portable, Anonymizable;
 
     /**
      * The attributes that are mass assignable.
@@ -42,6 +44,24 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $gdprWith = ['location'];
+
+    /**
+     * Using the default string from config.
+     */
+    protected $gdprAnonymizableFields = [
+        'name', 
+        'email'
+    ];
+
+    /**
+    * Using getAnonymized{column} to return anonymizable data
+    */
+    public function getAnonymizedEmail()
+    {
+        return random_bytes(10);
+    }
+
     /**
      * User has many activities
      */
@@ -50,6 +70,27 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Activity');
     }
     
+    /**
+     * Get the GDPR compliant data portability array for the model.
+     *
+     * @return array
+     */
+    public function toPortableArray()
+    {
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
+    }
+
+    /**
+     * The attributes that should be hidden for the downloadable data.
+     *
+     * @var array
+     */
+    protected $gdprHidden = ['password'];
+
     /**
      * a user has many taggs.
      * 
