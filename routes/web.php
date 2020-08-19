@@ -41,7 +41,7 @@ Route::get('activityConnection', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/activity/map/view', 'GeneralController@mapView')->name('map.view');
+Route::get('/activity/map-view', 'GeneralController@mapView')->name('map.view');
 Route::get('/about-us', 'GeneralController@about')->name('about');
 Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
 Route::get('/terms-of-use', 'GeneralController@terms')->name('tos');

@@ -77,42 +77,6 @@ p {
     min-height: 115px;
 }
 
-.route {
-    border-radius: 20px;
-    width: 100%;
-}
-
-.route_white {
-    background-color: #F7F7F7;
-    color: #0000ff;
-}
-
-.route_white h6 {
-    color: #707070;
-}
-
-
-.route_white .add_svg .icon_blue{
-    display: none;
-}
-
-.route_white .sub-menu {
-    color: #0000FF;
-}
-
-.route_purple {
-    background-color: #6406A8;
-    color: #fff;
-}
-
-.route_purple .add_svg .icon_white{
-    display: none;
-}
-
-.route_purple .sub-menu {
-    color: #fff;
-}
-
 .fulfilled_notification {
     color: #fff;
     background-color: #FF0000;

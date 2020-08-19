@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
 
             $table->boolean('show_location')->default(true);
             $table->boolean('status')->default(true);
-            $table->boolean('first_time_login')->default(0);
+            $table->boolean('first_time_login')->default(true);
             
             $table->string('role')->default('user');
             $table->rememberToken();
