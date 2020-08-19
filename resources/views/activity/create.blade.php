@@ -137,7 +137,7 @@ Add Activity
 @endsection
 @section('script')
 
-@if(is_new_user())
+@if($first_time_login)
     <script>
         const tour = new Shepherd.Tour({
             defaultStepOptions: {
