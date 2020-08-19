@@ -1,23 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-Privacy Policy
+About Us
 @endsection
 
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
-<style>
-    .privacy li:before {
-        position: absolute;
-        left: 20px;
-        content: "\2022";
-    }
-
-    .privacy li {
-        list-style: none;
-    }
-
-</style>
 @endsection
 
 @section('web-content')
@@ -34,18 +22,19 @@ Privacy Policy
     {{-- <div></div> --}}
 </div>
 <div class="container py-3 col-8 lead">
-    @include('hoc.partials.privacy-content')
+    @include('components.partials.terms-of-use-content')
 </div>
 @endsection
 
 @section('content')
-<section>
-    <div class="container py-5 privacy">
-        @include('hoc.partials.privacy-content')
-    </div>
-</section>
-@endsection
 
+<section class="">
+<div class="container py-5 mb-3 privacy">
+    @include('components.partials.terms-of-use-content')
+</div>
+</section>
+
+@endsection
 
 @section('footer')
 @include('partials.mobile.footer.footer')

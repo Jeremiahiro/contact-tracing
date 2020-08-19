@@ -7,6 +7,7 @@ use App\Activity;
 use App\UserLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\FollowNotification;
 
 class UserController extends Controller
 {
@@ -136,12 +137,18 @@ class UserController extends Controller
      * @use Overtrue\LaravelFollow\Followable;
      * 
      */
-    public function follow(Request $request){
-
+    public function follow(Request $request)
+    {
         $user = User::find($request->userID);
         $response = auth()->user()->toggleFollow($user);
         if($request->status == 0){
             $status = 1;
+            $details = [
+                'greeting' => 'Hi Artisan',
+                'body' => 'is followng you',
+                'follower_id' => auth()->user()->id,
+            ];
+            $user->notify(new FollowNotification($details));
         } else {
             $status = 0;
         }

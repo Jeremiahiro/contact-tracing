@@ -43,7 +43,7 @@
 
     <script src="{{ asset('frontend/js/moment-with-locales.min.js')}}"></script>
     
-    @laravelPWA
+    {{-- @laravelPWA --}}
     @yield('custom-style')
 
 </head>
@@ -68,8 +68,8 @@
         
             @yield('content')
         </main>
-        @yield('footer')
         @auth
+        @yield('footer')
         @include('partials.modals.views.sideNav')
         @include('partials.modals.views.settings')
         @include('partials.modals.views.userFollowers')

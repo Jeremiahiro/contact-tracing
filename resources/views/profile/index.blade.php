@@ -11,8 +11,7 @@ Dashboard
 
 @section('web-content')
 <script type="text/javascript">
-    window.location = "{{ route('map.view') }}"; //here double curly bracket
-
+    window.location = "{{ route('map.view') }}";
 </script>
 @endsection
 
@@ -147,7 +146,6 @@ Dashboard
                 });
         }
     }
-
 </script>
 
 @if(is_new_user())

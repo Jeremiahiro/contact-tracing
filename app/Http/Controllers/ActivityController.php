@@ -7,7 +7,10 @@ use App\Activity;
 use App\ActivityTags;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\ActivityTagNotification;
+use App\Notifications\ActivityTagSmsNotification;
 
 class ActivityController extends Controller
 {
@@ -28,16 +31,27 @@ class ActivityController extends Controller
      */
     public function index(Request $request)
     {
-        $activities = Activity::where('user_id', Auth::user()->id)->latest('updated_at')->simplePaginate(10);
-                
-        if($activities->count() > 0) {
+        $user = Auth::user();
+
+        $istagged = Activity::whereHas('tags', function($query) use($user){
+                                    $query->wherePersonId($user->id);
+                                })->latest('updated_at')->simplePaginate(10);
+
+        $activities = Activity::with('tags')
+        // ->where('user_id', $user->id)
+                                ->latest('updated_at')->simplePaginate(10);
+
+        // if($activities->count() > 0) {
             if ($request->ajax()) {
-                $activities = view('activity.partials.list', compact('activities'))->render();
-                return response()->json(['html'=>$activities]);
+                $activities = view('activity.partials.list', compact('activities', 'istagged'))->render();
+                return response()->json([
+                    'activities'=>$activities,
+                    'istagged'=>$istagged,
+                    ]);
             }
-            return view('activity.index', compact('activities'));
-        }
-        return redirect()->route('activity.create')->with('warning', 'You need to add an Activity!');
+            return view('activity.index', compact('activities', 'istagged'));
+        // }
+        // return redirect()->route('activity.create')->with('warning', 'You need to add an Activity!');
 
     }
 
@@ -65,6 +79,9 @@ class ActivityController extends Controller
 
         $start = Carbon::parse($request->start_date)->format('Y-m-d H:i');
         $end = Carbon::parse($request->end_date)->format('Y-m-d H:i');
+
+        DB::beginTransaction();
+
         try {
             $activity = Activity::firstOrCreate([
                 'from_address' => $request->from_address,
@@ -96,6 +113,14 @@ class ActivityController extends Controller
                             $activityTag->person_id     = $existingUser->id;
                             $activityTag->user_id       = Auth::user()->id;
                             $activityTag->save();
+                            
+                            $details = [
+                                'greeting' => 'Hi ' . $existingUser->name,
+                                'body' => 'You were tagged in an activity',
+                                'action' => 'click here to see',
+                                'activity_id' => $activity->id,
+                            ];
+                            $existingUser->notify(new ActivityTagNotification($details));
                         } 
                     }
                 } 
@@ -115,6 +140,15 @@ class ActivityController extends Controller
                             $activityTag->name          = $existingUser->name;
                             $activityTag->user_id       = Auth::user()->id;
                             $activityTag->save();
+
+                            $details = [
+                                'greeting' => 'Hi ' . $existingUser->name,
+                                'body' => 'You were tagged in an activity',
+                                'action' => 'click here to see',
+                                'activity_id' => $activity->id,
+                            ];
+                            $existingUser->notify(new ActivityTagNotification($details));
+
                         } elseif ($name[$key] != null) {
                             $activityTag = new ActivityTags;
                             $activityTag->name          = $name[$key];
@@ -123,6 +157,15 @@ class ActivityController extends Controller
                             $activityTag->activity_id   = $activity->id;
                             $activityTag->user_id       = Auth::user()->id;
                             $activityTag->save();
+
+                            $details = [
+                                'greeting' => 'Hi ' . $name[$key],
+                                'body' => 'You were tagged in an activity',
+                                'action' => 'click here to see',
+                                'activity_id' => $activity->id,
+                            ];
+                            $activityTag->notify(new ActivityTagNotification($details));
+                            $activityTag->notify(new ActivityTagSmsNotification($details));
                         } 
                     }
                 }
@@ -130,11 +173,14 @@ class ActivityController extends Controller
             } else {
                 return redirect()->back()->with('error', 'Activity was recently created');
             }
+            DB::commit();
+
             return redirect()->route('activity.index')->with('success', 'Successful!');
 
         } catch (\Throwable $th) {
+            DB::rollBack();
              return redirect()->back()->with('error', 'OOPS something went wrong');
-         } 
+        } 
 
     }
 
@@ -146,7 +192,7 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        //
+        return view('activity.show', compact('activity'));
     }
 
     /**
@@ -173,6 +219,7 @@ class ActivityController extends Controller
 
             if($request->name[0] != null || $request->tags != null)
             {
+                DB::beginTransaction();
                 try {
                     // for existing users
                     if($request->tags != null) {
@@ -181,7 +228,6 @@ class ActivityController extends Controller
                             $existingUser = User::where('username', $person)->first();
                             if ($existingUser) {
                                 $existingTag = ActivityTags::where('person_id', $existingUser->id)->where('activity_id', $activity->id)->first();
-                                // dd($existingTag);
                                 if(!$existingTag){
                                     $activityTag = new ActivityTags;
                                     $activityTag->activity_id   = $activity->id;
@@ -189,6 +235,14 @@ class ActivityController extends Controller
                                     $activityTag->name          = $existingUser->name;
                                     $activityTag->user_id       = Auth::user()->id;
                                     $activityTag->save();
+
+                                    $details = [
+                                        'greeting' => 'Hi ' . $existingUser->name,
+                                        'body' => 'You were tagged in an activity',
+                                        'action' => 'click here to see',
+                                        'activity_id' => $activity->id,
+                                    ];
+                                    $existingUser->notify(new ActivityTagNotification($details));
                                 } 
                             } 
                         }
@@ -211,6 +265,14 @@ class ActivityController extends Controller
                                     $activityTag->name          = $existingUser->name;
                                     $activityTag->user_id       = Auth::user()->id;
                                     $activityTag->save();
+
+                                    $details = [
+                                        'greeting' => 'Hi ' . $existingUser->name,
+                                        'body' => 'You were tagged in an activity',
+                                        'action' => 'click here to see',
+                                        'activity_id' => $activity->id,
+                                    ];
+                                    $existingUser->notify(new ActivityTagNotification($details));
                                 }
                              
                             } elseif ($name[$key] != null) {
@@ -223,16 +285,24 @@ class ActivityController extends Controller
                                     $activityTag->activity_id   = $activity->id;
                                     $activityTag->user_id       = Auth::user()->id;
                                     $activityTag->save();
+
+                                    $details = [
+                                        'greeting' => 'Hi ' . $name[$key],
+                                        'body' => 'You were tagged in an activity',
+                                        'action' => 'click here to see',
+                                        'activity_id' => $activity->id,
+                                    ];
+                                    $activityTag->notify(new ActivityTagNotification($details));
+                                    $activityTag->notify(new ActivityTagSmsNotification($details));
                                 }
                             }
                         }
                     }
-
+                    DB::commit();
                     return redirect()->route('activity.index')->with('success', 'Activity Updated Successfuly!');
     
                 } catch (\Throwable $th) {
-
-                    dd($th);
+                    DB::rollBack();
                     return redirect()->back()->with('error', 'OOps something went wrong');
                 } 
             } else {

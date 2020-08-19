@@ -22,7 +22,7 @@ Update Activity
 
 @section('web-content')
 <script type="text/javascript">
-    window.location = "{{ route('map.view') }}";//here double curly bracket
+    window.location = "{{ route('map.view') }}"; 
 </script>
 @endsection
 
@@ -31,12 +31,12 @@ Update Activity
 
 <div id="alert">
     @if($errors->any())
-        <div class="alert alert-danger text-danger" role="alert">
-            <button type="button" class="close text-danger" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true" class="text-danger">&times;</span>
-            </button>
-            <strong class="text-danger">Error! Select a valid location(s)</strong>
-        </div>
+    <div class="alert alert-danger text-danger" role="alert">
+        <button type="button" class="close text-danger" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" class="text-danger">&times;</span>
+        </button>
+        <strong class="text-danger">Error! Select a valid location(s)</strong>
+    </div>
     @endif
 </div>
 
@@ -44,21 +44,28 @@ Update Activity
     <div class="container text-primary">
         <div class="pt-3 pb-5 activity">
             <p class="mx-2">
+
+                @if (url()->current() == url()->previous())
+                <a href="{{ route('activity.index') }}" class="">
+                    <img src="{{ asset('/frontend/img/svg/back_blue.svg') }}" alt="go back">
+                </a>
+                @else
                 <a href="{{ url()->previous() }}" class="">
                     <img src="{{ asset('/frontend/img/svg/back_blue.svg') }}" alt="go back">
                 </a>
+                @endif
+
             </p>
             <p class="f-12 bold">Update Activity</p>
-            <form method="POST" action="{{ route('activity.update', $activity->id) }}"
-                id="activitForm" name="activity" autocomplete="off">
+            <form method="POST" action="{{ route('activity.update', $activity->id) }}" id="activitForm" name="activity"
+                autocomplete="off">
                 @csrf
                 @method("PATCH")
 
                 <div>
                     <div class="d-flex justify-content-between bold mb-3">
                         <div class="d-flex">
-                            <img src="{{ asset('/frontend/img/svg/map-pin-markedwhite.svg') }}"
-                                alt="map-pin">
+                            <img src="{{ asset('/frontend/img/svg/map-pin-markedwhite.svg') }}" alt="map-pin">
                             <div class="ml-1">
                                 <h3 class="m-0 p-0 f-16">{{ $activity->from_location }}</h3>
                                 <p class="m-0 p-0 f-10 regular">{{ $activity->from_address }}</p>
@@ -71,8 +78,7 @@ Update Activity
 
                     <div class="d-flex justify-content-between bold mb-3">
                         <div class="d-flex">
-                            <img src="{{ asset('/frontend/img/svg/map-pin-markedwhite.svg') }}"
-                                alt="map-pin">
+                            <img src="{{ asset('/frontend/img/svg/map-pin-markedwhite.svg') }}" alt="map-pin">
                             <div class="ml-1">
                                 <h3 class="m-0 p-0 f-16">{{ $activity->to_location }}</h3>
                                 <p class="m-0 p-0 f-10 regular">{{ $activity->to_address }}</p>
@@ -83,7 +89,7 @@ Update Activity
                         </p>
                     </div>
                 </div>
-                
+
                 <div class="my-5">
                     <div class="ml-3">
                         <div class="mb-3">

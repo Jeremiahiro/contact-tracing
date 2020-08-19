@@ -40,7 +40,7 @@ class GdprController extends Controller
      */
     public function showTerms()
     {
-        return view('gdpr.message');
+        return view('gdpr.index');
     }
 
     /**
@@ -56,7 +56,7 @@ class GdprController extends Controller
             'accepted_gdpr' => true,
         ]);
 
-        return redirect()->to('/');
+        return redirect()->intended('/');
     }
 
     /**

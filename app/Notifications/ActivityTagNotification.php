@@ -7,9 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class FollowNotification extends Notification
+class ActivityTagNotification extends Notification
 {
     use Queueable;
+    
     private $details;
 
     /**
@@ -30,7 +31,7 @@ class FollowNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['mail','database'];
     }
 
     /**
@@ -41,12 +42,12 @@ class FollowNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $url = url('/activity'.'/'.$this->details['activity_id']);
         return (new MailMessage)
+                    ->subject('Activity Notification')
                     ->greeting($this->details['greeting'])
                     ->line($this->details['body'])
-                    ->line($this->details['thanks'])
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->action('See Activity', $url);
     }
 
     /**
@@ -59,7 +60,8 @@ class FollowNotification extends Notification
     {
         return [
             'body' => $this->details['body'],
-            'follower_id' => $this->details['follower_id']
+            'activity_id' => $this->details['activity_id']
         ];
     }
+
 }

@@ -6,12 +6,11 @@ Activities
 
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
-<link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
 @endsection
 
 @section('web-content')
 <script type="text/javascript">
-    window.location = "{{ route('map.view') }}";//here double curly bracket
+    window.location = "{{ route('map.view') }}"; 
 </script>
 @endsection
 
@@ -19,13 +18,35 @@ Activities
 
 <section class="mb-5 py-3">
 
-    <div id="activity-list">
-        @include('activity.partials.list')
+    <div class="activityTab">
+        <ul class="m-3 f-12 nav d-flex justify-content-between">
+            <li class="active">
+                <a data-toggle="tab" href="#activity" class="text-primary active">Timeline</a>
+            </li>
+            <li><a data-toggle="tab" href="#tagged" class="text-primary">Tagged in</a></li>
+        </ul>
     </div>
 
-    <div class="text-center mb-5">
-        <div class="spinner-grow text-primary load-activity d-none" role="status">
-            <span class="sr-only">Loading...</span>
+    <div class="tab-content">
+        <div class="tab-pane in active" id="activity">
+            <div id="activity-list">
+                @include('activity.partials.list')
+            </div>
+            <div class="text-center mb-5">
+                <div class="spinner-grow text-primary load-activity d-none" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="tagged">
+            <div id="tagged-list">
+                @include('activity.partials.tagged')
+            </div>
+            <div class="text-center mb-5">
+                <div class="spinner-grow text-primary load-activity d-none" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -57,7 +78,8 @@ Activities
                     return;
                 }
                 $('.load-activity').addClass('d-none');
-                $("#activity-list").append(data.html);
+                $("#activity-list").append(data.activities);
+                $("#tagged-list").append(data.istagged);
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 alert('server not responding...');

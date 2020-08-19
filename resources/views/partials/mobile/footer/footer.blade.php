@@ -2,7 +2,8 @@
     <div class="container">
         <div class="d-flex justify-content-between py-2">
             <div class="">
-                <a href="{{ route('activity.index') }}"> <img src="{{  asset('/frontend/img/svg/home.svg') }}" alt="Home"> </a>
+                <a href="{{ route('activity.index') }}"> <img src="{{  asset('/frontend/img/svg/home.svg') }}"
+                        alt="Home"> </a>
             </div>
             <div class="menu">
                 <input type="checkbox" class="menu-open" name="menu-open" id="menu-open" />
@@ -21,7 +22,14 @@
                 </a>
             </div>
             <div class="">
-                <a href="#"><img src="{{  asset('/frontend/img/svg/not.svg') }}" alt="Notification"></a>
+                <a href="{{ route('notification') }}" class="notification-icon">
+                    <img src="{{  asset('/frontend/img/svg/not.svg') }}" alt="Notification">
+                    @auth
+                    @if (auth()->user()->unreadNotifications->count())
+                    <span class="badge badge-danger rounded-circle">{{ auth()->user()->unreadNotifications->count() }} </span>
+                    @endif
+                    @endauth
+                </a>
             </div>
         </div>
     </div>

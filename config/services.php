@@ -54,4 +54,10 @@ return [
         'redirect' => env('APP_URL') . '/login/twitter/callback',
     ],
 
+    'nexmo' => [
+        'key' => env('NEXMO_KEY'),
+        'secret' => env('NEXMO_SECRET'),
+        'sms_from' => env('NEXMO_NUMBER', 'I-AM VOCAL'),
+    ],
+
 ];

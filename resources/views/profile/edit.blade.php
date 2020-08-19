@@ -14,7 +14,7 @@ Edit Profile
 
 @section('web-content')
 <script type="text/javascript">
-    window.location = "{{ route('map.view') }}";//here double curly bracket
+    window.location = "{{ route('map.view') }}";
 </script>
 @endsection
 

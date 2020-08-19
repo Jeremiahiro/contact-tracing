@@ -32,7 +32,7 @@ class GeneralController extends Controller
      */
     public function search()
     {
-        return view('search.index');
+        return view('components.search.index');
     }
 
     /**
@@ -43,7 +43,7 @@ class GeneralController extends Controller
     public function about()
     {
         $count = DB::table("users")->count();
-        return view('hoc.about', compact('count'));
+        return view('components.about', compact('count'));
     }
 
     /**
@@ -54,7 +54,7 @@ class GeneralController extends Controller
     public function privacy()
     {
         $count = DB::table("users")->count();
-        return view('hoc.privacy', compact('count'));
+        return view('components.privacy', compact('count'));
     }
 
     /**
@@ -65,7 +65,7 @@ class GeneralController extends Controller
     public function terms()
     {
         $count = DB::table("users")->count();
-        return view('hoc.terms-of-use', compact('count'));
+        return view('components.terms-of-use', compact('count'));
     }
 
     /**
@@ -165,6 +165,6 @@ class GeneralController extends Controller
          
         $count = DB::table("users")->count();
         $user = Auth::user();
-        return view('hoc.map', compact('count', 'data'));
+        return view('components.map', compact('count', 'data'));
     }
 }

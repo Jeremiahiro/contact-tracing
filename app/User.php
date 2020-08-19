@@ -124,6 +124,25 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne('App\UserLocation', 'user_id');
     }
+
+    /**
+     * a user can be tagged.
+     */
+    public function follower()
+    {
+        return $this->hasMany('App\Notification', 'follower');
+    }
     
+    /**
+     * Route notifications for the Nexmo channel.
+     *
+     * @param  \Illuminate\Notifications\Notification  $notification
+     * @return string
+     */
+    public function routeNotificationForNexmo($notification)
+    {
+        return '08136478020';
+        // return $this->phone_number;
+    }
 
 }

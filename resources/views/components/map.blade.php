@@ -56,7 +56,6 @@ Map View
     <div id="iro_map_div">
         <div id="iro_map"></div>
     </div>
-
 </section>
 
 @endsection

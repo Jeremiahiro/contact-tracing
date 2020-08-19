@@ -19,7 +19,7 @@
                 </div>
             </span>
             <span class="text-center pt-2">
-                <a href="#"><img src="{{  asset('/frontend/img/svg/person.svg') }}" alt="contacts"></a>
+                <a href="{{ route('search')}}"><img src="{{  asset('/frontend/img/svg/person.svg') }}" alt="contacts"></a>
                 <div class="py-2 f-12 bold">
                     @guest
                         0
@@ -30,7 +30,7 @@
                 </div>
             </span>
             <span class="text-center pt-2">
-                <a href="#"><img src="{{  asset('/frontend/img/svg/people.svg') }}" alt="Active"></a>
+                <a href="{{ route('search')}}"><img src="{{  asset('/frontend/img/svg/people.svg') }}" alt="Active"></a>
                 <div class="py-2 f-12 bold">
                     @if ($count > 999 && $count <= 999999)
                         {{ $count/1000 . ' K' }}

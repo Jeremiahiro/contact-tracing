@@ -19,10 +19,9 @@ About Us
     <div class="text-center">
         <h6 class="">For Best experience on the platform, kindly use a mobile device</h6>
     </div>
-    {{-- <div></div> --}}
 </div>
 <div class="container py-3 col-8 lead">
-    @include('hoc.partials.about-content')
+    @include('components.partials.about-content')
 </div>
 @endsection
 
@@ -30,7 +29,7 @@ About Us
 
 <section class="">
     <div class="container py-5">
-        @include('hoc.partials.about-content')
+        @include('components.partials.about-content')
     </div>
 </section>
 
