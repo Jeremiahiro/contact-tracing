@@ -373,7 +373,7 @@ class ActivityController extends Controller
     }
 
 
-    public function Test()
+    public function ()
     {
         if (Auth::user()->first_time_login) {
             $first_time_login = true;
