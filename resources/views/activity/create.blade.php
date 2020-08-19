@@ -49,7 +49,7 @@ Add Activity
                 @csrf
                 <div id="startTour" class="d-flex justify-content-between align-items-center where-to">
                     <img src="{{ asset('/frontend/img/svg/left.svg') }}" alt=""
-                        class="mt-3 mr-2 where-to-icon">
+                        class="mt-3 mr-1 where-to-icon">
                     <div class="form-group row w-100">
                         <label for="from_location" class="f-24 col-md-12 text-md-left">
                             {{ __('Where') }}
@@ -99,7 +99,7 @@ Add Activity
                     </div>
                 </div>
 
-                <div class="ml-3">
+                <div class="ml-4">
                     <div class="row mb-4 form-group">
                         <label for="when" class="f-24 col-md-12 text-md-left">
                             {{ __('When') }}

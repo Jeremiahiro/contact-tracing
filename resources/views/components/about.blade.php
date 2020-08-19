@@ -28,7 +28,10 @@ About Us
 @section('content')
 
 <section class="">
-    <div class="container py-5">
+    <div class="container py-3 lead mb-5">
+        <a href="{{ url()->previous() }}" class="">
+            <img src="{{ asset('/frontend/img/svg/back_blue.svg') }}" alt="go back">
+        </a>
         @include('components.partials.about-content')
     </div>
 </section>

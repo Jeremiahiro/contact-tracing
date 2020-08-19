@@ -78,7 +78,7 @@ Dashboard
                     FOLLOW
                     @endif
                 </strong>
-                <div class="spinner-border text-white ml-2 spinner-border-sm d-none" id="follow-spinner" role="status">
+                <div class="spinner-border text-white ml-2 spinner-border-sm d-none btn-sm" id="follow-spinner" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </button>

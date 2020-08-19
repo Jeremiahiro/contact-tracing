@@ -42,8 +42,7 @@ class GeneralController extends Controller
      */
     public function about()
     {
-        $count = DB::table("users")->count();
-        return view('components.about', compact('count'));
+        return view('components.about');
     }
 
     /**
@@ -53,8 +52,7 @@ class GeneralController extends Controller
      */
     public function privacy()
     {
-        $count = DB::table("users")->count();
-        return view('components.privacy', compact('count'));
+        return view('components.privacy');
     }
 
     /**
@@ -64,10 +62,20 @@ class GeneralController extends Controller
      */
     public function terms()
     {
-        $count = DB::table("users")->count();
-        return view('components.terms-of-use', compact('count'));
+        return view('components.terms-of-use');
     }
 
+    /**
+     * Show the GDPR info.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function gdprDPA()
+    {
+        return view('gdpr.show');
+    }
+
+    
     /**
      * Show list of existing users search field.
      *

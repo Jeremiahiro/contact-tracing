@@ -3,7 +3,7 @@
     <hr style="border-color:#0000FF;">
     <p class="f-16 regular">Terms you agree to when you use SOP -</p>
     <hr style="border-color:#0000FF;">
-    <h5 class=" f-18 ">AGREEMENT TO TERMS OF USE</h5>
+    <h5 class="f-16 ">AGREEMENT TO TERMS OF USE</h5>
     <p class="regular f-16">
         Our mission is to enable users to monitor and manage their activities, mainly interms
         of locomotion to break transmission chain of possible COVID-19 infection.While we put

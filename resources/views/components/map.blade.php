@@ -24,7 +24,7 @@ Map View
         </div>
         <div class="">
             <i class="fa fa-user fa-2x mr-1"></i>
-            <span class="f-18 count">
+            <span class="f-16 count">
                 @if($count > 999 && $count <= 999999) {{ $count/1000 . ' K' }} @else @if($count> 999999)
                     {{ $count/1000000 . ' M' }}
                     @else
@@ -44,7 +44,7 @@ Map View
 <section class="py-3 mt-2 mb-4 bg-primary">
     <div class="mx-3 mb-2 text-white d-flex align-items-end justify-content-end">
         <i class="fa fa-user fa-2x mr-1"></i>
-        <span class="f-18 count">
+        <span class="f-16 count">
             @if($count > 999 && $count <= 999999) {{ $count/1000 . ' K' }} @else @if($count> 999999)
                 {{ $count/1000000 . ' M' }}
                 @else

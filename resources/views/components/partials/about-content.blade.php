@@ -1,7 +1,7 @@
 <div>
     <h2>About Us</h2>
     <hr style="border-color:#0000FF;">
-    <p class="f-18 regular">I-am Vocal is a non profit organization and a proponent for community engagement,
+    <p class="f-16 text-left regular">I-am Vocal is a non profit organization and a proponent for community engagement,
         with one aim; to make social impact. I-am Vocal has built the SOP Contact TracingApp,
         to protect communities and contribute to the improvement of the current state ofthe society.
         This App is not a replacement for the existing methods and measures,rather it is a compliment

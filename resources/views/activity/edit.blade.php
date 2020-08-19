@@ -108,8 +108,10 @@ Update Activity
             </form>
         </div>
     </div>
-    @include('partials.mobile.footer.footer')
 </section>
+@section('footer')
+@include('partials.mobile.footer.footer')
+@endsection
 @endsection
 @section('script')
 @endsection

@@ -29,9 +29,12 @@ About Us
 @section('content')
 
 <section class="">
-<div class="container py-5 mb-3 privacy">
-    @include('components.partials.terms-of-use-content')
-</div>
+    <div class="container py-3 lead mb-5 privacy">
+        <a href="{{ url()->previous() }}" class="">
+            <img src="{{ asset('/frontend/img/svg/back_blue.svg') }}" alt="go back">
+        </a>
+        @include('components.partials.terms-of-use-content')
+    </div>
 </section>
 
 @endsection
