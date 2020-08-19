@@ -1,5 +1,5 @@
 <div class="">
-    <div class="text-center py-3">
+    <div class="text-left py-3">
         <h5 class="">GDPR - Data Processing Agreement Addendum</h5>
     </div>
     <div class="text-left">

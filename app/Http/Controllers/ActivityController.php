@@ -37,9 +37,7 @@ class ActivityController extends Controller
                                     $query->wherePersonId($user->id);
                                 })->latest('updated_at')->simplePaginate(10);
 
-        $activities = Activity::with('tags')
-        // ->where('user_id', $user->id)
-                                ->latest('updated_at')->simplePaginate(10);
+        $activities = Activity::with('tags')->latest('updated_at')->simplePaginate(10);
 
         // if($activities->count() > 0) {
             if ($request->ajax()) {

@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Cookie;
 
-if (!function_exists('is_new_user')) {
-
     /**
      * Check if new user
      *
@@ -11,12 +9,11 @@ if (!function_exists('is_new_user')) {
      */
     function is_new_user()
     {
-        if (Auth::user()->first_time_login == true) {
+        if (Auth::user()->first_time_login == 0) {
             return true;
         }
         return false;
     }
-
     /**
      * Check if user is active
      *
@@ -29,4 +26,3 @@ if (!function_exists('is_new_user')) {
         }
         return false;
     }
-}

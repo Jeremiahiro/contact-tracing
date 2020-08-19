@@ -6,42 +6,52 @@ Map View
 
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
-<link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
 @endsection
 
 @section('web-content')
-<section class="bg-primary">
-    <div class="mx-3 p-2 text-white d-flex align-items-end justify-content-between">
-        <div>
-            <div class="d-flex">
-                <a href="{{ route('about') }}" class="text-white">About</a>
-                <a href="{{ route('privacy') }}" class="text-white px-4">Privacy Policy</a>
-                <a href="{{ route('tos') }}" class="text-white">Terms of Use</a>
+<section>
+    <div class="d-flex flex-column min-vh-100">
+        <div class="pt-4 px-5 route_blue">
+            <div class="row">
+                <div class="d-flex col-lg-6 col-md-12 justify-content-center">
+                    <a href="{{ route('about') }}" class="text-white pl-4">About</a>
+                    <a href="{{ route('privacy') }}" class="text-white px-4">Privacy Policy</a>
+                    <a href="{{ route('tos') }}" class="text-white">Terms of Use</a>
+                </div>
+                <div class="text-center col-lg-6 d-none d-md-block">
+                    <div>
+                        <i class="fa fa-user fa-2x mr-1"></i>
+                        <span class="f-16 count">
+                            @if($count > 999 && $count <= 999999) {{ $count/1000 . ' K' }} @else @if($count> 999999)
+                                {{ $count/1000000 . ' M' }}
+                                @else
+                                {{ $count }}
+                                @endif
+                                @endif
+                        </span>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row text-center d-none d-md-block">
+                <h6 class="f-14">For Best experience on the platform, kindly use a mobile device</h6>
             </div>
         </div>
-        <div class="text-center">
-            <h6 class="">For Best experience on the platform, kindly use a mobile device</h6>
+        <div class="flex-grow-1">
+            <div id="iro_map_div">
+                <div id="iro_map"></div>
+            </div>
         </div>
-        <div class="">
-            <i class="fa fa-user fa-2x mr-1"></i>
-            <span class="f-16 count">
-                @if($count > 999 && $count <= 999999) {{ $count/1000 . ' K' }} @else @if($count> 999999)
-                    {{ $count/1000000 . ' M' }}
-                    @else
-                    {{ $count }}
-                    @endif
-                    @endif
-            </span>
+        <div>
+            <div class="mb-2"></div>
+            @include('partials.mobile.footer.footer-lg')
         </div>
-    </div>
-    <div id="iro_map_div">
-        <div id="iro_map"></div>
     </div>
 </section>
 @endsection
 
 @section('content')
-<section class="py-3 mt-2 mb-4 bg-primary">
+<section class="py-3 mt-2 mb-4 route_blue">
     <div class="mx-3 mb-2 text-white d-flex align-items-end justify-content-end">
         <i class="fa fa-user fa-2x mr-1"></i>
         <span class="f-16 count">
@@ -197,7 +207,7 @@ Map View
                 var geolocpoint = new google.maps.LatLng(latitude, longitude);
 
                 var map = new google.maps.Map(document.getElementById('iro_map'), {
-                    zoom: 6,
+                    zoom: 8,
                     center: geolocpoint,
                     styles: style,
                     mapTypeControl: false,

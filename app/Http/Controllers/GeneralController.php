@@ -20,8 +20,9 @@ class GeneralController extends Controller
     public function index()
     {
         $count = DB::table("users")->count();
-
         $user = Auth::user();
+        dd($user->activities);
+
         return view('homepage.index', compact('count'));
     }
 

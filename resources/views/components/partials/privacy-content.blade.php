@@ -1,5 +1,5 @@
 <div class="">
-    <h2>SOP Privacy Policy</h2>
+    <h4 class="text-left">SOP Privacy Policy</h4>
     <hr style="border-color:#0000FF;">
     <p class="f-16 regular">We understand how important your privacy is. Here is how we have
         built this systemto respect your privacy and keep you in control. This privacy policy
