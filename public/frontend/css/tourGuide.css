@@ -1,8 +1,11 @@
 .shepherd-footer {
     position: relative;
-    background-color: #ccc !important;
+    background-color:#6406A8 !important;
 }
 
+.shepherd-header {
+    padding-top: 2px !important;
+}
 
 .shepherd-button:hover,
 .shepherd-button:focus {
@@ -12,7 +15,7 @@
 
 .shepherd-button {
     color: #fff !important;
-    background-color: #0B24FA !important;
+    background-color: #1e0530 !important;
 }
 
 .shepherd-button-secondary {
@@ -24,16 +27,24 @@
     text-align: left;
     font-size: 12px !important;
     line-height: 1 !important;
+    color: #fff !important;
+    font-weight: lighter !important;
+    margin-bottom: 7px;
 }
 
 .shepherd-content {
-    background-color: #ccc !important;
+    background-color: #6406A8 !important;
 }
 
 .tippy-arrow {
-    border-bottom-color: #ccc !important;
+    border-bottom-color: #6406A8 !important;
 }
 
 .shepherd {
     max-width: 70%;
+}
+
+.shepherd-cancel-icon span {
+    color: #fff !important;
+    font-size: 20px !important;
 }

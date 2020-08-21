@@ -18,7 +18,7 @@ Dashboard
 @endsection
 
 @section('content')
-<section class="splash profile_cover" id="startTour" style="background-image: url({{ $user->header }})">
+<section class="splash profile_cover" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
     @include('partials.modals.views.profile-picture')
     <div class="container content text-center text-white py-4">
@@ -43,7 +43,7 @@ Dashboard
             @endif
             @endif
         </div>
-        <div id="panel2 tourStep1" class="py-2">
+        <div id="panel2 " class="py-2 tourStep4">
             <div class="d-flex justify-content-around">
                 <span class="px-2">
                     <a href="#tab-view" class="text-white active">
@@ -51,13 +51,13 @@ Dashboard
                         <p class="m-0">Connections</p>
                     </a>
                 </span>
-                <span class="px-2 bold tourStep2">
+                <span class="px-2 bold">
                     <a href="#tab-view" class="text-white">
                         <span class="">{{ count($user->activities) }}</span>
                         <p class="m-0">Location</p>
                     </a>
                 </span>
-                <span class="px-2 tourStep3">
+                <span class="px-2">
                     <a href="" class="text-white" data-dismiss="modal" data-toggle="modal" data-target="#userFollowing">
                         <span class="">{{ count($user->followings) }}</span>
                         <p class="m-0">Following</p>
@@ -149,117 +149,5 @@ Dashboard
     }
 </script>
 
-@if(is_new_user())
-<script>
-    const tour = new Shepherd.Tour({
-        defaultStepOptions: {
-            cancelIcon: {
-                enabled: true
-            },
-            classes: 'class-1 class-2',
-            scrollTo: {
-                behavior: 'smooth',
-                block: 'center'
-            }
-        }
-    });
-
-    tour.addStep({
-        text: `WELCOME !!
-     You can take this tour to get started , click next to continue the tour. 
-     You could end tour by clicking on the close icon.`,
-        attachTo: {
-            element: '#startTour',
-            on: 'bottom'
-        },
-        buttons: [{
-                action() {
-                    return this.next();
-                },
-                text: 'Next'
-            },
-            {
-                action() {
-                    return this.complete();
-                },
-                text: 'Skip'
-            }
-        ],
-        id: 'creating'
-    });
-
-    tour.addStep({
-        text: `Click here to go to your Dashboard.`,
-        attachTo: {
-            element: '#tourStep1',
-            on: 'bottom'
-        },
-        buttons: [{
-                action() {
-                    return this.back();
-                },
-                classes: 'shepherd-button-secondary',
-                text: 'Back'
-            },
-            {
-                action() {
-                    return this.next();
-                },
-                text: 'Next'
-            }
-        ],
-        id: 'creating'
-    });
-
-    tour.addStep({
-        text: `Click here to add an already existing user on the platform as a connection.`,
-        attachTo: {
-            element: '.tourStep2',
-            on: 'bottom'
-        },
-        buttons: [{
-                action() {
-                    return this.back();
-                },
-                classes: 'shepherd-button-secondary',
-                text: 'Back'
-            },
-            {
-                action() {
-                    return this.next();
-                },
-                text: 'Next'
-            }
-        ],
-        id: 'creating'
-    });
-
-
-    tour.addStep({
-        text: `Click here to add a new user as a connection.`,
-        attachTo: {
-            element: '.tourStep3',
-            on: 'bottom'
-        },
-        buttons: [{
-                action() {
-                    return this.back();
-                },
-                classes: 'shepherd-button-secondary',
-                text: 'Back'
-            },
-            {
-                action() {
-                    return this.next();
-                },
-                text: 'DONE'
-            }
-        ],
-        id: 'creating'
-    });
-
-    tour.start();
-
-</script>
-@endif
+@include('component.tour.profileTour')
 @endsection

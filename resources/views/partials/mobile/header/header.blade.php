@@ -30,7 +30,7 @@
                                 <img src="{{ asset('/frontend/img/svg/back.svg') }}" alt="go back">
                             </a>
                         </p>
-                        <p class="mb-2">
+                        <p class="mb-2 ProfiletourStep2">
                             <a href="{{ route('dashboard.edit', auth()->user()->uuid) }}">
                                 <img src="{{ asset('frontend/img/svg/edit.svg') }}" alt="">
                             </a>
