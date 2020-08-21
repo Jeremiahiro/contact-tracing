@@ -134,5 +134,5 @@ Add Activity
 </section>
 @endsection
 @section('script')
-@include('tour.activityTour')
+@include('component.tour.activityTour')
 @endsection
