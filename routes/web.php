@@ -81,4 +81,6 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
 
     Route::get('/notification', 'UserNotificationsController@show')->name('notification');
 
+    Route::get('/walkthrough/complete', 'SettingController@skipWalkthrough')->name('tour.finish');
+
 });
