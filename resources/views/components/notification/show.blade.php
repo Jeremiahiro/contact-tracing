@@ -2,6 +2,9 @@
 
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
+<script src="{{ asset('frontend/jquery/map-view.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script>
+
 @endsection
 
 @section('web-content')
@@ -18,7 +21,6 @@
 
 @endsection
 @section('script')
-@include('activity.partials.mapScript')
 @endsection
 @section('footer')
 @include('partials.mobile.footer.footer')

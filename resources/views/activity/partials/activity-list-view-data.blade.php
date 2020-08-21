@@ -9,17 +9,19 @@
                 {{ $activity['end_date']->format('H:i A') }}
             </p>
         </div>
-        <div
-            class="{{ $index % 2 == 0 ? 'route_white' : 'route_purple' }} route p-3">
+        <div class="{{ auth()->user()->id == $activity->user_id ? 'route_white' : 'route_purple' }} route p-3">
             <div class="f-14 pb-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <h6 class="m-0 bold f-10">Route & Interactions</h6>
-                    @if (auth()->user()->id == $activity->user_id)
-                    <a href="" class="sub-menu" data-toggle="modal"
-                        data-target="#activityMenu-{{ $activity->id }}">
-                        <i class="fa fa-ellipsis-v"></i>
-                    </a>
-                    @endif
+                    <div>
+                        @if (auth()->user()->id == $activity->user_id)
+                        <a href="" class="sub-menu" data-toggle="modal" data-target="#activityMenu-{{ $activity->id }}">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </a>
+                        @else
+                        <img src="{{ $activity->owner->avatar }}" class="sub-menu avatar avatar-xs" alt="Activity Tag">
+                        @endif
+                    </div>
                 </div>
                 <a class="" data-toggle="modal" data-target="#tagModal-{{ $activity->id }}">
                     <div id="panel1" class="mb-0 pb-0 bold text-uppercase">
@@ -38,8 +40,7 @@
                     </a>
                 </div>
                 <div class="">
-                    <a class="f-8 bold" data-toggle="modal"
-                        data-target="#activitySelectionModal-{{ $activity->id }}">
+                    <a class="f-8 bold" data-toggle="modal" data-target="#activitySelectionModal-{{ $activity->id }}">
                         MAP VIEW
                     </a>
                 </div>
@@ -48,25 +49,21 @@
             <div class="d-flex justify-content-between">
                 <div class="">
                     @if($activity->tags->count())
-                        @foreach($activity->tags->take(4) as $index => $person)
-                            <img src="{{ $person->avatar }}" class="avatar avatar-xs" alt="Activity Tag">
-                        @endforeach
-                        @if($activity->tags->count() > 4)
-                            <a class="regular" data-toggle="modal" data-target="#activitySelectionModal-{{ $activity->id }}">
-                                <span class="regular">+{{ $activity->tags->count() - 4 }}</span>
-                            </a>
-                        @endif
+                    @foreach($activity->tags->take(4) as $index => $person)
+                    <img src="{{ $person->avatar }}" class="avatar avatar-xs" alt="Activity Tag">
+                    @endforeach
+                    @if($activity->tags->count() > 4)
+                    <a class="regular" data-toggle="modal" data-target="#activitySelectionModal-{{ $activity->id }}">
+                        <span class="regular">+{{ $activity->tags->count() - 4 }}</span>
+                    </a>
+                    @endif
                     @endif
                 </div>
                 <div class="">
                     @if (auth()->user()->id == $activity->user_id)
-                    <a href="{{ route('activity.edit', $activity->id) }}"
-                        class="add_svg">
-                        <img class="icon_blue"
-                            src="{{ asset('frontend/img/svg/plus_blue.svg' ) }}"
-                            alt="Edit Activity">
-                        <img class="icon_white"
-                            src="{{ asset('frontend/img/svg/plus_white.svg' ) }}"
+                    <a href="{{ route('activity.edit', $activity->id) }}" class="add_svg">
+                        <img class="icon_blue" src="{{ asset('frontend/img/svg/plus_blue.svg' ) }}" alt="Edit Activity">
+                        <img class="icon_white" src="{{ asset('frontend/img/svg/plus_white.svg' ) }}"
                             alt="Edit Activity">
                     </a>
                     @endif

@@ -24,7 +24,7 @@ Homepage
             <li data-target="#splashCarousel" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active splash splash-1">
+            <div class="carousel-item splash splash-1 active">
                 @include('homepage.splash.splash-1')
             </div>
             <div class="carousel-item splash splash-3">

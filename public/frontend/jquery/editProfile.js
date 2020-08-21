@@ -5,8 +5,8 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    $("#uploadAvatar").hide();
-    $("#uploadHeader").hide();
+    $("#upload-1").hide();
+    $("#upload-2").hide();
 
     $(function () {
         var croppie = null;
@@ -53,7 +53,7 @@ jQuery(document).ready(function ($) {
         // update profile picture
         $("#changeAvatar").on("change", function (event) {
             $("#uploadModal").modal();
-            $("#uploadAvatar").show();
+            $("#upload-1").show();
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
@@ -71,7 +71,7 @@ jQuery(document).ready(function ($) {
 
             var oldAvatar = $('#profile-pic').css('background-image');
 
-            $("#uploadAvatar").on("click", function () {
+            $("#upload-1").on("click", function () {
                 croppie.result('base64', {
                     type: "canvas",
                     size: "original", 
@@ -112,7 +112,7 @@ jQuery(document).ready(function ($) {
         // update profile header
         $("#changeHeader").on("change", function (event) {
             $("#uploadModal").modal();
-            $("#uploadHeader").show();
+            $("#upload-2").show();
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
@@ -130,7 +130,7 @@ jQuery(document).ready(function ($) {
 
             var oldHeader = $('#header-image').css('background-image');
 
-            $("#uploadHeader").on("click", function () {
+            $("#upload-2").on("click", function () {
                 croppie.result('base64', {
                     type: "canvas",
                     size: "original", 
@@ -178,8 +178,8 @@ jQuery(document).ready(function ($) {
             setTimeout(function () {
                 croppie.destroy();
             }, 100);
-            $("#uploadAvatar").hide();
-            $("#uploadHeader").hide();
+            $("#upload-1").hide();
+            $("#upload-2").hide();
         })
     });
 
@@ -258,6 +258,10 @@ jQuery(document).ready(function ($) {
             });
         });
     });
+
+    if(location.hash != null && location.hash != ""){
+        $(location.hash + '.collapse').collapse('show');
+    }
 
 });
 

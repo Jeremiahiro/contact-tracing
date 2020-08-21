@@ -10,7 +10,7 @@
             </div>
 
             <div>
-                @include('activity.partials.single-view')
+                @include('activity.partials.single-activity-view')
             </div>
         </div>
     </div>

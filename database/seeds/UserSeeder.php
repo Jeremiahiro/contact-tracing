@@ -1,7 +1,6 @@
 <?php
 
 use App\User;
-use App\Activity;
 use App\UserLocation;
 use Illuminate\Database\Seeder;
 
@@ -42,12 +41,6 @@ class UserSeeder extends Seeder
             'role' => 'admin'
         ]);
 
-        UserLocation::create([
-            'user_id' => '2'
-        ]);
-
-        factory(App\User::class, 50)->create();
-        factory(App\Activity::class, 50)->create();
-        factory(App\UserLocation::class, 50)->create();
+        factory(User::class, 50)->create();
     }
 }

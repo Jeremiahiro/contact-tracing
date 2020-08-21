@@ -10,32 +10,22 @@ jQuery(document).ready(function ($) {
                 // The key name on the left side is the name attribute
                 // of an input field. Validation rules are defined
                 // on the right side
-                // "start_date": "required",
-                // "end_date": "required",
-                from_latitude: {
+                latitude_1: {
                     number:true,
                     min:1,
                     required:true
                 },
-                to_latitude: {
+                latitude_2: {
                     number:true,
                     min:1,
-                    required:true
+                    required:true,
+                    notEqual: "#latitude_1"
                 },
-                // "name": "required",
-                // "email[]": {
-                //     required: true,
-                //     email: true
-                // },
             },
             // Specify validation error messages
             messages: {
-                // "start_date": "Please enter a valid date and time",
-                // "end_date": "Please enter a valid date and time",
-                "from_latitude": "Google Map: select a valid address",
-                "to_latitude": "Google Map: select a valid address",
-                // "name[]": "Please enter a valid name",
-                // "email[]": "Please enter a valid email address",
+                "latitude_1": "Google Map: select a valid address",
+                "latitude_2": "Google Map: select a valid address",
             },
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid

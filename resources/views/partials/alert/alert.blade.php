@@ -35,7 +35,7 @@
     </div>
     @endif
 
-    @if ($errors->any())
+    {{-- @if ($errors->any())
     <div class="alert alert-danger" role="alert">
         <button type="button" class="close text-danger" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true" class="text-danger">&times;</span>
@@ -46,5 +46,5 @@
             @endforeach
         </ul>
     </div>
-    @endif
+    @endif --}}
 </div>

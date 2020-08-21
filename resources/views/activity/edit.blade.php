@@ -9,6 +9,7 @@ Update Activity
 
 <script src="{{ asset('frontend/jquery/activityValidation.js') }}"></script>
 <script src="{{ asset('frontend/jquery/tabToggle.js') }}"></script>
+<script src="{{ asset('frontend/jquery/formTagging.js') }}"></script>
 
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/amsify.suggestags.css') }}">
 <script type="text/javascript" src="{{ asset('frontend/jquery/jquery.amsify.suggestags.js') }}">
@@ -27,7 +28,7 @@ Update Activity
 @endsection
 
 @section('content')
-@include('activity.partials.formScript')
+{{-- @include('activity.partials.formScript') --}}
 
 <div id="alert">
     @if($errors->any())

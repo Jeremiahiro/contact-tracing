@@ -7,43 +7,49 @@
         </div>
 
         <div class="d-flex justify-content-around align-items-center">
-            <span class="text-center">
-                <a href="#"><img src="{{  asset('/frontend/img/svg/marker.svg') }}" alt="marker"></a>
+            <div class="text-center">
+                <a href="{{ route('activity.index') }}">
+                    <img src="{{  asset('/frontend/img/svg/marker.svg') }}" alt="marker">
+                </a>
                 <div class="py-2 f-12 bold">
                     @guest
-                        0
+                    0
                     @else
-                        <span class="count">{{ Auth::user()->activities->count() }}</span>
+                    <span class="counter" data-count="{{ $activities }}">
+                        0
+                    </span>
                     @endguest
                     Locations
                 </div>
-            </span>
-            <span class="text-center pt-2">
-                <a href="{{ route('search')}}"><img src="{{  asset('/frontend/img/svg/person.svg') }}" alt="contacts"></a>
+            </div>
+            <div class="text-center pt-2">
+                <a href="{{ route('search')}}">
+                    <img src="{{  asset('/frontend/img/svg/person.svg') }}" alt="contacts">
+                </a>
                 <div class="py-2 f-12 bold">
                     @guest
-                        0
+                    0
                     @else
-                        <span class="count">{{ Auth::user()->tags->count() }}</span>
+                    <span class="counter" data-count="{{ $tags }}">
+                        0
+                    </span>
                     @endguest
                     Contacts
                 </div>
-            </span>
-            <span class="text-center pt-2">
-                <a href="{{ route('search')}}"><img src="{{  asset('/frontend/img/svg/people.svg') }}" alt="Active"></a>
+            </div>
+            <div class="text-center pt-2">
+                <a href="{{ route('map.view')}}"><img src="{{  asset('/frontend/img/svg/people.svg') }}" alt="Active"></a>
                 <div class="py-2 f-12 bold">
-                    @if ($count > 999 && $count <= 999999)
-                        {{ $count/1000 . ' K' }}
+                    @if($count > 999 && $count <= 999999) 
+                    <span class="counter" data-count="{{ $count/1000 . ' K' }}">0</span>
+                    @elseif($count> 999999) 
+                    <span class="counter" data-count="{{ $count/1000000 . ' M' }}">0</span>
                     @else
-                    @if ($count > 999999)
-                        {{ $count/1000000 . ' M' }}
-                    @else
-                        {{ $count }}
-                    @endif
+                    <span class="counter" data-count="{{ $count }}">0</span>
                     @endif
                     Active
                 </div>
-            </span>
+            </div>
         </div>
 
         <div class="pl-4">

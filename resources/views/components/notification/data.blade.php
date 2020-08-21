@@ -11,10 +11,10 @@
         @if ($activity->tags->count() > 2)
         You & {{ $activity->tags->count() }} others were tagged in an activity
         @else
-        You & {{ $activity->tags->count() }} other was tagged in an activity
+        You were tagged in an activity
         @endif
     </span>
-    @include('activity.partials.list-view')
+    @include('activity.partials.activity-list-view-data')
 </div>
 @endif
 @endforeach

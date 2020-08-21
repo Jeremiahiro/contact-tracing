@@ -6,16 +6,14 @@ Edit Profile
 
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
-<link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" crossorigin="anonymous"></script>
 <script src="{{ asset('frontend/jquery/editProfile.js') }}"></script>
+<script src="{{ asset('frontend/jquery/google-location-autocomplete.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize"type="text/javascript" async defer></script>
 @endsection
 
 @section('web-content')
 <script type="text/javascript">
     window.location = "{{ route('map.view') }}";
-
 </script>
 @endsection
 
@@ -206,32 +204,32 @@ Edit Profile
         </div>
 
         {{-- address info --}}
-        <div class="card">
+        <div class="card" id="address">
             <div class="card-header p-2" id="locationDetails">
                 <h5 class="mb-0">
                     <button class="btn text-primary collapsed" type="button" data-toggle="collapse"
-                        data-target="#collapseLocationDetials" aria-expanded="false"
-                        aria-controls="collapseLocationDetials">
+                        data-target="#addressInfo" aria-expanded="false"
+                        aria-controls="addressInfo">
                         <i class="fa fa-map-marker mr-2"></i> Address
                     </button>
                 </h5>
             </div>
             <div class="card-body p-0 m-0 ">
-                <div id="collapseLocationDetials" class="collapse" aria-labelledby="locationDetails"
+                <div id="addressInfo" class="collapse" aria-labelledby="locationDetails"
                     data-parent="#editProfileAccordion">
                     <form action="{{ route('location.update') }}" id="locationDetails" method="post" class="p-3">
                         @csrf
                         <div class="form-group mb-1">
-                            <label for="home_address" class="m-0 p-0 bold">Address (Home):</label>
-                            <input id="home_address" type="search"
+                            <label for="address_1" class="m-0 p-0 bold">Address (Home):</label>
+                            <input id="address_1" type="search"
                                 class="blue-input input rounded-0 @error('home_address') is-invalid @enderror"
                                 name="home_address" value="{{ $user->location->home_address ?? '' }}" required
                                 autocomplete="off" placeholder="Home Address">
-                            <input type="hidden" name="home_location" class="" id="home_location"
+                            <input type="hidden" name="home_location" class="" id="location_1"
                                 value="{{ $user->location->home_location ?? '' }}">
-                            <input type="hidden" name="home_latitude" class="" id="home_latitude"
+                            <input type="hidden" name="home_latitude" class="" id="latitude_1"
                                 value="{{ $user->location->home_latitude ?? '' }}">
-                            <input type="hidden" name="home_longitude" class="" id="home_longitude"
+                            <input type="hidden" name="home_longitude" class="" id="longitude_1"
                                 value="{{ $user->location->home_longitude ?? '' }}">
                             @error('home_location')
                             <span class="invalid-feedback" role="alert">
@@ -245,16 +243,16 @@ Edit Profile
                         </div>
 
                         <div class="form-group mb-2">
-                            <label for="office_address" class="m-0 p-0 bold">Address (Office):</label>
-                            <input id="office_address" type="search"
+                            <label for="address_2" class="m-0 p-0 bold">Address (Office):</label>
+                            <input id="address_2" type="search"
                                 class="blue-input input rounded-0 @error('office_address') is-invalid @enderror"
                                 name="office_address" value="{{ $user->location->office_address ?? '' }}"
                                 autocomplete="off" placeholder="Office Address">
-                            <input type="hidden" name="office_location" class="" id="office_location"
+                            <input type="hidden" name="office_location" class="" id="location_2"
                                 value="{{ $user->location->office_location ?? '' }}">
-                            <input type="hidden" name="office_latitude" class="" id="office_latitude"
+                            <input type="hidden" name="office_latitude" class="" id="latitude_2"
                                 value="{{ $user->location->office_latitude ?? '' }}">
-                            <input type="hidden" name="office_longitude" class="" id="office_longitude"
+                            <input type="hidden" name="office_longitude" class="" id="longitude_2"
                                 value="{{ $user->location->office_longitude ?? '' }}">
                             @error('office_location')
                             <span class="invalid-feedback" role="alert">
@@ -392,7 +390,7 @@ Edit Profile
                                 <div class="">
                                     <label class="switch">
                                         <input type="checkbox" data-id="{{ $user->uuid }}" name="status"
-                                            id="account_status" class="account_status" disabled/>
+                                            id="account_status" class="account_status" disabled />
                                         <span class="toggle-slider"></span>
                                     </label>
                                     <div class="spinner-border text-primary ml-2 spinner-border-sm d-none"
@@ -409,7 +407,7 @@ Edit Profile
         </div>
 
         <div class="mb-5"></div>
-   
+
     </div>
 </section>
 
@@ -422,45 +420,4 @@ Edit Profile
 @endsection
 @section('script')
 
-<script>
-    function initialize() {
-        var options = {
-            types: ['(cities)'],
-        };
-        var fromLoc = document.getElementById('home_address');
-        var getFromLoc = new google.maps.places.Autocomplete(fromLoc);
-        getFromLoc.addListener('place_changed', function () {
-            var place = getFromLoc.getPlace();
-            if (!place.geometry) {
-                // $('#fromAlert').toggleClass('show hide');
-                window.alert("'" + place.name + "' not available on Google Map");
-                fromLoc.value = "";
-                return;
-            } else {
-                $('#home_location').val(place.name);
-                $('#home_latitude').val(place.geometry['location'].lat());
-                $('#home_longitude').val(place.geometry['location'].lng());
-            }
-        });
-
-        var toLoc = document.getElementById('office_address');
-        var getToLoc = new google.maps.places.Autocomplete(toLoc);
-        getToLoc.addListener('place_changed', function () {
-            var place = getToLoc.getPlace();
-            if (!place.geometry) {
-                window.alert("'" + place.name + "' not available on Google Map");
-                toLoc.value = "";
-                return;
-            } else {
-                $('#office_location').val(place.name);
-                $('#office_latitude').val(place.geometry['location'].lat());
-                $('#office_longitude').val(place.geometry['location'].lng());
-            }
-        });
-    }
-
-</script>
-<script
-    src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places&callback=initialize"
-    type="text/javascript" async defer></script>
 @endsection
