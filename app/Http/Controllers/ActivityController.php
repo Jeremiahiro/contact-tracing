@@ -370,23 +370,6 @@ class ActivityController extends Controller
 		$this->validate($request, $rules, $messages);
     }
 
-
-    public function ()
-    {
-        if (Auth::user()->first_time_login) {
-            $first_time_login = true;
-            Auth::user()->first_time_login = false;
-            Auth::user()->save();
-        } else {
-            $first_time_login = false;
-        }
-
-        return view(
-            'test', 
-            ['first_time_login' => $first_time_login]
-        ); 
-    }
-
      /**
      * Show the search page.
      *

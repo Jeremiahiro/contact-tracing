@@ -46,8 +46,8 @@ class UserSeeder extends Seeder
             'user_id' => '2'
         ]);
 
-        factory(App\User::class, 50)->create();
-        factory(App\Activity::class, 50)->create();
-        factory(App\UserLocation::class, 50)->create();
+        #factory(App\User::class, 50)->create();
+        #factory(App\Activity::class, 50)->create();
+        #factory(App\UserLocation::class, 50)->create();
     }
 }

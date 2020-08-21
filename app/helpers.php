@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cookie;
      */
     function is_new_user()
     {
-        if (Auth::user()->first_time_login == 0) {
+        if (Auth::user()->first_time_login == true) {
             return true;
         }
         return false;

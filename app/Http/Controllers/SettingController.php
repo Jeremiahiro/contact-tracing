@@ -26,14 +26,34 @@ class SettingController extends Controller
 
     public function skipWalkthrough()
     {
-        # code...
         $user = Auth::user();
         if ($user->first_time_login != true) {
             $user->first_time_login = 1; 
             $user->save();
-            return response()->json('success', true);
+            return response()->json(['response' => 'success'], 201);
         }
+        $user->first_time_login = 0; 
+        $user->save();
+        return response()->json(['response' => 'updated'], 201);
+
     }
+
+
+    // public function  ()
+    // {
+    //     if (Auth::user()->first_time_login) {
+    //         $first_time_login = true;
+    //         Auth::user()->first_time_login = false;
+    //         Auth::user()->save();
+    //     } else {
+    //         $first_time_login = false;
+    //     }
+
+    //     return view(
+    //         'activity.create', 
+    //         ['first_time_login' => $first_time_login]
+    //     ); 
+    // }
 
     /**
      * Update the specified resource in storage.

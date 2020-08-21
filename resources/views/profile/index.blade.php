@@ -16,7 +16,7 @@ Dashboard
 @endsection
 
 @section('content')
-<section class="splash profile_cover" id="startTour" style="background-image: url({{ $user->header }})">
+<section class="splash profile_cover" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
     @include('partials.modals.views.profile-picture')
     <div class="container content text-center text-white py-4">
@@ -32,7 +32,7 @@ Dashboard
         <div class="py-2">
             @if ($user->id === auth()->user()->id)
             @if(!$user->location->home_location)
-            <a href="{{ route('dashboard.edit', auth()->user()->uuid) }}" class="btn blue-btn text-white">Update
+            <a href="{{ route('dashboard.edit', auth()->user()->uuid) }}" class="btn blue-btn text-white ProfiletourStep1">Update
                 Address</a>
             @else
             <h6 class="bold m-0 f-12">Home: {{ $user->location->home_location }}</h6>
@@ -40,7 +40,7 @@ Dashboard
             @endif
             @endif
         </div>
-        <div id="panel2 tourStep1" class="py-2">
+        <div id="panel2 " class="py-2 tourStep4">
             <div class="d-flex justify-content-around">
                 <span class="px-2">
                     <a href="#tab-view" class="text-white active">
@@ -48,13 +48,13 @@ Dashboard
                         <p class="m-0">Connections</p>
                     </a>
                 </span>
-                <span class="px-2 bold tourStep2">
+                <span class="px-2 bold">
                     <a href="#tab-view" class="text-white">
                         <span class="">{{ count($user->activities) }}</span>
                         <p class="m-0">Location</p>
                     </a>
                 </span>
-                <span class="px-2 tourStep3">
+                <span class="px-2">
                     <a href="" class="text-white" data-dismiss="modal" data-toggle="modal" data-target="#userFollowing">
                         <span class="">{{ count($user->followings) }}</span>
                         <p class="m-0">Following</p>
@@ -148,4 +148,5 @@ Dashboard
     }
 </script>
 
+@include('tour.profileTour')
 @endsection
