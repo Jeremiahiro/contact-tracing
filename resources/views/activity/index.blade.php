@@ -6,6 +6,8 @@ Activities
 
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
+<script src="{{ asset('frontend/jquery/map-view.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script>
 @endsection
 
 @section('web-content')
@@ -30,7 +32,7 @@ Activities
     <div class="tab-content">
         <div class="tab-pane in active" id="activity">
             <div id="activity-list">
-                @include('activity.partials.list')
+                @include('activity.partials.activity-list-view')
             </div>
             <div class="text-center mb-5">
                 <div class="spinner-grow text-primary load-activity d-none" role="status">
@@ -54,7 +56,6 @@ Activities
 
 @endsection
 @section('script')
-@include('activity.partials.mapScript')
 <script type="text/javascript">
     var page = 1;
     $(window).scroll(function () {

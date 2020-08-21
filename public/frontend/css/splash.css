@@ -46,7 +46,6 @@ p {
 }
 
 .date {
-    font-size: 238px;
     color: transparent;
     -webkit-text-stroke: 2px #fff;
     line-height: 0.9;
@@ -54,13 +53,11 @@ p {
 }
 
 .month {
-    font-size: 31px;
     line-height: 0.8;
     font-family: 'G-bold';
 }
 
 .time {
-    font-size: 47px;
     line-height: 1.1;
     font-family: 'G-light';
 }

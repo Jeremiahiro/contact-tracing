@@ -67,11 +67,26 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function activities()
     {
-        // return $this->hasMany('App\Activity', 'user_id')->groupBy('name');
-
         return $this->hasMany('App\Activity');
     }
-    
+
+    /**
+     * User has many activities
+     */
+    public function distinctActivity()
+    {
+        return $this->hasMany('App\Activity')->distinct('from_address');
+    }
+
+
+    /**
+     * User has many tags
+     */
+    public function distinctTag()
+    {
+        return $this->hasMany('App\ActivityTags')->distinct('name');
+    }
+
     /**
      * Get the GDPR compliant data portability array for the model.
      *
@@ -128,12 +143,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * a user can be tagged.
+     * @param \Illuminate\Database\Eloquent\Model|int $user
+     *
+     * @return bool
      */
-    public function follower()
+    public function isPerson()
     {
-        return $this->hasMany('App\Notification', 'follower');
+        return $this->hasMany('App\ActivityTags', 'person_id');
     }
+
     
     /**
      * Route notifications for the Nexmo channel.

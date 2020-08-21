@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::get('/', 'GeneralController@index')->name('home');
     Route::get('/search', 'GeneralController@search')->name('search');
     Route::get('/search/result', 'GeneralController@generalSearch')->name('search.query');
-    Route::get('/users/search', 'GeneralController@userSearch')->name('users.search');
+    Route::get('/users/search', 'GeneralController@userSearch')->name('search.user');
 
     Route::resource('/activity', 'ActivityController');
     Route::delete('/archive/activity/{id}', 'ActivityController@archive')->name('archive.activity');

@@ -20,9 +20,11 @@ class GeneralController extends Controller
     public function index()
     {
         $count = DB::table("users")->count();
-        $user = Auth::user();
+        $activities = Activity::where('user_id', auth()->user()->id)->distinct('from_address')->count();
+        $tags = ActivityTags::where('user_id', auth()->user()->id)->distinct('name')->count();
 
-        return view('homepage.index', compact('count'));
+        return view('homepage.index', compact(['count', 'activities', 'tags']));
+     
     }
 
     /**
@@ -92,7 +94,7 @@ class GeneralController extends Controller
                 ->where('role', '!=', 'super admin')
                 ->where('status', '!=', false)
                 ->where('username', 'LIKE', $search.'%')
-                ->simplePaginate(30);
+                ->simplePaginate(10);
 
             $output = '';
 
@@ -169,8 +171,8 @@ class GeneralController extends Controller
      */
     public function mapView()
     {
-        $data = UserLocation::where('home_location', '!=', null)->get(['home_location','home_latitude','home_longitude'])->toArray();
-         
+        $data = UserLocation::where('home_location', '!=', null)->get(['home_address','home_latitude','home_longitude'])->toArray();
+
         $count = DB::table("users")->count();
         $user = Auth::user();
         return view('components.map', compact('count', 'data'));

@@ -6,7 +6,7 @@
         </div>
         <div class="">
             <h1 class="time">
-                <a href="{{ route('activity.create') }}" class="time text-white">
+                <a href="{{ route('activity.create') }}" class="time f-46 text-white">
                     CONTACT TRACING
                 </a>
             </h1>

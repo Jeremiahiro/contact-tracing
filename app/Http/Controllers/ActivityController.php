@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cloudder;
 use App\User;
 use App\Activity;
 use App\ActivityTags;
@@ -39,17 +40,14 @@ class ActivityController extends Controller
 
         $activities = Activity::with('tags')->latest('updated_at')->simplePaginate(10);
 
-        // if($activities->count() > 0) {
-            if ($request->ajax()) {
-                $activities = view('activity.partials.list', compact('activities', 'istagged'))->render();
-                return response()->json([
-                    'activities'=>$activities,
-                    'istagged'=>$istagged,
-                    ]);
-            }
-            return view('activity.index', compact('activities', 'istagged'));
-        // }
-        // return redirect()->route('activity.create')->with('warning', 'You need to add an Activity!');
+        if ($request->ajax()) {
+            $activities = view('activity.partials.activity-list-view', compact('activities', 'istagged'))->render();
+            return response()->json([
+                'activities'=>$activities,
+                'istagged'=>$istagged,
+                ]);
+        }
+        return view('activity.index', compact('activities', 'istagged'));
 
     }
 
@@ -62,7 +60,8 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        return view('activity.create');
+        $user = Auth::user();
+        return view('activity.create', compact('user'));
     }
 
     /**
@@ -74,6 +73,20 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
         $this->validateActivity($request);
+
+        dd($request->all());
+
+
+        $from_image = $request->file('from_image')->getRealPath();
+        $to_image = $request->file('to_image')->getRealPath();
+
+        $uploadFrom = Cloudder::upload($from_image, null, ['folder' => 'SOP_Location_Pictures']);
+        $uploadTo = Cloudder::upload($to_image, null, ['folder' => 'SOP_Location_Pictures']);
+
+        // if($upload){
+            list($width, $height) = getimagesize($avatar);
+            $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
+            
 
         $start = Carbon::parse($request->start_date)->format('Y-m-d H:i');
         $end = Carbon::parse($request->end_date)->format('Y-m-d H:i');
@@ -162,8 +175,12 @@ class ActivityController extends Controller
                                 'action' => 'click here to see',
                                 'activity_id' => $activity->id,
                             ];
-                            $activityTag->notify(new ActivityTagNotification($details));
-                            $activityTag->notify(new ActivityTagSmsNotification($details));
+
+                            if($email[$key] != null){
+                                $activityTag->notify(new ActivityTagNotification($details));
+                            } elseif($phone[$key] != null) {
+                                $activityTag->notify(new ActivityTagSmsNotification($details));
+                            }
                         } 
                     }
                 }
@@ -290,8 +307,11 @@ class ActivityController extends Controller
                                         'action' => 'click here to see',
                                         'activity_id' => $activity->id,
                                     ];
-                                    $activityTag->notify(new ActivityTagNotification($details));
-                                    $activityTag->notify(new ActivityTagSmsNotification($details));
+                                    if($email[$key] != null){
+                                        $activityTag->notify(new ActivityTagNotification($details));
+                                    } elseif($phone[$key] != null) {
+                                        $activityTag->notify(new ActivityTagSmsNotification($details));
+                                    }
                                 }
                             }
                         }
@@ -351,11 +371,7 @@ class ActivityController extends Controller
     {
 
 		$rules = [
-            'from_location' => 'required',
             'from_latitude' => 'required',
-            'from_latitude' => 'required',
-            'to_location' => 'required',
-            'to_latitude' => 'required',
             'to_latitude' => 'required',
             'activity_tags.*.name' => 'sometimes',
             'activity_tags.*.email' => 'sometimes',

@@ -21,18 +21,20 @@ use Illuminate\Support\Str;
 $factory->define(Activity::class, function (Faker $faker) {
     return [
         'from_address' => $faker->address,
+        'from_location' => $faker->streetAddress,
         'from_latitude' => $faker->latitude($min = -4, $max = 7),
         'from_longitude' => $faker->longitude($min = -8, $max = 14),
-        'from_location' => $faker->streetAddress,
         
         'to_address' => $faker->address,
+        'to_location' => $faker->streetAddress,
         'to_latitude' => $faker->latitude($min = -8, $max = 7),
         'to_longitude' => $faker->longitude($min = -4, $max = 14),
-        'to_location' => $faker->streetAddress,
 
         'start_date' => $faker->dateTimeBetween('now'),
         'end_date' => $faker->dateTimeBetween('now', '+1 day'),
 
-        'user_id' => '1'
+        'user_id' => $faker->numberBetween($min = 1, $max = 2),
     ];
 });
+
+

@@ -6,7 +6,9 @@ Dashboard
 
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
-<link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
+<script src="{{ asset('frontend/jquery/map-view.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script>
+
 @endsection
 
 @section('web-content')
@@ -32,8 +34,9 @@ Dashboard
         <div class="py-2">
             @if ($user->id === auth()->user()->id)
             @if(!$user->location->home_location)
-            <a href="{{ route('dashboard.edit', auth()->user()->uuid) }}" class="btn blue-btn text-white ProfiletourStep1">Update
-                Address</a>
+            <a href="{{ route('dashboard.edit', auth()->user()->uuid) ."#addressInfo" }}" class="btn blue-btn text-white">Update
+                Address
+            </a>
             @else
             <h6 class="bold m-0 f-12">Home: {{ $user->location->home_location }}</h6>
             <h6 class="bold m-0 f-12">Office: {{ $user->location->office_location }}</h6>
@@ -78,7 +81,7 @@ Dashboard
                     FOLLOW
                     @endif
                 </strong>
-                <div class="spinner-border text-white ml-2 spinner-border-sm d-none btn-sm" id="follow-spinner" role="status">
+                <div class="spinner-border text-white ml-2 d-none" id="follow-spinner" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </button>
@@ -107,8 +110,6 @@ Dashboard
 @endsection
 
 @section('script')
-
-@include('activity.partials.mapScript')
 
 <script type="text/javascript">
     var page = 1;

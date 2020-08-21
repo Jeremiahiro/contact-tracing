@@ -16,10 +16,10 @@
                         </button>
                     </div>
                     <div>
-                        <button class="btn blue-btn text-white" id="uploadAvatar">
+                        <button class="btn blue-btn text-white" id="upload-1">
                             <i class="fa fa-upload text-white"></i> Upload
                         </button>
-                        <button class="btn blue-btn text-white" id="uploadHeader">
+                        <button class="btn blue-btn text-white" id="upload-2">
                             <i class="fa fa-upload text-white"></i> Upload
                         </button>
                     </div>

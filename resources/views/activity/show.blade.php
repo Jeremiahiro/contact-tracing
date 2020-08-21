@@ -10,7 +10,7 @@ Activities
 
 @section('web-content')
 <script type="text/javascript">
-    window.location = "{{ route('map.view') }}";
+    location = "{{ route('map.view') }}";
 </script>
 @endsection
 
@@ -19,7 +19,7 @@ Activities
 <section class="mb-5 py-3">
 
     <div class="route_purple mx-0 px-3 pb-4 pt-2">
-        @include('activity.partials.single-view')
+        @include('activity.partials.single-activity-view')
     </div>
 
 </section>

@@ -13,19 +13,24 @@ jQuery(document).ready(function ($) {
         });
     }, 4000);
 
-
-    $('.count').each(function () {
-        var $this = $(this);
-        jQuery({
-            Counter: 0
+    // number counter
+    $('.counter').each(function () {
+        var $this = $(this),
+            countTo = $this.attr('data-count');
+        $({
+            countNum: $this.text()
         }).animate({
-            Counter: $this.text()
+            countNum: countTo
         }, {
-            duration: 7000,
-            easing: 'swing',
+            duration: 3000,
+            easing: 'linear',
             step: function () {
-                $this.text(Math.ceil(this.Counter));
+                $this.text(Math.floor(this.countNum));
+            },
+            complete: function () {
+                $this.text(this.countNum);
             }
         });
     });
+
 });

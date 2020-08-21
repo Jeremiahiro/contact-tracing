@@ -12,29 +12,30 @@ Map View
 <section>
     <div class="d-flex flex-column min-vh-100">
         <div class="pt-4 px-5 route_blue">
-            <div class="row">
-                <div class="d-flex col-lg-6 col-md-12 justify-content-center">
+            <div class="d-flex justify-content-around align-items-center">
+                <div class="d-flex justify-content-center">
                     <a href="{{ route('about') }}" class="text-white pl-4">About</a>
                     <a href="{{ route('privacy') }}" class="text-white px-4">Privacy Policy</a>
                     <a href="{{ route('tos') }}" class="text-white">Terms of Use</a>
                 </div>
-                <div class="text-center col-lg-6 d-none d-md-block">
+
+                <div class="d-none d-md-block">
+                    <h6 class="f-14">For Best experience on the platform, kindly use a mobile device</h6>
+                </div>
+
+                <div class="text-center d-none d-md-block">
                     <div>
                         <i class="fa fa-user fa-2x mr-1"></i>
-                        <span class="f-16 count">
-                            @if($count > 999 && $count <= 999999) {{ $count/1000 . ' K' }} @else @if($count> 999999)
-                                {{ $count/1000000 . ' M' }}
-                                @else
-                                {{ $count }}
-                                @endif
-                                @endif
-                        </span>
+                        @if($count > 999 && $count <= 999999)
+                        <span class="counter"data-count="{{ $count/1000 . ' K' }}">0</span>
+                            @elseif($count> 999999)
+                            <span class="counter" data-count="{{ $count/1000000 . ' M' }}">0</span>
+                            @else
+                            <span class="counter" data-count="{{ $count }}">0</span>
+                            @endif
+                            </span>
                     </div>
                 </div>
-            </div>
-    
-            <div class="row text-center d-none d-md-block">
-                <h6 class="f-14">For Best experience on the platform, kindly use a mobile device</h6>
             </div>
         </div>
         <div class="flex-grow-1">
@@ -44,7 +45,7 @@ Map View
         </div>
         <div>
             <div class="mb-2"></div>
-            @include('partials.mobile.footer.footer-lg')
+            @include('partials.web.footer')
         </div>
     </div>
 </section>
@@ -219,7 +220,7 @@ Map View
                 var marker, i, contentString;
 
                 for (i = 0; i < locations.length; i++) {
-                    contentString = '<div id="content" class="regular"><h6>' + locations[i]['home_location'] +
+                    contentString = '<div id="content" class="regular text-primary"><h6>' + locations[i]['home_address'] +
                         '</h6></div>';
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(locations[i]['home_latitude'], locations[i][
