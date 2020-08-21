@@ -6,6 +6,8 @@ use Auth;
 use App\User;
 use Socialite;
 use Carbon\Carbon;
+use App\UserLocation;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -90,9 +92,12 @@ class LoginController extends Controller
         $string = substr($name, 0 , 5);
         $randomDigit = rand(100,999);
 
-        $username = strtoupper($string . $randomDigit);
+        $username = '@'.$string.$randomDigit;
+
+        $uuid = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0);
 
         $user = new User();
+        $user->uuid = $uuid;
         $user->name = $userSocial->name;
         $user->username = $username;
         $user->email = $userSocial->email;
@@ -102,6 +107,10 @@ class LoginController extends Controller
         $user->avatar = $userSocial->avatar;
         $user->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
         $user->save();
+
+        $location = new UserLocation();
+        $location->user_id = $user->id;
+        $location->save();
 
         return $user;
     }
@@ -127,4 +136,12 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function authenticated(Request $request, User $user) 
+    {
+        $user->status = 1; 
+        $user->save();
+
+        return redirect()->intended($this->redirectPath());
+     }
 }

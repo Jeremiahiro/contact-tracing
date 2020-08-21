@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21" height="73" viewBox="0 0 21 72">
+  <g id="Group_752" data-name="Group 752" transform="translate(443.5 143)">
+    <g id="Group_751" data-name="Group 751">
+      <g id="Group_750" data-name="Group 750" transform="translate(-548.881 326.119) rotate(90)">
+        <path id="round" d="M1.5,0A1.5,1.5,0,1,1,0,1.5,1.5,1.5,0,0,1,1.5,0Z" transform="translate(-434.5 -126.381)" fill="blue"/>
+        <path id="round-2" data-name="round" d="M1.5,0A1.5,1.5,0,1,1,0,1.5,1.5,1.5,0,0,1,1.5,0Z" transform="translate(-434.5 -117.381)" fill="blue"/>
+        <path id="round-3" data-name="round" d="M1.5,0A1.5,1.5,0,1,1,0,1.5,1.5,1.5,0,0,1,1.5,0Z" transform="translate(-434.5 -108.381)" fill="blue"/>
+      </g>
+      <rect id="pin" width="8" height="8" rx="4" transform="translate(-437 -143)" fill="blue"/>
+      <rect id="pin-2" data-name="pin" width="8" height="8" rx="4" transform="translate(-437 -79)" fill="blue"/>
+    </g>
+  </g>
+</svg>

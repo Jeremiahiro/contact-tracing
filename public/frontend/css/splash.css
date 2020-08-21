@@ -22,7 +22,8 @@ p {
 }
 
 .splash {
-    background-color: rgb(85, 85, 85);
+    /* background-color: rgba(85, 85, 85); */
+    background-color: rgb(85, 85, 85, 0.5);
     background-blend-mode: overlay;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -45,7 +46,6 @@ p {
 }
 
 .date {
-    font-size: 238px;
     color: transparent;
     -webkit-text-stroke: 2px #fff;
     line-height: 0.9;
@@ -53,13 +53,11 @@ p {
 }
 
 .month {
-    font-size: 31px;
     line-height: 0.8;
     font-family: 'G-bold';
 }
 
 .time {
-    font-size: 47px;
     line-height: 1.1;
     font-family: 'G-light';
 }
@@ -71,68 +69,9 @@ p {
     font-weight: bold;
 }
 
-.btn:focus,
-.btn:active {
-    border: 0;
-    outline: 0;
-    box-shadow: none;
-    -webkit-appearance: none;
-    -webkit-box-shadow: none;
-    outline: -webkit-focus-ring-color auto 0px;
-}
-
-.blue-btn {
-    background-color: #0000FF;
-    color: #fff;
-    font-size: 14px;
-}
-
-/* .login input {
-    border-bottom: 2px solid #fff;
-} */
-
-/* .recordactivity {
-    color: #0B24FA;
-} */
-
-/* .input_label {
-    font-size: 24px;
-} */
-
-/* .routeheader {
-    font-size: 9px !important;
-} */
-
 .vl {
-    border-left: 2px solid #0B24FA;
-    height: 105px;
-}
-
-.route {
-    border-radius: 20px;
-    width: 100%;
-}
-
-.route_white {
-    background-color: #F7F7F7;
-    color: #0000ff;
-}
-
-.route_white h6 {
-    color: #707070;
-}
-
-.route_purple {
-    background-color: #6406A8;
-    color: #fff;
-}
-
-.route_white .add_svg .icon_blue{
-    display: none;
-}
-
-.route_purple .add_svg .icon_white{
-    display: none;
+    border-right: 2px solid #0B24FA;
+    min-height: 115px;
 }
 
 .fulfilled_notification {
@@ -195,8 +134,8 @@ p {
     border-radius: 1px 20px;
 }
 
-/* .profile-places-img {
-    display: initial;
-    width: 40px;
-    height: 50px;
-} */
+.profile_cover {
+    min-height: 350px;
+    border-bottom-left-radius: 43px;
+    border-bottom-right-radius: 43px;
+}

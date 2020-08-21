@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\UserLocation;
 
 class RegisterController extends Controller
 {
@@ -55,9 +56,6 @@ class RegisterController extends Controller
             'password'  =>  ['required', 'string', 'min:8', 'confirmed', 'regex:/(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'],
             'username'  =>  ['string'],
             'phone'     =>  ['phone:AUTO,NG'],
-            'longitude' =>  ['string'],
-            'latitude'  =>  ['string'],
-            'location'  =>  ['string'],
         ]);
     }
 
@@ -73,15 +71,35 @@ class RegisterController extends Controller
         $string = substr($name, 0, 5);
         $randomDigit = rand(10,99);
 
-        $username = strtoupper('@' . $string . $randomDigit);
+        $username = '@'.$string.$randomDigit;
 
-        return User::create([
-            'name' => $data['name'],
-            'email'     => $data['email'],
-            'phone'     => $data['phone'],
-            'password'  => Hash::make($data['password']),
-            'username'  => $username,
-            'avatar'    => 'https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png',
-        ]);
+        $uuid = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0);
+
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->phone = $data['phone'];
+        $user->password = Hash::make($data['password']);
+        $user->username = $username;
+        $user->uuid = $uuid;
+        $user->avatar =  'https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png';
+
+        $user->save();
+
+        $location = new UserLocation();
+        $location->user_id = $user->id;
+        $location->save();
+
+        return $user;
+
+        // return User::create([
+        //     'name'      => $data['name'],
+        //     'email'     => $data['email'],
+        //     'phone'     => $data['phone'],
+        //     'password'  => Hash::make($data['password']),
+        //     'username'  => $username,
+        //     'uuid'      => $uuid,
+        //     'avatar'    =>  'https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png',
+        // ]);
     }
 }

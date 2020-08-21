@@ -9,13 +9,14 @@ Homepage
 @endsection
 
 @section('web-content')
-<h1 class="text-center">Please use a mobile device</h1>
+<script type="text/javascript">
+    window.location = "{{ route('map.view') }}";
+</script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 
 <section class="">
-
     <div id="splashCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators pb-5">
             <li data-target="#splashCarousel" data-slide-to="0" class="active"></li>
@@ -23,7 +24,7 @@ Homepage
             <li data-target="#splashCarousel" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active splash splash-1">
+            <div class="carousel-item splash splash-1 active">
                 @include('homepage.splash.splash-1')
             </div>
             <div class="carousel-item splash splash-3">

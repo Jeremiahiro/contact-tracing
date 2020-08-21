@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Activity extends Model
 {
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
@@ -23,9 +25,10 @@ class Activity extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'start_date' => 'datetime',
-        'end_date' => 'datetime',
+    protected $dates = [
+        'start_date',
+        'end_date',
+        'deleted_at',
     ];
 
     /**
@@ -33,15 +36,25 @@ class Activity extends Model
      */
     public function owner()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     /**
      * Get the people attached to the  activity.
+     * Group by unique names
      */
     public function tags()
     {
-        return $this->hasMany('App\ActivityTags', 'activity_id')->orderBy('created_at');
+        return $this->hasMany('App\ActivityTags', 'activity_id');
+    }
+
+    /**
+     * Get the people attached to the  activity.
+     * Group by unique names
+     */
+    public function tagging()
+    {
+        return $this->hasMany('App\ActivityTags', 'activity_id')->groupBy('name');
     }
 
     /**
@@ -51,4 +64,5 @@ class Activity extends Model
     {
         return $this->hasMany('App\User', 'person_id')->orderBy('created_at');
     }
+
 }

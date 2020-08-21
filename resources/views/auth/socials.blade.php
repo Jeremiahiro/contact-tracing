@@ -18,12 +18,5 @@
         <div class="col m-1 py-1 px-3 rounded text-center border border-white">
             <a href="{{ route('login') }}" class="text-white f-14">Login</a>
         </div>
-
-        {{-- <div class="col col-6">
-            <a href="{{ route('register') }}" class="m-1 py-1 px-3 rounded text-center border border-white text-white f-14">Register</a>
-        </div>
-        <div class="col col-6 border border-2 border-white py-1 px-2 rounded text-center">
-            <a href="{{ route('login') }}" class="text-white f-14">Login</a>
-        </div> --}}
     </div>
 </div>

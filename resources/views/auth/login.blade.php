@@ -5,21 +5,23 @@
 @endsection
 
 @section('web-content')
-<h1 class="text-center">Please use a mobile device</h1>
+<script type="text/javascript">
+    window.location = "{{ route('map.view') }}";//here double curly bracket
+</script>
 @endsection
 
-@section('mobile-content')
+@section('content')
 <section>
     <div class="splash splash-1">
         @include('partials.mobile.header.header')
 
-        <div class="container">
+        <div class="container col-md-6">
             <div class="">
                 <h1 class="text-white f-60 py-5">LOGIN</h1>
                 <form class="" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group row">
-                        <div class="input-group col-md-6 mb-3">
+                        <div class="input-group col-md-12 mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text transparent-input border-bottom" id="login-user-icon">
                                     <i class="fa fa-user"></i>
@@ -40,7 +42,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="input-group col-md-6 mb-3">
+                        <div class="input-group col-md-12 mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text transparent-input border-bottom" id="login-pass-icon">
                                     <i class="fa fa-lock"></i>

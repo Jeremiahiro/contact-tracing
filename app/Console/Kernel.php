@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+        \Dialect\Gdpr\Commands\AnonymizeInactiveUsers::class,
     ];
 
     /**
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('gdpr:anonymizeInactiveUsers')->daily();
         // $schedule->command('inspire')->hourly();
     }
 
