@@ -65,6 +65,22 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * User has many activities
      */
+    public function favorites()
+    {
+        return $this->hasMany('App\FavouriteLocation');
+    }
+
+    /**
+     * User has many activities
+     */
+    public function locations()
+    {
+        return $this->hasMany('App\UserLocation');
+    }    
+
+    /**
+     * User has many activities
+     */
     public function activities()
     {
         return $this->hasMany('App\Activity');

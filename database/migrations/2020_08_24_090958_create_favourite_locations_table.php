@@ -16,7 +16,7 @@ class CreateFavouriteLocationsTable extends Migration
         Schema::create('favourite_locations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('activity_id')->constrained('activities')->onDelete('cascade');
+            $table->foreignId('location_id')->constrained('user_locations')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Activity;
 use App\UserLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,13 +11,42 @@ use Illuminate\Support\Facades\Auth;
 class UserLocationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get all locations by user
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        //
+        $locations = Auth::user()->locations;
+        $favorites = Auth::user()->favorites;
+        
+        return view('components.locations.index', compact(['locations', 'favorites']));
+    }
+
+    /**
+     * Favorite a particular location
+     *
+     * @param  Post $post
+     * @return Response
+     */
+    public function favoriteLoc(UserLocation $location)
+    {
+        Auth::user()->favorites()->attach($location->id);
+
+        return back();
+    }
+
+    /**
+     * Unfavorite a particular location
+     *
+     * @param  Post $post
+     * @return Response
+     */
+    public function unFavoritePost(Activity $activity)
+    {
+        Auth::user()->favorites()->detach($activity->id);
+
+        return back();
     }
 
     /**

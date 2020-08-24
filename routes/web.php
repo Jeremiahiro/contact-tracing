@@ -41,16 +41,18 @@ Route::get('activityConnection', function () {
 
 Auth::routes(['verify' => true]);
 
+
+// unauthenticate routes
 Route::get('/activity/map-view', 'GeneralController@mapView')->name('map.view');
 Route::get('/about-us', 'GeneralController@about')->name('about');
 Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
 Route::get('/terms-of-use', 'GeneralController@terms')->name('tos');
 Route::get('/gdpr/dpa', 'GeneralController@gdprDPA')->name('gdpr.dpa');
 
-Auth::routes(['verify' => true]);
 Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->name('social.login');
 Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
 
+// authenticated routes
 Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::get('/', 'GeneralController@index')->name('home');
     Route::get('/search', 'GeneralController@search')->name('search');
@@ -60,7 +62,6 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::resource('/activity', 'ActivityController');
     Route::delete('/archive/activity/{id}', 'ActivityController@archive')->name('archive.activity');
     Route::get('/archive/activity/{id}', 'ActivityController@unarchive')->name('unarchive.activity');
-
     Route::get('/calendar', 'ActivityController@calendar')->name('calendar');
     Route::get('/sort', 'ActivityController@calendarActivity')->name('date_sort');
     
@@ -70,8 +71,10 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::post('/dashboard/update', 'UserController@update')->name('dashboard.update');
     Route::post('/follow', 'UserController@follow')->name('follow');
 
-    Route::get('/components/locations', 'GeneralController@locations')->name('locations');
     
+    Route::post('favorite/{location}', 'UserLocationController@favoriteLoc');
+    Route::post('unfavorite/{location}', 'UserLocationController@unFavoriteLoc');
+    Route::get('/locations', 'UserLocationController@index')->name('locations');
     Route::post('/dashboard/location/update', 'UserLocationController@update')->name('location.update');
     Route::get('/location/visibility', 'UserLocationController@locationVisibility')->name('changeStatus');
 
@@ -80,15 +83,11 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::get('/deactivate/account', 'SettingController@deactivate')->name('deactivateAccount');
     Route::post('/avatar-upload', 'SettingController@uploadAvatar')->name('uploadAvatar');
     Route::post('/header-upload', 'SettingController@uploadHeader')->name('uploadHeader');
+    Route::get('/walkthrough/complete', 'SettingController@skipWalkthrough')->name('tour.finish');
+
 
     Route::get('/notification', 'UserNotificationsController@show')->name('notification');
 
-    Route::post('favorite/{activity}', 'FavouriteLocationController@favoriteLoc');
-    Route::post('unfavorite/{activity}', 'FavouriteLocationController@unFavoriteLoc');
 
-    Route::get('/favourite/locations', 'FavouriteLocationController@index')->name('favourite.location');
-
-
-    Route::get('/walkthrough/complete', 'SettingController@skipWalkthrough')->name('tour.finish');
 
 });
