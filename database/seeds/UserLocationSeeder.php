@@ -11,15 +11,7 @@ class UserLocationSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        UserLocation::create([
-            'user_id' => '1'
-        ]);
-
-        UserLocation::create([
-            'user_id' => '2'
-        ]);
-        
+    {   
         factory(UserLocation::class, 50)->create();
     }
 }

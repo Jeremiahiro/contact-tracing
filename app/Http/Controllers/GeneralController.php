@@ -177,4 +177,5 @@ class GeneralController extends Controller
         $user = Auth::user();
         return view('components.map', compact('count', 'data'));
     }
+
 }

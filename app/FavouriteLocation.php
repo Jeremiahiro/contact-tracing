@@ -11,6 +11,15 @@ class FavouriteLocation extends Model
      */
     public function favorites()
     {
-        return $this->belongsToMany('App\Activity', 'favourite_locations', 'user_id', 'activity_id')->withTimeStamps();
+        return $this->belongsToMany('App\UserLocations', 'favourite_locations', 'user_id', 'location_id')->withTimeStamps();
     }
+
+     /**
+     * Get all of favorite posts for the user.
+     */
+    public function location()
+    {
+        return $this->belongsTo('App\UserLocation', 'location_id');
+    }
+   
 }

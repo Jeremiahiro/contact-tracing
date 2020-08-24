@@ -285,5 +285,6 @@ Add Activity
 
 @endsection
 @section('script')
+@include('components.tour.activityTour')
 
 @endsection
