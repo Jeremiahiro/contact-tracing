@@ -17,6 +17,6 @@ $factory->define(UserLocation::class, function (Faker $faker) {
         'office_latitude' => $faker->latitude($min = -8, $max = 7),
         'office_longitude' => $faker->longitude($min = -4, $max = 14),
 
-        'user_id' => $faker->numberBetween($min = 1, $max = 50),
+        'user_id' => $faker->numberBetween($min = 1, $max = 2),
     ];
 });

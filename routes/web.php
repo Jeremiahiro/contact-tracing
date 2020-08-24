@@ -83,6 +83,12 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
 
     Route::get('/notification', 'UserNotificationsController@show')->name('notification');
 
+    Route::post('favorite/{activity}', 'FavouriteLocationController@favoriteLoc');
+    Route::post('unfavorite/{activity}', 'FavouriteLocationController@unFavoriteLoc');
+
+    Route::get('/favourite/locations', 'FavouriteLocationController@index')->name('favourite.location');
+
+
     Route::get('/walkthrough/complete', 'SettingController@skipWalkthrough')->name('tour.finish');
 
 });

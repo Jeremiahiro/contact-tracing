@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ActivitySeeder::class);
         $this->call(ActivityTagSeeder::class);
         $this->call(UserLocationSeeder::class);
+        $this->call(FavouriteLocationSeeder::class);
     }
 }

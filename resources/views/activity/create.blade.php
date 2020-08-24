@@ -60,7 +60,8 @@ Add Activity
                     <div>
                         <span class="mt-2">
                             <img src="{{ asset('/frontend/img/svg/left.svg') }}" alt="" class="ml-1" id="sideIcon-1">
-                            <img src="{{ asset('/frontend/img/svg/left-1.svg') }}" alt="" class="ml-1 d-none" id="sideIcon-2">
+                            <img src="{{ asset('/frontend/img/svg/left-1.svg') }}" alt="" class="ml-1 d-none"
+                                id="sideIcon-2">
                         </span>
                     </div>
                     <div class="form-group row w-100">

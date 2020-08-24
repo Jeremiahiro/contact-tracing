@@ -139,7 +139,16 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function location()
     {
-        return $this->hasOne('App\UserLocation', 'user_id');
+        return $this->hasMany('App\UserLocation', 'user_id');
+    }
+
+
+    /**
+     * user has a location
+     */
+    public function favorite_location()
+    {
+        return $this->hasMany('App\UserLocation', 'user_id');
     }
 
     /**
