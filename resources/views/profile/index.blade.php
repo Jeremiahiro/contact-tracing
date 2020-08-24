@@ -52,7 +52,7 @@ Dashboard
                     </a>
                 </span>
                 <span class="px-2 bold">
-                    <a href="#tab-view" class="text-white">
+                    <a href="{{ route('locations', auth()->user()->uuid) }}" class="text-white">
                         <span class="">{{ count($user->activities) }}</span>
                         <p class="m-0">Location</p>
                     </a>

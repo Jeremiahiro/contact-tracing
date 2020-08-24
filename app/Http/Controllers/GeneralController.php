@@ -177,4 +177,15 @@ class GeneralController extends Controller
         $user = Auth::user();
         return view('components.map', compact('count', 'data'));
     }
+
+
+    /**
+     * Show the Locations page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function locations()
+    {
+        return view('components.locations');
+    }
 }

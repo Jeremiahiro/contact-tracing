@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::get('/dashboard/{id}/edit', 'UserController@edit')->name('dashboard.edit');
     Route::post('/dashboard/update', 'UserController@update')->name('dashboard.update');
     Route::post('/follow', 'UserController@follow')->name('follow');
+
+    Route::get('/components/locations', 'GeneralController@locations')->name('locations');
     
     Route::post('/dashboard/location/update', 'UserLocationController@update')->name('location.update');
     Route::get('/location/visibility', 'UserLocationController@locationVisibility')->name('changeStatus');
