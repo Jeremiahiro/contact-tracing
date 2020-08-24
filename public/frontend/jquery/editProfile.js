@@ -54,6 +54,7 @@ jQuery(document).ready(function ($) {
         $("#changeAvatar").on("change", function (event) {
             $("#uploadModal").modal();
             $("#upload-1").show();
+            var requestType = $(this).data('type');
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
@@ -74,17 +75,18 @@ jQuery(document).ready(function ($) {
             $("#upload-1").on("click", function () {
                 croppie.result('base64', {
                     type: "canvas",
-                    size: "original", 
-                    format: "png", 
+                    size: "original",
+                    format: "png",
                     quality: 1
                 }).then(function (base64) {
                     $("#uploadModal").modal("hide");
                     $('.profile-pic-cam').hide();
                     $('#profile-pic').css('background-image', 'url(/frontend/loader.gif)');
 
-                    var url = `/avatar-upload`;
+                    var url = `/image-upload`;
                     var formData = new FormData();
-                    formData.append("avatar", $.base64ImageToBlob(base64));
+                    formData.append("image", $.base64ImageToBlob(base64));
+                    formData.append("type", requestType);
 
                     $.ajax({
                         type: 'POST',
@@ -113,6 +115,7 @@ jQuery(document).ready(function ($) {
         $("#changeHeader").on("change", function (event) {
             $("#uploadModal").modal();
             $("#upload-2").show();
+            var requestType = $(this).data('type');
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
@@ -133,16 +136,17 @@ jQuery(document).ready(function ($) {
             $("#upload-2").on("click", function () {
                 croppie.result('base64', {
                     type: "canvas",
-                    size: "original", 
-                    format: "png", 
+                    size: "original",
+                    format: "png",
                     quality: 1
                 }).then(function (base64) {
                     $("#uploadModal").modal("hide");
                     $('#header-image').css('background-image', 'url(/frontend/loader.gif)');
 
-                    var url = `/header-upload`;
+                    var url = `/image-upload`;
                     var formData = new FormData();
-                    formData.append("header", $.base64ImageToBlob(base64));
+                    formData.append("image", $.base64ImageToBlob(base64));
+                    formData.append("type", requestType);
 
                     $.ajax({
                         type: 'POST',
@@ -150,17 +154,20 @@ jQuery(document).ready(function ($) {
                         data: formData,
                         processData: false,
                         contentType: false,
+                        dataType: 'json',
                     }).done(response => {
                         if (response.success != true) {
                             $('#header-image').css('background-image', oldHeader);
                             showAlertMessage('danger', 'Oops! something went wrong');
                         } else {
                             $('#header-image').css('background-image', 'url(' + base64 + ')');
+                            console.log(response);
                             // showAlertMessage('success', 'Successful');
                         }
                     }).fail(e => {
                         $('#header-image').css('background-image', oldHeader);
                         showAlertMessage('danger', 'Unsupported Image Size or Format');
+                        console.log(e);
                         // location.reload(true);
                     });
                 });
@@ -259,7 +266,7 @@ jQuery(document).ready(function ($) {
         });
     });
 
-    if(location.hash != null && location.hash != ""){
+    if (location.hash != null && location.hash != "") {
         $(location.hash + '.collapse').collapse('show');
     }
 

@@ -23,8 +23,8 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="tab2">
-            <div id="activityTaggedControls" class="carousel slide" data-ride="carousel">
+        <div class="tab-pane fade mb-5" id="tab2">
+            <div id="activityTaggedControls" class="carousel slide" data-ride="carousel" style="height: 150px;">
                 <div class="carousel-inner mb-5" role="listbox">
                     @foreach($user->tagging->chunk(12) as $tags)
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">

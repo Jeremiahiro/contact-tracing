@@ -81,8 +81,8 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::get('/dashboard/{id}/setting', 'SettingController@setting')->name('dashboard.setting');
     Route::post('/dashboard/password', 'SettingController@updatePassword')->name('dashboard.password');
     Route::get('/deactivate/account', 'SettingController@deactivate')->name('deactivateAccount');
-    Route::post('/avatar-upload', 'SettingController@uploadAvatar')->name('uploadAvatar');
-    Route::post('/header-upload', 'SettingController@uploadHeader')->name('uploadHeader');
+    Route::post('/image-upload', 'SettingController@uploadImage')->name('upload.image');
+    Route::post('/image-delete', 'SettingController@destroyImage')->name('delete.image');
     Route::get('/walkthrough/complete', 'SettingController@skipWalkthrough')->name('tour.finish');
 
 

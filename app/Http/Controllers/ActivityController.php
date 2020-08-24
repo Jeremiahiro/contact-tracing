@@ -60,8 +60,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        return view('activity.create', compact('user'));
+        return view('activity.create');
     }
 
     /**
@@ -77,27 +76,11 @@ class ActivityController extends Controller
         $start = Carbon::parse($request->start_date)->format('Y-m-d H:i');
         $end = Carbon::parse($request->end_date)->format('Y-m-d H:i');
 
+        dd($request->all());
+
         DB::beginTransaction();
 
         try {
-
-            if($request->from_image != null) {
-                $from_image = $request->file('from_image')->getRealPath();
-                $uploadFrom = Cloudder::upload($from_image, null, ['folder' => 'SOP_Location_Pictures']);
-                if($uploadFrom){
-                    list($width1, $height1) = getimagesize($from_image);
-                    $from_image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width1, "height"=>$height1]);
-                }
-            }
-    
-            if($request->to_image != null){
-                $to_image = $request->file('to_image')->getRealPath();
-                $uploadTo = Cloudder::upload($to_image, null, ['folder' => 'SOP_Location_Pictures']);
-                if($uploadTo){
-                    list($width2, $height2) = getimagesize($to_image);
-                    $to_image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width2, "height"=>$height2]);
-                }
-            }
 
             $activity = Activity::firstOrCreate([
                 'from_address' => $request->from_address,
@@ -113,8 +96,8 @@ class ActivityController extends Controller
                 'start_date' => $start,
                 'end_date' => $end,
 
-                'from_image' => $from_image_url,
-                'to_image' => $to_image_url,
+                'from_image' => $request->from_image,
+                'to_image' => $request->to_image,
     
                 'user_id' => auth()->user()->id,
             ]);

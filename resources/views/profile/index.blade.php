@@ -31,18 +31,6 @@ Dashboard
             <h6 class="bold m-0 f-18">{{ $user->name }}</h6>
             <p class="bold">{{ $user->username }}</p>
         </div>
-        <div class="py-2">
-            @if ($user->id === auth()->user()->id)
-            @if(!$user->location->home_location)
-            <a href="{{ route('dashboard.edit', auth()->user()->uuid) ."#addressInfo" }}" class="btn blue-btn text-white">Update
-                Address
-            </a>
-            @else
-            <h6 class="bold m-0 f-12">Home: {{ $user->location->home_location }}</h6>
-            <h6 class="bold m-0 f-12">Office: {{ $user->location->office_location }}</h6>
-            @endif
-            @endif
-        </div>
         <div id="panel2 " class="py-2 tourStep4">
             <div class="d-flex justify-content-around">
                 <span class="px-2">

@@ -56,7 +56,7 @@ class GdprController extends Controller
             'accepted_gdpr' => true,
         ]);
 
-        return redirect()->intended('/');
+        return redirect()->intended();
     }
 
     /**

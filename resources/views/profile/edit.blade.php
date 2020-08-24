@@ -7,8 +7,6 @@ Edit Profile
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 <script src="{{ asset('frontend/jquery/editProfile.js') }}"></script>
-<script src="{{ asset('frontend/jquery/google-location-autocomplete.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize"type="text/javascript" async defer></script>
 @endsection
 
 @section('web-content')
@@ -48,7 +46,7 @@ Edit Profile
                     </span>
                 </div>
             </label>
-            <input type="File" name="avatar" class="d-none avatar-input" id="changeAvatar" value="" accept="image/*">
+            <input type="File" name="avatar" class="d-none avatar-input" id="changeAvatar" value="" accept="image/*" data-type="profile_image">
         </div>
         <div class="py-2">
             <h6 class="bold m-0 f-18">{{ $user->name }}</h6>
@@ -74,7 +72,7 @@ Edit Profile
                     </svg>
                 </span>
             </label>
-            <input type="File" name="header" class="d-none avatar-input" id="changeHeader" value="" accept="image/*">
+            <input type="File" name="header" class="d-none avatar-input" id="changeHeader" value="" accept="image/*" data-type="header_image">
         </div>
     </div>
 </section>
@@ -193,76 +191,6 @@ Edit Profile
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                        </div>
-
-                        <div class="form-group mx-3 row">
-                            <button type="submit" class="ml-auto btn blue-btn text-white">Done</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        {{-- address info --}}
-        <div class="card" id="address">
-            <div class="card-header p-2" id="locationDetails">
-                <h5 class="mb-0">
-                    <button class="btn text-primary collapsed" type="button" data-toggle="collapse"
-                        data-target="#addressInfo" aria-expanded="false"
-                        aria-controls="addressInfo">
-                        <i class="fa fa-map-marker mr-2"></i> Address
-                    </button>
-                </h5>
-            </div>
-            <div class="card-body p-0 m-0 ">
-                <div id="addressInfo" class="collapse" aria-labelledby="locationDetails"
-                    data-parent="#editProfileAccordion">
-                    <form action="{{ route('location.update') }}" id="locationDetails" method="post" class="p-3">
-                        @csrf
-                        <div class="form-group mb-1">
-                            <label for="address_1" class="m-0 p-0 bold">Address (Home):</label>
-                            <input id="address_1" type="search"
-                                class="blue-input input rounded-0 @error('home_address') is-invalid @enderror"
-                                name="home_address" value="{{ $user->location->home_address ?? '' }}" required
-                                autocomplete="off" placeholder="Home Address">
-                            <input type="hidden" name="home_location" class="" id="location_1"
-                                value="{{ $user->location->home_location ?? '' }}">
-                            <input type="hidden" name="home_latitude" class="" id="latitude_1"
-                                value="{{ $user->location->home_latitude ?? '' }}">
-                            <input type="hidden" name="home_longitude" class="" id="longitude_1"
-                                value="{{ $user->location->home_longitude ?? '' }}">
-                            @error('home_location')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                            <span class="invalid-feedback" id="fromAlert" role="alert">
-                                <strong class="text-danger regular"> Selected location not available on Google
-                                    Map</strong>
-                            </span>
-                        </div>
-
-                        <div class="form-group mb-2">
-                            <label for="address_2" class="m-0 p-0 bold">Address (Office):</label>
-                            <input id="address_2" type="search"
-                                class="blue-input input rounded-0 @error('office_address') is-invalid @enderror"
-                                name="office_address" value="{{ $user->location->office_address ?? '' }}"
-                                autocomplete="off" placeholder="Office Address">
-                            <input type="hidden" name="office_location" class="" id="location_2"
-                                value="{{ $user->location->office_location ?? '' }}">
-                            <input type="hidden" name="office_latitude" class="" id="latitude_2"
-                                value="{{ $user->location->office_latitude ?? '' }}">
-                            <input type="hidden" name="office_longitude" class="" id="longitude_2"
-                                value="{{ $user->location->office_longitude ?? '' }}">
-                            @error('office_location')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                            <span class="invalid-feedback" id="fromAlert" role="alert">
-                                <strong class="text-danger regular"> Selected location not available on Google
-                                    Map</strong>
-                            </span>
                         </div>
 
                         <div class="form-group mx-3 row">

@@ -108,10 +108,6 @@ class LoginController extends Controller
         $user->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
         $user->save();
 
-        $location = new UserLocation();
-        $location->user_id = $user->id;
-        $location->save();
-
         return $user;
     }
 

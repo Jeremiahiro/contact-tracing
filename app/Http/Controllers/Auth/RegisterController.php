@@ -86,10 +86,6 @@ class RegisterController extends Controller
 
         $user->save();
 
-        $location = new UserLocation();
-        $location->user_id = $user->id;
-        $location->save();
-
         return $user;
 
         // return User::create([

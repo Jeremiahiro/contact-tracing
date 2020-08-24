@@ -101,22 +101,13 @@ jQuery(document).ready(function ($) {
         $('#sideIcon-2').removeClass('d-none')
         $('#sideIcon-1').addClass('d-none')
     });
+
     $('#sideIcon-2').click(function () {
         $("#collapseFromInfo").collapse('hide');
         $("#collapseToInfo").collapse('hide');
         $('#sideIcon-2').addClass('d-none')
         $('#sideIcon-1').removeClass('d-none')
     });
-
-    var fromLocHome = $('#use_home_address_for_from');
-    var fromLocOffice = $('#use_office_address_for_from');
-    var toLocHome = $('#use_home_address_for_to');
-    var toLocOffice = $('#use_office_address_for_to');
-
-    fromLocHome.attr("disabled", false);
-    fromLocOffice.attr("disabled", false);
-    toLocHome.attr("disabled", false);
-    toLocOffice.attr("disabled", false);
 
     var from_address = $('#address_1');
     var from_location = $('#location_1');
@@ -128,87 +119,71 @@ jQuery(document).ready(function ($) {
     var to_latitude = $('#latitude_2');
     var to_longitude = $('#longitude_2');
 
-    $('#clearFrom').click(function(){
+    $('#clearFrom').click(function () {
         from_address.val('');
         from_location.val('');
         from_latitude.val('');
         from_longitude.val('');
         $('input:radio[name="from"]').prop('checked', false);
-        toLocHome.attr("disabled", false);
-        toLocOffice.attr("disabled", false);
-        fromLocHome.attr("disabled", false);
-        fromLocOffice.attr("disabled", false);
+        $('input:radio[name="from"]').attr('disabled', false);
+        $('input:radio[name="to"]').attr('disabled', false);
         $('#clearFrom').addClass('d-none');
+        $('label[for="from_image"]').show();
     });
 
-    $('#clearTo').click(function(){
+    $('#clearTo').click(function () {
         to_address.val('');
         to_location.val('');
         to_latitude.val('');
         to_longitude.val('');
         $('input:radio[name="to"]').prop('checked', false);
-        toLocHome.attr("disabled", false);
-        toLocOffice.attr("disabled", false);
-        fromLocHome.attr("disabled", false);
-        fromLocOffice.attr("disabled", false);
-
+        $('input:radio[name="to"]').attr('disabled', false);
+        $('input:radio[name="from"]').attr('disabled', false);
         $('#clearTo').addClass('d-none');
+        $('label[for="to_image"]').show();
     });
 
-    $('input:radio[name="from"]').change(function () {
-        if (fromLocHome.is(':checked')) {
-            toLocHome.attr("disabled", true);
-            toLocOffice.attr("disabled", false);
+    from = $('input:radio[name="from"]')
+    to = $('input:radio[name="to"]')
 
-            $('#clearFrom').removeClass('d-none');
-            from_address.val($(this).data('address'));
-            from_location.val($(this).data('location'));
-            from_latitude.val($(this).data('latitude'));
-            from_longitude.val($(this).data('longitude'));
+    from.change(function () {
+        from.each(function (idx, el) {
 
-        } else if (fromLocOffice.is(':checked')) {
-            toLocOffice.attr("disabled", true);
-            toLocHome.attr("disabled", false);
-            $('#clearFrom').removeClass('d-none');
-            from_address.val($(this).data('address'));
-            from_location.val($(this).data('location'));
-            from_latitude.val($(this).data('latitude'));
-            from_longitude.val($(this).data('longitude'));
+            selectedValueID = $(el).data('id');
 
-        } else {
-            $('#clearFrom').addClass('d-none');
-            toLocHome.attr("disabled", false);
-            toLocOffice.attr("disabled", false);
-        }
+            if ($(el).is(':checked')) {
+                selectdTo = $('#use_address_for_to-' + selectedValueID).attr("disabled", true);
+                $('#clearFrom').removeClass('d-none');
+                from_address.val($(el).data('address'));
+                from_location.val($(el).data('location'));
+                from_latitude.val($(el).data('latitude'));
+                from_longitude.val($(el).data('longitude'));
+                $('label[for="from_image"]').hide()
+            } else {
+                selectdTo = $('#use_address_for_to-' + selectedValueID).attr("disabled", false);
+            }
+        });
     });
 
-    $('input:radio[name="to"]').change(function () {
-        if (toLocHome.is(':checked')) {
-            fromLocHome.attr("disabled", true);
-            fromLocOffice.attr("disabled", false);
+    to.change(function () {
+        to.each(function (idx, el) {
 
-            $('#clearTo').removeClass('d-none');
-            to_address.val($(this).data('address'));
-            to_location.val($(this).data('location'));
-            to_latitude.val($(this).data('latitude'));
-            to_longitude.val($(this).data('longitude'));
+            selectedValueID = $(el).data('id');
 
-        } else if (toLocOffice.is(':checked')) {
-            fromLocOffice.attr("disabled", true);
-            fromLocHome.attr("disabled", false);
-
-            $('#clearTo').removeClass('d-none');
-            to_address.val($(this).data('address'));
-            to_location.val($(this).data('location'));
-            to_latitude.val($(this).data('latitude'));
-            to_longitude.val($(this).data('longitude'));
-
-        } else {
-            $('#clearTo').addClass('d-none');
-            fromLocHome.attr("disabled", false);
-            fromLocOffice.attr("disabled", false);
-        }
+            if ($(el).is(':checked')) {
+                selectdTo = $('#use_address_for_from-' + selectedValueID).attr("disabled", true);
+                $('#clearTo').removeClass('d-none');
+                to_address.val($(el).data('address'));
+                to_location.val($(el).data('location'));
+                to_latitude.val($(el).data('latitude'));
+                to_longitude.val($(el).data('longitude'));
+                $('label[for="to_image"]').hide()
+            } else {
+                selectdTo = $('#use_address_for_from-' + selectedValueID).attr("disabled", false);
+            }
+        });
     });
+
 
     $("#upload-1").hide();
     $("#upload-2").hide();
@@ -259,6 +234,7 @@ jQuery(document).ready(function ($) {
         $("#from_image").on("change", function (event) {
             $("#uploadModal").modal();
             $("#upload-1").show();
+            var requestType = $(this).data('type');
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
@@ -282,9 +258,34 @@ jQuery(document).ready(function ($) {
                     quality: 1
                 }).then(function (base64) {
                     $("#uploadModal").modal("hide");
+                    $('label[for="from_image"]').hide()
+                    $('#removeFromImage').removeClass('d-none');
                     $('#fromImagePreviewDiv').removeClass('d-none');
                     $('#fromImagePreview').attr('src', base64);
-                    $('#from_image_value').val(base64);
+
+                    var url = `/image-upload`;
+                    var formData = new FormData();
+                    formData.append("image", $.base64ImageToBlob(base64));
+                    formData.append("type", requestType);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        dataType: 'json',
+                    }).done(response => {
+                        if (response.success != true) {
+                            $('#from_image_value').val('');
+                            showAlertMessage('danger', 'Oops! something went wrong');
+                        } else {
+                            $('#from_image_value').val(response.image_url);
+                        }
+                    }).fail(e => {
+                        $('#from_image_value').val('');
+                        showAlertMessage('danger', 'Unsupported Image Size or Format');
+                    });
                 });
             });
         });
@@ -293,6 +294,7 @@ jQuery(document).ready(function ($) {
         $("#to_image").on("change", function (event) {
             $("#uploadModal").modal();
             $("#upload-2").show();
+            var requestType = $(this).data('type');
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
                 viewport: {
@@ -316,9 +318,34 @@ jQuery(document).ready(function ($) {
                     quality: 1
                 }).then(function (base64) {
                     $("#uploadModal").modal("hide");
+                    $('label[for="to_image"]').hide()
+                    $('#removeToImage').removeClass('d-none');
                     $('#toImagePreviewDiv').removeClass('d-none');
                     $('#toImagePreview').attr('src', base64);
-                    $('#to_image_value').val(base64);
+
+                    var url = `/image-upload`;
+                    var formData = new FormData();
+                    formData.append("image", $.base64ImageToBlob(base64));
+                    formData.append("type", requestType);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        dataType: 'json',
+                    }).done(response => {
+                        if (response.success != true) {
+                            $('#to_image_value').val('');
+                            showAlertMessage('danger', 'Oops! something went wrong');
+                        } else {
+                            $('#to_image_value').val(response.image_url);
+                        }
+                    }).fail(e => {
+                        $('#to_image_value').val(base64);
+                        showAlertMessage('danger', 'Unsupported Image Size or Format');
+                    });
                 });
             });
         });
@@ -340,9 +367,40 @@ jQuery(document).ready(function ($) {
     });
 
     $('#removeFromImage').click(function () {
+        $('label[for="from_image"]').show()
+        $('#removeFromImage').addClass('d-none');
         $('#fromImagePreviewDiv').addClass('d-none');
         $('#fromImagePreview').attr('src', 'http://placehold.it/100');
-        $('#from_image_value').val('');
+
+        var url = `/image-delete`;
+        var image_url = $('#from_image_value').val();
+        console.log(image_url);
+
+        var formData = new FormData();
+        formData.append("image_url", image_url);
+
+        console.log(formData);
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+        }).done(response => {
+            if (response.success != true) {
+                $('#from_image_value').val(data);
+                console.log(response);
+            } else {
+                $('#from_image_value').val('');
+                console.log(response);
+            }
+        }).fail(e => {
+            $('#from_image_value').val(data);
+            console.log(e);
+        });
+
     });
 
     $('#removeToImage').click(function () {

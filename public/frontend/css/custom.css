@@ -857,6 +857,6 @@ input:checked+.toggle-slider:before {
 }
 
 .img_preview {
-    width: 100%;
-    height: 100px;
+    width: 200px;
+    height: 200px;
 }

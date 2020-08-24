@@ -143,35 +143,79 @@ class SettingController extends Controller
     }
 
     /** 
-     * Lets a user update profile header image
+     * Lets a user upload image
      * * @param  \Illuminate\Http\Request  $request
      * 
      */
-    public function uploadHeader(Request $request)
+    public function uploadImage(Request $request)
     {
         $request->validate([
-            'header' => 'required|image|mimes:jpeg,bmp,jpg,png|between:1,6000',
+            'image' => 'required|image|mimes:jpeg,bmp,jpg,png|between:1,6000',
         ]);
 
-        $header = $request->file('header')->getRealPath();
-        $upload = Cloudder::upload($header, null, ['folder' => 'SOP_Header_Pictures']);
+        if($request->ajax()) {
 
-        if($upload){
-            list($width, $height) = getimagesize($header);
-            $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
-            
-            $user = Auth::user();
-            $user->header = $image_url;
-            $user->save();
+            $image = $request->file('image')->getRealPath();
+            $upload = Cloudder::upload($image, null, ['folder' => 'SOP_Pictures']);
     
+            if($upload){
+                list($width, $height) = getimagesize($image);
+                $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
+                
+                if($request->type == 'header_image'){
+                    $this->saveHeader($request, $image_url);
+                } else if($request->type == 'profile_image'){
+                    $this->saveAvatar($request, $image_url);
+                }
+        
+                $response = [
+                    'success' => true,
+                    "message" => 'Successful',
+                    "image_url" => $image_url
+                ];
+                return response()->json($response, 201);
+    
+            } else {
+                return response()->json(['error' => 'Oops! Something went wrong.']);
+            }
+
+        }
+
+    }
+
+    public function saveAvatar(Request $request, $image_url)
+    {
+        $user = Auth::user();
+        $user->avarar = $image_url;
+        $user->save();
+    }
+
+    public function saveHeader(Request $request, $image_url)
+    {
+        $user = Auth::user();
+        $user->header = $image_url;
+        $user->save();
+    }
+
+        /** 
+     * Lets a user destryo image
+     * * @param  \Illuminate\Http\Request  $request
+     * 
+     */
+    public function destroyImage(Request $request)
+    {
+        
+        if($request->ajax()) {
+
+            Cloudder::delete($request->image_url, null);
+
             $response = [
                 'success' => true,
-                "message" => 'Successful'
+                "message" => 'Successful',
             ];
             return response()->json($response, 201);
 
-        } else {
-            return response()->json(['error' => 'Oops! Something went wrong.']);
         }
+
     }
 }

@@ -89,68 +89,50 @@ Add Activity
                                 </span>
                             </div>
                             <div class="f-24 border collapse additional-info-collapse" id="collapseFromInfo">
-                                <div class="d-flex justify-content-between p-2">
-                                    <div class="col-6 p-0 m-0">
-                                        <p class="m-0 p-0 f-14">Known Locations</p>
-                                        @if (!$user->location->home_address && !$user->location->office_address)
-                                        <p class="light f-14">
-                                            No known location,
-                                            <br>
-                                            Add one
-                                            <a href="{{ route('dashboard.edit', $user->uuid) ."#addressInfo" }}"
-                                                class="text-primary">
-                                                here
-                                            </a>
-                                        </p>
+                                <div class="p-2 m-0">
+                                    <div>
+                                        <p class="m-0 p-0 f-14">Favourite Locations</p>
+                                        @if (!auth()->user()->favorites)
+                                        No favourite locations
+                                        @else
+                                        @foreach (auth()->user()->favorites as $loc)
+                                        <input class="existingLoc" type="radio"
+                                            id="use_address_for_from-{{ $loc->location->id }}"
+                                            value="{{ $loc->location->id }}" aria-label="..." name="from"
+                                            data-id="{{ $loc->location->id }}"
+                                            data-address="{{ $loc->location->address }}"
+                                            data-location="{{ $loc->location->location }}"
+                                            data-latitude="{{ $loc->location->latitude }}"
+                                            data-longitude="{{ $loc->location->longitude }}"
+                                            data-image="{{ $loc->location->image }}">
+                                        <label class="light f-16" for="use_address_for_from-{{ $loc->location->id }}">
+                                            {{ $loc->location->location }}
+                                        </label>
+                                        @endforeach
                                         @endif
                                         <div class="">
-                                            @if ($user->location->home_address)
-                                            <input class="existingLoc" type="radio" id="use_home_address_for_from"
-                                                value="" aria-label="..." name="from"
-                                                data-address="{{ $user->location->home_address }}"
-                                                data-location="{{ $user->location->home_location }}"
-                                                data-latitude="{{ $user->location->home_latitude }}"
-                                                data-longitude="{{ $user->location->home_longitude }}">
-                                            <label class="light f-16" for="use_home_address_for_from">
-                                                Home
+                                            <label for="from_image" class="">
+                                                <span>
+                                                    Add Image
+                                                    @include('activity.partials.cam')
+                                                </span>
                                             </label>
-                                            @endif
-                                        </div>
-                                        <div class="">
-                                            @if ($user->location->office_address)
-                                            <input class="existingLoc" type="radio" id="use_office_address_for_from"
-                                                value="" aria-label="..." name="from"
-                                                data-address="{{ $user->location->office_address }}"
-                                                data-location="{{ $user->location->office_location }}"
-                                                data-latitude="{{ $user->location->office_latitude }}"
-                                                data-longitude="{{ $user->location->office_longitude }}">
-                                            <label class="light f-16" for="use_office_address_for_from">
-                                                Office
-                                            </label>
-                                            @endif
+                                            <input type="hidden" name="from_image" id="from_image_value" value="">
+                                            <input type="File" name="" class="d-none avatar-input" id="from_image"
+                                                value="" accept="image/*" data-type="from_image">
+                                            <div id="fromImagePreviewDiv" class="d-none tx_effect">
+                                                <div class="img_preview text-center mx-auto">
+                                                    <img src="http://placehold.it/100" alt="Location Image Preview"
+                                                        class="loc_img_preview" id="fromImagePreview">
+                                                </div>
+                                                <div class="text-right">
+                                                    <i class="fa fa-times text-danger d-none" id="removeFromImage"></i>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="f-14 text-left d-none" id="clearFrom">clear</div>
                                     </div>
-                                    <div class="">
-                                        <label for="from_image" class="">
-                                            <span>
-                                                Add Image
-                                                @include('activity.partials.cam')
-                                            </span>
-                                        </label>
-                                        <input type="hidden" name="from_image" id="from_image_value" value="">
-                                        <input type="File" name="" class="d-none avatar-input" id="from_image" value=""
-                                            accept="image/*">
-                                        <div id="fromImagePreviewDiv" class="d-none tx_effect">
-                                            <div class="img_preview">
-                                                <img src="http://placehold.it/100" alt="Location Image Preview"
-                                                    class="loc_img_preview" id="fromImagePreview">
-                                            </div>
-                                            <div class="text-right">
-                                                <i class="fa fa-times text-danger" id="removeFromImage"></i>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -179,68 +161,50 @@ Add Activity
                                 </span>
                             </div>
                             <div class="f-24 border collapse additional-info-collapse" id="collapseToInfo">
-                                <div class="d-flex justify-content-between p-2">
-                                    <div class="col-6 p-0 m-0">
-                                        <p class="m-0 p-0 f-14">Known Locations</p>
-                                        @if (!$user->location->home_address && !$user->location->office_address)
-                                        <p class="light f-14">
-                                            No known location,
-                                            <br>
-                                            Add one
-                                            <a href="{{ route('dashboard.edit', $user->uuid) ."#addressInfo" }}"
-                                                class="text-primary">
-                                                here
-                                            </a>
-                                        </p>
+                                <div class="p-2 m-0">
+                                    <div>
+                                        <p class="m-0 p-0 f-14">Favourite Locations</p>
+                                        @if (!auth()->user()->favorites)
+                                        No favourite locations
+                                        @else
+                                        @foreach (auth()->user()->favorites as $loc)
+                                        <input class="existingLoc" type="radio"
+                                            id="use_address_for_to-{{ $loc->location->id }}"
+                                            value="{{ $loc->location->id }}" aria-label="..." name="to"
+                                            data-id="{{ $loc->location->id }}"
+                                            data-address="{{ $loc->location->address }}"
+                                            data-location="{{ $loc->location->location }}"
+                                            data-latitude="{{ $loc->location->latitude }}"
+                                            data-longitude="{{ $loc->location->longitude }}"
+                                            data-image="{{ $loc->location->image }}">
+                                        <label class="light f-16" for="use_address_for_to-{{ $loc->location->id }}">
+                                            {{ $loc->location->location }}
+                                        </label>
+                                        @endforeach
                                         @endif
                                         <div class="">
-                                            @if ($user->location->home_address)
-                                            <input class="existingLoc" type="radio" id="use_home_address_for_to"
-                                                value="" aria-label="..." name="to"
-                                                data-address="{{ $user->location->home_address }}"
-                                                data-location="{{ $user->location->home_location }}"
-                                                data-latitude="{{ $user->location->home_latutude }}"
-                                                data-longitude="{{ $user->location->home_longitude }}">
-                                            <label class="light f-16" for="use_home_address_for_to">
-                                                Home
+                                            <label for="to_image" class="">
+                                                <span>
+                                                    Add Image
+                                                    @include('activity.partials.cam')
+                                                </span>
                                             </label>
-                                            @endif
-                                        </div>
-                                        <div class="">
-                                            @if ($user->location->office_address)
-                                            <input class="existingLoc" type="radio" id="use_office_address_for_to"
-                                                value="" aria-label="..." name="to"
-                                                data-address="{{ $user->location->office_address }}"
-                                                data-location="{{ $user->location->office_location }}"
-                                                data-latitude="{{ $user->location->office_latutude }}"
-                                                data-longitude="{{ $user->location->office_longitude }}">
-                                            <label class="light f-16" for="use_office_address_for_to">
-                                                Office
-                                            </label>
-                                            @endif
+                                            <input type="hidden" name="to_image" id="to_image_value" value="">
+                                            <input type="File" name="" class="d-none avatar-input" id="to_image"
+                                                value="" accept="image/*">
+                                            <div id="toImagePreviewDiv" class="d-none tx_effect">
+                                                <div class="img_preview">
+                                                    <img src="http://placehold.it/100" alt="Location Image Preview"
+                                                        class="loc_img_preview" id="toImagePreview">
+                                                </div>
+                                                <div class="text-right">
+                                                    <i class="fa fa-times text-danger d-none" id="removeToImage"></i>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="f-14 text-left d-none" id="clearTo">clear</div>
                                     </div>
-                                    <div class="">
-                                        <label for="to_image" class="">
-                                            <span>
-                                                Add Image
-                                                @include('activity.partials.cam')
-                                            </span>
-                                        </label>
-                                        <input type="hidden" name="to_image" id="to_image_value">
-                                        <input type="File" name="" class="d-none avatar-input" id="to_image" value=""
-                                            accept="image/*">
-                                        <div id="toImagePreviewDiv" class="d-none tx_effect">
-                                            <div class="img_preview">
-                                                <img src="http://placehold.it/100" alt="Location Image Preview"
-                                                    class="loc_img_preview" id="toImagePreview">
-                                            </div>
-                                            <div class="text-right">
-                                                <i class="fa fa-times text-danger" id="removeToImage"></i>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
