@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\ActivityTagNotification;
 use App\Notifications\ActivityTagSmsNotification;
+use App\UserLocation;
 
 class ActivityController extends Controller
 {
@@ -76,7 +77,7 @@ class ActivityController extends Controller
         $start = Carbon::parse($request->start_date)->format('Y-m-d H:i');
         $end = Carbon::parse($request->end_date)->format('Y-m-d H:i');
 
-        dd($request->all());
+        // dd($request->all());
 
         DB::beginTransaction();
 
@@ -101,6 +102,28 @@ class ActivityController extends Controller
     
                 'user_id' => auth()->user()->id,
             ]);
+
+            $location_1 = UserLocation::where('location', $request->from_location)
+                                            ->where('user_id', auth()->user()->id)->first();
+
+            if(!$location_1){
+                $location_1 = new UserLocation;
+                $location_1->address = $request->from_address;
+                $location_1->location = $request->from_location;
+                $location_1->latitude = $request->lfrom_atitude;
+                $location_1->longitude = $request->from_longitude;
+            }
+
+            $location_2 = UserLocation::where('location', $request->to_location)
+                    ->where('user_id', auth()->user()->id)->first();
+
+            if(!$location_2){
+                $location_2 = new UserLocation;
+                $location_2->address = $request->to_address;
+                $location_2->location = $request->to_location;
+                $location_2->latitude = $request->to_atitude;
+                $location_2->longitude = $request->to_longitude;
+            }
     
             if ($activity->wasRecentlyCreated) {
                 // for existing users
