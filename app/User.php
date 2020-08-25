@@ -190,4 +190,14 @@ class User extends Authenticatable implements MustVerifyEmail
         // return $this->phone_number;
     }
 
+        /**
+     * User has many activities
+     */
+    public function isfavorite($location)
+    {
+        if ($this->favorites($location) == true) {
+            return true;
+        }
+        return false;
+    }
 }

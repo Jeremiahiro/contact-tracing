@@ -40,11 +40,5 @@ class UserLocation extends Model
         return $this->belongsTo('App\User');
     }
 
-    /**
-     * User has many activities
-     */
-    public function favorites()
-    {
-        return $this->hasMany('App\FavouriteLocation', 'location_id');
-    }
+
 }

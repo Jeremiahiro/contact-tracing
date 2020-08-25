@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Activity;
+use App\FavouriteLocation;
 use App\UserLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,29 +25,41 @@ class UserLocationController extends Controller
     }
 
     /**
-     * Favorite a particular location
-     *
-     * @param  Post $post
-     * @return Response
-     */
-    public function favoriteLoc(UserLocation $location)
-    {
-        Auth::user()->favorites()->attach($location->id);
-
-        return back();
-    }
-
-    /**
      * Unfavorite a particular location
      *
      * @param  Post $post
      * @return Response
      */
-    public function unFavoritePost(Activity $activity)
+    public function toggleFavourite($location)
     {
-        Auth::user()->favorites()->detach($activity->id);
+        $user = Auth::user();
+        $favorite = FavouriteLocation::where('location_id', $location)->where('user_id', $user->id)->first();
 
-        return back();
+        if($favorite){
+            $favorite->delete();
+
+            $response = [
+                'success' => true,
+                "attach" => false,
+                "loc" => $location,
+            ];
+            return response()->json($response, 201);
+            
+        } else {
+            $favorite = new FavouriteLocation;
+            $favorite->user_id = $user->id;
+            $favorite->location_id = $location;
+            $favorite->save();
+
+            $response = [
+                'success' => true,
+                "attach" => true,
+                "loc" => $location,
+            ];
+            return response()->json($response, 201);
+        }
+
+
     }
 
     /**
