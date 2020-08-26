@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserLocationsTable extends Migration
+class CreateLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUserLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_locations', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('address');
             $table->string('location');
@@ -23,7 +23,6 @@ class CreateUserLocationsTable extends Migration
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-
         });
     }
 
@@ -34,6 +33,6 @@ class CreateUserLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_locations');
+        Schema::dropIfExists('locations');
     }
 }

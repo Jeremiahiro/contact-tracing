@@ -1,8 +1,9 @@
 <?php
 
+use App\Location;
 use Illuminate\Database\Seeder;
 
-class FavouriteLocationSeeder extends Seeder
+class LocationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -10,7 +11,7 @@ class FavouriteLocationSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        factory(App\FavouriteLocation::class, 5)->create();
+    {   
+        factory(Location::class, 50)->create();
     }
 }

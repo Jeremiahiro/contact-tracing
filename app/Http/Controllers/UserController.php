@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Activity;
-use App\UserLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\FollowNotification;
@@ -58,6 +57,7 @@ class UserController extends Controller
      */
     public function show(Request $request, $id)
     {
+
         $user = User::where('uuid', $id)->first();
 
         $activities = Activity::where('user_id', $user->id)->latest()->simplePaginate(10);
@@ -140,19 +140,31 @@ class UserController extends Controller
     public function follow(Request $request)
     {
         $user = User::find($request->userID);
-        $response = auth()->user()->toggleFollow($user);
-        if($request->status == 0){
-            $status = 1;
+
+        if(auth()->user()->isFollowing($user)){
+            auth()->user()->unfollow($user);
+            $response = [
+                'success' => true,
+                "attach" => false,
+            ];
+            return response()->json($response, 201);
+            
+        } else {
+            auth()->user()->follow($user);
+
             $details = [
                 'greeting' => 'Hi Artisan',
                 'body' => 'is followng you',
                 'follower_id' => auth()->user()->id,
             ];
             $user->notify(new FollowNotification($details));
-        } else {
-            $status = 0;
+
+            $response = [
+                'success' => true,
+                "attach" => true,
+            ];
+            return response()->json($response, 201);
         }
-        return response()->json(['success'=>$response, 'status' => $status]);
     }
 
     public function anonymizeAGroupOfUsers() {
@@ -160,5 +172,39 @@ class UserController extends Controller
     	foreach ($users as $user) {
             $user->anonymize();
         }
+    }
+
+    /** 
+     * Ajax autoload
+     * followers
+     */
+    public function followers(Request $request)
+    {
+        $followers = Auth::user()->followers()->paginate(50);
+
+        if ($request->ajax()) {
+            $followers = view('components.follow.parials.followers_data', compact('followers'))->render();
+            return response()->json([
+                'followers' => $followers,
+                ]);
+        }
+        return view('components.follow.followers', compact(['followers']));
+    }
+
+    /** 
+     * Ajax autoload
+     * followings
+     */
+    public function followings(Request $request)
+    {
+        $followings = Auth::user()->followings()->paginate(50);
+
+        if ($request->ajax()) {
+            $followings = view('components.follow.parials.followings_data', compact('followings'))->render();
+            return response()->json([
+                'followings' => $followings,
+                ]);
+        }
+        return view('components.follow.followings', compact(['followings']));
     }
 }

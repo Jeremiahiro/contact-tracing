@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Auth;
-use App\FavouriteLocation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -65,18 +63,6 @@ class Activity extends Model
     public function tagged()
     {
         return $this->hasMany('App\User', 'person_id')->orderBy('created_at');
-    }
-
-    /**
-     * Determine whether a post has been marked as favorite by a user.
-     *
-     * @return boolean
-     */
-    public function favorited()
-    {
-        return (bool) FavouriteLocation::where('user_id', Auth::id())
-                            ->where('activity_id', $this->id)
-                            ->first();
     }
 
 }

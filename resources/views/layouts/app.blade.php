@@ -62,7 +62,7 @@
             @endphp
             @if ($route == 'home' || $route == 'login' || $route == 'register' || $route == 'password.request' ||
              $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' || $route == 'dashboard.index'
-             || $route == 'dashboard.show' || $route == 'dashboard.edit')
+             || $route == 'dashboard.show' || $route == 'dashboard.edit' || $route == 'followers' || $route == 'followings')
             @else
                 @include('partials.mobile.header.header')
             @endif
@@ -75,8 +75,8 @@
         @yield('footer')
         @include('partials.modals.views.sideNav')
         @include('partials.modals.views.settings')
-        @include('partials.modals.views.userFollowers')
-        @include('partials.modals.views.userFollowings')
+        {{-- @include('partials.modals.views.userFollowers') --}}
+        {{-- @include('partials.modals.views.userFollowings') --}}
         @endauth
         @enddesktop
     </div>

@@ -1,7 +1,6 @@
 <?php
 
 use App\User;
-use App\UserLocation;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder

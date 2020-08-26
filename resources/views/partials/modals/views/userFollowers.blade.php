@@ -2,10 +2,11 @@
     <div class="modal-dialog full-modal m-0 p-0" role="document">
         <div class="modal-content full-modal-content side_nav_white text-primary">
             <div class="modal-body">
-                <button type="button" class="close opacity-1 float-right" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><img
-                            src="{{ asset('/frontend/img/svg/back_blue.svg') }}"
-                            alt="go back"></span>
+                <a href="{{ url()->previous() }}" class="opacity-1 float-right">
+                    <span aria-hidden="true">
+                        <img src="{{ asset('/frontend/img/svg/back_blue.svg') }}" alt="go back">
+                    </span>
+                </a>
                 </button>
                 <div class="text-uppercase">Connections</div>
                 <div class="activityView">
@@ -45,7 +46,7 @@
                                                     FOLLOW
                                                 @endif
                                             </strong>
-                                            <div class="spinner-border text-white ml-2 spinner-border-sm d-none"
+                                            <div class="spinner-border text-white ml-2 spinner-border-sm d-none f-10"
                                                 id="follow-spinner" role="status">
                                                 <span class="sr-only">Loading...</span>
                                             </div>

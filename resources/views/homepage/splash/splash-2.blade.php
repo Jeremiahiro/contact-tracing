@@ -8,7 +8,7 @@
 
         <div class="d-flex justify-content-around align-items-center">
             <div class="text-center">
-                <a href="{{ route('activity.index') }}">
+                <a href="{{ route('locations') }}">
                     <img src="{{  asset('/frontend/img/svg/marker.svg') }}" alt="marker">
                 </a>
                 <div class="py-2 f-12 bold">

@@ -2,17 +2,17 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Overtrue\LaravelFollow\Followable;
+use Overtrue\LaravelFavorite\Traits\Favoriter;
 use Dialect\Gdpr\Portable;
 use Dialect\Gdpr\Anonymizable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Followable, Notifiable, Portable, Anonymizable;
+    use Followable, Notifiable, Portable, Anonymizable, Favoriter;
 
     /**
      * The attributes that are mass assignable.
@@ -65,17 +65,17 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * User has many activities
      */
-    public function favorites()
-    {
-        return $this->hasMany('App\FavouriteLocation');
-    }
+    // public function favorites()
+    // {
+    //     $favortePosts = $user->getFavoriteItems(Post::class)->paginate();
+    // }
 
     /**
      * User has many activities
      */
     public function locations()
     {
-        return $this->hasMany('App\UserLocation');
+        return $this->hasMany('App\Location');
     }    
 
     /**
@@ -155,16 +155,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function location()
     {
-        return $this->hasMany('App\UserLocation', 'user_id');
-    }
-
-
-    /**
-     * user has a location
-     */
-    public function favorite_location()
-    {
-        return $this->hasMany('App\UserLocation', 'user_id');
+        return $this->hasMany('App\Location', 'user_id');
     }
 
     /**
@@ -190,14 +181,5 @@ class User extends Authenticatable implements MustVerifyEmail
         // return $this->phone_number;
     }
 
-        /**
-     * User has many activities
-     */
-    public function isfavorite($location)
-    {
-        if ($this->favorites($location) == true) {
-            return true;
-        }
-        return false;
-    }
+
 }

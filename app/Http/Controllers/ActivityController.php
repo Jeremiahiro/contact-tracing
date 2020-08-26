@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Cloudder;
 use App\User;
 use App\Activity;
 use App\ActivityTags;
+use App\Location;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\ActivityTagNotification;
 use App\Notifications\ActivityTagSmsNotification;
-use App\UserLocation;
 
 class ActivityController extends Controller
 {
@@ -48,7 +47,10 @@ class ActivityController extends Controller
                 'istagged'=>$istagged,
                 ]);
         }
-        return view('activity.index', compact('activities', 'istagged'));
+        if(count($activities) > 0) {
+            return view('activity.index', compact('activities', 'istagged'));
+        }
+        return redirect()->route('activity.create')->with('info', 'Add an Activity');
 
     }
 
@@ -103,26 +105,18 @@ class ActivityController extends Controller
                 'user_id' => auth()->user()->id,
             ]);
 
-            $location_1 = UserLocation::where('location', $request->from_location)
-                                            ->where('user_id', auth()->user()->id)->first();
+            $location_1 = Location::where('location', $request->from_location)->where('user_id', auth()->user()->id)->first();
 
             if(!$location_1){
-                $location_1 = new UserLocation;
-                $location_1->address = $request->from_address;
-                $location_1->location = $request->from_location;
-                $location_1->latitude = $request->lfrom_atitude;
-                $location_1->longitude = $request->from_longitude;
+                $location = $request->all();
+                $this->save_new_location_for_from($location);
             }
 
-            $location_2 = UserLocation::where('location', $request->to_location)
-                    ->where('user_id', auth()->user()->id)->first();
+            $location_2 = Location::where('location', $request->to_location)->where('user_id', auth()->user()->id)->first();
 
             if(!$location_2){
-                $location_2 = new UserLocation;
-                $location_2->address = $request->to_address;
-                $location_2->location = $request->to_location;
-                $location_2->latitude = $request->to_atitude;
-                $location_2->longitude = $request->to_longitude;
+                $location = $request->all();
+                $this->save_new_location_for_to($location);
             }
     
             if ($activity->wasRecentlyCreated) {
@@ -208,9 +202,35 @@ class ActivityController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollBack();
-             return redirect()->back()->with('error', 'OOPS something went wrong');
+            dd($th);
+            return redirect()->back()->with('error', 'OOPS something went wrong');
         } 
 
+    }
+
+    public function save_new_location_for_from($location)
+    {
+        // dd($location);
+        $fromLoc = new Location;
+        $fromLoc->address      = $location['from_address'];
+        $fromLoc->location     = $location['from_location'];
+        $fromLoc->latitude     = $location['from_latitude'];
+        $fromLoc->longitude    = $location['from_longitude'];
+        $fromLoc->image        = $location['from_image'];
+        $fromLoc->user_id      = Auth::user()->id;
+        $fromLoc->save();
+    }
+
+    public function save_new_location_for_to($location)
+    {
+        $toLoc = new Location;
+        $toLoc->address      = $location['to_address'];
+        $toLoc->location     = $location['to_location'];
+        $toLoc->latitude     = $location['to_latitude'];
+        $toLoc->longitude    = $location['to_longitude'];
+        $toLoc->image        = $location['to_image'];
+        $toLoc->user_id      = Auth::user()->id;
+        $toLoc->save();
     }
 
     /**

@@ -109,6 +109,20 @@ jQuery(document).ready(function ($) {
         $('#sideIcon-1').removeClass('d-none')
     });
 
+    $('.input-daterange').click(function () {
+        $("#collapseFromInfo").collapse('hide');
+        $("#collapseToInfo").collapse('hide');
+        $('#sideIcon-2').addClass('d-none')
+        $('#sideIcon-1').removeClass('d-none')
+    });
+
+    $('.activity_tagging').click(function () {
+        $("#collapseFromInfo").collapse('hide');
+        $("#collapseToInfo").collapse('hide');
+        $('#sideIcon-2').addClass('d-none')
+        $('#sideIcon-1').removeClass('d-none')
+    });
+
     var from_address = $('#address_1');
     var from_location = $('#location_1');
     var from_latitude = $('#latitude_1');
@@ -379,8 +393,6 @@ jQuery(document).ready(function ($) {
         var formData = new FormData();
         formData.append("image_url", image_url);
 
-        console.log(formData);
-
         $.ajax({
             type: 'POST',
             url: url,
@@ -391,14 +403,11 @@ jQuery(document).ready(function ($) {
         }).done(response => {
             if (response.success != true) {
                 $('#from_image_value').val(data);
-                console.log(response);
             } else {
                 $('#from_image_value').val('');
-                console.log(response);
             }
         }).fail(e => {
             $('#from_image_value').val(data);
-            console.log(e);
         });
 
     });
