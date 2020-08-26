@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    People you follow
+People you follow
 @endsection
 
 @section('custom-style')
@@ -11,17 +11,16 @@
 @section('web-content')
 <script type="text/javascript">
     window.location = "{{ route('map.view') }}";
+
 </script>
 @endsection
 
 @section('content')
 <div class="text-primary">
-    <div class="modal-body">
-        <a href="{{ url()->previous() }}" class="opacity-1 float-right">
-            <span aria-hidden="true">
-                <img src="{{ asset('/frontend/img/svg/back_blue.svg') }}" alt="go back">
-            </span>
-        </a>
+    @include('partials.mobile.header.header')
+
+    <div class="p-3">
+
         <div class="activityView">
             <div class="activityTab">
                 <ul class="mb-0 mt-3 f-12 nav">
@@ -39,7 +38,7 @@
                     @include('components.follow.partials.followings_data')
                 </div>
                 {{-- <div class="tab-pane fade" id="followers_list"> --}}
-                    {{-- @include('components.follow.partials.followers_data') --}}
+                {{-- @include('components.follow.partials.followers_data') --}}
                 {{-- </div> --}}
                 <div class="text-center mb-5">
                     <div class="spinner-grow text-primary load_followings d-none" role="status">

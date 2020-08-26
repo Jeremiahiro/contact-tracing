@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Followers
+Followers
 @endsection
 
 @section('custom-style')
@@ -11,32 +11,31 @@
 @section('web-content')
 <script type="text/javascript">
     window.location = "{{ route('map.view') }}";
+
 </script>
 @endsection
 
 @section('content')
 <div class="text-primary">
-    <div class="modal-body">
-        <a href="{{ url()->previous() }}" class="opacity-1 float-right">
-            <span aria-hidden="true">
-                <img src="{{ asset('/frontend/img/svg/back_blue.svg') }}" alt="go back">
-            </span>
-        </a>
+    @include('partials.mobile.header.header')
+    <div class="p-3">
         <div class="activityView">
             <div class="activityTab">
                 <ul class="mb-0 mt-3 f-12 nav">
                     <li>
-                        <a data-toggle="tab" href="#followings_list" class="text-primary" aria-disabled="true" disabled>Mutual</a>
+                        <a data-toggle="tab" href="#followings_list" class="text-primary" aria-disabled="true"
+                            disabled>Mutual</a>
                     </li>
                     <span class="mx-1">|</span>
                     <li class="active">
-                        <a data-toggle="tab" href="#followers_list" class="text-primary active" aria-disabled="true" disabled>Neutral</a>
+                        <a data-toggle="tab" href="#followers_list" class="text-primary active" aria-disabled="true"
+                            disabled>Neutral</a>
                     </li>
                 </ul>
             </div>
             <div class="py-3 tab-content">
                 {{-- <div class="tab-pane fade" id="followings_list"> --}}
-                    {{-- @include('components.follow.partials.followings_data') --}}
+                {{-- @include('components.follow.partials.followings_data') --}}
                 {{-- </div> --}}
                 <div class="tab-pane active" id="followers_list">
                     @include('components.follow.partials.followers_data')

@@ -73,6 +73,8 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::post('/follow', 'UserController@follow')->name('follow');
     Route::get('/{username}/followers', 'UserController@followers')->name('followers');
     Route::get('/{username}/followings', 'UserController@followings')->name('followings');
+    Route::get('/{username}/locations', 'LocationController@index')->name('locations');
+
     
     Route::get('/favorite/{location}', 'LocationController@toggleFavourite');
     Route::get('/locations', 'LocationController@index')->name('locations');

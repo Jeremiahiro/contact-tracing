@@ -12,13 +12,13 @@
         </a>
     </span>
     <span class="px-2">
-        <a href="" class="text-white" data-dismiss="modal" data-toggle="modal" data-target="#userFollowing">
+        <a href="{{ route('followings', auth()->user()->uuid) }}" class="text-white">
             <span class="">{{ count($user->followings) }}</span>
             <p class="m-0">Following</p>
         </a>
     </span>
     <span class="px-2">
-        <a href="" class="text-white" data-dismiss="modal" data-toggle="modal" data-target="#userFollowers">
+        <a href="{{ route('followers', auth()->user()->uuid) }}" class="text-white">
             <span class="tl-follower">{{ count($user->followers) }}</span>
             <p class="m-0">Followers</p>
         </a>

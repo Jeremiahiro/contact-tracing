@@ -62,7 +62,7 @@
             @endphp
             @if ($route == 'home' || $route == 'login' || $route == 'register' || $route == 'password.request' ||
              $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' || $route == 'dashboard.index'
-             || $route == 'dashboard.show' || $route == 'dashboard.edit' || $route == 'followers' || $route == 'followings')
+             || $route == 'dashboard.show' || $route == 'dashboard.edit' || $route == 'followers' || $route == 'followings' || $route == 'locations')
             @else
                 @include('partials.mobile.header.header')
             @endif

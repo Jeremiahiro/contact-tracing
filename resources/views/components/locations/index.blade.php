@@ -16,6 +16,7 @@ Locations
 @endsection
 
 @section('content')
+@include('partials.mobile.header.header')
 
 <div class="activityTab py-2">
     <ul class="m-3 f-12 nav d-flex justify-content-between">
