@@ -69,12 +69,17 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::get('/dashboard/{id}/show', 'UserController@show')->name('dashboard.show');
     Route::get('/dashboard/{id}/edit', 'UserController@edit')->name('dashboard.edit');
     Route::post('/dashboard/update', 'UserController@update')->name('dashboard.update');
+
     Route::post('/follow', 'UserController@follow')->name('follow');
+    Route::get('/{username}/followers', 'UserController@followers')->name('followers');
+    Route::get('/{username}/followings', 'UserController@followings')->name('followings');
+    Route::get('/{username}/locations', 'LocationController@index')->name('locations');
+
     
-    Route::get('favorite/{location}', 'UserLocationController@toggleFavourite');
-    Route::get('/locations', 'UserLocationController@index')->name('locations');
-    Route::post('/dashboard/location/update', 'UserLocationController@update')->name('location.update');
-    Route::get('/location/visibility', 'UserLocationController@locationVisibility')->name('changeStatus');
+    Route::get('/favorite/{location}', 'LocationController@toggleFavourite');
+    Route::get('/locations', 'LocationController@index')->name('locations');
+    Route::post('/dashboard/location/update', 'LocationController@update')->name('location.update');
+    Route::get('/location/visibility', 'LocationController@locationVisibility')->name('changeStatus');
 
     Route::get('/dashboard/{id}/setting', 'SettingController@setting')->name('dashboard.setting');
     Route::post('/dashboard/password', 'SettingController@updatePassword')->name('dashboard.password');
@@ -85,7 +90,7 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
 
 
     Route::get('/notification', 'UserNotificationsController@show')->name('notification');
-
+    Route::get('/get_data', 'GeneralController@fetchData');
 
 
 });

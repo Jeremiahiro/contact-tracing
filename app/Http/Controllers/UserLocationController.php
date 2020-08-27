@@ -20,6 +20,7 @@ class UserLocationController extends Controller
     {
         $locations = Auth::user()->locations;
         $favorites = Auth::user()->favorites;
+
         
         return view('components.locations.index', compact(['locations', 'favorites']));
     }
@@ -58,8 +59,6 @@ class UserLocationController extends Controller
             ];
             return response()->json($response, 201);
         }
-
-
     }
 
     /**

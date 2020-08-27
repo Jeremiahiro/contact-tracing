@@ -32,31 +32,8 @@ Dashboard
             <p class="bold">{{ $user->username }}</p>
         </div>
         <div id="panel2 " class="py-2 tourStep4">
-            <div class="d-flex justify-content-around">
-                <span class="px-2">
-                    <a href="#tab-view" class="text-white active">
-                        <span class="">{{ count($user->tags) }}</span>
-                        <p class="m-0">Connections</p>
-                    </a>
-                </span>
-                <span class="px-2 bold">
-                    <a href="{{ route('locations', auth()->user()->uuid) }}" class="text-white">
-                        <span class="">{{ count($user->activities) }}</span>
-                        <p class="m-0">Location</p>
-                    </a>
-                </span>
-                <span class="px-2">
-                    <a href="" class="text-white" data-dismiss="modal" data-toggle="modal" data-target="#userFollowing">
-                        <span class="">{{ count($user->followings) }}</span>
-                        <p class="m-0">Following</p>
-                    </a>
-                </span>
-                <span class="px-2">
-                    <a href="" class="text-white" data-dismiss="modal" data-toggle="modal" data-target="#userFollowers">
-                        <span class="tl-follower">{{ count($user->followers) }}</span>
-                        <p class="m-0">Followers</p>
-                    </a>
-                </span>
+            <div id="info_stat">
+                @include('components.info.userInfo')
             </div>
             @if($user->id != auth()->user()->id)
             <button class="text-center mt-3 btn f-12 rounded blue-btn text-white action-follow"
@@ -69,7 +46,7 @@ Dashboard
                     FOLLOW
                     @endif
                 </strong>
-                <div class="spinner-border text-white ml-2 d-none" id="follow-spinner" role="status">
+                <div class="spinner-border text-white ml-2 spinner-border-sm d-none" id="follow-spinner" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </button>

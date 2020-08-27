@@ -16,7 +16,7 @@
                     <div>
                         <span>
                             <h4 class="month bold f-12 m-0">
-                                {{ $activity['start_date']->format('d ') }}
+                                {{ $activity['start_date']->format('d') }}
                             </h4>
                             <p class="month bold f-8 m-0">
                                 {{ $activity['start_date']->format('M') }}

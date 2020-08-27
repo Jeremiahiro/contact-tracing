@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Cloudder;
 use App\User;
 use App\Activity;
 use App\ActivityTags;
+use App\Location;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +47,10 @@ class ActivityController extends Controller
                 'istagged'=>$istagged,
                 ]);
         }
-        return view('activity.index', compact('activities', 'istagged'));
+        if(count($activities) > 0) {
+            return view('activity.index', compact('activities', 'istagged'));
+        }
+        return redirect()->route('activity.create')->with('info', 'Add an Activity');
 
     }
 
@@ -76,7 +79,7 @@ class ActivityController extends Controller
         $start = Carbon::parse($request->start_date)->format('Y-m-d H:i');
         $end = Carbon::parse($request->end_date)->format('Y-m-d H:i');
 
-        dd($request->all());
+        // dd($request->all());
 
         DB::beginTransaction();
 
@@ -101,6 +104,20 @@ class ActivityController extends Controller
     
                 'user_id' => auth()->user()->id,
             ]);
+
+            $location_1 = Location::where('location', $request->from_location)->where('user_id', auth()->user()->id)->first();
+
+            if(!$location_1){
+                $location = $request->all();
+                $this->save_new_location_for_from($location);
+            }
+
+            $location_2 = Location::where('location', $request->to_location)->where('user_id', auth()->user()->id)->first();
+
+            if(!$location_2){
+                $location = $request->all();
+                $this->save_new_location_for_to($location);
+            }
     
             if ($activity->wasRecentlyCreated) {
                 // for existing users
@@ -185,9 +202,35 @@ class ActivityController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollBack();
-             return redirect()->back()->with('error', 'OOPS something went wrong');
+            dd($th);
+            return redirect()->back()->with('error', 'OOPS something went wrong');
         } 
 
+    }
+
+    public function save_new_location_for_from($location)
+    {
+        // dd($location);
+        $fromLoc = new Location;
+        $fromLoc->address      = $location['from_address'];
+        $fromLoc->location     = $location['from_location'];
+        $fromLoc->latitude     = $location['from_latitude'];
+        $fromLoc->longitude    = $location['from_longitude'];
+        $fromLoc->image        = $location['from_image'];
+        $fromLoc->user_id      = Auth::user()->id;
+        $fromLoc->save();
+    }
+
+    public function save_new_location_for_to($location)
+    {
+        $toLoc = new Location;
+        $toLoc->address      = $location['to_address'];
+        $toLoc->location     = $location['to_location'];
+        $toLoc->latitude     = $location['to_latitude'];
+        $toLoc->longitude    = $location['to_longitude'];
+        $toLoc->image        = $location['to_image'];
+        $toLoc->user_id      = Auth::user()->id;
+        $toLoc->save();
     }
 
     /**

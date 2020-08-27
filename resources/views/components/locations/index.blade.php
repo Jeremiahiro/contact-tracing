@@ -16,6 +16,7 @@ Locations
 @endsection
 
 @section('content')
+@include('partials.mobile.header.header')
 
 <div class="activityTab py-2">
     <ul class="m-3 f-12 nav d-flex justify-content-between">
@@ -28,10 +29,8 @@ Locations
 
 <div class="tab-content">
     <div class="tab-pane in active" id="allLoc">
-        <div id="activity-list">
-            @foreach ($locations as $location)
-            @include('components.locations.partials.data')
-            @endforeach
+        <div id="location_list">
+            @include('components.locations.partials.locations')
         </div>
         <div class="text-center mb-5">
             <div class="spinner-grow text-primary load-activity d-none" role="status">
@@ -39,16 +38,10 @@ Locations
             </div>
         </div>
     </div>
-    
-    <div class="tab-pane fade" id="fav">
-        <div id="tagged-list">
-            @foreach ($favorites as $loc)
-            @php
-            $location = $loc->location
-            @endphp
-            @include('components.locations.partials.data')
-            @endforeach
 
+    <div class="tab-pane fade" id="fav">
+        <div id="favourite_list">
+            @include('components.locations.partials.favorites')
         </div>
         <div class="text-center mb-5">
             <div class="spinner-grow text-primary load-activity d-none" role="status">
@@ -57,12 +50,6 @@ Locations
         </div>
     </div>
 </div>
-
-
-{{-- @foreach ($locations as $location)
-@include('components.locations.partials.data')    
-@endforeach --}}
-
 
 @endsection
 
@@ -102,36 +89,65 @@ Locations
 </script>
 
 <script>
-    jQuery(document).ready(function ($) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+jQuery(document).ready(function ($) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('.toggleFavourite').click(function () {
+        var locationID = $(this).data('id');
+        console.log(locationID);
+        var object = $(this);
+        var c = $(this).parent("div").find("#fav_icon").attr('src');
+
+        $.ajax({
+            type: 'GET',
+            url: `favorite/` + locationID,
+            contentType: 'application/json',
+        }).done(response => {
+            if (response.attach != true) {
+                object.find("img").attr('src', '/frontend/img/svg/heart.svg');
+                fetchFavourites();
+            } else {
+                fetchFavourites();
+                object.find("img").attr('src', '/frontend/img/svg/heart_red.svg');
             }
-        });
-
-        $('.toggleFavourite').click(function () {
-            var locationID = $(this).data('id');
-            console.log(locationID);
-
-            $.ajax({
-                type: 'GET',
-                url: `favorite/`+locationID ,
-                contentType: 'application/json',
-                success: function (response) {
-                  // show add button
-                  console.log(response);
-
-                    $('#favorites' + locationID).show();
-                    // hide delete button
-                    $('#unfavorite' + locationID).hide();
-                },
-                error: function (e) {
-                    // handle error
-                    console.log(e['responseText']);
-                }
-            });
+        }).fail(e => {
+            console.log(e);
+            object.find("img").attr('src', '/frontend/img/svg/heart.svg');
         });
     });
+
+    function fetchLocation() {
+        $.ajax({
+            url: `get_data`,
+            type: "GET",
+            data: {
+                'type': 'location'
+            },
+            success: function (data) {
+                $("#location_list").html(data.locations);
+            },
+        });
+    }
+
+    function fetchFavourites() {
+        $.ajax({
+            url: `get_data`,
+            type: "GET",
+            data: {
+                'type': 'favorites'
+            },
+            success: function (data) {
+                $("#favourite_list").html(data.favorites);
+            },
+        });
+    }
+
+
+});
 
 </script>
 

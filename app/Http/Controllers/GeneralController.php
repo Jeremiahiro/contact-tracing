@@ -6,7 +6,7 @@ use DB;
 use Auth;
 use App\User;
 use App\Activity;
-use App\UserLocation;
+use App\Location;
 use App\ActivityTags;
 use Illuminate\Http\Request;
 
@@ -171,11 +171,74 @@ class GeneralController extends Controller
      */
     public function mapView()
     {
-        $data = UserLocation::where('home_location', '!=', null)->get(['home_address','home_latitude','home_longitude'])->toArray();
+        $data = Location::where('location', '!=', null)->get(['address','latitude','longitude'])->toArray();
 
         $count = DB::table("users")->count();
         $user = Auth::user();
         return view('components.map', compact('count', 'data'));
+    }
+
+    /** 
+     * Ajax request to automatically update data
+     * followers
+     * following
+     * location
+     * favourite
+     */
+    public function fetchData(Request $request)
+    {
+
+        if ($request->ajax()) {
+           if($request->type == "location"){
+                $locations = Auth::user()->locations;
+                $locations = view('components.locations.partials.locations', compact('locations'))->render();
+                return response()->json([
+                    'locations' => $locations,
+                    ]);
+           }
+           if($request->type == "favorites"){
+                $favorites = Auth::user()->getFavoriteItems(Location::class)->paginate(50);
+
+                $favorites = view('components.locations.partials.favorites', compact('favorites'))->render();
+                return response()->json([
+                    'favorites' => $favorites,
+                    ]);
+           }
+           if($request->type == "followers"){
+                $followers = Auth::user()->followings()->paginate(50);
+
+                $followings = view('components.follow.followers', compact('followers'))->render();
+                return response()->json([
+                    'followers' => $followers,
+                    ]);
+            }
+            if($request->type == "followings"){
+                $followings = Auth::user()->followings()->paginate(50);
+
+                $followings = view('components.follow.followings', compact('followings'))->render();
+                return response()->json([
+                    'followings' => $followings,
+                    ]);
+            }
+            if($request->type == "info_stat"){
+                $tags = Auth::user()->tags();
+                $activities = Auth::user()->activities();
+                $followers = Auth::user()->followers();
+                $followings = Auth::user()->followings();
+
+                $data = [
+                    'tags' => $tags,
+                    'activities' => $activities,
+                    'followers' => $followers,
+                    'followings' => $followings
+                ];
+
+                $data = view('components.info.userInfo', compact('data'))->render();
+                return response()->json([
+                    'data' => $data,
+                    ]);
+            }
+        }
     }
 
 }

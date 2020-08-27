@@ -90,11 +90,9 @@ Add Activity
                             </div>
                             <div class="f-24 border collapse additional-info-collapse" id="collapseFromInfo">
                                 <div class="p-2 m-0">
-                                    <div>
+                                    <div class="accordion_body">
+                                        @if (auth()->user()->favorites()->count() > 0)
                                         <p class="m-0 p-0 f-14">Favourite Locations</p>
-                                        @if (!auth()->user()->favorites)
-                                        No favourite locations
-                                        @else
                                         @foreach (auth()->user()->favorites as $loc)
                                         <input class="existingLoc" type="radio"
                                             id="use_address_for_from-{{ $loc->location->id }}"
@@ -109,12 +107,13 @@ Add Activity
                                             {{ $loc->location->location }}
                                         </label>
                                         @endforeach
+                                        @else
                                         @endif
-                                        <div class="">
-                                            <label for="from_image" class="">
+                                        <div class="text-center">
+                                            <label for="from_image" class="text-center">
                                                 <span>
-                                                    Add Image
-                                                    @include('activity.partials.cam')
+                                                    @include('activity.partials.cam')<br/>
+                                                    Add Location Image 
                                                 </span>
                                             </label>
                                             <input type="hidden" name="from_image" id="from_image_value" value="">
@@ -125,14 +124,14 @@ Add Activity
                                                     <img src="http://placehold.it/100" alt="Location Image Preview"
                                                         class="loc_img_preview" id="fromImagePreview">
                                                 </div>
-                                                <div class="text-right">
-                                                    <i class="fa fa-times text-danger d-none" id="removeFromImage"></i>
+                                                <div class="text-center text-danger f-12 d-none" id="removeFromImage">
+                                                    <i class="fa fa-times"></i> 
+                                                    <span class="">Delete Image</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="f-14 text-left d-none" id="clearFrom">clear</div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -161,8 +160,8 @@ Add Activity
                                 </span>
                             </div>
                             <div class="f-24 border collapse additional-info-collapse" id="collapseToInfo">
-                                <div class="p-2 m-0">
-                                    <div>
+                                <div class="p-2 m-0 ">
+                                    <div class="accordion_body">
                                         <p class="m-0 p-0 f-14">Favourite Locations</p>
                                         @if (!auth()->user()->favorites)
                                         No favourite locations
@@ -182,29 +181,29 @@ Add Activity
                                         </label>
                                         @endforeach
                                         @endif
-                                        <div class="">
-                                            <label for="to_image" class="">
+                                        <div class="text-center">
+                                            <label for="to_image" class="text-center">
                                                 <span>
-                                                    Add Image
-                                                    @include('activity.partials.cam')
+                                                    @include('activity.partials.cam')<br/>
+                                                    Add Location Image 
                                                 </span>
                                             </label>
                                             <input type="hidden" name="to_image" id="to_image_value" value="">
                                             <input type="File" name="" class="d-none avatar-input" id="to_image"
-                                                value="" accept="image/*">
+                                                value="" accept="image/*" data-type="to_image">
                                             <div id="toImagePreviewDiv" class="d-none tx_effect">
-                                                <div class="img_preview">
+                                                <div class="img_preview text-center mx-auto">
                                                     <img src="http://placehold.it/100" alt="Location Image Preview"
                                                         class="loc_img_preview" id="toImagePreview">
                                                 </div>
-                                                <div class="text-right">
-                                                    <i class="fa fa-times text-danger d-none" id="removeToImage"></i>
+                                                <div class="text-center text-danger f-12 d-none" id="removeToImage">
+                                                    <i class="fa fa-times"></i> 
+                                                    <span class="">Delete Image</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="f-14 text-left d-none" id="clearTo">clear</div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -229,7 +228,7 @@ Add Activity
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 activity_tagging">
                         @include('activity.partials.tags')
                     </div>
                 </div>

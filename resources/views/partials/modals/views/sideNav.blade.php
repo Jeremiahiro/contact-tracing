@@ -15,20 +15,20 @@
                         <p class="m-0 f-12">Connections</p>
                     </span>
                     <span class="px-1">
-                        <span class="">{{ count(auth()->user()->activities) }}</span>
-                        <p class="m-0 f-12">Location</p>
+                        <a href="{{ route ('locations') }}" class="text-white">
+                            <span class="">{{ count(auth()->user()->locations) }}</span>
+                            <p class="m-0 f-12">Location</p>
+                        </a>
                     </span>
                     <span class="px-1">
-                        <a href="" class="text-white" data-dismiss="modal" data-toggle="modal"
-                            data-target="#userFollowing">
+                        <a href="{{ route ('followings', auth()->user()->username ) }}" class="text-white">
                             <span class="">{{ count(auth()->user()->followings) }}</span>
                             <p class="m-0 f-12">Following</p>
                         </a>
                     </span>
                     <span class="px-1">
-                        <a href="" class="text-white" data-dismiss="modal" data-toggle="modal"
-                            data-target="#userFollowers">
-                            <span class="tl-follower">{{ count(auth()->user()->Followers) }}</span>
+                        <a href="{{ route ('followers', auth()->user()->username ) }}" class="text-white">
+                            <span class="tl-follower">{{ count(auth()->user()->followers) }}</span>
                             <p class="m-0 f-12">Followers</p>
                         </a>
                     </span>

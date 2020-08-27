@@ -160,6 +160,7 @@ jQuery(document).ready(function ($) {
                             $('#header-image').css('background-image', oldHeader);
                             showAlertMessage('danger', 'Oops! something went wrong');
                         } else {
+                            $('#fromImagePreview').attr('src', base64);
                             $('#header-image').css('background-image', 'url(' + base64 + ')');
                             console.log(response);
                             // showAlertMessage('success', 'Successful');
@@ -287,3 +288,17 @@ function showAlertMessage(type, message) {
     $("#upload-alert").html(alertMessage);
     removeAlertMessage();
 }
+
+
+// function fetchData() {
+//     //this makes the setTimeout a self run function it runs the first time always
+//     setTimeout(function () {
+//         $.ajax({
+//          
+//             data: "",
+//             success: function(data) {
+
+//             },
+//             complete: fetchData
+//         });
+//     }, 4000);
