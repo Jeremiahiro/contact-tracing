@@ -66,12 +66,40 @@ Locations
 
 @endsection
 
-@section('footer')
-@include('partials.mobile.footer.footer')
-@endsection
-
 @section('script')
 
+<script type="text/javascript">
+    var page = 1;
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            page++;
+            loadMoreData(page);
+        }
+    });
+
+    function loadMoreData(page) {
+        $.ajax({
+                url: '?page=' + page,
+                type: "get",
+                beforeSend: function () {
+                    $('.load-activity').removeClass('d-none');
+                }
+            })
+            .done(function (data) {
+                if (data.html == " ") {
+                    $('.load-activity').html("No more records found");
+                    return;
+                }
+                $('.load-activity').addClass('d-none');
+                $("#activity-list").append(data.location);
+                $("#tagged-list").append(data.favorites);
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                alert('server not responding...');
+            });
+    }
+
+</script>
 
 <script>
     jQuery(document).ready(function ($) {
@@ -100,7 +128,6 @@ Locations
                 error: function (e) {
                     // handle error
                     console.log(e['responseText']);
-
                 }
             });
         });
@@ -108,5 +135,7 @@ Locations
 
 </script>
 
-
+@endsection
+@section('footer')
+@include('partials.mobile.footer.footer')
 @endsection
