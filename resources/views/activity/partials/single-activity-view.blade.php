@@ -39,20 +39,20 @@
                         </div>
                         @if ($activity->from_image != null)
                         <div class="carousel-item">
-                            <div class="map-img rounded">
+                            <div class="map-img map-lg rounded">
                                 <img src="{{ $activity->from_image }}" alt="">
                             </div>
                         </div>
                         @endif
                         @if ($activity->to_image != null)
                         <div class="carousel-item">
-                            <div class="map-img rounded">
+                            <div class="map-img map-lg rounded">
                                 <img src="{{ $activity->to_image }}" alt="">
                             </div>
                         </div>
                         @endif
                     </div>
-                    @if ($activity->from_image != null)
+                    @if ($activity->from_image != null || $activity->to_image != null)
                     <a class="carousel-control-prev text-white" href="#activityCarouselIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon text-white" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
