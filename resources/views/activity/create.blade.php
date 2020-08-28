@@ -160,7 +160,7 @@ Add Activity
                                 </span>
                             </div>
                             <div class="f-24 border collapse additional-info-collapse" id="collapseToInfo">
-                                <div class="p-2 m-0 ">
+                                <div class="p-2 m-0">
                                     <div class="accordion_body">
                                         <p class="m-0 p-0 f-14">Favourite Locations</p>
                                         @if (!auth()->user()->favorites)
