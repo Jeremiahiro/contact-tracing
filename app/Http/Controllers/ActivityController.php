@@ -68,7 +68,9 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        return view('activity.create');
+        $favorites = Auth::user()->getFavoriteItems(Location::class)->paginate(5);
+
+        return view('activity.create', compact(['favorites']));
     }
 
     /**

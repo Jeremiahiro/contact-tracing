@@ -91,20 +91,20 @@ Add Activity
                             <div class="f-24 border collapse additional-info-collapse" id="collapseFromInfo">
                                 <div class="p-2 m-0">
                                     <div class="accordion_body">
-                                        @if (auth()->user()->favorites()->count() > 0)
+                                        @if ($favorites->count())
                                         <p class="m-0 p-0 f-14">Favourite Locations</p>
-                                        @foreach (auth()->user()->favorites as $loc)
+                                        @foreach ($favorites as $location)
                                         <input class="existingLoc" type="radio"
-                                            id="use_address_for_from-{{ $loc->location->id }}"
-                                            value="{{ $loc->location->id }}" aria-label="..." name="from"
-                                            data-id="{{ $loc->location->id }}"
-                                            data-address="{{ $loc->location->address }}"
-                                            data-location="{{ $loc->location->location }}"
-                                            data-latitude="{{ $loc->location->latitude }}"
-                                            data-longitude="{{ $loc->location->longitude }}"
-                                            data-image="{{ $loc->location->image }}">
-                                        <label class="light f-16" for="use_address_for_from-{{ $loc->location->id }}">
-                                            {{ $loc->location->location }}
+                                            id="use_address_for_from-{{ $location->id }}"
+                                            value="{{ $location->id }}" aria-label="..." name="from"
+                                            data-id="{{ $location->id }}"
+                                            data-address="{{ $location->address }}"
+                                            data-location="{{ $location->location }}"
+                                            data-latitude="{{ $location->latitude }}"
+                                            data-longitude="{{ $location->longitude }}"
+                                            data-image="{{ $location->image }}">
+                                        <label class="light f-16" for="use_address_for_from-{{ $location->id }}">
+                                            {{ $location->location }}
                                         </label>
                                         @endforeach
                                         @else
@@ -162,22 +162,20 @@ Add Activity
                             <div class="f-24 border collapse additional-info-collapse" id="collapseToInfo">
                                 <div class="p-2 m-0">
                                     <div class="accordion_body">
+                                        @if ($favorites->count() > 0)
                                         <p class="m-0 p-0 f-14">Favourite Locations</p>
-                                        @if (!auth()->user()->favorites)
-                                        No favourite locations
-                                        @else
-                                        @foreach (auth()->user()->favorites as $loc)
+                                        @foreach ($favorites as $location)
                                         <input class="existingLoc" type="radio"
-                                            id="use_address_for_to-{{ $loc->location->id }}"
-                                            value="{{ $loc->location->id }}" aria-label="..." name="to"
-                                            data-id="{{ $loc->location->id }}"
-                                            data-address="{{ $loc->location->address }}"
-                                            data-location="{{ $loc->location->location }}"
-                                            data-latitude="{{ $loc->location->latitude }}"
-                                            data-longitude="{{ $loc->location->longitude }}"
-                                            data-image="{{ $loc->location->image }}">
-                                        <label class="light f-16" for="use_address_for_to-{{ $loc->location->id }}">
-                                            {{ $loc->location->location }}
+                                            id="use_address_for_to-{{ $location->id }}"
+                                            value="{{ $location->id }}" aria-label="..." name="to"
+                                            data-id="{{ $location->id }}"
+                                            data-address="{{ $location->address }}"
+                                            data-location="{{ $location->location }}"
+                                            data-latitude="{{ $location->latitude }}"
+                                            data-longitude="{{ $location->longitude }}"
+                                            data-image="{{ $location->image }}">
+                                        <label class="light f-16" for="use_address_for_to-{{ $location->id }}">
+                                            {{ $location->location }}
                                         </label>
                                         @endforeach
                                         @endif
