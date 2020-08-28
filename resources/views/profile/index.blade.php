@@ -18,7 +18,7 @@ Dashboard
 @endsection
 
 @section('content')
-<section class="splash profile_cover" style="background-image: url({{ $user->header }})">
+<section id="startTour" class="splash profile_cover" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
     @include('partials.modals.views.profile-picture')
     <div class="container content text-center text-white py-4">
