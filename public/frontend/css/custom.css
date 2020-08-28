@@ -861,9 +861,14 @@ input:checked+.toggle-slider:before {
     height: 200px;
 }
 
+.indicators {
+    left: auto;
+    bottom: auto;
+}
+
 .blue-indicators {
+    border-radius: 50%;
     width: 7px !important;
     height: 7px !important;
     background-color: #0000ff !important;
-    border-radius: 50%;
 }

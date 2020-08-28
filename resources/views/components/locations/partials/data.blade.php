@@ -53,7 +53,7 @@
                             class="">
                     </div>
                 </div>
-                <ol class="carousel-indicators m-0 " style="left:auto; bottom:auto;">
+                <ol class="carousel-indicators m-0 indicators">
                     <li data-target="#locationsCarousel" data-slide-to="0" class="blue-indicators active"></li>
                     <li data-target="#locationsCarousel" data-slide-to="1" class="blue-indicators"></li>
                 </ol>
