@@ -15,12 +15,19 @@
     });
 
     tour.addStep({
-        text: `Click here to Edit your profile`,
+        text: `WELCOME !!
+     You can take this tour to get started , click next to continue or 
+     end tour by clicking on the skip button.`,
         attachTo: {
-            element: '.ProfiletourStep2',
+            element: '#startTour',
             on: 'bottom'
         },
-        buttons: [
+        buttons: [{
+                action() {
+                    return this.next();
+                },
+                text: 'Next'
+            },
             {
                 action() {
                     $.ajax({
@@ -34,6 +41,39 @@
                     return this.complete();
                 },
                 text: 'Skip'
+            }
+        ],
+        id: 'creating'
+    });
+    
+
+
+    tour.addStep({
+        text: `Click here to Edit your profile`,
+        attachTo: {
+            element: '.ProfiletourStep2',
+            on: 'bottom'
+        },
+        buttons: [{
+                action() {
+                    return this.back();
+                },
+                classes: 'shepherd-button-secondary',
+                text: 'Back'
+            },
+            {
+                action() {
+                    $.ajax({
+                        type: 'GET',
+                        url: `/walkthrough/complete`,
+                    }).done(data => {
+                        console.log(data.response);
+                    }).fail(e => {
+                        console.log(data).response;
+                    });
+                    return this.complete();
+                },
+                text: 'Done'
             }
         ],
         id: 'creating'
