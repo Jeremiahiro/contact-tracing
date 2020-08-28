@@ -58,7 +58,7 @@ Add Activity
                 </div>
                 <div id="startTour" class="d-flex justify-content-between">
                     <div>
-                        <span class="mt-2">
+                        <span id="tourStep4" class="mt-2">
                             <img src="{{ asset('/frontend/img/svg/left.svg') }}" alt="" class="ml-1" id="sideIcon-1">
                             <img src="{{ asset('/frontend/img/svg/left-1.svg') }}" alt="" class="ml-1 d-none"
                                 id="sideIcon-2">
@@ -66,7 +66,7 @@ Add Activity
                     </div>
                     <div class="form-group row w-100">
 
-                        <div class="col-md-6 mb-1">
+                        <div class="col-md-6 mb-1" id="tourStep2">
                             <div>
                                 <input id="address_1" type="search"
                                     class="blue-input input rounded-0 @error('from_address') is-invalid @enderror"
@@ -136,7 +136,7 @@ Add Activity
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6" id="tourStep3">
                             <div>
                                 <input id="address_2" type="search"
                                     class="blue-input input rounded-0 @error('to_address') is-invalid @enderror"

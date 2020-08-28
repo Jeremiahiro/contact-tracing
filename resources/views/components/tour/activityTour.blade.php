@@ -15,8 +15,8 @@
 
     tour.addStep({
         text: `WELCOME !!
-     You can take this tour to get started , click next to continue the tour. 
-     You could end tour by clicking on the close icon.`,
+     You can take this tour to get started , click next to continue or 
+     end tour by clicking on the skip button.`,
         attachTo: {
             element: '#startTour',
             on: 'bottom'
@@ -69,9 +69,9 @@
     });
 
     tour.addStep({
-        text: `Click here to add an already existing user on the platform as a connection.`,
+        text: `Click here to add your From location and its image or pick from your favourite locations.`,
         attachTo: {
-            element: '.tourStep2',
+            element: '#tourStep2',
             on: 'bottom'
         },
         buttons: [{
@@ -92,9 +92,79 @@
     });
 
     tour.addStep({
+        text: `Click here to add your To location and its image or pick from your favourite locations.`,
+        attachTo: {
+            element: '#tourStep3',
+            on: 'bottom'
+        },
+        buttons: [{
+                action() {
+                    return this.back();
+                },
+                classes: 'shepherd-button-secondary',
+                text: 'Back'
+            },
+            {
+                action() {
+                    return this.next();
+                },
+                text: 'Next'
+            }
+        ],
+        id: 'creating'
+    });
+
+    tour.addStep({
+        text: `Close your Where section by clicking here.`,
+        attachTo: {
+            element: '#tourStep4',
+            on: 'bottom'
+        },
+        buttons: [{
+                action() {
+                    return this.back();
+                },
+                classes: 'shepherd-button-secondary',
+                text: 'Back'
+            },
+            {
+                action() {
+                    return this.next();
+                },
+                text: 'Next'
+            }
+        ],
+        id: 'creating'
+    });
+
+    tour.addStep({
+        text: `Click here to add an already existing user on the platform as a connection.`,
+        attachTo: {
+            element: '.tourStep5',
+            on: 'bottom'
+        },
+        buttons: [{
+                action() {
+                    return this.back();
+                },
+                classes: 'shepherd-button-secondary',
+                text: 'Back'
+            },
+            {
+                action() {
+                    return this.next();
+                },
+                text: 'Next'
+            }
+        ],
+        id: 'creating'
+    });
+    
+
+    tour.addStep({
         text: `Click here to add a new user as a connection.`,
         attachTo: {
-            element: '.tourStep3',
+            element: '.tourStep6',
             on: 'bottom'
         },
         buttons: [{

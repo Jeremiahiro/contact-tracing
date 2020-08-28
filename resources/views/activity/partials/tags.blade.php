@@ -6,9 +6,9 @@
             </label>
         </div>
         <div class="align-items-end mb-0 mt-3 f-12">
-            <span class="bold text-primary tourStep2" id="tab1Label">Existing</span>
+            <span class="bold text-primary tourStep5" id="tab1Label">Existing</span>
             <span class="">|</span>
-            <span class="light text-primary tourStep3" id="tab2Label">New
+            <span class="light text-primary tourStep6" id="tab2Label">New
                 <span class="">( <span class="form-dup-counter">0</span> )</span>
             </span>
         </div>

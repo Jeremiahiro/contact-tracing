@@ -49,7 +49,7 @@
                         alt=""> 
                     </div>
                     <div class="carousel-item">
-                        <img style="object-fit: cover; height:222px; width:333px;" src="{{ $location->image }}" alt=""
+                        <img style="object-fit: cover; height:222px; width:100%;" src="{{ $location->image }}" alt=""
                             class="">
                     </div>
                 </div>
