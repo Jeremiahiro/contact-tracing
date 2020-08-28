@@ -20,7 +20,7 @@ Activities
 
 <section class="mb-5 py-3">
 
-    <div class="activityTab">
+    <div id="startTour" class="activityTab">
         <ul class="m-3 f-12 nav d-flex justify-content-between">
             <li class="active">
                 <a data-toggle="tab" href="#activity" class="text-primary active">Timeline</a>
@@ -56,6 +56,7 @@ Activities
 
 @endsection
 @section('script')
+
 <script type="text/javascript">
     var page = 1;
     $(window).scroll(function () {
