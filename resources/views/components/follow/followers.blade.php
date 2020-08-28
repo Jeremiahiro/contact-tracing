@@ -21,7 +21,7 @@ Followers
     <div class="p-3">
         <div class="activityView">
             <div class="activityTab">
-                <ul class="mb-0 mt-3 f-12 nav">
+                <ul class="mb-0 f-12 nav">
                     <li>
                         <a data-toggle="tab" href="#followings_list" class="text-primary" aria-disabled="true"
                             disabled>Mutual</a>

@@ -204,6 +204,7 @@ class GeneralController extends Controller
                     'favorites' => $favorites,
                     ]);
            }
+           
            if($request->type == "followers"){
                 $followers = Auth::user()->followings()->paginate(50);
 
@@ -212,32 +213,16 @@ class GeneralController extends Controller
                     'followers' => $followers,
                     ]);
             }
-            if($request->type == "followings"){
-                $followings = Auth::user()->followings()->paginate(50);
 
-                $followings = view('components.follow.followings', compact('followings'))->render();
+            if($request->type == "notification"){
+
+                $notification = Auth::user()->unreadNotifications();
+
                 return response()->json([
-                    'followings' => $followings,
+                    'notification' => $notification,
                     ]);
             }
-            if($request->type == "info_stat"){
-                $tags = Auth::user()->tags();
-                $activities = Auth::user()->activities();
-                $followers = Auth::user()->followers();
-                $followings = Auth::user()->followings();
 
-                $data = [
-                    'tags' => $tags,
-                    'activities' => $activities,
-                    'followers' => $followers,
-                    'followings' => $followings
-                ];
-
-                $data = view('components.info.userInfo', compact('data'))->render();
-                return response()->json([
-                    'data' => $data,
-                    ]);
-            }
         }
     }
 

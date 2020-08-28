@@ -18,12 +18,10 @@ People you follow
 @section('content')
 <div class="text-primary">
     @include('partials.mobile.header.header')
-
     <div class="p-3">
-
         <div class="activityView">
             <div class="activityTab">
-                <ul class="mb-0 mt-3 f-12 nav">
+                <ul class="mb-0 f-12 nav">
                     <li class="active">
                         <a data-toggle="tab" href="#followings_list" class="text-primary active">Mutual</a>
                     </li>

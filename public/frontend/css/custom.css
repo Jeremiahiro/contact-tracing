@@ -104,13 +104,13 @@ footer {
     display: inline-block;
 }
 
-.notification-icon {
+.notification_icon {
     position: relative;
 }
 
-.notification-icon .badge {
+.notification_icon .badge {
     position: absolute;
-    top: -15px;
+    top: -8px;
     right: 0;
 }
 

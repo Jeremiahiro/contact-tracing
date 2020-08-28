@@ -38,8 +38,6 @@
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
     {{-- <link rel="stylesheet" href="{{ asset('frontend/css/rescalendar.min.css') }}" rel="stylesheet"> --}}
 
-    <script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
-    <script src="{{ asset('frontend/jquery/followToggle.js')}}"></script>
 
     <script src="{{ asset('frontend/js/moment-with-locales.min.js')}}"></script>
 
@@ -75,12 +73,13 @@
         @yield('footer')
         @include('partials.modals.views.sideNav')
         @include('partials.modals.views.settings')
-        {{-- @include('partials.modals.views.userFollowers') --}}
-        {{-- @include('partials.modals.views.userFollowings') --}}
         @endauth
         @enddesktop
     </div>
-
+    @auth
+    <script src="{{ asset('frontend/jquery/followToggle.js')}}"></script>
+    @endauth
+    <script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
     @yield('script')
 
 </body>

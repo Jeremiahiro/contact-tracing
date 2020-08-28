@@ -35,29 +35,33 @@ jQuery(document).ready(function ($) {
         });
     });
 
-    // function fetchFollowers() {
-    //     $.ajax({
-    //         url: `get_data`,
-    //         type: "GET",
-    //         data: {
-    //             'type': 'followers'
-    //         },
-    //         success: function (data) {
-    //             $("#followers_list").html(data.followers);
-    //         },
-    //     });
-    // }
+    var notification = $('#notification_count');
+    notification.hide();
 
-    // function fetchFollowings() {
-    //     $.ajax({
-    //         url: `get_data`,
-    //         type: "GET",
-    //         data: {
-    //             'type': 'followings'
-    //         },
-    //         success: function (data) {
-    //             $("#followings_list").html(data.followings);
-    //         },
-    //     });
-    // }
+    $(function fetchNotification() {
+
+        setTimeout(function () {
+            $.ajax({
+                url: `get_data`,
+                type: "GET",
+                data: {
+                    'type': 'notification'
+                },
+                success: function (data) {
+                    if (data.notification.length) {
+                        notification.show();
+                        notification.html(data.notification.length);
+                    } else {
+                        console.log('there');
+                        notification.hide();
+                    }
+                },
+                error(e){
+                    console.log(e['responseText']);
+                },
+                complete: fetchNotification
+            });
+        }, 5000);
+    });
+
 });

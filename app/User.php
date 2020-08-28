@@ -65,17 +65,9 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * User has many activities
      */
-    // public function favorites()
-    // {
-    //     $favortePosts = $user->getFavoriteItems(Post::class)->paginate();
-    // }
-
-    /**
-     * User has many activities
-     */
     public function locations()
     {
-        return $this->hasMany('App\Location');
+        return $this->hasMany('App\Location')->orderBy('address', 'ASC');
     }    
 
     /**
@@ -148,14 +140,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isTagged()
     {
         return $this->hasMany('App\ActivityTags', 'person_id');
-    }
-
-    /**
-     * user has a location
-     */
-    public function location()
-    {
-        return $this->hasMany('App\Location', 'user_id');
     }
 
     /**

@@ -21,14 +21,10 @@
                     <img src="{{  asset('/frontend/img/svg/ct.svg') }}" alt="Contact Tracing">
                 </a>
             </div>
-            <div class="">
-                <a href="{{ route('notification') }}" class="notification-icon">
+            <div class="notification_icon">
+                <a href="{{ route('notification') }}" class="">
                     <img src="{{  asset('/frontend/img/svg/not.svg') }}" alt="Notification">
-                    @auth
-                    @if (auth()->user()->unreadNotifications->count())
-                    <span class="badge badge-danger rounded-circle">{{ auth()->user()->unreadNotifications->count() }} </span>
-                    @endif
-                    @endauth
+                    <span class="badge badge-danger rounded-circle" id="notification_count">5</span>
                 </a>
             </div>
         </div>

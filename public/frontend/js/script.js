@@ -32,5 +32,4 @@ jQuery(document).ready(function ($) {
             }
         });
     });
-
 });

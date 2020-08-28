@@ -88,9 +88,7 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::post('/image-delete', 'SettingController@destroyImage')->name('delete.image');
     Route::get('/walkthrough/complete', 'SettingController@skipWalkthrough')->name('tour.finish');
 
-
     Route::get('/notification', 'UserNotificationsController@show')->name('notification');
     Route::get('/get_data', 'GeneralController@fetchData');
-
 
 });

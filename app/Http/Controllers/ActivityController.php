@@ -54,8 +54,6 @@ class ActivityController extends Controller
 
     }
 
-  
-
     /**
      * Show the form for creating a new resource.
      *
@@ -78,8 +76,6 @@ class ActivityController extends Controller
 
         $start = Carbon::parse($request->start_date)->format('Y-m-d H:i');
         $end = Carbon::parse($request->end_date)->format('Y-m-d H:i');
-
-        // dd($request->all());
 
         DB::beginTransaction();
 
@@ -105,41 +101,45 @@ class ActivityController extends Controller
                 'user_id' => auth()->user()->id,
             ]);
 
-            $location_1 = Location::where('location', $request->from_location)->where('user_id', auth()->user()->id)->first();
-
-            if(!$location_1){
-                $location = $request->all();
-                $this->save_new_location_for_from($location);
-            }
-
-            $location_2 = Location::where('location', $request->to_location)->where('user_id', auth()->user()->id)->first();
-
-            if(!$location_2){
-                $location = $request->all();
-                $this->save_new_location_for_to($location);
-            }
-    
             if ($activity->wasRecentlyCreated) {
+
+                $location_1 = Location::where('location', $request->from_location)->where('user_id', auth()->user()->id)->first();
+
+                if(!$location_1){
+                    $location = [
+                        'address'   => $request->from_address,
+                        'location'  => $request->from_location,
+                        'latitude'  => $request->from_latitude,
+                        'longitude' => $request->from_longitude,
+                        'image'     => $request->from_image,
+                    ];
+                    $this->save_new_location($location);
+                }
+
+                $location_2 = Location::where('location', $request->to_location)->where('user_id', auth()->user()->id)->first();
+
+                if(!$location_2){
+                    $location = [
+                        'address'   => $request->to_address,
+                        'location'  => $request->to_location,
+                        'latitude'  => $request->to_latitude,
+                        'longitude' => $request->to_longitude,
+                        'image'     => $request->to_image,
+                    ];
+                    $this->save_new_location($location);
+                }
+    
                 // for existing users
                 if($request->tags != null) {
                     $tags = explode(",", $request->tags);
                     foreach($tags as $person) {
                         $existingUser = User::where('username', $person)->first();
                         if ($existingUser) {
-                            $activityTag = new ActivityTags;
-                            $activityTag->activity_id   = $activity->id;
-                            $activityTag->name          = $existingUser->name;
-                            $activityTag->person_id     = $existingUser->id;
-                            $activityTag->user_id       = Auth::user()->id;
-                            $activityTag->save();
-                            
-                            $details = [
-                                'greeting' => 'Hi ' . $existingUser->name,
-                                'body' => 'You were tagged in an activity',
-                                'action' => 'click here to see',
+                            $data = [
                                 'activity_id' => $activity->id,
+                                'user'        => $existingUser,
                             ];
-                            $existingUser->notify(new ActivityTagNotification($details));
+                            $this->save_tag_for_existing_user($data);
                         } 
                     }
                 } 
@@ -153,20 +153,11 @@ class ActivityController extends Controller
                     foreach($name as $key => $value) {
                         $existingUser = User::where('email', $email[$key])->first();
                         if ($existingUser) {
-                            $activityTag = new ActivityTags;
-                            $activityTag->activity_id   = $activity->id;
-                            $activityTag->person_id     = $existingUser->id;
-                            $activityTag->name          = $existingUser->name;
-                            $activityTag->user_id       = Auth::user()->id;
-                            $activityTag->save();
-
-                            $details = [
-                                'greeting' => 'Hi ' . $existingUser->name,
-                                'body' => 'You were tagged in an activity',
-                                'action' => 'click here to see',
+                            $data = [
                                 'activity_id' => $activity->id,
+                                'user'        => $existingUser,
                             ];
-                            $existingUser->notify(new ActivityTagNotification($details));
+                            $this->save_tag_for_existing_user($data);
 
                         } elseif ($name[$key] != null) {
                             $activityTag = new ActivityTags;
@@ -208,30 +199,38 @@ class ActivityController extends Controller
 
     }
 
-    public function save_new_location_for_from($location)
+    public function save_tag_for_existing_user($data)
     {
-        // dd($location);
-        $fromLoc = new Location;
-        $fromLoc->address      = $location['from_address'];
-        $fromLoc->location     = $location['from_location'];
-        $fromLoc->latitude     = $location['from_latitude'];
-        $fromLoc->longitude    = $location['from_longitude'];
-        $fromLoc->image        = $location['from_image'];
-        $fromLoc->user_id      = Auth::user()->id;
-        $fromLoc->save();
+        $activityTag = new ActivityTags;
+        $activityTag->activity_id   = $data['activity_id'];
+        $activityTag->person_id     = $data['user']->id;
+        $activityTag->name          = $data['user']->name;
+        $activityTag->user_id       = Auth::user()->id;
+        $activityTag->save();
+
+        // initiate notification
+        $details = [
+            'greeting' => 'Hi ' . $data['user']->name,
+            'body' => 'You were tagged in an activity',
+            'action' => 'click here to see',
+            'activity_id' => $data['activity_id'],
+        ];
+        $data['user']->notify(new ActivityTagNotification($details));
+
     }
 
-    public function save_new_location_for_to($location)
+    public function save_new_location($location)
     {
-        $toLoc = new Location;
-        $toLoc->address      = $location['to_address'];
-        $toLoc->location     = $location['to_location'];
-        $toLoc->latitude     = $location['to_latitude'];
-        $toLoc->longitude    = $location['to_longitude'];
-        $toLoc->image        = $location['to_image'];
-        $toLoc->user_id      = Auth::user()->id;
-        $toLoc->save();
+        $loc = new Location;
+        $loc->address      = $location['address'];
+        $loc->location     = $location['location'];
+        $loc->latitude     = $location['latitude'];
+        $loc->longitude    = $location['longitude'];
+        $loc->image        = $location['image'];
+        $loc->user_id      = Auth::user()->id;
+        $loc->save();
     }
+
 
     /**
      * Display the specified resource.
