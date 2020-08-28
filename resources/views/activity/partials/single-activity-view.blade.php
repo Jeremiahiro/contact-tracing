@@ -27,12 +27,42 @@
                 {{ $activity['end_date']->format('g:i A') }}
             </p>
         </div>
-
         <div class="">
             <div class="w-100 py-2">
-                <div class="map map-lg rounded" id="map-{{ $activity->id }}" fLat="{{ $activity->from_latitude }}"
-                    fLng="{{ $activity->from_longitude }}" tLat="{{ $activity->to_latitude }}"
-                    tLng="{{ $activity->to_longitude }}">
+                <div id="activityCarouselIndicators" class="carousel" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="map map-lg rounded" id="map-{{ $activity->id }}"
+                                fLat="{{ $activity->from_latitude }}" fLng="{{ $activity->from_longitude }}"
+                                tLat="{{ $activity->to_latitude }}" tLng="{{ $activity->to_longitude }}">
+                            </div>
+                        </div>
+                        @if ($activity->from_image != null)
+                        <div class="carousel-item">
+                            <div class="map-img rounded">
+                                <img src="{{ $activity->from_image }}" alt="">
+                            </div>
+                        </div>
+                        @endif
+                        @if ($activity->to_image != null)
+                        <div class="carousel-item">
+                            <div class="map-img rounded">
+                                <img src="{{ $activity->to_image }}" alt="">
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                    @if ($activity->from_image != null)
+                    <a class="carousel-control-prev text-white" href="#activityCarouselIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon text-white" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next text-white" href="#activityCarouselIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon text-white" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    @endif
+
                 </div>
             </div>
             <p class="m-0 px-2 bold text-left f-10">

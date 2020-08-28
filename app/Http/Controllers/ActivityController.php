@@ -34,20 +34,20 @@ class ActivityController extends Controller
     {
         $user = Auth::user();
 
-        $activities = Activity::with('tags')->where('user_id', $user->id)->whereDate('created_at', Carbon::today())->get();
+        $activities = Activity::with('tags')->where('user_id', $user->id)->whereDate('created_at', Carbon::today())->latest('created_at')->get();
 
         $istagged = Activity::whereHas('tags', function($query) use($user){
                                     $query->wherePersonId($user->id);
-                                })->whereDate('created_at', Carbon::today())->get();
+                                })->whereDate('created_at', Carbon::today())->latest('created_at')->get();
 
         if($request->ajax()){
 
             $sort_date = Carbon::parse($request->date)->format('Y-m-d');
 
-            $activities = Activity::with('tags')->where('user_id', $user->id)->whereDate('created_at', $sort_date)->get();
+            $activities = Activity::with('tags')->where('user_id', $user->id)->whereDate('created_at', $sort_date)->latest('created_at')->get();
             $istagged = Activity::whereHas('tags', function($query) use($user){
                                         $query->wherePersonId($user->id);
-                                    })->whereDate('created_at', $sort_date)->get();
+                                    })->whereDate('created_at', $sort_date)->latest('created_at')->get();
 
             return response()->json([
                 'activities' => view('activity.partials.activity_list_view', compact('activities'))->render(),
@@ -95,17 +95,16 @@ class ActivityController extends Controller
                 'from_location' => $request->from_location,
                 'from_latitude' => $request->from_latitude,
                 'from_longitude' => $request->from_longitude,
+                'from_image' => $request->from_image,
     
                 'to_address' => $request->to_address,
                 'to_location' => $request->to_location,
                 'to_latitude' => $request->to_latitude,
                 'to_longitude' => $request->to_longitude,
+                'to_image' => $request->to_image,
     
                 'start_date' => $start,
                 'end_date' => $end,
-
-                'from_image' => $request->from_image,
-                'to_image' => $request->to_image,
     
                 'user_id' => auth()->user()->id,
             ]);

@@ -13,12 +13,7 @@ class Activity extends Model
      *
      * @var array
     */
-    protected $fillable = [
-        'user_id', 
-        'from_latitude', 'from_longitude', 'from_address', 'from_location',
-        'to_address', 'to_latitude', 'to_longitude', 'to_location',
-        'start_date', 'end_date',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be cast to native types.

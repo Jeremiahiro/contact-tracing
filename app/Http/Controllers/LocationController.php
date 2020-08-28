@@ -16,7 +16,7 @@ class LocationController extends Controller
      */
     public function index(Request $request)
     {
-        $locations = Auth::user()->locations;
+        $locations = Location::where('user_id', Auth::user()->id)->orderBy('address', 'ASC')->simplePaginate(100);
 
         $favorites = Auth::user()->getFavoriteItems(Location::class)->paginate(5);
 

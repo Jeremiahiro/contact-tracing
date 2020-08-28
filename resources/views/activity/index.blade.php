@@ -43,21 +43,17 @@ Activities
             <div id="activity_list">
                 @include('activity.partials.activity_list_view')
             </div>
-            <div class="text-center mb-5">
-                <div class="spinner-grow text-primary load-activity d-none" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
         </div>
         <div class="tab-pane fade" id="tagged">
             <div id="tagged_list">
                 @include('activity.partials.tagged')
             </div>
-            <div class="text-center mb-5">
-                <div class="spinner-grow text-primary load-activity d-none" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
+        </div>
+    </div>
+
+    <div id="activity_spinner" class="text-center my-5 d-none">
+        <div class="spinner-grow text-primary load-activity" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
     </div>
 

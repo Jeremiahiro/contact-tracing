@@ -260,6 +260,7 @@ jQuery(document).ready(function ($) {
                     width: 350,
                     height: 350
                 },
+                showZoomer: false,
                 enableOrientation: true
             });
             $.getImage(event.target, croppie);
@@ -320,6 +321,7 @@ jQuery(document).ready(function ($) {
                     width: 350,
                     height: 350
                 },
+                showZoomer: false,
                 enableOrientation: true
             });
             $.getImage(event.target, croppie);
