@@ -51,6 +51,7 @@ jQuery(document).ready(function ($) {
                     if (data.notification.length) {
                         notification.show();
                         notification.html(data.notification.length);
+                        console.log('here');
                     } 
                 },
                 error(e){
@@ -58,7 +59,7 @@ jQuery(document).ready(function ($) {
                 },
                 complete: fetchNotification
             });
-        }, 5000);
+        }, 2000);
     });
 
 });
