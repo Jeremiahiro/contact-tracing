@@ -13,9 +13,9 @@
             <div class="f-14 pb-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <h6 class="m-0 bold f-10">Route & Interactions</h6>
-                    <div>
-                        <span>
-                            <h4 class="month bold f-12 m-0">
+                    <div class="d-flex justify-content-around">
+                        <span class="px-3">
+                            <h4 class="month bold f-14 m-0">
                                 {{ $activity['start_date']->format('d') }}
                             </h4>
                             <p class="month bold f-8 m-0">

@@ -78,8 +78,8 @@ Locations
                     return;
                 }
                 $('.load-activity').addClass('d-none');
-                $("#activity-list").append(data.location);
-                $("#tagged-list").append(data.favorites);
+                $("#location-list").append(data.locations);
+                $("#favorite-list").append(data.favorites);
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 alert('server not responding...');
