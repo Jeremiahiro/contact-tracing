@@ -14,14 +14,14 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <h6 class="m-0 bold f-10">Route & Interactions</h6>
                     <div class="d-flex justify-content-around">
-                        <span class="px-3">
+                        {{-- <span class="px-3">
                             <h4 class="month bold f-14 m-0">
                                 {{ $activity['start_date']->format('d') }}
                             </h4>
                             <p class="month bold f-8 m-0">
                                 {{ $activity['start_date']->format('M') }}
                             </p>
-                        </span>
+                        </span> --}}
                         @if (auth()->user()->id == $activity->user_id)
                         <a href="" class="sub-menu" data-toggle="modal" data-target="#activityMenu-{{ $activity->id }}">
                             <i class="fa fa-ellipsis-v"></i>

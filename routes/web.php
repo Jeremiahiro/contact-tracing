@@ -75,7 +75,6 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::get('/{username}/followings', 'UserController@followings')->name('followings');
     Route::get('/{username}/locations', 'LocationController@index')->name('locations');
 
-    
     Route::get('/favorite/{location}', 'LocationController@toggleFavourite');
     Route::get('/locations', 'LocationController@index')->name('locations');
     Route::post('/dashboard/location/update', 'LocationController@update')->name('location.update');

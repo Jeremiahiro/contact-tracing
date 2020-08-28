@@ -24,7 +24,7 @@
             <div class="notification_icon">
                 <a href="{{ route('notification') }}" class="">
                     <img src="{{  asset('/frontend/img/svg/not.svg') }}" alt="Notification">
-                    <span class="badge badge-danger rounded-circle" id="notification_count">5</span>
+                    <span class="badge badge-danger rounded-circle" id="notification_count"></span>
                 </a>
             </div>
         </div>
