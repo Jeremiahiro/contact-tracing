@@ -79,7 +79,7 @@ Locations
                 }
                 $('.load-activity').addClass('d-none');
                 $("#location-list").append(data.locations);
-                $("#favorite-list").append(data.favorites);
+                $("#favourite-list").append(data.favorites);
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 alert('server not responding...');

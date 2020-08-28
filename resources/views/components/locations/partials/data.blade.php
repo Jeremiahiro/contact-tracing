@@ -54,10 +54,8 @@
                     </div>
                 </div>
                 <ol class="carousel-indicators m-0 " style="left:auto; bottom:auto;">
-                    <li data-target="#locationsCarousel" data-slide-to="0" 
-                    style="width: 7px; height:7px; background-color:blue; border-radius:50%;" class="active"></li>
-                    <li data-target="#locationsCarousel" data-slide-to="1" 
-                    style="width: 7px; height:7px; background-color:blue; border-radius:50%;"></li>
+                    <li data-target="#locationsCarousel" data-slide-to="0" class="blue-indicators active"></li>
+                    <li data-target="#locationsCarousel" data-slide-to="1" class="blue-indicators"></li>
                 </ol>
             </div>
             @endif

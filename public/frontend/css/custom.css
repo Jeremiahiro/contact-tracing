@@ -860,3 +860,10 @@ input:checked+.toggle-slider:before {
     width: 200px;
     height: 200px;
 }
+
+.blue-indicators {
+    width: 7px !important;
+    height: 7px !important;
+    background-color: #0000ff !important;
+    border-radius: 50%;
+}
