@@ -54,7 +54,7 @@ button:active {
 }
 
 .rescalendar_day_cells{
-    border-spacing: 7px;
+    border-spacing: 7px !important;
 }
 
 .firstColumn{
@@ -75,7 +75,6 @@ button:active {
     padding: 0 2px;
     font-size: 14px;
 }
-
 
 .dia_semana{
     padding-top: 4px !important;

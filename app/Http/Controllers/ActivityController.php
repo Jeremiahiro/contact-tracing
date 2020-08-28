@@ -34,23 +34,30 @@ class ActivityController extends Controller
     {
         $user = Auth::user();
 
+        $activities = Activity::with('tags')->where('user_id', $user->id)->whereDate('created_at', Carbon::today())->get();
+
         $istagged = Activity::whereHas('tags', function($query) use($user){
                                     $query->wherePersonId($user->id);
-                                })->latest('updated_at')->simplePaginate(10);
+                                })->whereDate('created_at', Carbon::today())->get();
 
-        $activities = Activity::with('tags')->latest('updated_at')->simplePaginate(10);
+        if($request->ajax()){
 
-        if ($request->ajax()) {
-            $activities = view('activity.partials.activity-list-view', compact('activities', 'istagged'))->render();
+            $sort_date = Carbon::parse($request->date)->format('Y-m-d');
+
+            $activities = Activity::with('tags')->where('user_id', $user->id)->whereDate('created_at', $sort_date)->get();
+            $istagged = Activity::whereHas('tags', function($query) use($user){
+                                        $query->wherePersonId($user->id);
+                                    })->whereDate('created_at', $sort_date)->get();
+
             return response()->json([
-                'activities'=>$activities,
-                'istagged'=>$istagged,
+                'activities' => view('activity.partials.activity_list_view', compact('activities'))->render(),
+                'istagged' => view('activity.partials.tagged', compact('istagged'))->render(),
+                'date' => $sort_date,
                 ]);
         }
-        if(count($activities) > 0) {
-            return view('activity.index', compact('activities', 'istagged'));
-        }
-        return redirect()->route('activity.create')->with('info', 'Add an Activity');
+
+      
+        return view('activity.index', compact('activities', 'istagged'));
 
     }
 
@@ -439,7 +446,7 @@ class ActivityController extends Controller
     {
 
         // $date = Carbon::parse($request->query)->format('Y-m-d');
-        $date = ($request->query);
+        $date = Carbon::parse($request->date)->format('Y-m-d H:i');
 
         $response = [
             'success' => true,

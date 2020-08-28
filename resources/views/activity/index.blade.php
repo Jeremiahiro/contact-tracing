@@ -6,6 +6,9 @@ Activities
 
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('frontend/css/rescalendar.min.css') }}">
+<script type="text/javascript" src="{{ asset('frontend/js/rescalendar.min.js') }}"></script>
+
 <script src="{{ asset('frontend/jquery/map-view.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script>
 @endsection
@@ -20,6 +23,12 @@ Activities
 
 <section class="mb-5 py-3">
 
+    <div>
+        <div class="wrapper">
+            <div class="rescalendar" id="my_calendar_calSize"></div>
+        </div>
+        <input type="hidden" name="date_sort" id="date_sort">
+    </div>
     <div class="activityTab">
         <ul class="m-3 f-12 nav d-flex justify-content-between">
             <li class="active">
@@ -31,8 +40,8 @@ Activities
 
     <div class="tab-content">
         <div class="tab-pane in active" id="activity">
-            <div id="activity-list">
-                @include('activity.partials.activity-list-view')
+            <div id="activity_list">
+                @include('activity.partials.activity_list_view')
             </div>
             <div class="text-center mb-5">
                 <div class="spinner-grow text-primary load-activity d-none" role="status">
@@ -41,7 +50,7 @@ Activities
             </div>
         </div>
         <div class="tab-pane fade" id="tagged">
-            <div id="tagged-list">
+            <div id="tagged_list">
                 @include('activity.partials.tagged')
             </div>
             <div class="text-center mb-5">
@@ -56,8 +65,22 @@ Activities
 
 @endsection
 @section('script')
+<script>
+    jQuery(document).ready(function ($) {
 
-<script type="text/javascript">
+        // Multiple instantiation (divs 1 and 2)
+        $('#my_calendar_calSize').rescalendar({
+            id: 'my_calendar_calSize',
+            jumpSize: 2,
+            calSize: 4,
+            dataKeyField: 'name',
+            dataKeyValues: ['item1']
+        });
+
+    });
+
+</script>
+{{-- <script type="text/javascript">
     var page = 1;
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
@@ -80,7 +103,7 @@ Activities
                     return;
                 }
                 $('.load-activity').addClass('d-none');
-                $("#activity-list").append(data.activities);
+                $("#activity_list").append(data.activities);
                 $("#tagged-list").append(data.istagged);
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
@@ -88,7 +111,7 @@ Activities
             });
     }
 
-</script>
+</script> --}}
 @endsection
 @section('footer')
 @include('partials.mobile.footer.footer')
