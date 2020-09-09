@@ -91,3 +91,9 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::get('/get_data', 'GeneralController@fetchData');
 
 });
+
+Route::get('/offline', function () {    
+    return view('modules/laravelpwa/offline');
+});
+
+// Route::get('/admin/login', 'AdminController@gdprDPA')->name('gdpr.dpa');

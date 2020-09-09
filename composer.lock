@@ -2370,7 +2370,7 @@
             "version": "2.2.2",
             "source": {
                 "type": "git",
-                "url": "git@github.com:Nexmo/nexmo-php.git",
+                "url": "https://github.com/Nexmo/nexmo-php.git",
                 "reference": "1a8ccfbde765c9599973995d1eeac491f094aa0a"
             },
             "dist": {

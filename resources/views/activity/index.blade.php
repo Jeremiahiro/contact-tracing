@@ -71,7 +71,7 @@ Activities
         $('#my_calendar_calSize').rescalendar({
             id: 'my_calendar_calSize',
             jumpSize: 3,
-            calSize: 5,
+            calSize: 6,
             dataKeyField: 'name',
             dataKeyValues: ['item1']
         });

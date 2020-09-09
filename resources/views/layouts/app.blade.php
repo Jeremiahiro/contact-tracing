@@ -17,7 +17,7 @@
     {{-- <script src="{{ asset('frontend/js/rescalendar.min.js') }}"></script> --}}
 
     <script src="{{ asset('frontend/jquery/jquery-3.5.1.min.js') }}"></script>
-        <script src="{{ asset('frontend/jquery/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('frontend/jquery/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('frontend/jquery/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('frontend/js/script.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -44,9 +44,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" crossorigin="anonymous"></script>
     
-    {{-- @laravelPWA --}}
     @yield('custom-style')
-
+    @laravelPWA
 </head>
 
 <body>
