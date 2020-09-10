@@ -14,7 +14,7 @@
         You were tagged in an activity
         @endif
     </span>
-    @include('activity.partials.activity-list-view-data')
+    @include('activity.partials.activity_data')
 </div>
 @endif
 @endforeach

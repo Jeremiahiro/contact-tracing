@@ -59,10 +59,10 @@ Dashboard
     <div class="container px-3 pt-5 mb-5" id="tab-view">
         <p class="f-14">ROUTE HISTORY</p>
         @if ($user->id === auth()->user()->id)
-        @include('profile.hoc.activity-view')
+        @include('profile.partials.activity-view')
         @else
         @if ($user->show_location != true)
-        @include('profile.hoc.activity-view')
+        @include('profile.partials.activity-view')
         @endif
         @endif
     </div>

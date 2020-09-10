@@ -51,17 +51,15 @@ jQuery(document).ready(function ($) {
                     if (data.notification.length) {
                         notification.show();
                         notification.html(data.notification.length);
-                    } else {
-                        console.log('there');
-                        notification.hide();
-                    }
+                        console.log('here');
+                    } 
                 },
                 error(e){
-                    console.log(e['responseText']);
+                    // console.log(e['responseText']);
                 },
                 complete: fetchNotification
             });
-        }, 5000);
+        }, 2000);
     });
 
 });

@@ -5,7 +5,8 @@ Locations
 @endsection
 
 @section('custom-style')
-
+{{-- <script src="{{ asset('frontend/jquery/map-loc-view.js') }}"></script> --}}
+<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script>
 @endsection
 
 @section('web-content')

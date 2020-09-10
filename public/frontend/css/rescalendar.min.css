@@ -54,7 +54,7 @@ button:active {
 }
 
 .rescalendar_day_cells{
-    border-spacing: 7px !important;
+    border-spacing: 2px !important;
 }
 
 .firstColumn{
@@ -103,7 +103,7 @@ button:active {
 .rescalendar_day_cells td:hover {
     background: #eee;
     cursor: pointer;
-    color: #000
+    color: #0000ff
 }
 
 .rescalendar td a {

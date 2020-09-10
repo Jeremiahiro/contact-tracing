@@ -419,9 +419,15 @@ input[type="search"]::-webkit-search-cancel-button {
     height: 60px;
 }
 
+.map-img,
 .map-lg {
     width: 100%;
     height: 250px;
+}
+
+.map-img img {
+    width: 100%;
+    height: 100%;
 }
 
 .border-4 {
@@ -433,13 +439,13 @@ input[type="search"]::-webkit-search-cancel-button {
     font-family: 'G-heavy' !important;
 }
 
-.carousel-control-prev-icon {
+/* .carousel-control-prev-icon {
     background-image: url("../img/svg/prev-icon.svg");
 }
 
 .carousel-control-next-icon {
     background-image: url("../img/svg/next-icon.svg");
-}
+} */
 
 .bg-gray {
     background-color: #E2E2E2;

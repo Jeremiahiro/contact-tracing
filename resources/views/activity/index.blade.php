@@ -10,12 +10,14 @@ Activities
 <script type="text/javascript" src="{{ asset('frontend/js/rescalendar.min.js') }}"></script>
 
 <script src="{{ asset('frontend/jquery/map-view.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer>
+</script>
 @endsection
 
 @section('web-content')
 <script type="text/javascript">
-    window.location = "{{ route('map.view') }}"; 
+    window.location = "{{ route('map.view') }}";
+
 </script>
 @endsection
 
@@ -29,35 +31,32 @@ Activities
         </div>
         <input type="hidden" name="date_sort" id="date_sort">
     </div>
-    <div class="activityTab">
+    {{-- <div class="activityTab">
         <ul class="m-3 f-12 nav d-flex justify-content-between">
             <li class="active">
                 <a data-toggle="tab" href="#activity" class="text-primary active">Timeline</a>
             </li>
             <li><a data-toggle="tab" href="#tagged" class="text-primary">Tagged in</a></li>
         </ul>
+    </div> --}}
+
+    {{-- <div class="tab-content"> --}}
+    {{-- <div class="tab-pane in active" id="activity"> --}}
+    <div class="" id="activity">
+        <div id="activity_list">
+            @include('activity.partials.activity_list_view')
+        </div>
+    </div>
+    {{-- <div class="tab-pane fade" id="tagged"> --}}
+    {{-- <div id="tagged_list"> --}}
+    {{-- @include('activity.partials.tagged') --}}
+    {{-- </div> --}}
+    {{-- </div> --}}
     </div>
 
-    <div class="tab-content">
-        <div class="tab-pane in active" id="activity">
-            <div id="activity_list">
-                @include('activity.partials.activity_list_view')
-            </div>
-            <div class="text-center mb-5">
-                <div class="spinner-grow text-primary load-activity d-none" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="tagged">
-            <div id="tagged_list">
-                @include('activity.partials.tagged')
-            </div>
-            <div class="text-center mb-5">
-                <div class="spinner-grow text-primary load-activity d-none" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
+    <div id="activity_spinner" class="text-center my-5 d-none">
+        <div class="spinner-grow text-primary load-activity" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
     </div>
 
@@ -71,7 +70,7 @@ Activities
         // Multiple instantiation (divs 1 and 2)
         $('#my_calendar_calSize').rescalendar({
             id: 'my_calendar_calSize',
-            jumpSize: 2,
+            jumpSize: 3,
             calSize: 5,
             dataKeyField: 'name',
             dataKeyValues: ['item1']
