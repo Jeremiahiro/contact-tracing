@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/offline', function () {    
+    return view('vendor/laravelpwa/offline');
+});
 
 Route::get('index', function () {
     return view('activity.index');
