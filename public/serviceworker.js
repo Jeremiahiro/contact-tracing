@@ -15,7 +15,7 @@ var filesToCache = [
 
 // Cache on install
 self.addEventListener("install", event => {
-    this.skipWaiting();
+    // this.skipWaiting();
     event.waitUntil(
         caches.open(staticCacheName)
             .then(cache => {
@@ -50,3 +50,5 @@ self.addEventListener("fetch", event => {
             })
     )
 });
+
+

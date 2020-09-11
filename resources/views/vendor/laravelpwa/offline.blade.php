@@ -1,7 +1,28 @@
 @extends('layouts.app')
 
-@section('content')
+{{-- link to styles --}}
+@section('custom-style')
+{{-- custom style goes here --}}
 
-    <h1>You are currently not connected to any networks.</h1>
+@endsection
+
+{{-- for web view --}}
+@section('web-content')
+
+<h1>You are offline</h1>
+
+@endsection
+
+{{-- for mobile view --}}
+@section('content')
+<section>
+   
+    <h1>You are offline</h1>
+    
+</section>
+@endsection
+
+{{-- scripts --}}
+@section('script')
 
 @endsection
