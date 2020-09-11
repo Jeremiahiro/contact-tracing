@@ -22,13 +22,13 @@
                     </span>
                     <span class="px-1">
                         <a href="{{ route ('followings', auth()->user()->username ) }}" class="text-white">
-                            <span class="">{{ count(auth()->user()->followings) }}</span>
+                            <span class="" id="followings_count">{{ count(auth()->user()->followings) }}</span>
                             <p class="m-0 f-12">Following</p>
                         </a>
                     </span>
                     <span class="px-1">
                         <a href="{{ route ('followers', auth()->user()->username ) }}" class="text-white">
-                            <span class="tl-follower">{{ count(auth()->user()->followers) }}</span>
+                            <span class="tl-follower" id="followers_count">{{ count(auth()->user()->followers) }}</span>
                             <p class="m-0 f-12">Followers</p>
                         </a>
                     </span>

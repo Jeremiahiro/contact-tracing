@@ -57,7 +57,6 @@ class UserController extends Controller
      */
     public function show(Request $request, $id)
     {
-
         $user = User::where('uuid', $id)->first();
 
         $activities = Activity::where('user_id', $user->id)->latest()->simplePaginate(10);
@@ -139,29 +138,39 @@ class UserController extends Controller
      */
     public function follow(Request $request)
     {
-        $user = User::find($request->userID);
+        $follow_user = User::find($request->userID);
 
-        if(auth()->user()->isFollowing($user)){
-            auth()->user()->unfollow($user);
+        if(auth()->user()->isFollowing($follow_user)){
+            auth()->user()->unfollow($follow_user);
+            $followers_count = Auth::user()->followers()->count();
+            $followings_count = Auth::user()->followings()->count();
+
             $response = [
                 'success' => true,
                 "attach" => false,
+                "followers_count" => $followers_count,
+                "followings_count" => $followings_count,
             ];
             return response()->json($response, 201);
             
         } else {
-            auth()->user()->follow($user);
+            auth()->user()->follow($follow_user);
+
+            $followers_count = Auth::user()->followers()->count();
+            $followings_count = Auth::user()->followings()->count();
 
             $details = [
                 'greeting' => 'Hi Artisan',
                 'body' => 'is followng you',
                 'follower_id' => auth()->user()->id,
             ];
-            $user->notify(new FollowNotification($details));
+            $follow_user->notify(new FollowNotification($details));
 
             $response = [
                 'success' => true,
                 "attach" => true,
+                "followers_count" => $followers_count,
+                "followings_count" => $followings_count,
             ];
             return response()->json($response, 201);
         }

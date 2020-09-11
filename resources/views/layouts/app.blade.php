@@ -11,7 +11,7 @@
     <title>{{ env('APP_NAME')}} | @yield('title')</title>
 
     <!-- Scripts -->
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     {{-- <script src="{{ asset('frontend/js/moment-with-locales.min.js') }}"></script> --}}
     {{-- <script src="{{ asset('frontend/js/rescalendar.min.js') }}"></script> --}}
@@ -38,12 +38,10 @@
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
     {{-- <link rel="stylesheet" href="{{ asset('frontend/css/rescalendar.min.css') }}" rel="stylesheet"> --}}
 
-
     <script src="{{ asset('frontend/js/moment-with-locales.min.js')}}"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" crossorigin="anonymous"></script>
-    
     
     @yield('custom-style')
     @laravelPWA
