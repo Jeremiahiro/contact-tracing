@@ -1,5 +1,6 @@
 var staticCacheName = "pwa-v" + new Date().getTime();
 var filesToCache = [
+    '/',
     '/offline',
     '/favicon.ico',
     '../frontend/bootstrap/css/bootstrap.css.map',
