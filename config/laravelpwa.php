@@ -9,8 +9,8 @@ return [
         'background_color' => '#0000ff',
         'theme_color' => '#0000ff',
         'display' => 'standalone',
-        'orientation'=> 'any',
-        'status_bar'=> 'purple',
+        'orientation'=> 'portrait',
+        'status_bar'=> '#0000ff',
         'icons' => [
             '72x72' => [
                 'path' => '../frontend/img/icons/icon-72x72.png',
@@ -46,16 +46,16 @@ return [
             ],
         ],
         'splash' => [
-            '640x1136' => '../img/splash/splash-640x1136.png',
-            '750x1334' => '../img/splash/splash-750x1334.png',
-            '828x1792' => '../img/splash/splash-828x1792.png',
-            '1125x2436' => '../img/splash/splash-1125x2436.png',
-            '1242x2208' => '../img/splash/splash-1242x2208.png',
-            '1242x2688' => '../img/splash/splash-1242x2688.png',
-            '1536x2048' => '../img/splash/splash-1536x2048.png',
-            '1668x2224' => '../img/splash/splash-1668x2224.png',
-            '1668x2388' => '../img/splash/splash-1668x2388.png',
-            '2048x2732' => '../img/splash/splash-2048x2732.png',
+            '640x1136' => '../frontend/img/splash/splash-640x1136.png',
+            '750x1334' => '../frontend/img/splash/splash-750x1334.png',
+            '828x1792' => '../frontend/img/splash/splash-828x1792.png',
+            '1125x2436' => '../frontend/img/splash/splash-1125x2436.png',
+            '1242x2208' => '../frontend/img/splash/splash-1242x2208.png',
+            '1242x2688' => '../frontend/img/splash/splash-1242x2688.png',
+            '1536x2048' => '../frontend/img/splash/splash-1536x2048.png',
+            '1668x2224' => '../frontend/img/splash/splash-1668x2224.png',
+            '1668x2388' => '../frontend/img/splash/splash-1668x2388.png',
+            '2048x2732' => '../frontend/img/splash/splash-2048x2732.png',
         ],
         'shortcuts' => [
             [

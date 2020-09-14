@@ -2386,7 +2386,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Nexmo/nexmo-php.git",
-                "reference": "4b85f8612fc9409d40f36c9647e1932d7640af45"
+                "reference": "1a8ccfbde765c9599973995d1eeac491f094aa0a"
             },
             "dist": {
                 "type": "zip",

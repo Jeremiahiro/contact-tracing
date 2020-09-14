@@ -8,27 +8,27 @@ jQuery(document).ready(function ($) {
     $('.action-follow').click(function () {
         $('#follow-spinner').removeClass('d-none');
         var userID = $(this).data('id');
-        var status = $('.F-status').val();
         var cObj = $(this);
         var c = $(this).parent("div").find(".tl-follower").text();
 
         $.ajax({
-            type: 'POST',
             url: '/follow',
+            type: 'POST',
             data: {
                 userID: userID,
-                status: status
             },
             success: function (data) {
                 if (data.attach != true) {
                     cObj.find("strong").text("FOLLOW");
                     cObj.parent("div").find(".tl-follower").text(parseInt(c) - 1);
-                    $('.F-status').val(0);
                     $('#follow-spinner').addClass('d-none');
+                    $('#followers_count').html(data.followers_count);
+                    $('#followings_count').html(data.followings_count);
                 } else {
                     cObj.find("strong").text("UNFOLLOW");
                     cObj.parent("div").find(".tl-follower").text(parseInt(c) + 1);
-                    $('.F-status').val(1);
+                    $('#followers_count').html(data.followers_count);
+                    $('#followings_count').html(data.followings_count);
                     $('#follow-spinner').addClass('d-none');
                 }
             }
@@ -42,7 +42,7 @@ jQuery(document).ready(function ($) {
 
         setTimeout(function () {
             $.ajax({
-                url: `get_data`,
+                url: `/get_data`,
                 type: "GET",
                 data: {
                     'type': 'notification'
@@ -51,15 +51,14 @@ jQuery(document).ready(function ($) {
                     if (data.notification.length) {
                         notification.show();
                         notification.html(data.notification.length);
-                        console.log('here');
                     } 
                 },
                 error(e){
-                    // console.log(e['responseText']);
+                    console.log(e['responseText']);
                 },
                 complete: fetchNotification
             });
-        }, 2000);
+        }, 5000);
     });
 
 });

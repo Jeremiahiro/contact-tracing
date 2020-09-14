@@ -206,7 +206,7 @@ class GeneralController extends Controller
            }
            
            if($request->type == "followers"){
-                $followers = Auth::user()->followings()->paginate(50);
+                $followers = Auth::user()->followers()->paginate(50);
 
                 $followings = view('components.follow.followers', compact('followers'))->render();
                 return response()->json([
@@ -220,9 +220,8 @@ class GeneralController extends Controller
 
                 return response()->json([
                     'notification' => $notification,
-                    ]);
+                ]);
             }
-
         }
     }
 
