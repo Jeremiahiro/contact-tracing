@@ -39,10 +39,6 @@ Route::get('activityConnection', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/offline', function () {    
-    return view('vendor/laravelpwa/offline');
-});
-
 // unauthenticate routes
 Route::get('/activity/map-view', 'GeneralController@mapView')->name('map.view');
 Route::get('/about-us', 'GeneralController@about')->name('about');
@@ -52,10 +48,10 @@ Route::get('/gdpr/dpa', 'GeneralController@gdprDPA')->name('gdpr.dpa');
 
 Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->name('social.login');
 Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
+Route::get('/', 'GeneralController@index')->name('home');
 
 // authenticated routes
 Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
-    Route::get('/', 'GeneralController@index')->name('home');
     Route::get('/search', 'GeneralController@search')->name('search');
     Route::get('/search/result', 'GeneralController@generalSearch')->name('search.query');
     Route::get('/users/search', 'GeneralController@userSearch')->name('search.user');
@@ -94,7 +90,8 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
 });
 
 Route::get('/offline', function () {    
-    return view('modules/laravelpwa/offline');
+    return view('vendor/laravelpwa/offline');
 });
+
 
 // Route::get('/admin/login', 'AdminController@gdprDPA')->name('gdpr.dpa');

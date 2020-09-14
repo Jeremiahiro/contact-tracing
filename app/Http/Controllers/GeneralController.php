@@ -20,10 +20,17 @@ class GeneralController extends Controller
     public function index()
     {
         $count = DB::table("users")->count();
-        $activities = Activity::where('user_id', auth()->user()->id)->distinct('from_address')->count();
-        $tags = ActivityTags::where('user_id', auth()->user()->id)->distinct('name')->count();
+        if(Auth::user()){
+            $activities = Activity::where('user_id', auth()->user()->id)->distinct('from_address')->count();
+            $tags = ActivityTags::where('user_id', auth()->user()->id)->distinct('name')->count();
+    
+            return view('homepage.index', compact(['count', 'activities', 'tags']));
+        } else {
+            $activities = [];
+            $tags = [];
+            return view('homepage.index', compact(['count', 'activities', 'tags']));
+        }
 
-        return view('homepage.index', compact(['count', 'activities', 'tags']));
      
     }
 
