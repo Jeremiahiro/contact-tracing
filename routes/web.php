@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/offline', function () {    
-    return view('vendor/laravelpwa/offline');
-});
-
 Route::get('index', function () {
     return view('activity.index');
 });
@@ -43,6 +39,9 @@ Route::get('activityConnection', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::get('/offline', function () {    
+    return view('vendor/laravelpwa/offline');
+});
 
 // unauthenticate routes
 Route::get('/activity/map-view', 'GeneralController@mapView')->name('map.view');
