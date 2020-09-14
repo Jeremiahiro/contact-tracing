@@ -4,13 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>{{ env('APP_NAME')}} | 404</title>
 
     <!-- Google font -->
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:700" rel="stylesheet">
-
-    <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    {{-- <link href="https://fonts.googleapis.com/css?family=Quicksand:700" rel="stylesheet"> --}}
 
     <style>
         * {
