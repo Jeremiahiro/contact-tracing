@@ -83,7 +83,6 @@ class LoginController extends Controller
                 'provider'          => $provider,
                 'provider_id'       => $userSocial->id,
                 'access_token'      => $userSocial->token,
-                'avatar'            => $userSocial->avatar,
             ]);
             return $authUser;
         }
