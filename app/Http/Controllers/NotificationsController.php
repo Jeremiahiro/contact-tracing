@@ -7,8 +7,11 @@ use App\User;
 use App\Activity;
 use Illuminate\Http\Request;
 
-class UserNotificationsController extends Controller
+class NotificationsController extends Controller
 {
+ 
+    // https://laravel-notification-channels.com/pusher-push-notifications/#installation
+    
     public function show(Request $request)
     {
         $notifications = auth()->user()->notifications;
