@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Activity;
-use App\ActivityTags;
-use App\Location;
+use App\Model\User;
+use App\Model\Activity;
+use App\Model\ActivityTags;
+use App\Model\Location;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -81,6 +81,9 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
+        // TODO delete the script with google key from activit.create
+
+        // dd($request->all());
         $this->validateActivity($request);
 
         $start = Carbon::parse($request->start_date)->format('Y-m-d H:i');

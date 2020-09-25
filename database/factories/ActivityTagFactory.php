@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\ActivityTags;
+use App\Model\ActivityTags;
 use Faker\Generator as Faker;
 
 $factory->define(ActivityTags::class, function (Faker $faker) {

@@ -9,13 +9,27 @@ Homepage
 @endsection
 
 @section('web-content')
-<script type="text/javascript">
-    window.location = "{{ route('map.view') }}";
-</script>
+<div class="splash splash-2">
+    <div class="container col-md-4 mx-auto">
+        <div class="">
+            <div class="container p-4">
+                <div class="trace_date py-5">
+                    @include('homepage.splash.extra.time')
+                </div>
+                <div class="">
+                    <h1 class="time">
+                        <a href="{{ route('activity.create') }}" class="time f-46 text-white">
+                            CONTACT TRACING
+                        </a>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('content')
-
 <section class="">
     <div id="splashCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators pb-5">
@@ -36,7 +50,6 @@ Homepage
         </div>
     </div>
 </section>
-
 @endsection
 @section('script')
 <script>
@@ -55,5 +68,4 @@ Homepage
     });
 
 </script>
-{{-- your script goes here --}}
 @endsection

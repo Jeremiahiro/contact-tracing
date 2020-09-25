@@ -39,6 +39,11 @@ Route::get('activityConnection', function () {
 
 Auth::routes(['verify' => true]);
 
+// Route::get('test', function () {
+//     event(new App\Events\StatusLiked('Someone'));
+//     return "Event has been sent!";
+// });
+
 // unauthenticate routes
 Route::get('/activity/map-view', 'GeneralController@mapView')->name('map.view');
 Route::get('/about-us', 'GeneralController@about')->name('about');
@@ -94,4 +99,15 @@ Route::get('/offline', function () {
 });
 
 
-// Route::get('/admin/login', 'AdminController@gdprDPA')->name('gdpr.dpa');
+Route::group(['namespace' => 'Admin', 'prefix' => 'backend', 'middleware' => ['auth']], function () {
+    Route::group(['middleware' => 'super_admin'], function() {
+        Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+        Route::resource('/users', 'UsersController', ['as' => 'admin']);
+        Route::resource('/activities', 'ActivitiesController', ['as' => 'admin']);
+        Route::resource('/locations_log', 'LocationsLogController', ['as' => 'admin']);
+        Route::resource('/supports', 'SupportController', ['as' => 'admin']);
+        Route::resource('/broadcast', 'BroadcastController', ['as' => 'admin']);
+        Route::resource('/splash', 'SplashController', ['as' => 'admin']);
+        Route::resource('/settings', 'SettingController', ['as' => 'admin']);
+    });
+});

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\User;
-use App\Location;
+use App\Model\User;
+use App\Model\Location;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
