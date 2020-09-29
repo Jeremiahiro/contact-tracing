@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Model\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -36,6 +36,6 @@ class UserSeeder extends Seeder
             'role' => 'admin'
         ]);
 
-        factory(App\User::class, 50)->create();
+        factory(User::class, 50)->create();
     }
 }

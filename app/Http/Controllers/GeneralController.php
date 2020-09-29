@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use DB;
 use Auth;
-use App\User;
-use App\Activity;
-use App\Location;
-use App\ActivityTags;
+use App\Model\User;
+use App\Model\Activity;
+use App\Model\Location;
+use App\Model\ActivityTags;
 use Illuminate\Http\Request;
 
 class GeneralController extends Controller
@@ -22,8 +22,7 @@ class GeneralController extends Controller
         $count = DB::table("users")->count();
         if(Auth::user()){
             $activities = Activity::where('user_id', auth()->user()->id)->distinct('from_address')->count();
-            $tags = ActivityTags::where('user_id', auth()->user()->id)->distinct('name')->count();
-    
+            $tags = ActivityTags::where('user_id', auth()->user()->id)->distinct('name')->count();  
             return view('homepage.index', compact(['count', 'activities', 'tags']));
         } else {
             $activities = [];

@@ -1,6 +1,6 @@
 <?php
 
-use App\ActivityTags;
+use App\Model\ActivityTags;
 use Illuminate\Database\Seeder;
 
 class ActivityTagSeeder extends Seeder

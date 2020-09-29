@@ -11,7 +11,9 @@ Add Activity
 
 <script src="{{ asset('frontend/jquery/formTagging.js') }}"></script>
 <script src="{{ asset('frontend/jquery/google-location-autocomplete.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize"
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqlBzMgOyqWDAZUJacsncmGLnxoxED9wk&libraries=places&callback=initialize"
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize" --}}
     type="text/javascript" async defer></script>
 
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/amsify.suggestags.css') }}">
@@ -27,7 +29,6 @@ Add Activity
 @section('web-content')
 <script type="text/javascript">
     window.location = "{{ route('map.view') }}";
-
 </script>
 @endsection
 

@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use App\User;
-use App\UserLocation;
+use Illuminate\Support\Str;
+use App\Model\User;
 
 class RegisterController extends Controller
 {
@@ -73,17 +73,14 @@ class RegisterController extends Controller
 
         $username = '@'.$string.$randomDigit;
 
-        $uuid = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0);
-
         $user = new User();
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->phone = $data['phone'];
         $user->password = Hash::make($data['password']);
         $user->username = $username;
-        $user->uuid = $uuid;
-        $user->avatar =  'https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png';
-
+        $user->avatar =  'https://res.cloudinary.com/iro/image/upload/v1595613322/avatar.png';
+    
         $user->save();
 
         return $user;
@@ -95,6 +92,7 @@ class RegisterController extends Controller
         //     'password'  => Hash::make($data['password']),
         //     'username'  => $username,
         //     'uuid'      => $uuid,
+        //     'api_token' => Str::random(60),
         //     'avatar'    =>  'https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png',
         // ]);
     }

@@ -1,7 +1,7 @@
 <?php
 
 return [
-	// Datatype for primary keys of your models.
+	// Datatype for primary keys of your Model.
 	// used in migrations only
 	'primary_keys_type' => 'integer', // 'string' or 'integer'
 		
