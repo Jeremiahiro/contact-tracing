@@ -290,6 +290,7 @@ class ActivityController extends Controller
     
                 } catch (\Throwable $th) {
                     DB::rollBack();
+                    dd($th);
                     return redirect()->back()->with('error', 'OOps something went wrong');
                 } 
             } else {
@@ -381,7 +382,8 @@ class ActivityController extends Controller
             'action' => 'click here to see',
             'activity_id' => $data['activity_id'],
         ];
-        $data['user']->notify(new ActivityTagNotification($details));
+        $activityTag->notify(new ActivityTagNotification($details));
+        // $data['user']->notify(new ActivityTagNwotification($details));
 
     }
 
@@ -408,9 +410,6 @@ class ActivityController extends Controller
         } elseif($data['phone'] != null) {
             $activityTag->notify(new ActivityTagSmsNotification($details));
         }
-
-        $data['user']->notify(new ActivityTagNotification($details));
-
     }
 
     public function save_new_location($location)

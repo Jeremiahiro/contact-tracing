@@ -109,5 +109,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'backend', 'middleware' => ['a
         Route::resource('/broadcast', 'BroadcastController', ['as' => 'admin']);
         Route::resource('/splash', 'SplashController', ['as' => 'admin']);
         Route::resource('/settings', 'SettingController', ['as' => 'admin']);
+        Route::resource('/activity_log', 'ActivityLogController', ['as' => 'admin']);
     });
 });

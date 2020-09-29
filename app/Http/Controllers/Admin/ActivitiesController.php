@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Activity;
 use Illuminate\Http\Request;
 
 class ActivitiesController extends Controller
@@ -14,7 +15,8 @@ class ActivitiesController extends Controller
      */
     public function index()
     {
-        return view('admin.activities.index');
+        $activities = Activity::paginate(6);
+        return view('admin.activities.index', compact('activities'));
     }
 
     /**

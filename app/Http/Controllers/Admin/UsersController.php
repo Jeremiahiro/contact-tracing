@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\User;
+use DataTables;
 
 class UsersController extends Controller
 {
@@ -12,9 +14,20 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.users.index');
+        $count = User::count();
+        if($request->ajax()){
+            $data = User::latest()->get();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        return '<a href="/backend/users/'. $row->uuid .'" class="edit btn btn-primary">View</a>';
+                    })
+                    ->rawColumns(['action', 'avatar'])
+                    ->make(true);
+        }
+        return view('admin.users.index', compact('count'));
     }
 
     /**
@@ -44,9 +57,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        //
+        $user = User::where('uuid', $uuid)->first();
+        return view('admin.users.show', compact('user'));
     }
 
     /**

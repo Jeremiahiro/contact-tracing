@@ -10,11 +10,12 @@ use Overtrue\LaravelFavorite\Traits\Favoriter;
 use Dialect\Gdpr\Portable;
 use Dialect\Gdpr\Anonymizable;
 use Laravel\Passport\HasApiTokens;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Webpatser\Uuid\Uuid;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Followable, Notifiable, Portable, Anonymizable, Favoriter, HasApiTokens;
+    use Followable, Notifiable, Portable, Anonymizable, Favoriter, HasApiTokens, LogsActivity;
 
     /**
      * The attributes that are mass assignable.

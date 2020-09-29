@@ -4,10 +4,11 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class ActivityTags extends Model
 {
-    use Notifiable;
+    use Notifiable, LogsActivity;
 
 
     /**

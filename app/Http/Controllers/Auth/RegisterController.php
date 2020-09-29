@@ -79,8 +79,8 @@ class RegisterController extends Controller
         $user->phone = $data['phone'];
         $user->password = Hash::make($data['password']);
         $user->username = $username;
-        $user->avatar =  'https://res.cloudinary.com/iro/image/upload/v1581499532/Profile_Pictures/wzoe4az0cg6lm7idfocb.png';
-
+        $user->avatar =  'https://res.cloudinary.com/iro/image/upload/v1595613322/avatar.png';
+    
         $user->save();
 
         return $user;

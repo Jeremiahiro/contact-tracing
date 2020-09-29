@@ -19,7 +19,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('/admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/admin/css/sb-admin-2.css') }}" rel="stylesheet">
     @yield('style')
 
 </head>
@@ -38,6 +38,7 @@
         </div>
     </div>
     <!-- Bootstrap core JavaScript-->
+    {{-- <script src="{{ asset('frontend/jquery/jquery-3.5.1.min.js') }}"></script> --}}
     <script src="{{ asset ('/admin/vendor/jquery/jquery.min.js')}} "></script>
     <script src="{{ asset ('/admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}} "></script>
 
