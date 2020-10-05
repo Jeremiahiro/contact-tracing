@@ -12,7 +12,6 @@ $factory->define(Location::class, function (Faker $faker) {
         'latitude' => $faker->latitude($min = -4, $max = 7),
         'longitude' => $faker->longitude($min = -8, $max = 14),
         'image' => $faker->imageUrl($width = 300, $height = 300, 'cats', true, 'Faker'),
-
-        'user_id' => $faker->numberBetween($min = 1, $max = 2),
+        'user_id' => $faker->numberBetween($min = 1, $max = 50),
     ];
 });

@@ -33,7 +33,9 @@ class UserSeeder extends Seeder
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
             'phone' => '+2348136478020',
-            'role' => 'admin'
+            'role' => 'admin',
+            'gender' => 'Male',
+            'age_range' => '21 - 25 Years'
         ]);
 
         factory(User::class, 50)->create();

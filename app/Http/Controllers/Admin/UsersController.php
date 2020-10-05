@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Charts\UserChart;
 use App\Http\Controllers\Controller;
+use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Model\User;
 use DataTables;
+use Illuminate\Support\Facades\DB;
+use Spatie\Activitylog\Models\Activity as ActivityLog;
 
 class UsersController extends Controller
 {
@@ -22,12 +26,24 @@ class UsersController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        return '<a href="/backend/users/'. $row->uuid .'" class="edit btn btn-primary">View</a>';
+                        return '<a href="/backend/users/'. $row->uuid .'" class="edit btn btn-primary btn-sm py-1">View</a>';
                     })
-                    ->rawColumns(['action', 'avatar'])
+                    ->addColumn('registered', function($row){
+                        return $row->created_at->diffForHumans();
+                    })
+                    ->rawColumns(['action', 'registered'])
                     ->make(true);
         }
         return view('admin.users.index', compact('count'));
+    }
+
+    public function activityChart($uuid)
+    {
+        $user = User::where('uuid', $uuid);
+        
+        $data = $user->activity()->get();
+
+        return response()->json($data);
     }
 
     /**
@@ -57,10 +73,24 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($uuid)
+    public function show(Request $request, $uuid)
     {
         $user = User::where('uuid', $uuid)->first();
-        return view('admin.users.show', compact('user'));
+
+        $activity_logs = ActivityLog::where('causer_id', $user->id)->get();
+
+        $activity = Activity::where('user_id', $user->id)
+                        ->groupBy('date')
+                        ->orderBy('date', 'desc')
+                            ->get(array(
+                                DB::raw('Date(created_at) as date'),
+                                DB::raw('COUNT(*) as "count"')
+                            ));
+
+        // to json
+        $activity_stat = json_encode($activity);
+
+        return view('admin.users.show', compact(['user', 'activity_logs', 'activity_stat']));
     }
 
     /**

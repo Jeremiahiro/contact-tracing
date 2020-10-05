@@ -51,9 +51,9 @@ jQuery(document).ready(function ($) {
                     if (data.notification.length) {
                         notification.show();
                         notification.html(data.notification.length);
-                    } 
+                    }
                 },
-                error(e){
+                error(e) {
                     console.log(e['responseText']);
                 },
                 complete: fetchNotification

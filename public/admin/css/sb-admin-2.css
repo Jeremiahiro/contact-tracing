@@ -6570,6 +6570,10 @@ button.bg-dark:focus {
   border-radius: 0.35rem !important;
 }
 
+.rounded-lg {
+  border-radius: 0.5rem !important;
+}
+
 .rounded-top {
   border-top-left-radius: 0.35rem !important;
   border-top-right-radius: 0.35rem !important;
@@ -10155,8 +10159,8 @@ a:focus {
 }
 
 .img-profile-md {
-  height: 5rem;
-  width: 5rem;
+  height: 8rem;
+  width: 8rem;
 }
 
 .img-profile-lg {
@@ -11248,3 +11252,40 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+.activity-feed {
+  padding: 15px;
+  list-style: none;
+}
+
+.feed-item {
+  position: relative;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  border-left: 2px solid #e4e8eb;
+}
+
+.feed-item:last-child {
+  border-color: transparent;
+}
+
+.feed-item::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -7px;
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background: #fff;
+  border: 4px solid green;
+}
+
+.feed-item .data {
+  display: block;
+  position: relative;
+  top: -5px;
+  color: #8c96a3;
+}
+

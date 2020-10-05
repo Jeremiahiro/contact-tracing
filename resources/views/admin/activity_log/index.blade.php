@@ -6,63 +6,39 @@
 
 @section('content')
 <div class="container-fluid">
-    <ul>
-        @foreach ($activity_logs as $data)
-        <li>
-            @if ($data->subject_type === "App\Model\User")
-            <a href="{{ route('admin.users.show', $data->subject->uuid ) }}">
-                {{ $data->subject->username }}
-            </a>
-            @if ($data->causer != null)
-                <b>
-                    <em>
-                        {{ $data->description }}
-                    </em>
-                </b> Account {{ $data->created_at->diffForHumans() }}
-            @else
-                <b>
-                    <em>Updates</em>    
-                </b> Account {{ $data->created_at->diffForHumans() }}
-            @endif
-            @else
-            @if ($data->subject_type === "App\Model\Activity")
-            <a href="{{ route('admin.users.show', $data->causer->uuid ) }}">
-                {{ $data->causer->username }}
-            </a>
-            <b>
-                <em>
-                    {{ $data->description }}
-                </em>
-            </b> an
-            <a href="{{ route('admin.activities.show', $data->subject->id ) }}">
-                Activity
-            </a>
-            {{ $data->created_at->diffForHumans() }}
-            @else
-            @if ($data->subject_type === "App\Model\ActivityTags")
-            <a href="{{ route('admin.users.show', $data->causer->uuid ) }}">
-                {{ $data->causer->username }}
-            </a>
-            <b>
-                <em>
-                    {{ $data->description }}
-                </em>
-            </b> for an
-            <a href="{{ route('admin.activities.show', $data->subject->activity_id ) }}">
-                Activity
-            </a>
-            {{ $data->created_at->diffForHumans() }}
-            @else
-            @endif
-            @endif
-            @endif
-        </li>
-        @endforeach
-    </ul>
-
+    <h5>Activity Feed</h5>
+    <ol class="activity-feed" id="activity_feed">
+        @include('admin.activity_log.data')
+    </ol>
 </div>
 
 @endsection
 @section('script')
 
+<script>
+    $(document).ready(function () {
+
+        $(function fetchActivityLog() {
+
+            setTimeout(function () {
+                $.ajax({
+                    url: `/backend/activity_log`,
+                    type: "GET",
+                    data: {
+                        'type': 'activity_log'
+                    },
+                    success: function (data) {
+                        $("#activity_feed").html(data.activity_logs);
+                        console.log(1);
+                    },
+                    error(e) {
+                        console.log(e['responseText']);
+                    },
+                    complete: fetchActivityLog
+                });
+            }, 5000);
+        });
+    });
+
+</script>
 @endsection

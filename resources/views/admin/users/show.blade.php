@@ -5,122 +5,192 @@ Users - {{ $user->username }}
 @endsection
 
 @section('style')
-{{-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' /> --}}
-<link rel='stylesheet' href='{{ asset('admin/vendor/calender/fullcalender.min.css')}}' />
+
+{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"> --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('admin/dist/jquery.calmosaic.min.css')}}">
+{{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script> --}}
+<script src="{{ asset('admin/dist/jquery.calmosaic.min.js')}}"></script>
+
 @endsection
 
 @section('content')
 <div class="container-fluid">
 
-    <nav aria-label="breadcrumb">
+    {{-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="{{ route('admin.dashboard') }}">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a href="{{ route('admin.users.index') }}">All User</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-                {{ $user->username }}
-            </li>
-        </ol>
-    </nav>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="{{ route('admin.users.index') }}">All User</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        {{ $user->username }}
+    </li>
+    </ol>
+    </nav> --}}
 
-    <div class="mb-4 user-profile">
-        <div class="card border-left-primary h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col-lg-2 col-md-12 mx-2">
+    <div class="mb-4 row">
+        <div class="col-lg-4 col-md-12">
+            <div class="card border-bottom-primary h-100 py-4">
+                <div class="card-body rounded-lg text-center">
+                    <span class="py-4">
                         <img class="img-profile-lg rounded-circle" src="{{ $user->avatar }}">
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="h1 mb-0 font-weight-bold text-gray-800">{{ $user->name }}</div>
-                                <h3>{{ $user->username }}</h3>
-                            </div>
-                            <div class="my-2 col-lg-12 col-md-12">
-                                <span class="mr-2">
-                                    <span class="font-weight-bold text-gray-800">{{ count($user->followers) }}</span>
-                                    Followers
-                                </span>
-                                <span class="mr-2">
-                                    <span class="font-weight-bold text-gray-800">{{ count($user->followings) }}</span>
-                                    Followings
-                                </span>
-                            </div>
+                    </span>
+                    <div class="my-4">
+                        <div class="h3 mb-0 font-weight-bold text-gray-800">{{ $user->name }}</div>
+                        <h5 class="mb-3">{{ $user->username }}</h5>
+                        <div class="h5 mb-3">
+                            {{ $user->phone }}
                         </div>
-                    </div>
-                    <div class="col-lg-5 col-md-12">
-                        <div id='calendar'></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row no-gutters">
-            <div class="card h-100 py-2 col-lg-4 col-md-12">
-                <div class="card-body">
-                    <div class="col no-gutters align-items-left">
-                        <div class="h5 mb-3"><span class="font-weight-bold text-gray-800">Phone: </span>
-                            {{ $user->phone_number }}
-                        </div>
-                        <div class="h5 mb-3"><span class="font-weight-bold text-gray-800">Email: </span>
+                        <div class="h5 mb-3">
                             {{ $user->email }}
                         </div>
-                        <div class="h5 mb-3"><span class="font-weight-bold text-gray-800">Gender: </span>
+                        <div class="h5 mb-3">
                             {{ $user->gender }}</div>
-                        <div class="h5 mb-3"><span class="font-weight-bold text-gray-800">Age Range: </span>
+                        <div class="h5">
                             {{ $user->age_range }}
                         </div>
                     </div>
-                    <div class="row w-75 mx-auto">
-                        {{-- Modal to message user accont --}}
-                        <button type="button" class="col m-2 btn btn-success" data-toggle="modal"
-                            data-target="#messageModal">
-                            Send Message
-                        </button>
-
-                        {{-- Modal to deactivate user accont --}}
-                        <button type="button" class="col m-2 btn btn-danger" data-toggle="modal"
-                            data-target="#deactivateModal">
-                            Deactivate User
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-12">
-                <nav class="p-2">
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-activity-tab" data-toggle="tab" href="#nav-activity"
-                            role="tab" aria-controls="nav-activity" aria-selected="true">Activity
-                            ({{ count($user->activities) }})</a>
-                        <a class="nav-item nav-link" id="nav-tags-tab" data-toggle="tab" href="#nav-tags" role="tab"
-                            aria-controls="nav-tags" aria-selected="false">Connections ({{ count($user->tags) }})</a>
-                        <a class="nav-item nav-link" id="nav-location-tab" data-toggle="tab" href="#nav-location"
-                            role="tab" aria-controls="nav-location" aria-selected="false">Locations
-                            ({{ count($user->locations) }})</a>
-                        <a class="nav-item nav-link" id="nav-support-tab" data-toggle="tab" href="#nav-support"
-                            role="tab" aria-controls="nav-support" aria-selected="false">Support (0)</a>
-                    </div>
-                </nav>
-                <div class="tab-content p-3" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-activity" role="tabpanel"
-                        aria-labelledby="nav-activity-tab">
-                        Activity View
-                    </div>
-                    <div class="tab-pane fade" id="nav-tags" role="tabpanel" aria-labelledby="nav-tags-tab">
-                        Tags View
-                    </div>
-                    <div class="tab-pane fade" id="nav-location" role="tabpanel" aria-labelledby="nav-location-tab">
-                        Location View
-                    </div>
-                    <div class="tab-pane fade" id="nav-support" role="tabpanel" aria-labelledby="nav-support-tab">
-                        Support View
-                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="row">
+                <div class="col-6 mb-4 m-0">
+                    <div class="card shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Activities
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ count($user->activities) }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-4 k-0">
+                    <div class="card h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Locations
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ count($user->locations) }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-map-marker fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-4 m-0">
+                    <div class="card shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Connections
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ count($user->tags) }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-users fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-4 k-0">
+                    <div class="card h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Support
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ count($user->locations) }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-ticket-alt fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-4 m-0">
+                    <div class="card shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Followers
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ count($user->followers) }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-user-plus fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-4 k-0">
+                    <div class="card h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Followings
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ count($user->followings) }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-user-check fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mt-5 col-10">
+                <div class="col-6 mb-4 k-0">
+                    <button type="button" class="col m-2 btn btn-success" data-toggle="modal"
+                        data-target="#messageModal">
+                        Message
+                    </button>
+                </div>
+                <div class="col-6 mb-4 k-0">
+                    <button type="button" class="col m-2 btn btn-danger" data-toggle="modal"
+                        data-target="#deactivateModal">
+                        Deactivate
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <ol class="activity-feed" id="activity_feed">
+                @include('admin.activity_log.data')
+            </ol>
+        </div>
     </div>
+
+    <div class="text-center">
+        <div id="heatmap-1"></div>
+    </div>
+
 
 </div>
 
@@ -131,25 +201,19 @@ Users - {{ $user->username }}
 @endsection
 @section('script')
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js'></script>
-<script src='{{ asset('/admin/vendor/calender/fullcalender.min.js')}}'></script>
-
 <script>
-    $(document).ready(function () {
-        // TODO: update this to suit choice
-        // page is now ready, initialize the calendar...
-        $('#calendar').fullCalendar({
-            // put your options and callbacks here
-            initialView: 'dayGridWeek',
-            events: [
-                @foreach($user->activities as $activity) {
-                    from: '{{ $activity->from_address }}',
-                    date: '{{ $activity->start_date }}',
-                    url : '{{ route('admin.activities.show', $activity->id) }}',
-                },
-                @endforeach
-            ]
-        })
+    var data = {!! $activity_stat !!};
+    $("#heatmap-1").calmosaic(data, {
+        months: 12,
+        labels: {
+            days: false,
+            months: true,
+            custom: {
+                weekDayLabels: null,
+                monthLabels: null
+            }
+        },
+
     });
 
 </script>

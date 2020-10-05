@@ -13,9 +13,14 @@ class ActivityLogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $activity_logs = ActivityLog::paginate(100);
+        $activity_logs = ActivityLog::paginate(50);
+        if($request->ajax()){
+            return response()->json([
+                'activity_logs' => view('admin.activity_log.data', compact('activity_logs'))->render(),
+                ]);
+        }
         return view('admin.activity_log.index', compact('activity_logs'));
     }
 

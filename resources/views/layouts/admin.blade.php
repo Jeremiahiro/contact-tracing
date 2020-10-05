@@ -19,6 +19,13 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
+    <script src="{{ asset ('/admin/vendor/jquery/jquery.min.js')}} "></script>
+    <script src="{{ asset ('/admin/vendor/jquery/moment.min.js')}} "></script>
+    <script src="{{ asset ('/admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}} "></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset ('/admin/vendor/jquery-easing/jquery.easing.min.js')}} "></script>
+
     <link href="{{ asset('/admin/css/sb-admin-2.css') }}" rel="stylesheet">
     @yield('style')
 
@@ -39,11 +46,6 @@
     </div>
     <!-- Bootstrap core JavaScript-->
     {{-- <script src="{{ asset('frontend/jquery/jquery-3.5.1.min.js') }}"></script> --}}
-    <script src="{{ asset ('/admin/vendor/jquery/jquery.min.js')}} "></script>
-    <script src="{{ asset ('/admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}} "></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset ('/admin/vendor/jquery-easing/jquery.easing.min.js')}} "></script>
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset ('/admin/js/sb-admin-2.min.js')}} "></script>

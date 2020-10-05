@@ -24,16 +24,14 @@ $factory->define(Activity::class, function (Faker $faker) {
         'from_location' => $faker->streetAddress,
         'from_latitude' => $faker->latitude($min = -4, $max = 7),
         'from_longitude' => $faker->longitude($min = -8, $max = 14),
-        
         'to_address' => $faker->address,
         'to_location' => $faker->streetAddress,
         'to_latitude' => $faker->latitude($min = -8, $max = 7),
         'to_longitude' => $faker->longitude($min = -4, $max = 14),
-
         'start_date' => $faker->dateTimeBetween('now'),
         'end_date' => $faker->dateTimeBetween('now', '+1 day'),
-
-        'user_id' => $faker->numberBetween($min = 1, $max = 2),
+        'user_id' => $faker->numberBetween($min = 1, $max = 50),
+        'created_at' => $faker->dateTimeBetween('-1 year', 'now'),
     ];
 });
 

@@ -103,6 +103,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'backend', 'middleware' => ['a
     Route::group(['middleware' => 'super_admin'], function() {
         Route::get('/', 'DashboardController@index')->name('admin.dashboard');
         Route::resource('/users', 'UsersController', ['as' => 'admin']);
+        // Route::get('/users/{id}/analytics', 'UsersController', ['as' => 'admin']);
         Route::resource('/activities', 'ActivitiesController', ['as' => 'admin']);
         Route::resource('/locations_log', 'LocationsLogController', ['as' => 'admin']);
         Route::resource('/supports', 'SupportController', ['as' => 'admin']);
@@ -110,5 +111,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'backend', 'middleware' => ['a
         Route::resource('/splash', 'SplashController', ['as' => 'admin']);
         Route::resource('/settings', 'SettingController', ['as' => 'admin']);
         Route::resource('/activity_log', 'ActivityLogController', ['as' => 'admin']);
+        Route::get('/users_ajax_chart', 'DashboardController@userChartAjax');
+        Route::get('/activities_ajax_chart', 'DashboardController@activityChartAjax');
     });
 });
