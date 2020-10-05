@@ -4,7 +4,7 @@
 
             <div class="text-right p-3">
                 <a href="{{ route('dashboard.index') }}" class="text-white">
-                    <img src="{{ Auth::user()->avatar }}" class="avatar avatar-md" alt="default avatar">
+                    <img src="{{ auth()->user()->avatar }}" class="avatar avatar-md" alt="default avatar">
                     <h6 class="m-0 f-16">{{ auth()->user()->name }}</h6>
                     <p class="regular">{{ auth()->user()->username }}</p>
                 </a>

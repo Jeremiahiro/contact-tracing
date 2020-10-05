@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\User;
-use App\Activity;
+use App\Model\User;
+use App\Model\Activity;
 use Illuminate\Http\Request;
 
 class NotificationsController extends Controller

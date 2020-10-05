@@ -7,12 +7,12 @@ return [
     'gcm' => [
         'priority' => 'normal',
         'dry_run' => false,
-        'apiKey' => 'My_ApiKey',
+        'apiKey' => env('GCM_API_KEY'),
     ],
     'fcm' => [
         'priority' => 'normal',
         'dry_run' => false,
-        'apiKey' => 'My_ApiKey',
+        'apiKey' => env('FCM_API_KEY'),
     ],
     'apn' => [
         'certificate' => __DIR__ . '/iosCertificates/apns-dev-cert.pem',

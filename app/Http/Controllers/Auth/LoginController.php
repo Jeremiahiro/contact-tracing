@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
-use App\User;
+use App\Model\User;
 use Socialite;
 use Carbon\Carbon;
-use App\UserLocation;
+use App\Model\UserLocation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -93,10 +93,7 @@ class LoginController extends Controller
 
         $username = '@'.$string.$randomDigit;
 
-        $uuid = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0);
-
         $user = new User();
-        $user->uuid = $uuid;
         $user->name = $userSocial->name;
         $user->username = $username;
         $user->email = $userSocial->email;

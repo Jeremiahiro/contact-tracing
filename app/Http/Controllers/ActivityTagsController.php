@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ActivityTags;
+use App\Model\ActivityTags;
 use Illuminate\Http\Request;
 
 class ActivityTagsController extends Controller

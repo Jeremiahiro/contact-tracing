@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\User;
-use App\UserActivity;
-use App\ActivityPeople;
+use App\Model\User;
+use App\Model\UserActivity;
+use App\Model\ActivityPeople;
 use Illuminate\Http\Request;
 
 class UserActivityController extends Controller

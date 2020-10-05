@@ -1,12 +1,9 @@
-<nav class="bg-white">
-    <div class="container">
-        <div class="d-flex justify-content-between">
-            <p class="regular f-14">
-                &copy; {{ date('Y') }} I-AM VOCAL, All Rights Reserved
-            </p>
-            <div>
-                <a href="{{ route('gdpr.dpa')}}" class="regular f-14 text-primary">GDPR / DPA</a>
-            </div>
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; {{ env('APP_NAME')}} {{ date('Y') }}</span>
         </div>
     </div>
-</nav>
+</footer>
+<!-- End of Footer -->
