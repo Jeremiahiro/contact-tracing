@@ -17,25 +17,21 @@ Route::get('index', function () {
     return view('activity.index');
 });
 
-Route::get('create', function () {
-    return view('activity.create');
-})->name('activity.create');
+// Route::get('proximity', function () {
+//     return view('activity.modals.proximity');
+// });
 
-Route::get('proximity', function () {
-    return view('activity.modals.proximity');
-});
+// Route::get('profile', function () {
+//     return view('profile.index');
+// })->name('profile.index');
 
-Route::get('profile', function () {
-    return view('profile.index');
-})->name('profile.index');
+// Route::get('alert', function () {
+//     return view('alert.index');
+// });
 
-Route::get('alert', function () {
-    return view('alert.index');
-});
-
-Route::get('activityConnection', function () {
-    return view('partials.modals.activityConnection');
-});
+// Route::get('activityConnection', function () {
+//     return view('partials.modals.activityConnection');
+// });
 
 Auth::routes(['verify' => true]);
 

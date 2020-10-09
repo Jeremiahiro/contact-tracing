@@ -18,7 +18,7 @@ class CreateSplashImagesTable extends Migration
             $table->string('splash_image');
             $table->string('description')->nullable();
             $table->string('type');
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

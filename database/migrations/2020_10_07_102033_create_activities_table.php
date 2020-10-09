@@ -13,28 +13,14 @@ class CreateActivitiesTable extends Migration
      */
     public function up()
     {
-        
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->string('from_address');
-            $table->string('from_location')->nullable();
-            $table->string('from_latitude');
-            $table->string('from_longitude');
-            $table->string('from_image')->nullable();
-
-            $table->string('to_address');
-            $table->string('to_location')->nullable();
-            $table->string('to_latitude');
-            $table->string('to_longitude');
-            $table->string('to_image')->nullable();
-            
             $table->dateTime('start_date', 0);
             $table->dateTime('end_date', 0);
-            
             $table->softDeletes();
             $table->timestamps();
-
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
         });
     }
 
@@ -45,8 +31,6 @@ class CreateActivitiesTable extends Migration
      */
     public function down()
     {
-        Schema::table('activities', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('activities');
     }
 }

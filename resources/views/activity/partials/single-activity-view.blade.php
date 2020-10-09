@@ -6,8 +6,8 @@
             <div class="d-flex">
                 <img src="{{ asset('/frontend/img/svg/map-pin-markedwhite.svg') }}" alt="map-pin">
                 <div class="ml-1">
-                    <h3 class="m-0 p-0 f-16">{{ $activity->from_location }}</h3>
-                    <p class="m-0 p-0 f-10 regular">{{ $activity->from_address }}</p>
+                    <h3 class="m-0 p-0 f-16">{{ $activity->location->street }}</h3>
+                    <p class="m-0 p-0 f-12 regular">{{ $activity->location->address }}</p>
                 </div>
             </div>
             <p class="f-9">
@@ -15,44 +15,24 @@
             </p>
         </div>
 
-        <div class="d-flex justify-content-between bold mb-3">
-            <div class="d-flex">
-                <img src="{{ asset('/frontend/img/svg/map-pin-markedwhite.svg') }}" alt="map-pin">
-                <div class="ml-1">
-                    <h3 class="m-0 p-0 f-16">{{ $activity->to_location }}</h3>
-                    <p class="m-0 p-0 f-10 regular">{{ $activity->to_address }}</p>
-                </div>
-            </div>
-            <p class="f-9">
-                {{ $activity['end_date']->format('g:i A') }}
-            </p>
-        </div>
         <div class="">
             <div class="w-100 py-2">
                 <div id="activityCarouselIndicators" class="carousel" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <div class="map map-lg rounded" id="map-{{ $activity->id }}"
-                                fLat="{{ $activity->from_latitude }}" fLng="{{ $activity->from_longitude }}"
-                                tLat="{{ $activity->to_latitude }}" tLng="{{ $activity->to_longitude }}">
+                                lat="{{ $activity->location->latitude }}" lng="{{ $activity->location->longitude }}">
                             </div>
                         </div>
-                        @if ($activity->from_image != null)
+                        @if ($activity->location->image != null)
                         <div class="carousel-item">
                             <div class="map-img map-lg rounded">
-                                <img src="{{ $activity->from_image }}" alt="">
-                            </div>
-                        </div>
-                        @endif
-                        @if ($activity->to_image != null)
-                        <div class="carousel-item">
-                            <div class="map-img map-lg rounded">
-                                <img src="{{ $activity->to_image }}" alt="">
+                                <img src="{{ $activity->location->image }}" alt="">
                             </div>
                         </div>
                         @endif
                     </div>
-                    @if ($activity->from_image != null || $activity->to_image != null)
+                    @if ($activity->location->image != null)
                     <a class="carousel-control-prev text-white" href="#activityCarouselIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon text-white" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
@@ -97,7 +77,7 @@
                                     </div>
                                     @else
                                     <div>
-                                        <img src="{{ $person->avatar }}" class="avatar avatar-sm" alt="Activity Tag">
+                                        <img src="{{ asset('frontend/img/avatar1.png') }}" class="avatar avatar-sm" alt="Activity Tag">
                                     </div>
                                     <div class="ml-1">
                                         <p class="f-12 mb-0 bold text-capitalize">

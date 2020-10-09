@@ -38,13 +38,13 @@ Homepage
             <li data-target="#splashCarousel" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item splash splash-1 active">
+            <div class="carousel-item splash active" style="background-image: url('{{ $contact_info->splash_image }}');">
                 @include('homepage.splash.splash-1')
             </div>
-            <div class="carousel-item splash splash-3">
+            <div class="carousel-item splash" style="background-image: url('{{ $support_info->splash_image }}');">
                 @include('homepage.splash.splash-3')
             </div>
-            <div class="carousel-item splash splash-2">
+            <div class="carousel-item splash" style="background-image: url('{{ $location_info->splash_image }}');">
                 @include('homepage.splash.splash-2')
             </div>
         </div>

@@ -28,18 +28,6 @@ Update Activity
 @endsection
 
 @section('content')
-{{-- @include('activity.partials.formScript') --}}
-
-<div id="alert">
-    @if($errors->any())
-    <div class="alert alert-danger text-danger" role="alert">
-        <button type="button" class="close text-danger" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true" class="text-danger">&times;</span>
-        </button>
-        <strong class="text-danger">Error! Select a valid location(s)</strong>
-    </div>
-    @endif
-</div>
 
 <section>
     <div class="container text-primary">
@@ -57,7 +45,7 @@ Update Activity
                 @endif
 
             </p>
-            <p class="f-12 bold">Update Activity</p>
+            <p class="f-12 bold">Add People you met</p>
             <form method="POST" action="{{ route('activity.update', $activity->id) }}" id="activitForm" name="activity"
                 autocomplete="off">
                 @csrf
@@ -68,25 +56,12 @@ Update Activity
                         <div class="d-flex">
                             <img src="{{ asset('/frontend/img/svg/map-pin-markedwhite.svg') }}" alt="map-pin">
                             <div class="ml-1">
-                                <h3 class="m-0 p-0 f-16">{{ $activity->from_location }}</h3>
-                                <p class="m-0 p-0 f-10 regular">{{ $activity->from_address }}</p>
+                                <h3 class="m-0 p-0 f-16">{{ $activity->location->street }}</h3>
+                                <p class="m-0 p-0 f-12 regular">{{ $activity->location->address }}</p>
                             </div>
                         </div>
                         <p class="f-9">
                             {{ $activity['start_date']->format('g:i A') }}
-                        </p>
-                    </div>
-
-                    <div class="d-flex justify-content-between bold mb-3">
-                        <div class="d-flex">
-                            <img src="{{ asset('/frontend/img/svg/map-pin-markedwhite.svg') }}" alt="map-pin">
-                            <div class="ml-1">
-                                <h3 class="m-0 p-0 f-16">{{ $activity->to_location }}</h3>
-                                <p class="m-0 p-0 f-10 regular">{{ $activity->to_address }}</p>
-                            </div>
-                        </div>
-                        <p class="f-9">
-                            {{ $activity['end_date']->format('g:i A') }}
                         </p>
                     </div>
                 </div>

@@ -58,12 +58,12 @@ Dashboard
 <section class="">
     <div class="container px-3 pt-5 mb-5" id="tab-view">
         <p class="f-14">ROUTE HISTORY</p>
-        @if ($user->id === auth()->user()->id)
+        @if ($user->id === auth()->user()->id || $user->show_location === true)
         @include('profile.partials.activity-view')
-        @else
-        @if ($user->show_location != true)
-        @include('profile.partials.activity-view')
-        @endif
+        {{-- @else --}}
+        {{-- @if ($user->show_location == true) --}}
+        {{-- @include('profile.partials.activity-view') --}}
+        {{-- @endif --}}
         @endif
     </div>
 </section>

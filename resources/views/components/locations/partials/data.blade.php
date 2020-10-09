@@ -1,14 +1,14 @@
 <div class="card">
     <div class="card-header" id="heading-{{ $location->id }}">
         <h5 class="mb-0">
-            <button class="btn text-primary blue-text" data-toggle="collapse"
+            <a href="#collapse-{{ $location->id }}" class="text-left text-primary f-14" data-toggle="collapse"
                 data-target="#collapse-{{ $location->id }}" aria-expanded="true"
-                aria-controls="collapse-{{ $location->address }}">
-                {{ $location->location }}
-            </button>
+                aria-controls="collapse-{{ $location->street }}">
+                {{ $location->address }}
+            </a>
         </h5>
     </div>
-    <div id="collapse-{{ $location->id }}" class="collapse" aria-labelledby="heading-{{ $location->address }}"
+    <div id="collapse-{{ $location->id }}" class="collapse" aria-labelledby="heading-{{ $location->street }}"
         data-parent="#accordion">
         <div class="card-body">
             <div class="row">
@@ -39,10 +39,9 @@
                 @if ($location->image != null)
                 <img src="{{ $location->image }}" alt="" class="map-img">
                 @else
-                {{-- <div class="map map-lg rounded" id="map-{{ $location->id }}"
-                    fLat="{{ $location->latitude }}" fLng="{{ $location->latitude }}">
-                </div> --}}
-                <img class="" src="https://maps.googleapis.com/maps/api/staticmap?size=340x250&zoom=16&center={{ $location->location }}&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0x242f3e&style=element:labels.text.fill%7Ccolor:0x746855&style=element:labels.text.stroke%7Ccolor:0x242f3e&style=feature:administrative.locality%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:poi.park%7Celement:geometry%7Ccolor:0x263c3f&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x6b9a76&style=feature:road%7Celement:geometry%7Ccolor:0x38414e&style=feature:road%7Celement:geometry.stroke%7Ccolor:0x212a37&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x9ca5b3&style=feature:road.highway%7Celement:geometry%7Ccolor:0x746855&style=feature:road.highway%7Celement:geometry.stroke%7Ccolor:0x1f2835&style=feature:road.highway%7Celement:labels.text.fill%7Ccolor:0xf3d19c&style=feature:transit%7Celement:geometry%7Ccolor:0x2f3948&style=feature:transit.station%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:water%7Celement:geometry%7Ccolor:0x17263c&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x515c6d&style=feature:water%7Celement:labels.text.stroke%7Ccolor:0x17263c&key={{ env('GOOGLE_API_KEY') }}" alt="">
+                <img class=""
+                    src="https://maps.googleapis.com/maps/api/staticmap?size=340x250&zoom=16&center={{ $location->address }}&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0x242f3e&style=element:labels.text.fill%7Ccolor:0x746855&style=element:labels.text.stroke%7Ccolor:0x242f3e&style=feature:administrative.locality%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:poi.park%7Celement:geometry%7Ccolor:0x263c3f&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x6b9a76&style=feature:road%7Celement:geometry%7Ccolor:0x38414e&style=feature:road%7Celement:geometry.stroke%7Ccolor:0x212a37&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x9ca5b3&style=feature:road.highway%7Celement:geometry%7Ccolor:0x746855&style=feature:road.highway%7Celement:geometry.stroke%7Ccolor:0x1f2835&style=feature:road.highway%7Celement:labels.text.fill%7Ccolor:0xf3d19c&style=feature:transit%7Celement:geometry%7Ccolor:0x2f3948&style=feature:transit.station%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:water%7Celement:geometry%7Ccolor:0x17263c&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x515c6d&style=feature:water%7Celement:labels.text.stroke%7Ccolor:0x17263c&key={{ env('GOOGLE_API_KEY') }}"
+                    alt="">
                 @endif
             </div>
         </div>

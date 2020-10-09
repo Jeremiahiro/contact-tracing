@@ -6,7 +6,6 @@ use Auth;
 use App\Model\User;
 use Socialite;
 use Carbon\Carbon;
-use App\Model\UserLocation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -131,9 +130,6 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, User $user) 
     {
-        $user->status = 1; 
-        $user->save();
-
         return redirect()->intended($this->redirectPath());
      }
 }

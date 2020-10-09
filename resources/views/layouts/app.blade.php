@@ -10,6 +10,9 @@
 
     <title>{{ env('APP_NAME')}} | @yield('title')</title>
 
+    <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon"/>
+
+
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
@@ -75,7 +78,11 @@
         @enddesktop
     </div>
     @auth
-    <script src="{{ asset('frontend/jquery/followToggle.js')}}"></script>
+    @if (Request::is('/') || Request::is('activity/map-view') || Request::is('about-us') || Request::is('privacy-policy') || Request::is('terms-of-use') || Request::is('gdpr*'))
+        //
+    @else
+   <script src="{{ asset('frontend/jquery/followToggle.js')}}"></script>
+   @endif
     @endauth
     <script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
     @yield('script')

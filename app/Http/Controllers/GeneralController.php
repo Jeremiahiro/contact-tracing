@@ -8,6 +8,7 @@ use App\Model\User;
 use App\Model\Activity;
 use App\Model\Location;
 use App\Model\ActivityTags;
+use App\Model\SplashImage;
 use Illuminate\Http\Request;
 
 class GeneralController extends Controller
@@ -20,14 +21,25 @@ class GeneralController extends Controller
     public function index()
     {
         $count = DB::table("users")->count();
+
+        $location_info = SplashImage::where('type', 'location')->where('status', true)->first();
+        $contact_info = SplashImage::where('type', 'contact')->where('status', true)->first();
+        $support_info = SplashImage::where('type', 'support')->where('status', true)->first();
+
         if(Auth::user()){
-            $activities = Activity::where('user_id', auth()->user()->id)->distinct('from_address')->count();
-            $tags = ActivityTags::where('user_id', auth()->user()->id)->distinct('name')->count();  
-            return view('homepage.index', compact(['count', 'activities', 'tags']));
+            $locations = Location::where('user_id', auth()->user()->id)->distinct('address')->count();
+            $tags = ActivityTags::where('user_id', auth()->user()->id)->distinct('name')->count(); 
+            return view('homepage.index', compact([
+                'count', 'locations', 'tags',
+                'location_info', 'contact_info', 'support_info'
+                ])); 
         } else {
-            $activities = [];
+            $locations = [];
             $tags = [];
-            return view('homepage.index', compact(['count', 'activities', 'tags']));
+            return view('homepage.index', compact([
+                'count', 'locations', 'tags',
+                'location_info', 'contact_info', 'support_info'
+                ]));
         }
 
      
@@ -98,7 +110,6 @@ class GeneralController extends Controller
 
             $data = User::where('id', '!=', Auth::user()->id)
                 ->where('role', '!=', 'super admin')
-                ->where('status', '!=', false)
                 ->where('username', 'LIKE', $search.'%')
                 ->simplePaginate(10);
 
@@ -142,7 +153,7 @@ class GeneralController extends Controller
 
             $data = User::where('id', '!=', Auth::user()->id)
                 ->where('role', '!=', 'super admin')
-                ->where('status', '!=', false)
+                // ->where('status', '!=', false)
                 ->where('username', 'LIKE', $search.'%')
                 ->simplePaginate(30);
 
@@ -177,7 +188,7 @@ class GeneralController extends Controller
      */
     public function mapView()
     {
-        $data = Location::where('location', '!=', null)->get(['address','latitude','longitude'])->toArray();
+        $data = Location::where('address', '!=', null)->get(['street','latitude','longitude'])->toArray();
 
         $count = DB::table("users")->count();
         $user = Auth::user();

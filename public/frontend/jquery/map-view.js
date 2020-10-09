@@ -131,13 +131,8 @@ function initMap() {
 
     $.each($maps, function (i, value) {
         var cen = {
-            lat: parseFloat($(value).attr('fLat')),
-            lng: parseFloat($(value).attr('fLng'))
-        };
-
-        var mrk = {
-            lat: parseFloat($(value).attr('tLat')),
-            lng: parseFloat($(value).attr('tLng'))
+            lat: parseFloat($(value).attr('lat')),
+            lng: parseFloat($(value).attr('lng'))
         };
 
         var mapDivId = $(value).attr('id');

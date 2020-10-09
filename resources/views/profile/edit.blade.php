@@ -78,7 +78,7 @@ Edit Profile
 </section>
 
 <section class="py-3 mb-5">
-    <h4 class="m-2 px-3 bold f-24">Details</h4>
+    <h4 class="m-2 px-3 bold f-18">User Details</h4>
 
     <div class="accordion" id="editProfileAccordion">
         {{-- personal information --}}

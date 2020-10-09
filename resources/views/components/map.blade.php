@@ -220,12 +220,10 @@ Map View
                 var marker, i, contentString;
 
                 for (i = 0; i < locations.length; i++) {
-                    contentString = '<div id="content" class="regular text-primary"><h6>' + locations[i]['address'] +
+                    contentString = '<div id="content" class="regular text-primary"><h6>' + locations[i]['street'] +
                         '</h6></div>';
                     marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(locations[i]['latitude'], locations[i][
-                            'longitude'
-                        ]),
+                        position: new google.maps.LatLng(locations[i]['latitude'], locations[i]['longitude']),
                         map: map
                     });
 

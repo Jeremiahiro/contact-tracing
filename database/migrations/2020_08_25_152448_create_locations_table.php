@@ -15,13 +15,15 @@ class CreateLocationsTable extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
+            $table->string('country');
+            $table->string('state');
+            $table->string('city');
+            $table->string('street');
             $table->string('address');
-            $table->string('location');
             $table->string('latitude');
             $table->string('longitude');
             $table->string('image')->nullable();
             $table->timestamps();
-
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         });
     }

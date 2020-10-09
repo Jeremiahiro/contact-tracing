@@ -48,6 +48,15 @@ class Activity extends Model
      * Get the people attached to the  activity.
      * Group by unique names
      */
+    public function location()
+    {
+        return $this->belongsTo('App\Model\Location', 'location_id');
+    }
+
+    /**
+     * Get the people attached to the  activity.
+     * Group by unique names
+     */
     public function tagging()
     {
         return $this->hasMany('App\Model\ActivityTags', 'activity_id')->groupBy('name');

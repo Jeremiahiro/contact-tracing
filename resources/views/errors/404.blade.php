@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand:700" rel="stylesheet">
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    {{-- <link type="text/css" rel="stylesheet" href="css/style.css" /> --}}
 
     <style>
         * {
