@@ -48,8 +48,8 @@ Add Activity
     <div class="container text-primary mb-5">
         <div class="py-5 activity">
             <p class="f-12 bold">Record Activity</p>
-            <form method="POST" action="{{ route('activity.store') }}" id="activityForm" name="activity"
-                autocomplete="off">
+            <form method="POST" action="{{ route('activity.store') }}" 
+                id="activityForm" name="activity" autocomplete="off">
                 @csrf
 
                 <div class="row">
@@ -106,12 +106,12 @@ Add Activity
                                             <input type="hidden" name="image" id="location_image_value" value="">
                                             <input type="File" name="" class="d-none avatar-input" id="location_image"
                                                 value="" accept="image/*" data-type="location_image">
-                                            <div id="fromImagePreviewDiv" class="d-none tx_effect">
+                                            <div id="location_image_preview_div" class="d-none tx_effect">
                                                 <div class="img_preview text-center mx-auto">
                                                     <img src="http://placehold.it/100" alt="Location Image Preview"
-                                                        class="loc_img_preview" id="fromImagePreview">
+                                                        class="loc_img_preview" id="location_image_preview">
                                                 </div>
-                                                <div class="text-center text-danger f-12 d-none" id="removeFromImage">
+                                                <div class="text-center text-danger f-12 d-none" id="remove_image">
                                                     <i class="fa fa-times"></i>
                                                     <span class="">Delete Image</span>
                                                 </div>
@@ -124,6 +124,7 @@ Add Activity
                         </div>
                     </div>
                 </div>
+
                 <div class="">
                     <div class="row mb-4 form-group">
                         <label for="when" class="f-24 col-md-12 text-md-left">
@@ -153,7 +154,9 @@ Add Activity
 
                 <div class="">
                     <div class="form-group pull-right">
-                        <button type="submit" class="btn f-14 rounded blue-btn px-3 text-white">ADD</button>
+                        <button type="submit" class="btn f-14 rounded blue-btn px-3 text-white">
+                            ADD
+                        </button>
                     </div>
                 </div>
             </form>

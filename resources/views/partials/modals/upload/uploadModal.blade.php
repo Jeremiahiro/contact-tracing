@@ -1,4 +1,4 @@
-<div class="modal fade right" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
+<div class="modal fade right" id="upload_image_modal" tabindex="-1" role="dialog" aria-labelledby="upload_image_modal_label">
     <div class="modal-dialog full-modal m-0 p-0" role="document">
         <div class="modal-content full-modal-content side_nav_white text-primary">
             <!-- Modal Header -->
@@ -15,11 +15,15 @@
                             <i class="fa fa-undo text-white"></i> Rotate
                         </button>
                     </div>
+
                     <div>
-                        <button class="btn blue-btn text-white" id="upload-1">
+                        <button class="btn blue-btn text-white d-none" id="upload_image">
                             <i class="fa fa-upload text-white"></i> Upload
                         </button>
-                        <button class="btn blue-btn text-white" id="upload-2">
+                        <button class="btn blue-btn text-white d-none" id="upload_header">
+                            <i class="fa fa-upload text-white"></i> Upload
+                        </button>
+                        <button class="btn blue-btn text-white d-none" id="upload_avatar">
                             <i class="fa fa-upload text-white"></i> Upload
                         </button>
                     </div>

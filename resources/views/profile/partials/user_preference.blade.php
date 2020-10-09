@@ -14,30 +14,6 @@
 
                 <div id="updatePrefrences" method="post" class="">
 
-                    {{-- Toggle Activity Visibility --}}
-                    <div class="form-group my-3 border-bottom">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <p class="f-14 bold m-0">Others Can See My Activity</p>
-                            </div>
-                            <div class="">
-                                <div class="spinner-border text-primary ml-2 spinner-border-sm d-none"
-                                    id="toggle_location_spinner" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" data-id="{{ $user->uuid }}" name="show_location"
-                                        id="toggle_location" class="toggle_location"
-                                        {{ $user->show_location == true ? 'checked' : '' }} />
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="text-muted f-12">
-                            This allows other users on the platform see your activity when they veiw your profile
-                        </div>
-                    </div>
-
                     {{-- Toggle Background Activity --}}
                     <div class="form-group my-3 border-bottom">
                         <div class="d-flex justify-content-between align-items-center">

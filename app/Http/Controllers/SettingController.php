@@ -38,23 +38,6 @@ class SettingController extends Controller
 
     }
 
-
-    // public function  ()
-    // {
-    //     if (Auth::user()->first_time_login) {
-    //         $first_time_login = true;
-    //         Auth::user()->first_time_login = false;
-    //         Auth::user()->save();
-    //     } else {
-    //         $first_time_login = false;
-    //     }
-
-    //     return view(
-    //         'activity.create', 
-    //         ['first_time_login' => $first_time_login]
-    //     ); 
-    // }
-
     /**
      * Update the specified resource in storage.
      *
@@ -246,7 +229,11 @@ class SettingController extends Controller
                 return response()->json($response, 201);
     
             } else {
-                return response()->json(['error' => 'Oops! Something went wrong.']);
+                $response = [
+                    'success' => false,
+                    "message" => 'Unsupported Image Size or Format',
+                ];
+                return response()->json($response, 422);
             }
 
         }
@@ -256,7 +243,7 @@ class SettingController extends Controller
     public function saveAvatar(Request $request, $image_url)
     {
         $user = Auth::user();
-        $user->avarar = $image_url;
+        $user->avatar = $image_url;
         $user->save();
     }
 

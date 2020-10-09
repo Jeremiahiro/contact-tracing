@@ -81,7 +81,6 @@ Edit Profile
     </div>
 </section>
 
-
 <section class="py-3 mb-5">
     <h4 class="m-2 px-3 bold f-18">User Information</h4>
 
@@ -106,13 +105,20 @@ Edit Profile
                 <i class="fa fa-cog mr-2"></i> Preferences
             </button>
         </div>
+
+        <div class="mb-0">
+            <button class="btn text-primary regular f-18" type="button" data-toggle="modal" data-target="#user_activity_archive"
+                aria-expanded="false">
+                <i class="fa fa-tasks mr-2"></i> Activity
+            </button>
+        </div>
     </div>
 </section>
-
 @include('partials.modals.upload.uploadModal')
 @include('profile.partials.user_info')
 @include('profile.partials.user_security_info')
 @include('profile.partials.user_preference')
+@include('profile.partials.user_activity_archive')
 
 @endsection
 @section('footer')

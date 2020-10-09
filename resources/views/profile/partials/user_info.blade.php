@@ -13,13 +13,13 @@
                 <form action="{{ route('dashboard.update') }}" id="update_user_info" method="post" class="">
                     @csrf
 
-                    <div class="form-group mb-1">
+                    <div class="form-group mb-2">
                         <label for="email" class="m-0 p-0 bold f-14">Email:</label>
                         <input type="email" class="blue-input input rounded-0" name="email" value="{{ $user->email }}"
                             id="email" readonly>
                     </div>
 
-                    <div class="form-group mb-1">
+                    <div class="form-group mb-2">
                         <label for="name" class="m-0 p-0 bold f-14">Full Name:</label>
                         <input type="text" class="blue-input input rounded-0 @error('name') is invalid @enderror"
                             name="name" value="{{ old('name', $user->name) }}" id="name" autofocus required>
@@ -30,7 +30,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group mb-1">
+                    <div class="form-group mb-2">
                         <label for="username" class="m-0 p-0 bold f-14">Username:</label>
                         <input type="text" class="blue-input input rounded-0 @error('username') is invalid @enderror"
                             name="username" value="{{ old('username', $user->username) }}" id="username" required>
@@ -41,7 +41,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group mb-1">
+                    <div class="form-group mb-2">
                         <label for="phone" class="m-0 p-0 bold f-14">Phone Number:</label>
                         <input type="tel" class="blue-input input rounded-0 @error('phone') is invalid @enderror"
                             name="phone" value="{{ old('phone', $user->phone) }}" id="phone" required>
@@ -52,7 +52,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group mb-1">
+                    <div class="form-group mb-2">
                         <label for="gender" class="m-0 p-0 bold f-14">Gender:</label>
                         <select class="input blue-input @error('gender') is-invalid @enderror" name="gender"
                             id="gender">

@@ -68,7 +68,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        $favorites = Auth::user()->getFavoriteItems(Location::class)->paginate(5);
+        $favorites = Auth::user()->getFavoriteItems(Location::class)->take(5);
 
         return view('activity.create', compact(['favorites']));
     }
@@ -110,7 +110,6 @@ class ActivityController extends Controller
 
                 $location = $this->save_new_location($location);
             }
-
 
             $activity = Activity::firstOrCreate([
                 'location_id'   => $location->id,
@@ -171,21 +170,17 @@ class ActivityController extends Controller
                         } 
                     }
                 }
-            
             } else {
                 return redirect()->back()->with('error', 'Activity was recently created');
             }
             DB::commit();
-
             return redirect()->route('activity.index')->with('success', 'Successful!');
-
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('error', 'OOPS something went wrong');
         } 
 
     }
-
 
     /**
      * Display the specified resource.

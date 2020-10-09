@@ -42,7 +42,7 @@ jQuery(document).ready(function ($) {
         });
     });
 
-    
+
     $(".remove").hide()
 
     var counter = $(".form-dup-counter").text();
@@ -93,27 +93,6 @@ jQuery(document).ready(function ($) {
         $('#sideIcon-1').addClass('d-none')
     });
 
-    // $('#sideIcon-2').click(function () {
-    //     $("#collapseFromInfo").collapse('hide');
-    //     $("#collapseToInfo").collapse('hide');
-    //     $('#sideIcon-2').addClass('d-none')
-    //     $('#sideIcon-1').removeClass('d-none')
-    // });
-
-    // $("#address_2").focusin(function () {
-    //     $("#collapseFromInfo").collapse('hide');
-    //     $("#collapseToInfo").collapse('show');
-    //     $('#sideIcon-2').removeClass('d-none')
-    //     $('#sideIcon-1').addClass('d-none')
-    // });
-
-    // $('#sideIcon-2').click(function () {
-    //     $("#collapseFromInfo").collapse('hide');
-    //     $("#collapseToInfo").collapse('hide');
-    //     $('#sideIcon-2').addClass('d-none')
-    //     $('#sideIcon-1').removeClass('d-none')
-    // });
-
     // dateTime field
     $('.input-daterange').click(function () {
         $("#collapseFromInfo").collapse('hide');
@@ -122,12 +101,9 @@ jQuery(document).ready(function ($) {
         $('#sideIcon-1').removeClass('d-none')
     });
 
-
     $('.activity_tagging').click(function () {
         $("#collapseFromInfo").collapse('hide');
         $("#collapseToInfo").collapse('hide');
-        // $('#sideIcon-2').addClass('d-none')
-        // $('#sideIcon-1').removeClass('d-none')
     });
 
     // additional button to hide div
@@ -140,11 +116,6 @@ jQuery(document).ready(function ($) {
     var latitude = $('#latitude_1');
     var longitude = $('#longitude_1');
 
-    // var to_address = $('#address_2');
-    // var to_location = $('#location_2');
-    // var to_latitude = $('#latitude_2');
-    // var to_longitude = $('#longitude_2');
-
     $('#clearFrom').click(function () {
         address.val('');
         location.val('');
@@ -156,18 +127,6 @@ jQuery(document).ready(function ($) {
         $('#clearFrom').addClass('d-none');
         $('label[for="location_image"]').show();
     });
-
-    // $('#clearTo').click(function () {
-    //     to_address.val('');
-    //     to_location.val('');
-    //     to_latitude.val('');
-    //     to_longitude.val('');from
-    //     $('input:radio[name="to"]').prop('checked', false);
-    //     $('input:radio[name="to"]').attr('disabled', false);
-    //     $('input:radio[name="from"]').attr('disabled', false);
-    //     $('#clearTo').addClass('d-none');
-    //     $('label[for="to_image"]').show();
-    // });
 
     from = $('input:radio[name="from"]')
     // to = $('input:radio[name="to"]')
@@ -190,28 +149,6 @@ jQuery(document).ready(function ($) {
             }
         });
     });
-
-    // to.change(function () {
-    //     to.each(function (idx, el) {
-
-    //         selectedValueID = $(el).data('id');
-
-    //         if ($(el).is(':checked')) {
-    //             selectdTo = $('#use_address_for_from-' + selectedValueID).attr("disabled", true);
-    //             $('#clearTo').removeClass('d-none');
-    //             to_address.val($(el).data('address'));
-    //             to_location.val($(el).data('location'));
-    //             to_latitude.val($(el).data('latitude'));
-    //             to_longitude.val($(el).data('longitude'));
-    //             $('label[for="to_image"]').hide()
-    //         } else {
-    //             selectdTo = $('#use_address_for_from-' + selectedValueID).attr("disabled", false);
-    //         }
-    //     });
-    // });
-
-    $("#upload-1").hide();
-    // $("#upload-2").hide();
 
     $(function () {
         var croppie = null;
@@ -257,8 +194,8 @@ jQuery(document).ready(function ($) {
 
         // add from location image
         $("#location_image").on("change", function (event) {
-            $("#uploadModal").modal();
-            $("#upload-1").show();
+            $("#upload_image_modal").modal();
+            $("#upload_image").removeClass('d-none');
             var requestType = $(this).data('type');
             // Initailize croppie instance and assign it to global variable
             croppie = new Croppie(el, {
@@ -276,18 +213,18 @@ jQuery(document).ready(function ($) {
             });
             $.getImage(event.target, croppie);
 
-            $("#upload-1").on("click", function () {
+            $("#upload_image").on("click", function () {
                 croppie.result('base64', {
                     type: "canvas",
                     size: "original",
                     format: "png",
                     quality: 1
                 }).then(function (base64) {
-                    $("#uploadModal").modal("hide");
+                    $("#upload_image_modal").modal("hide");
                     $('label[for="location_image"]').hide()
-                    $('#removeFromImage').removeClass('d-none');
-                    $('#fromImagePreviewDiv').removeClass('d-none');
-                    $('#fromImagePreview').attr('src', base64);
+                    $('#remove_image').removeClass('d-none');
+                    $('#location_image_preview_div').removeClass('d-none');
+                    $('#location_image_preview').attr('src', base64);
 
                     var url = `/image-upload`;
                     var formData = new FormData();
@@ -301,103 +238,41 @@ jQuery(document).ready(function ($) {
                         processData: false,
                         contentType: false,
                         dataType: 'json',
-                    }).done(response => {
-                        if (response.success != true) {
-                            $('#location_image_value').val('');
-                            showAlertMessage('danger', 'Oops! something went wrong');
-                        } else {
+                        success: function (response) {
                             $('#location_image_value').val(response.image_url);
+                        },
+                        error: function (xhr) {
+                            const jsonResponse = JSON.parse(xhr.responseText);
+                            showAlertMessage('danger', jsonResponse['message']);
+                            $('#location_image_value').val('');
                         }
-                    }).fail(e => {
-                        $('#from_image_value').val('');
-                        showAlertMessage('danger', 'Unsupported Image Size or Format');
                     });
                 });
             });
         });
-
-        // // add to location image
-        // $("#to_image").on("change", function (event) {
-        //     $("#uploadModal").modal();
-        //     $("#upload-2").show();
-        //     var requestType = $(this).data('type');
-        //     // Initailize croppie instance and assign it to global variable
-        //     croppie = new Croppie(el, {
-        //         viewport: {
-        //             width: 300,
-        //             height: 300,
-        //             type: 'square',
-        //         },
-        //         boundary: {
-        //             width: 350,
-        //             height: 350
-        //         },
-        //         showZoomer: false,
-        //         enableOrientation: true
-        //     });
-        //     $.getImage(event.target, croppie);
-
-        //     $("#upload-2").on("click", function () {
-        //         croppie.result('base64', {
-        //             type: "canvas",
-        //             size: "original",
-        //             format: "png",
-        //             quality: 1
-        //         }).then(function (base64) {
-        //             $("#uploadModal").modal("hide");
-        //             $('label[for="to_image"]').hide()
-        //             $('#removeToImage').removeClass('d-none');
-        //             $('#toImagePreviewDiv').removeClass('d-none');
-        //             $('#toImagePreview').attr('src', base64);
-
-        //             var url = `/image-upload`;
-        //             var formData = new FormData();
-        //             formData.append("image", $.base64ImageToBlob(base64));
-        //             formData.append("type", requestType);
-
-        //             $.ajax({
-        //                 type: 'POST',
-        //                 url: url,
-        //                 data: formData,
-        //                 processData: false,
-        //                 contentType: false,
-        //                 dataType: 'json',
-        //             }).done(response => {
-        //                 if (response.success != true) {
-        //                     $('#to_image_value').val('');
-        //                     showAlertMessage('danger', 'Oops! something went wrong');
-        //                 } else {
-        //                     $('#to_image_value').val(response.image_url);
-        //                 }
-        //             }).fail(e => {
-        //                 $('#to_image_value').val(base64);
-        //                 showAlertMessage('danger', 'Unsupported Image Size or Format');
-        //             });
-        //         });
-        //     });
-        // });
 
         // To Rotate Image Left or Right
         $(".rotate").on("click", function () {
             croppie.rotate(parseInt($(this).data('deg')));
         });
 
-        $('#uploadModal').on('hidden.bs.modal', function (e) {
+        $('#upload_image_modal').on('hidden.bs.modal', function (e) {
             // This function will call immediately after model close
             // To ensure that old croppie instance is destroyed on every model close
             setTimeout(function () {
                 croppie.destroy();
             }, 100);
-            $("#upload-1").hide();
-            $("#upload-2").hide();
+            $("#upload_image").addClass('d-none');
+            $("#upload_avatar").addClass('d-none');
+            $("#upload_header").addClass('d-none');
         })
     });
 
-    $('#removeFromImage').click(function () {
+    $('#remove_image').click(function () {
         $('label[for="location_image"]').show()
-        $('#removeFromImage').addClass('d-none');
-        $('#fromImagePreviewDiv').addClass('d-none');
-        $('#fromImagePreview').attr('src', 'http://placehold.it/100');
+        $('#remove_image').addClass('d-none');
+        $('#location_image_preview_div').addClass('d-none');
+        $('#location_image_preview').attr('src', 'http://placehold.it/100');
 
         var url = `/image-delete`;
         var image_url = $('#from_image_value').val();
@@ -417,6 +292,7 @@ jQuery(document).ready(function ($) {
             if (response.success != true) {
                 $('#location_image_value').val(data);
             } else {
+                $('#location_image_preview_div').addClass('d-none');
                 $('#location_image_value').val('');
             }
         }).fail(e => {

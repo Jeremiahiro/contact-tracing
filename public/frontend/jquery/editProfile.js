@@ -5,294 +5,6 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    $("#upload-1").hide();
-    $("#upload-2").hide();
-
-    $(function () {
-        var croppie = null;
-        var el = document.getElementById('resizer');
-
-        $.base64ImageToBlob = function (str) {
-            // extract content type and base64 payload from original string
-            var pos = str.indexOf(';base64,');
-            var type = str.substring(5, pos);
-            var b64 = str.substr(pos + 8);
-
-            // decode base64
-            var imageContent = atob(b64);
-
-            // create an ArrayBuffer and a view (as unsigned 8-bit)
-            var buffer = new ArrayBuffer(imageContent.length);
-            var view = new Uint8Array(buffer);
-
-            // fill the view, using the decoded base64
-            for (var n = 0; n < imageContent.length; n++) {
-                view[n] = imageContent.charCodeAt(n);
-            }
-
-            // convert ArrayBuffer to Blob
-            var blob = new Blob([buffer], {
-                type: type
-            });
-
-            return blob;
-        }
-
-        $.getImage = function (input, croppie) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    croppie.bind({
-                        url: e.target.result,
-                    });
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // update profile picture
-        $("#changeAvatar").on("change", function (event) {
-            $("#uploadModal").modal();
-            $("#upload-1").show();
-            var requestType = $(this).data('type');
-            // Initailize croppie instance and assign it to global variable
-            croppie = new Croppie(el, {
-                viewport: {
-                    width: 250,
-                    height: 250,
-                    type: 'circle',
-                },
-                boundary: {
-                    width: 350,
-                    height: 350
-                },
-                enableOrientation: true
-            });
-            $.getImage(event.target, croppie);
-
-            var oldAvatar = $('#profile-pic').css('background-image');
-
-            $("#upload-1").on("click", function () {
-                croppie.result('base64', {
-                    type: "canvas",
-                    size: "original",
-                    format: "png",
-                    quality: 1
-                }).then(function (base64) {
-                    $("#uploadModal").modal("hide");
-                    $('.profile-pic-cam').hide();
-                    $('#profile-pic').css('background-image', 'url(/frontend/loader.gif)');
-
-                    var url = `/image-upload`;
-                    var formData = new FormData();
-                    formData.append("image", $.base64ImageToBlob(base64));
-                    formData.append("type", requestType);
-
-                    $.ajax({
-                        type: 'POST',
-                        url: url,
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                    }).done(response => {
-                        if (response.success != true) {
-                            $('#profile-pic').css('background-image', oldAvatar);
-                            showAlertMessage('danger', 'Oops! something went wrong');
-                        } else {
-                            $('#profile-pic').css('background-image', 'url(' + base64 + ')');
-                            $('.profile-pic-cam').show();
-                            // showAlertMessage('success', 'Successful');
-                        }
-                    }).fail(e => {
-                        $('#profile-pic').css('background-image', oldAvatar);
-                        showAlertMessage('danger', 'Unsupported Image Size or Format');
-                    });
-                });
-            });
-        });
-
-        // update profile header
-        $("#changeHeader").on("change", function (event) {
-            $("#uploadModal").modal();
-            $("#upload-2").show();
-            var requestType = $(this).data('type');
-            // Initailize croppie instance and assign it to global variable
-            croppie = new Croppie(el, {
-                viewport: {
-                    width: 300,
-                    height: 300,
-                    type: 'square',
-                },
-                boundary: {
-                    width: 350,
-                    height: 350
-                },
-                enableOrientation: true
-            });
-            $.getImage(event.target, croppie);
-
-            var oldHeader = $('#header-image').css('background-image');
-
-            $("#upload-2").on("click", function () {
-                croppie.result('base64', {
-                    type: "canvas",
-                    size: "original",
-                    format: "png",
-                    quality: 1
-                }).then(function (base64) {
-                    $("#uploadModal").modal("hide");
-                    $('#header-image').css('background-image', 'url(/frontend/loader.gif)');
-
-                    var url = `/image-upload`;
-                    var formData = new FormData();
-                    formData.append("image", $.base64ImageToBlob(base64));
-                    formData.append("type", requestType);
-
-                    $.ajax({
-                        type: 'POST',
-                        url: url,
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        dataType: 'json',
-                    }).done(response => {
-                        if (response.success != true) {
-                            $('#header-image').css('background-image', oldHeader);
-                            showAlertMessage('danger', 'Oops! something went wrong');
-                        } else {
-                            $('#fromImagePreview').attr('src', base64);
-                            $('#header-image').css('background-image', 'url(' + base64 + ')');
-                            console.log(response);
-                            // showAlertMessage('success', 'Successful');
-                        }
-                    }).fail(e => {
-                        $('#header-image').css('background-image', oldHeader);
-                        showAlertMessage('danger', 'Unsupported Image Size or Format');
-                        console.log(e);
-                        // location.reload(true);
-                    });
-                });
-            });
-        });
-
-        // To Rotate Image Left or Right
-        $(".rotate").on("click", function () {
-            croppie.rotate(parseInt($(this).data('deg')));
-        });
-
-        $('#uploadModal').on('hidden.bs.modal', function (e) {
-            // This function will call immediately after model close
-            // To ensure that old croppie instance is destroyed on every model close
-            setTimeout(function () {
-                croppie.destroy();
-            }, 100);
-            $("#upload-1").hide();
-            $("#upload-2").hide();
-        })
-    });
-
-    // Toggle activity visibility
-    $('#toggle_location').change(function () {
-        $('#toggle_location').attr("disabled", true);
-        var status = $(this).is(':checked') ? 1 : 0;
-
-        $('#toggle_location_spinner').removeClass('d-none');
-        $.ajax({
-            type: 'GET',
-            url: `/location/visibility`,
-            data: {
-                'status': status,
-            },
-            dataType: "json",
-            success: function (response) {
-                $(this).prop("checked", !this.checked);
-                $('#toggle_location_spinner').addClass('d-none');
-                showAlertMessage('success', response.message);
-                $('#toggle_location').attr("disabled", false);
-            },
-            error: function (xhr) {
-                const jsonResponse = JSON.parse(xhr.responseText);
-                showAlertMessage('danger', jsonResponse['message']);
-                $('#toggle_location').attr("disabled", false);
-                $(this).prop("checked", !this.checked);
-                $('#toggle_location_spinner').addClass('d-none');
-            }
-        });
-    });
-
-    // Toggle background activity
-    $('#background_activity').change(function () {
-        $('#background_activity').attr("disabled", true);
-        var status = $(this).is(':checked') ? 1 : 0;
-
-        $('#background_activity_spinner').removeClass('d-none');
-        $.ajax({
-            type: 'GET',
-            url: `/background/activity`,
-            data: {
-                'status': status,
-            },
-            dataType: "json",
-            success: function (response) {
-                $(this).prop("checked", !this.checked);
-                $('#background_activity_spinner').addClass('d-none');
-                showAlertMessage('success', response.message);
-                $('#background_activity').attr("disabled", false);
-            },
-            error: function (xhr) {
-                const jsonResponse = JSON.parse(xhr.responseText);
-                showAlertMessage('danger', jsonResponse['message']);
-                $('#background_activity').attr("disabled", false);
-                $(this).prop("checked", !this.checked);
-                $('#background_activity_spinner').addClass('d-none');
-            }
-        });
-    });
-
-    // Toggle notification
-    $('#toggle_notification').change(function () {
-        $('#toggle_notification').attr("disabled", true);
-        var status = $(this).is(':checked') ? 1 : 0;
-
-        $('#toggle_notification_spinner').removeClass('d-none');
-        $.ajax({
-            type: 'GET',
-            url: `/toggle/notification`,
-            data: {
-                'status': status,
-            },
-            dataType: "json",
-            success: function (response) {
-                $(this).prop("checked", !this.checked);
-                showAlertMessage('success', response.message);
-                $('#toggle_notification_spinner').addClass('d-none');
-                $('#toggle_notification').attr("disabled", false);
-            },
-            error: function (xhr) {
-                $(this).prop("checked", !this.checked);
-                const jsonResponse = JSON.parse(xhr.responseText);
-                showAlertMessage('danger', jsonResponse['message']);
-                $('#toggle_notification').attr("disabled", false);
-                $('#toggle_notification_spinner').addClass('d-none');
-            }
-        });
-    });
-
-
-    // Enable deactivate account button
-    $("#confirm_deactivate").click(function () {
-        var checked_status = this.checked;
-        if (checked_status == true) {
-            $("#deactivate_account_btn").removeAttr("disabled");
-        } else {
-            $("#deactivate_account_btn").attr("disabled", "disabled");
-        }
-    });
-
-    if (location.hash != null && location.hash != "") {
-        $(location.hash + '.collapse').collapse('show');
-    }
-
     $(function () {
 
         // Initialize regex validation for password
@@ -397,10 +109,12 @@ jQuery(document).ready(function ($) {
             // Specify validation error messages
             messages: {
                 password: {
+                    required: "Password is required",
                     regex: 'Password must contain at least 8 characters, including UPPER/lowercase and numbers',
                     maxlength: "Incorrect password format",
                 },
                 password_confirmation: {
+                    required: "Password Confirmation is required",
                     equalTo: "Password Confirmation does not match",
                 }
             },
@@ -434,6 +148,281 @@ jQuery(document).ready(function ($) {
             }
         });
 
+
+        var croppie = null;
+        var el = document.getElementById('resizer');
+
+        $.base64ImageToBlob = function (str) {
+            // extract content type and base64 payload from original string
+            var pos = str.indexOf(';base64,');
+            var type = str.substring(5, pos);
+            var b64 = str.substr(pos + 8);
+
+            // decode base64
+            var imageContent = atob(b64);
+
+            // create an ArrayBuffer and a view (as unsigned 8-bit)
+            var buffer = new ArrayBuffer(imageContent.length);
+            var view = new Uint8Array(buffer);
+
+            // fill the view, using the decoded base64
+            for (var n = 0; n < imageContent.length; n++) {
+                view[n] = imageContent.charCodeAt(n);
+            }
+
+            // convert ArrayBuffer to Blob
+            var blob = new Blob([buffer], {
+                type: type
+            });
+
+            return blob;
+        }
+
+        $.getImage = function (input, croppie) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    croppie.bind({
+                        url: e.target.result,
+                    });
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // update profile picture
+        $("#changeAvatar").on("change", function (event) {
+            $("#upload_image_modal").modal();
+            $("#upload_avatar").removeClass('d-none');
+            var requestType = $(this).data('type');
+            // Initailize croppie instance and assign it to global variable
+            croppie = new Croppie(el, {
+                viewport: {
+                    width: 300,
+                    height: 300,
+                    type: 'circle',
+                },
+                boundary: {
+                    width: 350,
+                    height: 350
+                },
+                showZoomer: false,
+                enableOrientation: true
+            });
+            $.getImage(event.target, croppie);
+
+            var oldAvatar = $('#profile-pic').css('background-image');
+
+            $("#upload_avatar").on("click", function () {
+                croppie.result('base64', {
+                    type: "canvas",
+                    size: "original",
+                    format: "png",
+                    quality: 1
+                }).then(function (base64) {
+                    $("#upload_image_modal").modal("hide");
+                    $('.profile-pic-cam').hide();
+                    $('#profile-pic').css('background-image', 'url(/frontend/loader.gif)');
+
+                    var url = `/image-upload`;
+                    var formData = new FormData();
+                    formData.append("image", $.base64ImageToBlob(base64));
+                    formData.append("type", requestType);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            $('#profile-pic').css('background-image', 'url(' + base64 + ')');
+                            $('.profile-pic-cam').show();
+                            showAlertMessage('success', response.message);
+                        },
+                        error: function (xhr) {
+                            const jsonResponse = JSON.parse(xhr.responseText);
+                            showAlertMessage('danger', jsonResponse['message']);
+                            $('#profile-pic').css('background-image', oldAvatar);
+                            $('.profile-pic-cam').show();
+                        }
+                    });
+                });
+            });
+        });
+
+        // update profile header
+        $("#changeHeader").on("change", function (event) {
+            $("#upload_image_modal").modal();
+            $("#upload_header").removeClass('d-none');
+            var requestType = $(this).data('type');
+            // Initailize croppie instance and assign it to global variable
+            croppie = new Croppie(el, {
+                viewport: {
+                    width: 300,
+                    height: 300,
+                    type: 'square',
+                },
+                boundary: {
+                    width: 350,
+                    height: 350
+                },
+                showZoomer: false,
+                enableOrientation: true
+            });
+            $.getImage(event.target, croppie);
+
+            var oldHeader = $('#header-image').css('background-image');
+
+            $("#upload_header").on("click", function () {
+                croppie.result('base64', {
+                    type: "canvas",
+                    size: "original",
+                    format: "png",
+                    quality: 1
+                }).then(function (base64) {
+                    $("#upload_image_modal").modal("hide");
+                    $('#header-image').css('background-image', 'url(/frontend/loader.gif)');
+
+                    var url = `/image-upload`;
+                    var formData = new FormData();
+                    formData.append("image", $.base64ImageToBlob(base64));
+                    formData.append("type", requestType);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        dataType: 'json',
+                        success: function (response) {
+                            $('#header-image').css('background-image', 'url(' + base64 + ')');
+                            showAlertMessage('success', response.message);
+                        },
+                        error: function (xhr) {
+                            const jsonResponse = JSON.parse(xhr.responseText);
+                            showAlertMessage('danger', jsonResponse['message']);
+                            $('#header-image').css('background-image', oldHeader);
+                            console.log(e);
+                        }
+                    });
+                });
+            });
+        });
+
+        // To Rotate Image Left or Right
+        $(".rotate").on("click", function () {
+            croppie.rotate(parseInt($(this).data('deg')));
+        });
+
+        $('#upload_image_modal').on('hidden.bs.modal', function (e) {
+            // This function will call immediately after model close
+            // To ensure that old croppie instance is destroyed on every model close
+            setTimeout(function () {
+                croppie.destroy();
+            }, 100);
+            $("#upload_image").addClass('d-none');
+            $("#upload_avatar").addClass('d-none');
+            $("#upload_header").addClass('d-none');
+        })
+    });
+
+    // Toggle activity visibility
+    $('#toggle_location').change(function () {
+        $('#toggle_location').attr("disabled", true);
+        var status = $(this).is(':checked') ? 1 : 0;
+
+        $('#toggle_location_spinner').removeClass('d-none');
+        $.ajax({
+            type: 'GET',
+            url: `/location/visibility`,
+            data: {
+                'status': status,
+            },
+            dataType: "json",
+            success: function (response) {
+                $(this).prop("checked", !this.checked);
+                $('#toggle_location_spinner').addClass('d-none');
+                showAlertMessage('success', response.message);
+                $('#toggle_location').attr("disabled", false);
+            },
+            error: function (xhr) {
+                const jsonResponse = JSON.parse(xhr.responseText);
+                showAlertMessage('danger', jsonResponse['message']);
+                $('#toggle_location').attr("disabled", false);
+                $(this).prop("checked", !this.checked);
+                $('#toggle_location_spinner').addClass('d-none');
+            }
+        });
+    });
+
+    // Toggle background activity
+    $('#background_activity').change(function () {
+        $('#background_activity').attr("disabled", true);
+        var status = $(this).is(':checked') ? 1 : 0;
+
+        $('#background_activity_spinner').removeClass('d-none');
+        $.ajax({
+            type: 'GET',
+            url: `/background/activity`,
+            data: {
+                'status': status,
+            },
+            dataType: "json",
+            success: function (response) {
+                $(this).prop("checked", !this.checked);
+                $('#background_activity_spinner').addClass('d-none');
+                showAlertMessage('success', response.message);
+                $('#background_activity').attr("disabled", false);
+            },
+            error: function (xhr) {
+                const jsonResponse = JSON.parse(xhr.responseText);
+                showAlertMessage('danger', jsonResponse['message']);
+                $('#background_activity').attr("disabled", false);
+                $(this).prop("checked", !this.checked);
+                $('#background_activity_spinner').addClass('d-none');
+            }
+        });
+    });
+
+    // Toggle notification
+    $('#toggle_notification').change(function () {
+        $('#toggle_notification').attr("disabled", true);
+        var status = $(this).is(':checked') ? 1 : 0;
+
+        $('#toggle_notification_spinner').removeClass('d-none');
+        $.ajax({
+            type: 'GET',
+            url: `/toggle/notification`,
+            data: {
+                'status': status,
+            },
+            dataType: "json",
+            success: function (response) {
+                $(this).prop("checked", !this.checked);
+                showAlertMessage('success', response.message);
+                $('#toggle_notification_spinner').addClass('d-none');
+                $('#toggle_notification').attr("disabled", false);
+            },
+            error: function (xhr) {
+                $(this).prop("checked", !this.checked);
+                const jsonResponse = JSON.parse(xhr.responseText);
+                showAlertMessage('danger', jsonResponse['message']);
+                $('#toggle_notification').attr("disabled", false);
+                $('#toggle_notification_spinner').addClass('d-none');
+            }
+        });
+    });
+
+    // Enable deactivate account button
+    $("#confirm_deactivate").click(function () {
+        var checked_status = this.checked;
+        if (checked_status == true) {
+            $("#deactivate_account_btn").removeAttr("disabled");
+        } else {
+            $("#deactivate_account_btn").attr("disabled", "disabled");
+        }
     });
 
 });

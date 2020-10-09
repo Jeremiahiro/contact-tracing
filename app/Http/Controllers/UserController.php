@@ -20,13 +20,12 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $activities = Activity::where('user_id', $user->id)->latest()->simplePaginate(10);
-        $archives = Activity::where('user_id', $user->id)->where('deleted_at', '!=', null)->latest('deleted_at')->withTrashed()->simplePaginate(50);
 
         if ($request->ajax()) {
             $activities = view('profile.activity', compact('activities'))->render();
             return response()->json(['html'=>$activities]);
         }
-        return view('profile.index', compact('user', 'activities', 'archives'));
+        return view('profile.index', compact('user', 'activities'));
     }
 
     /**
@@ -62,7 +61,7 @@ class UserController extends Controller
 
         $activities = Activity::where('user_id', $user->id)->latest()->simplePaginate(10);
         $archives = Activity::where('user_id', $user->id)->where('deleted_at', '!=', null)->latest('deleted_at')->withTrashed()->simplePaginate(50);
-
+        
         if ($request->ajax()) {
             $activities = view('profile.activity', compact('activities'))->render();
             return response()->json(['html'=>$activities]);
@@ -79,8 +78,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('uuid', $id)->first();
+        $archives = Activity::where('user_id', $user->id)->where('deleted_at', '!=', null)->latest('deleted_at')->withTrashed()->simplePaginate(100);
 
-        return view('profile.edit', compact('user'));
+        return view('profile.edit', compact('user', 'archives'));
     }
 
     /**
