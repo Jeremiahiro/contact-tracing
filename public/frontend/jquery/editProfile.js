@@ -191,12 +191,12 @@ jQuery(document).ready(function ($) {
         })
     });
 
-    $('#show_location').change(function () {
-        $(this).attr("disabled", true);
-
+    // Toggle activity visibility
+    $('#toggle_location').change(function () {
+        $('#toggle_location').attr("disabled", true);
         var status = $(this).is(':checked') ? 1 : 0;
 
-        $('#location-spinner').removeClass('d-none');
+        $('#toggle_location_spinner').removeClass('d-none');
         $.ajax({
             type: 'GET',
             url: `/location/visibility`,
@@ -204,72 +204,237 @@ jQuery(document).ready(function ($) {
                 'status': status,
             },
             dataType: "json",
-        }).done(response => {
-            if (response.success != true) {
+            success: function (response) {
                 $(this).prop("checked", !this.checked);
-                $('#location-spinner').addClass('d-none');
-                showAlertMessage('danger', 'Oops! something went wrong');
-                location.reload();
-            } else {
-                showAlertMessage('success', 'Successful');
-                $(this).removeAttr("disabled")
-                $('#location-spinner').addClass('d-none');
-                location.reload();
+                $('#toggle_location_spinner').addClass('d-none');
+                showAlertMessage('success', response.message);
+                $('#toggle_location').attr("disabled", false);
+            },
+            error: function (xhr) {
+                const jsonResponse = JSON.parse(xhr.responseText);
+                showAlertMessage('danger', jsonResponse['message']);
+                $('#toggle_location').attr("disabled", false);
+                $(this).prop("checked", !this.checked);
+                $('#toggle_location_spinner').addClass('d-none');
             }
-        }).fail(e => {
-            $(this).removeAttr("disabled")
-            $(this).prop("checked", !this.checked);
-            $('#location-spinner').addClass('d-none');
-            showAlertMessage('danger', 'file format or size not supported');
-            location.reload();
         });
     });
 
-    $('#account_status').change(function () {
-        $('#deactivateMdal').modal('show');
+    // Toggle background activity
+    $('#background_activity').change(function () {
+        $('#background_activity').attr("disabled", true);
+        var status = $(this).is(':checked') ? 1 : 0;
 
-        $('#deactivateMdal').on('hidden.bs.modal', function (e) {
-            $('#account_status').prop("checked", !this.checked);
-        })
-
-        $('#proceed').click(function () {
-            $('#deactivateModal').modal('hide');
-            $('#deactivate-spinner').removeClass('d-none');
-
-            var status = $('#account_status').is(':checked') ? 1 : 0;
-
-            $.ajax({
-                type: 'GET',
-                url: `/deactivate/account`,
-                data: {
-                    'status': status,
-                },
-                dataType: "json",
-            }).done(response => {
-                if (response.success != true) {
-                    $('#account_status').prop("checked", !this.checked);
-                    $('#deactivate-spinner').addClass('d-none');
-                    showAlertMessage('danger', 'Oops! something went wrong');
-                    location.reload();
-                } else {
-                    $('#account_status').prop("checked", !this.checked);
-                    // showAlertMessage('success', 'Successful');
-                    $(this).removeAttr("disabled")
-                    $('#deactivate-spinner').addClass('d-none');
-                    document.getElementById('logout-form').submit();
-                }
-            }).fail(e => {
-                $('#account_status').prop("checked", !this.checked);
-                $('#deactivate-spinner').addClass('d-none');
-                showAlertMessage('danger', 'Oops! something went wrong');
-                location.reload();
-            });
+        $('#background_activity_spinner').removeClass('d-none');
+        $.ajax({
+            type: 'GET',
+            url: `/background/activity`,
+            data: {
+                'status': status,
+            },
+            dataType: "json",
+            success: function (response) {
+                $(this).prop("checked", !this.checked);
+                $('#background_activity_spinner').addClass('d-none');
+                showAlertMessage('success', response.message);
+                $('#background_activity').attr("disabled", false);
+            },
+            error: function (xhr) {
+                const jsonResponse = JSON.parse(xhr.responseText);
+                showAlertMessage('danger', jsonResponse['message']);
+                $('#background_activity').attr("disabled", false);
+                $(this).prop("checked", !this.checked);
+                $('#background_activity_spinner').addClass('d-none');
+            }
         });
+    });
+
+    // Toggle notification
+    $('#toggle_notification').change(function () {
+        $('#toggle_notification').attr("disabled", true);
+        var status = $(this).is(':checked') ? 1 : 0;
+
+        $('#toggle_notification_spinner').removeClass('d-none');
+        $.ajax({
+            type: 'GET',
+            url: `/toggle/notification`,
+            data: {
+                'status': status,
+            },
+            dataType: "json",
+            success: function (response) {
+                $(this).prop("checked", !this.checked);
+                showAlertMessage('success', response.message);
+                $('#toggle_notification_spinner').addClass('d-none');
+                $('#toggle_notification').attr("disabled", false);
+            },
+            error: function (xhr) {
+                $(this).prop("checked", !this.checked);
+                const jsonResponse = JSON.parse(xhr.responseText);
+                showAlertMessage('danger', jsonResponse['message']);
+                $('#toggle_notification').attr("disabled", false);
+                $('#toggle_notification_spinner').addClass('d-none');
+            }
+        });
+    });
+
+
+    // Enable deactivate account button
+    $("#confirm_deactivate").click(function () {
+        var checked_status = this.checked;
+        if (checked_status == true) {
+            $("#deactivate_account_btn").removeAttr("disabled");
+        } else {
+            $("#deactivate_account_btn").attr("disabled", "disabled");
+        }
     });
 
     if (location.hash != null && location.hash != "") {
         $(location.hash + '.collapse').collapse('show');
     }
+
+    $(function () {
+
+        // Initialize regex validation for password
+        $.validator.addMethod(
+            "regex",
+            function (value, element, regexp) {
+                var re = new RegExp(regexp);
+                return this.optional(element) || re.test(value);
+            },
+            "Please check your input."
+        );
+
+        // Initialize form validation on the profile update form.
+        $("#update_user_info").validate({
+            // Specify validation rules
+            rules: {
+                name: {
+                    required: true
+                },
+                username: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 15,
+                },
+                phone: {
+                    required: true,
+                    minlength: 10
+                },
+                gender: {
+                    required: true
+                },
+                age_range: {
+                    required: true
+                },
+            },
+            // Specify validation error messages
+            messages: {
+                name: {
+                    required: "Enter your Full Name"
+                },
+                username: {
+                    required: "Enter your Username",
+                    minlength: "Username must be at least 3 characters",
+                    maxlength: "Username must be at most 15 characters",
+                },
+                phone: {
+                    required: "Enter your Phone Number",
+                    minlength: "Please enter Valid Phone Number",
+                },
+                gender: {
+                    required: "Select your Gender",
+                },
+                age_range: {
+                    required: "Select your Age Range",
+                },
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+                $('#update_info_submit').html('Updateing...');
+                $('#update_info_spinner').removeClass('d-none');
+                $.ajax({
+                    url: form.action,
+                    type: form.method,
+                    data: $(form).serialize(),
+                    success: function (response) {
+                        if (response.success != true) {
+                            $('#update_info_submit').html('Update');
+                            $('#update_info_spinner').addClass('d-none');
+                            showAlertMessage('danger', response.message);
+                        } else {
+                            showAlertMessage('success', response.message);
+                            $('#update_info_submit').html('Update');
+                            $('#update_info_spinner').addClass('d-none');
+                        }
+                    },
+                    error: function (xhr) {
+                        const jsonResponse = JSON.parse(xhr.responseText);
+                        showAlertMessage('danger', jsonResponse['message']);
+                        $('#update_info_submit').html('Update');
+                        $('#update_info_spinner').addClass('d-none');
+                    }
+                });
+            }
+        });
+
+        // Initialize form validation on the password update form.
+        $("#update_user_password").validate({
+            // Specify validation rules
+            rules: {
+                password: {
+                    required: true,
+                    maxlength: 16,
+                    regex: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+                },
+                password_confirmation: {
+                    required: true,
+                    equalTo: "#password",
+
+                },
+            },
+            // Specify validation error messages
+            messages: {
+                password: {
+                    regex: 'Password must contain at least 8 characters, including UPPER/lowercase and numbers',
+                    maxlength: "Incorrect password format",
+                },
+                password_confirmation: {
+                    equalTo: "Password Confirmation does not match",
+                }
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+                $('#update_password_submit').html('Updateing...');
+                $('#update_password_spinner').removeClass('d-none');
+                $.ajax({
+                    url: form.action,
+                    type: form.method,
+                    data: $(form).serialize(),
+                    success: function (response) {
+                        if (response.success != true) {
+                            $('#update_password_submit').html('Update');
+                            $('#update_password_spinner').addClass('d-none');
+                            showAlertMessage('danger', response.message);
+                        } else {
+                            showAlertMessage('success', response.message);
+                            $('#update_password_submit').html('Update');
+                            $('#update_password_spinner').addClass('d-none');
+                        }
+                    },
+                    error: function (xhr) {
+                        const jsonResponse = JSON.parse(xhr.responseText);
+                        showAlertMessage('danger', jsonResponse['message']);
+                        $('#update_password_submit').html('Update');
+                        $('#update_password_spinner').addClass('d-none');
+                    }
+                });
+            }
+        });
+
+    });
 
 });
 
@@ -288,17 +453,3 @@ function showAlertMessage(type, message) {
     $("#upload-alert").html(alertMessage);
     removeAlertMessage();
 }
-
-
-// function fetchData() {
-//     //this makes the setTimeout a self run function it runs the first time always
-//     setTimeout(function () {
-//         $.ajax({
-//          
-//             data: "",
-//             success: function(data) {
-
-//             },
-//             complete: fetchData
-//         });
-//     }, 4000);

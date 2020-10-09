@@ -147,7 +147,6 @@ class LocationController extends Controller
             "message" => 'Successful'
         ];
         return response()->json($response, 201);
-   
     }
 
 }

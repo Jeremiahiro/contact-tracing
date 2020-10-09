@@ -110,6 +110,8 @@ class GeneralController extends Controller
 
             $data = User::where('id', '!=', Auth::user()->id)
                 ->where('role', '!=', 'super admin')
+                ->where('status', '!=', false)
+                ->where('active', '!=', false)
                 ->where('username', 'LIKE', $search.'%')
                 ->simplePaginate(10);
 
@@ -153,7 +155,8 @@ class GeneralController extends Controller
 
             $data = User::where('id', '!=', Auth::user()->id)
                 ->where('role', '!=', 'super admin')
-                // ->where('status', '!=', false)
+                ->where('status', '!=', false)
+                ->where('active', '!=', false)
                 ->where('username', 'LIKE', $search.'%')
                 ->simplePaginate(30);
 

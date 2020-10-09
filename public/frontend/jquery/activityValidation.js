@@ -11,14 +11,14 @@ jQuery(document).ready(function ($) {
                 // of an input field. Validation rules are defined
                 // on the right side
                 latitude_1: {
-                    number:true,
-                    min:1,
-                    required:true
+                    number: true,
+                    min: 1,
+                    required: true
                 },
                 latitude_2: {
-                    number:true,
-                    min:1,
-                    required:true,
+                    number: true,
+                    min: 1,
+                    required: true,
                     notEqual: "#latitude_1"
                 },
             },

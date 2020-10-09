@@ -130,6 +130,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, User $user) 
     {
+        $user->status = 1;
         return redirect()->intended($this->redirectPath());
      }
 }

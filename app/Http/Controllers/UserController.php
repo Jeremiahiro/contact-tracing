@@ -7,6 +7,7 @@ use App\Model\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\FollowNotification;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -91,29 +92,50 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $request->validate([
-            'name'      => ['required', 'string', 'max:255'],
-            'username'  => ['string', 'max:15'],
-            'phone'     => ['phone:AUTO,NG'],
-            'gender'    => ['required'],
-            'age_range'    => ['required'],
+        $validator = Validator::make($request->all(), [
+            'name'      => 'required|string|max:50',
+            'username'  => 'required|string|max:15|min:3',
+            'phone'     => 'required|phone:AUTO,NG',
+            'gender'    => 'required',
+            'age_range' => 'required',
         ]);
 
         $trim_username = ltrim($request->username, '@');
         $username = '@'. $trim_username;
 
+        if($validator->fails()){
+            $response = [
+                'success' => false,
+                'message' => 'Incorrect Form Values',
+            ];
+            return response()->json($response, 422);
+        }
+
         try {
+
             $user = Auth::user();
-            $user->name = $request->get('name');
+            $user->name = $request->name;
             $user->username = $username;
-            $user->phone = $request->get('phone');
-            $user->gender = $request->get('gender');
-            $user->age_range = $request->get('age_range');
+            $user->phone = $request->phone;
+            $user->gender = $request->gender;
+            $user->age_range = $request->age_range;
             $user->save();
-            return redirect()->back()->with('success', 'Successful');
+
+            $response = [
+                'success' => true,
+                'message' => 'Successful',
+            ];
+            return response()->json($response, 201);
+            // return redirect()->back()->with('success', 'Successful');
 
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'oops something went wrong');
+            $response = [
+                'success' => false,
+                'message' => 'OOPS! Something went wrong',
+            ];
+
+            return response()->json($response, 422);
+            // return redirect()->back()->with('error', 'oops something went wrong');
         }
 
     }

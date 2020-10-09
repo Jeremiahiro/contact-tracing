@@ -48,6 +48,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'status' => 'boolean',
         'show_location' => 'boolean',
+
+        // use active for admin disabling user
         'active' => 'boolean',
         'background_activity' => 'boolean',
         'first_time_login' => 'boolean',
