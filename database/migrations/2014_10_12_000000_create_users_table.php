@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('gender')->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->default('https://res.cloudinary.com/iro/image/upload/v1595613322/avatar.png');
-            $table->string('header')->default('https://res.cloudinary.com/iro/image/upload/v1594295895/samples/Rectangle_1547.png');
+            $table->string('header')->default('https://res.cloudinary.com/iro/image/upload/v1602495912/SOP_Pictures/xroeyxlu4pdxxfnixwve.png');
 
             $table->string('provider', 20)->nullable();
             $table->string('provider_id')->nullable();
