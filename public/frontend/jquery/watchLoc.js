@@ -3,7 +3,12 @@ jQuery(document).ready(function ($) {
     var trackedData = [];
     const expires = new Date();
     const expires_at = expires.setHours(expires.getHours() + 48); // 48 hours from now
-    const storedLocation = JSON.parse(localStorage.getItem('trackedLocations')) || []; // get data from local storage
+
+    if (localStorage.hasOwnProperty('trackedLocations')) {
+        const storedLocation = JSON.parse(localStorage.getItem('trackedLocations')); // get data from local storage
+    } else {
+        const storedLocation = []; // get data from local storage
+    }
 
     var address; // street_address
     var street; // street
@@ -147,7 +152,6 @@ jQuery(document).ready(function ($) {
             if (status === "OK") {
                 address = result[0].formatted_address;
 
-                console.log(result);
                 if (lastLoc.address != address) {
                     for (const component of result[0].address_components) {
                         const addressType = component.types[0]
