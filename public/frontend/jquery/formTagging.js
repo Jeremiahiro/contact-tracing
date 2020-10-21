@@ -42,7 +42,6 @@ jQuery(document).ready(function ($) {
         });
     });
 
-
     $(".remove").hide()
 
     var counter = $(".form-dup-counter").text();
@@ -85,67 +84,100 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    /**
+     * check if local storage has data
+     * get five latest data and display
+     */
+    if (localStorage.hasOwnProperty('trackedLocations')) {
+
+        const loggedLocations = JSON.parse(localStorage.getItem('trackedLocations')) || []; // get data from local storage
+
+        if (loggedLocations.length >= 5) {
+            var locs = loggedLocations.slice(Math.max(loggedLocations.length - 5, 0))
+        } else {
+            var locs = loggedLocations;
+        }
+        for (var i = 0; i < locs.length; i++) {
+
+            var $locationData = '';
+            $locationData += '<input class="existingLoc" type="radio" name="loc_data" id="use_logged_address-' + i + 1 + '"';
+            $locationData += 'value=" "';
+            $locationData += 'data-id="' + i + 1 + '"';
+            $locationData += 'data-address="' + locs[i].address + '"';
+            $locationData += 'data-latitude="' + locs[i].location.lat + '"';
+            $locationData += 'data-longitude="' + locs[i].location.lng + '"';
+            $locationData += 'data-street="' + locs[i].street + '"';
+            $locationData += 'data-locality="' + locs[i].city + '"';
+            $locationData += 'data-administrative_area_level_1="' + locs[i].state + '"';
+            $locationData += 'data-country="' + locs[i].country + '"';
+            $locationData += 'data-created_at="' + moment(locs[i].created_at).format("DD-MM-YYYY HH:mm") + '"';
+            $locationData += '>';
+            $locationData += '<label class="light f-12" for="use_logged_address-' + i + 1 + '" >' + locs[i].address + '</label>';
+
+            $('#logs_div').removeClass('d-none');
+            $('#logs').append($locationData);
+
+        }
+    }
+
     // show additional input to select location and add image
-    $("#address_1").focusin(function () {
+    $("#address").focusin(function () {
         $("#collapseFromInfo").collapse('show');
-        $("#collapseToInfo").collapse('hide');
-        $('#sideIcon-2').removeClass('d-none')
-        $('#sideIcon-1').addClass('d-none')
     });
 
     // dateTime field
     $('.input-daterange').click(function () {
         $("#collapseFromInfo").collapse('hide');
-        $("#collapseToInfo").collapse('hide');
-        $('#sideIcon-2').addClass('d-none')
-        $('#sideIcon-1').removeClass('d-none')
     });
 
     $('.activity_tagging').click(function () {
         $("#collapseFromInfo").collapse('hide');
-        $("#collapseToInfo").collapse('hide');
     });
 
     // additional button to hide div
-    $('.closeFromInfo').click(function () {
+    $('#closeFromInfo').click(function () {
         $("#collapseFromInfo").collapse('hide');
     });
 
-    var address = $('#address_1');
-    var location = $('#location_1');
-    var latitude = $('#latitude_1');
-    var longitude = $('#longitude_1');
+    var address = $('#address');
+    var latitude = $('#latitude');
+    var longitude = $('#longitude');
+    var street = $('#street');
+    var locality = $('#locality');
+    var administrative_area_level_1 = $('#administrative_area_level_1');
+    var country = $('#country');
+    var created_at = $('#startDate');
 
     $('#clearFrom').click(function () {
         address.val('');
-        location.val('');
         latitude.val('');
         longitude.val('');
-        $('input:radio[name="from"]').prop('checked', false);
-        $('input:radio[name="from"]').attr('disabled', false);
-        $('input:radio[name="to"]').attr('disabled', false);
+        street.val('');
+        locality.val('');
+        administrative_area_level_1.val('');
+        country.val('');
+        created_at.val('');
+        $('input:radio[name="loc_data"]').prop('checked', false);
+        $('input:radio[name="loc_data"]').attr('disabled', false);
         $('#clearFrom').addClass('d-none');
-        $('label[for="location_image"]').show();
     });
 
-    from = $('input:radio[name="from"]')
-    // to = $('input:radio[name="to"]')
+    loc_data = $('input[name="loc_data"]')
 
-    from.change(function () {
-        from.each(function (idx, el) {
+    loc_data.change(function () {
 
-            selectedValueID = $(el).data('id');
+        loc_data.each(function (idx, el) {
 
             if ($(el).is(':checked')) {
-                selectdTo = $('#use_address_for_to-' + selectedValueID).attr("disabled", true);
                 $('#clearFrom').removeClass('d-none');
                 address.val($(el).data('address'));
-                location.val($(el).data('location'));
                 latitude.val($(el).data('latitude'));
                 longitude.val($(el).data('longitude'));
-                $('label[for="location_image"]').hide()
-            } else {
-                selectdTo = $('#use_address_for_to-' + selectedValueID).attr("disabled", false);
+                street.val($(el).data('street'));
+                locality.val($(el).data('locality'));
+                country.val($(el).data('country'));
+                administrative_area_level_1.val($(el).data('administrative_area_level_1'));
+                created_at.val($(el).data('created_at'));
             }
         });
     });
@@ -301,6 +333,7 @@ jQuery(document).ready(function ($) {
 
     });
 
+    // console.log("loc", loggedLocations)
     // $('#removeToImage').click(function () {
     //     $('#toImagePreviewDiv').addClass('d-none');
     //     $('#toImagePreview').attr('src', 'http://placehold.it/100');

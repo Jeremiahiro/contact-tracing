@@ -10,8 +10,8 @@ Activities
 <script type="text/javascript" src="{{ asset('frontend/js/rescalendar.min.js') }}"></script>
 
 <script src="{{ asset('frontend/jquery/map-view.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer>
-</script>
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer> --}}
+{{-- </script> --}}
 @endsection
 
 @section('web-content')

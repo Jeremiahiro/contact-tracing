@@ -20,10 +20,6 @@ Edit Profile
 <section class="splash profile_cover" id="header-image" style="background-image: url({{ $user->header }})">
     @include('partials.mobile.header.header')
 
-    <div class="" id="upload-alert" style="z-index: 999999;">
-
-    </div>
-
     <div class="container text-center py-4">
         <div class="">
             <label for="changeAvatar">

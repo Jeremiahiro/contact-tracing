@@ -12,7 +12,11 @@ Add Activity
 <script src="{{ asset('frontend/jquery/formTagging.js') }}"></script>
 <script src="{{ asset('frontend/jquery/google-location-autocomplete.js') }}"></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize" type="text/javascript" async defer></script>
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}" type="text/javascript">
+</script> --}}
+
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initialize"
+type="text/javascript" async defer></script> --}}
 
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/amsify.suggestags.css') }}">
 <script type="text/javascript" src="{{ asset('frontend/jquery/jquery.amsify.suggestags.js') }}">
@@ -48,8 +52,8 @@ Add Activity
     <div class="container text-primary mb-5">
         <div class="py-5 activity">
             <p class="f-12 bold">Record Activity</p>
-            <form method="POST" action="{{ route('activity.store') }}" 
-                id="activityForm" name="activity" autocomplete="off">
+            <form method="POST" action="{{ route('activity.store') }}" id="activityForm" name="activity"
+                autocomplete="off">
                 @csrf
 
                 <div class="row">
@@ -58,7 +62,7 @@ Add Activity
                     </label>
                     <div class="form-group w-100">
                         <div class="col-md-6 mb-1" id="tourStep2">
-                            <input id="address_1" type="search"
+                            <input id="address" type="search"
                                 class="blue-input input input1 rounded-0 @error('address') is-invalid @enderror"
                                 name="address" value="{{ old('address') }}" required autocomplete="off"
                                 placeholder="Location">
@@ -74,28 +78,15 @@ Add Activity
                             <div class="f-24 border collapse additional-info-collapse" id="collapseFromInfo">
                                 <div class="p-2 m-0">
                                     <div class="accordion_body">
-                                        @if ($favorites->count())
-                                        <div class="d-flex justify-content-between align-items-center">
+
+                                        <div class="d-none" id="logs_div">
                                             <p class="m-0 p-0 f-14">Favourite Locations</p>
-                                            <span>
-                                                <i class="closeFromInfo float-right fa fa-times text-danger f-12"></i>
-                                            </span>
+
+                                            <div class="" id="logs">
+
+                                            </div>
                                         </div>
-                                        @foreach ($favorites as $location)
-                                        <input class="existingLoc" type="radio"
-                                            id="use_address_for_from-{{ $location->id }}" value="{{ $location->id }}"
-                                            aria-label="..." name="from" data-id="{{ $location->id }}"
-                                            data-address="{{ $location->address }}"
-                                            data-location="{{ $location->location }}"
-                                            data-latitude="{{ $location->latitude }}"
-                                            data-longitude="{{ $location->longitude }}"
-                                            data-image="{{ $location->image }}">
-                                        <label class="light f-16" for="use_address_for_from-{{ $location->id }}">
-                                            {{ $location->location }}
-                                        </label>
-                                        @endforeach
-                                        @else
-                                        @endif
+
                                         <div class="text-center">
                                             <label for="location_image" class="text-center">
                                                 <span>
@@ -117,7 +108,16 @@ Add Activity
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="f-14 text-left d-none" id="clearFrom">clear</div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div id="clearFrom" class="d-none">
+                                                    <i class="fa fa-ban text-gray f-16"></i>
+                                                </div>
+                                            </div>
+                                            <div id="closeFromInfo">
+                                                <i class="fa fa-times-circle text-gray f-16"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -144,18 +144,19 @@ Add Activity
                         @include('activity.partials.tags')
                     </div>
                 </div>
-                
-                <input type="hidden" class="" name="latitude" id="latitude_1" value="{{ old('latitude') }}">
-                <input type="hidden" class="" name="longitude" id="longitude_1" value="{{ old('longitude') }}">
-                <input type="hidden" class="" name="street" id="street"/>
-                <input type="hidden" class="" name="city" id="locality"/>
-                <input type="hidden" class="" name="state" id="administrative_area_level_1"/>
-                <input type="hidden" class="" name="country" id="country"/>
+
+                <input type="hidden" class="" name="latitude" id="latitude" value="{{ old('latitude') }}">
+                <input type="hidden" class="" name="longitude" id="longitude" value="{{ old('longitude') }}">
+                <input type="hidden" class="" name="street" id="street" />
+                <input type="hidden" class="" name="city" id="locality" />
+                <input type="hidden" class="" name="state" id="administrative_area_level_1" />
+                <input type="hidden" class="" name="country" id="country" />
 
                 <div class="">
                     <div class="form-group pull-right">
-                        <button type="submit" class="btn f-14 rounded blue-btn px-3 text-white">
-                            ADD
+                        <button type="submit" class="mb-5 btn btn-lg blue-btn text-white w-100">
+                            <span class="spinner-border spinner-border-sm d-none" id="save_activity_spinner" role="status" aria-hidden="true"></span>
+                            <span id="save_activity_submit">Save</span>
                         </button>
                     </div>
                 </div>

@@ -23,7 +23,8 @@ Update Activity
 
 @section('web-content')
 <script type="text/javascript">
-    window.location = "{{ route('map.view') }}"; 
+    window.location = "{{ route('map.view') }}";
+
 </script>
 @endsection
 
@@ -45,8 +46,8 @@ Update Activity
                 @endif
 
             </p>
-            <p class="f-12 bold">Add People you met</p>
-            <form method="POST" action="{{ route('activity.update', $activity->id) }}" id="activitForm" name="activity"
+            <p class="f-16 bold">Add More People you met</p>
+            <form method="POST" action="{{ route('activity.update', $activity->id) }}" id="activityForm" name="updateActivity"
                 autocomplete="off">
                 @csrf
                 @method("PATCH")
@@ -55,7 +56,7 @@ Update Activity
                     <div class="d-flex justify-content-between bold mb-3">
                         <div class="d-flex">
                             <img src="{{ asset('/frontend/img/svg/map-pin-markedwhite.svg') }}" alt="map-pin">
-                            <div class="ml-1">
+                            <div class="">
                                 <h3 class="m-0 p-0 f-16">{{ $activity->location->street }}</h3>
                                 <p class="m-0 p-0 f-12 regular">{{ $activity->location->address }}</p>
                             </div>
@@ -67,16 +68,18 @@ Update Activity
                 </div>
 
                 <div class="my-5">
-                    <div class="ml-3">
+                    <div class="">
                         <div class="mb-3">
                             @include('activity.partials.tags')
                         </div>
                     </div>
 
                     <div class="">
-                        <div class="form-group d-flex justify-content-end">
-                            <button type="submit" id="submit-form"
-                                class="btn f-14 rounded blue-btn px-3 text-white">ADD</button>
+                        <div class="form-group pull-right">
+                            <button type="submit" class="mb-5 btn btn-lg blue-btn text-white w-100">
+                                <span class="spinner-border spinner-border-sm d-none" id="save_activity_spinner" role="status" aria-hidden="true"></span>
+                                <span id="save_activity_submit">Save</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -90,4 +93,73 @@ Update Activity
 @endsection
 @endsection
 @section('script')
+<script>
+    jQuery(document).ready(function ($) {
+
+        $(function () {
+            // Initialize form validation on the registration form.
+            // It has the name attribute "registration"
+            $("form[name='updateActivity']").validate({
+                // Specify validation rules
+                rules: {
+                    // The key name on the left side is the name attribute
+                    // of an input field. Validation rules are defined
+                    // on the right side
+                   
+                },
+                // Specify validation error messages
+                messages: {
+                    //
+                },
+                // Make sure the form is submitted to the destination defined
+                // in the "action" attribute of the form when valid
+                submitHandler: function (form) {
+                    $('#save_activity_submit').html('Saving...');
+                    $('#save_activity_spinner').removeClass('d-none');
+                    $.ajax({
+                        url: form.action,
+                        type: form.method,
+                        data: $(form).serialize(),
+                        success: function (response) {
+                            if (response.success != true) {
+                                $('#save_activity_submit').html('Save');
+                                $('#save_activity_spinner').addClass('d-none');
+                                showAlertMessage('danger', response.message);
+                            } else {
+                                showAlertMessage('success', response.message);
+                                $('#save_activity_submit').html('Save');
+                                $('#save_activity_spinner').addClass('d-none');
+                                location.replace('/activity')
+                            }
+                        },
+                        error: function (xhr) {
+                            const jsonResponse = JSON.parse(xhr.responseText);
+                            showAlertMessage('danger', jsonResponse['message']);
+                            $('#save_activity_submit').html('Save');
+                            $('#save_activity_spinner').addClass('d-none');
+                        }
+                    });
+                }
+            });
+        });
+
+        function removeAlertMessage() {
+            setTimeout(function () {
+                $(".alert").remove();
+            }, 4000);
+        }
+
+        function showAlertMessage(type, message) {
+            const alertMessage = ' <div id="upload-alert" class="alert alert-' + type +
+                ' show" role="alert">\n' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+                '<span aria-hidden="true" class="">&times;</span>\n' + '</button>\n' +
+                '<strong class="regular">' +
+                message +
+                '</strong>\n' + '</div>';
+            $("#upload-alert").html(alertMessage);
+            removeAlertMessage();
+        }
+    });
+</script>
 @endsection

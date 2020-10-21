@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\ActivityTagNotification;
 use App\Notifications\ActivityTagSmsNotification;
+use Illuminate\Support\Facades\Validator;
 
 class ActivityController extends Controller
 {
@@ -83,7 +84,19 @@ class ActivityController extends Controller
     {
         // TODO delete the script with google key from activit.create
 
-        $this->validateActivity($request);
+        $validator = Validator::make($request->all(), [
+            'activity_tags.*.name' => 'sometimes',
+            'activity_tags.*.email' => 'sometimes',
+            'activity_tags.*.phone' => 'sometimes',
+        ]);
+
+        if($validator->fails()){
+            $response = [
+                'success' => false,
+                'message' => 'Incorrect Form Values',
+            ];
+            return response()->json($response, 422);
+        }
 
         $user = Auth::user();
         $start = Carbon::parse($request->start_date)->format('Y-m-d H:i');
@@ -171,13 +184,27 @@ class ActivityController extends Controller
                     }
                 }
             } else {
-                return redirect()->back()->with('error', 'Activity was recently created');
+                $response = [
+                    'success' => false,
+                    'message' => 'Error! Activity was recently created',
+                ];
+    
+                return response()->json($response, 422);
             }
             DB::commit();
-            return redirect()->route('activity.index')->with('success', 'Successful!');
+            $response = [
+                'success' => true,
+                'message' => 'Successful',
+            ];
+            return response()->json($response, 201);
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'OOPS something went wrong');
+            $response = [
+                'success' => false,
+                'message' => 'OOPS! Something went wrong',
+            ];
+
+            return response()->json($response, 422);
         } 
 
     }
@@ -272,17 +299,37 @@ class ActivityController extends Controller
                     }
 
                     DB::commit();
-                    return redirect()->route('activity.index')->with('success', 'Activity Updated Successfuly!');
+                    $response = [
+                        'success' => true,
+                        'message' => 'Updated Successfuly',
+                    ];
+                    return response()->json($response, 201);
     
                 } catch (\Throwable $th) {
                     DB::rollBack();
-                    return redirect()->back()->with('error', 'OOps something went wrong');
+                    $response = [
+                        'success' => false,
+                        'message' => 'OOps something went wrong',
+                    ];
+        
+                    return response()->json($response, 422);
                 } 
             } else {
-                return redirect()->back()->with('error', 'Entry fields cannot be null');
+                $response = [
+                    'success' => false,
+                    'message' => 'Error! Tag at least one person',
+                ];
+    
+                return response()->json($response, 422);
             }
         }
-        return redirect()->back()->with('info', 'Unauthorized Access!');
+
+        $response = [
+            'success' => false,
+            'message' => 'Unauthorized Access',
+        ];
+
+        return response()->json($response, 401);
 
     }
 
