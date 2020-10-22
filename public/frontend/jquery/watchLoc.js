@@ -5,9 +5,11 @@ jQuery(document).ready(function ($) {
     const expires_at = expires.setHours(expires.getHours() + 48); // 48 hours from now
 
     if (localStorage.hasOwnProperty('trackedLocations')) {
-        var storedLocation = JSON.parse(localStorage.getItem('trackedLocations')); // get data from local storage
+        var
+         storedLocation = JSON.parse(localStorage.getItem('trackedLocations')); // get data from local storage
     } else {
-        var storedLocation = []; // get data from local storage
+        var
+         storedLocation = []; // get data from local storage
     }
 
     var address; // street_address
