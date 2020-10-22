@@ -63,8 +63,8 @@ jQuery(document).ready(function ($) {
 
             // Output from Distance in Meters: distanceInMeters
             // Output from Distance in Kilometers: distanceInMeters * 0.001
-            if (distanceInMeters >= 100) {
-                saveLocationToLocalStorage(latLng, created_at, lastLoc);
+            if (distanceInMeters >= 0) {
+                saveLocationToLocalStorage(latLng, created_at);
                 // console.log('check 4', "saved Loc")
             }
 
@@ -145,9 +145,10 @@ jQuery(document).ready(function ($) {
      * @param country provided from geocoder.
      * 
      */
-    function saveLocationToLocalStorage(latLng, lastLoc, created_at) {
+    function saveLocationToLocalStorage(latLng, created_at) {
 
         const geocoder = new google.maps.Geocoder();
+        const lastAddress = storedLocation.reverse()[0].address;
 
         geocoder.geocode({
             location: latLng
@@ -156,7 +157,7 @@ jQuery(document).ready(function ($) {
                 address = result[0].formatted_address;
 
                 if (storedLocation.length > 0) {
-                    if (lastLoc.address != address) {
+                    if (lastAddress != address) {
                         // console.log('check 10', "check if address exists")
                         persistData(result, address, created_at, latLng)
                     }
@@ -178,7 +179,7 @@ jQuery(document).ready(function ($) {
         for (const component of result[0].address_components) {
             const addressType = component.types[0]
 
-            console.log('check 6', addressType)
+            // console.log('check 6', addressType)
             if (addressType == 'route') {
                 street = component['long_name'];
             }
