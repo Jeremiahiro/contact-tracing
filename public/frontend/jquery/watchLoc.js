@@ -63,7 +63,7 @@ jQuery(document).ready(function ($) {
 
             // Output from Distance in Meters: distanceInMeters
             // Output from Distance in Kilometers: distanceInMeters * 0.001
-            if (distanceInMeters >= 0) {
+            if (distanceInMeters >= 200) {
                 saveLocationToLocalStorage(latLng, created_at);
                 // console.log('check 4', "saved Loc")
             }
@@ -148,7 +148,7 @@ jQuery(document).ready(function ($) {
     function saveLocationToLocalStorage(latLng, created_at) {
 
         const geocoder = new google.maps.Geocoder();
-        const lastAddress = storedLocation.reverse()[0].address;
+        var lastAddress = storedLocation.reverse()[0].address;
 
         geocoder.geocode({
             location: latLng
