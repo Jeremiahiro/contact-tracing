@@ -19,19 +19,19 @@
                     <a class="text-white bold f-16 py-2" href="{{ route('dashboard.edit', auth()->user()->uuid) }}">
                         <i class="mr-2 fa fa-user"></i> Edit Profile 
                     </a>
-                    <a class="text-white bold f-16 py-2" href="{{ route('about')}}">
+                    <a class="text-white bold f-16 py-2" href="{{ route('about') }}">
                         <i class="mr-2 fa fa-info-circle"></i> About
                     </a>
-                    <a class="text-white bold f-16 py-2" href="{{ route('privacy')}}">
+                    <a class="text-white bold f-16 py-2" href="{{ route('privacy') }}">
                         <i class="mr-2 fa fa-file"></i> Privacy Policy 
                     </a>
-                    <a class="text-white bold f-16 py-2" href="{{ route('tos')}}">
+                    <a class="text-white bold f-16 py-2" href="{{ route('tos') }}">
                         <i class="mr-2 fa fa-sticky-note"></i> Terms of Service 
                     </a>
-                    <a class="text-white bold f-16 py-2" href="{{ route('gdpr.dpa')}}">
+                    <a class="text-white bold f-16 py-2" href="{{ route('gdpr.dpa') }}">
                         <i class="mr-2 fa fa-database"></i> GDPR / DPA 
                     </a>
-                    <a class="text-muted bold f-16 py-2" href="#" disabled aria-disabled="true">
+                    <a class="text-white bold f-16 py-2" href="{{ route('faq') }}">
                         <i class="mr-2 fa fa-question-circle"></i> FAQ 
                     </a>
                     <a class="text-muted bold f-16 py-2" href="#" disabled aria-disabled="true">

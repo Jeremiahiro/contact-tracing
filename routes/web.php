@@ -45,6 +45,7 @@ Route::get('/activity/map-view', 'GeneralController@mapView')->name('map.view');
 Route::get('/about-us', 'GeneralController@about')->name('about');
 Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
 Route::get('/terms-of-use', 'GeneralController@terms')->name('tos');
+Route::get('/frequently-asked-questions', 'GeneralController@faq')->name('faq');
 Route::get('/gdpr/dpa', 'GeneralController@gdprDPA')->name('gdpr.dpa');
 
 Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->name('social.login');

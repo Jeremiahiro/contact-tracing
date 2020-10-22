@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $activities = Activity::where('user_id', $user->id)->latest()->simplePaginate(10);
+        $activities = Activity::where('user_id', $user->id)->latest()->simplePaginate(100);
 
         if ($request->ajax()) {
             $activities = view('profile.activity', compact('activities'))->render();

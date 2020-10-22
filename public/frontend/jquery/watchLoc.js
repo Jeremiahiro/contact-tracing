@@ -2,14 +2,14 @@ jQuery(document).ready(function ($) {
 
     var trackedData = [];
     const expires = new Date();
-    const expires_at = expires.setHours(expires.getHours() + 48); // 48 hours from now
+    const expires_at = expires.setHours(expires.getHours() + 36); // 48 hours from now
 
     if (localStorage.hasOwnProperty('trackedLocations')) {
         var
-         storedLocation = JSON.parse(localStorage.getItem('trackedLocations')); // get data from local storage
+            storedLocation = JSON.parse(localStorage.getItem('trackedLocations')); // get data from local storage
     } else {
         var
-         storedLocation = []; // get data from local storage
+            storedLocation = []; // get data from local storage
     }
 
     var address; // street_address
@@ -36,8 +36,6 @@ jQuery(document).ready(function ($) {
             lng: coordinates.coords.longitude, // LongA
         }
         const created_at = coordinates.timestamp;
-
-        const geocoder = new google.maps.Geocoder();
 
         // if (localStorage.hasOwnProperty('trackedLocations')) {
 
@@ -66,12 +64,12 @@ jQuery(document).ready(function ($) {
             // Output from Distance in Meters: distanceInMeters
             // Output from Distance in Kilometers: distanceInMeters * 0.001
             if (distanceInMeters >= 100) {
-                saveLocationToLocalStorage(latLng, created_at, geocoder, lastLoc);
+                saveLocationToLocalStorage(latLng, created_at, lastLoc);
                 // console.log('check 4', "saved Loc")
             }
 
         } else {
-            saveLocationToLocalStorage(latLng, created_at, geocoder);
+            saveLocationToLocalStorage(latLng, created_at);
             // console.log('check 5', "save new Loc")
         }
         // } 
@@ -147,61 +145,79 @@ jQuery(document).ready(function ($) {
      * @param country provided from geocoder.
      * 
      */
-    function saveLocationToLocalStorage(latLng, created_at, geocoder, lastLoc) {
+    function saveLocationToLocalStorage(latLng, lastLoc, created_at) {
+
+        const geocoder = new google.maps.Geocoder();
+
         geocoder.geocode({
             location: latLng
         }, (result, status) => {
             if (status === "OK") {
                 address = result[0].formatted_address;
 
-                if (lastLoc.address != address) {
-                    for (const component of result[0].address_components) {
-                        const addressType = component.types[0]
-
-                        // console.log('check 6', addressType)
-                        if (addressType == 'route') {
-                            street = component['long_name'];
-                        }
-
-                        if (addressType == 'locality') {
-                            city = component['long_name'];
-                        }
-
-                        if (addressType == 'administrative_area_level_1') {
-                            state = component['long_name'];
-                        }
-
-                        if (addressType == 'country') {
-                            country = component['long_name'];
-                        }
+                if (storedLocation.length > 0) {
+                    if (lastLoc.address != address) {
+                        // console.log('check 10', "check if address exists")
+                        persistData(result, address, created_at, latLng)
                     }
-
-                    var data = {
-                        'expires_at': expires_at,
-                        'created_at': created_at,
-                        'location': latLng,
-                        'address': address,
-                        'street': street,
-                        'city': city,
-                        'state': state,
-                        'country': country,
-                    }
-
-                    // + 88 hours = 1603438044575
-                    // - 48 hours = 1602948470357
-
-                    // market square lat= 4.785717; lng = 7.041944
-
-
-                    trackedData = storedLocation;
-                    trackedData.push(data);
-                    localStorage.setItem('trackedLocations', JSON.stringify(trackedData));
-
-                    // console.log('check 7', "success")
+                } else {
+                    // console.log('check 11', "save new Loc")
+                    persistData(result, address, created_at, latLng)
                 }
 
             }
         });
+    }
+
+    /**
+     * 
+     * @param {*} result 
+     * @param {*} address 
+     */
+    function persistData(result, address, created_at, latLng) {
+        for (const component of result[0].address_components) {
+            const addressType = component.types[0]
+
+            console.log('check 6', addressType)
+            if (addressType == 'route') {
+                street = component['long_name'];
+            }
+
+            if (addressType == 'locality') {
+                city = component['long_name'];
+            }
+
+            if (addressType == 'administrative_area_level_1') {
+                state = component['long_name'];
+            }
+
+            if (addressType == 'country') {
+                country = component['long_name'];
+            }
+        }
+
+        var data = {
+            'expires_at': expires_at,
+            'created_at': created_at,
+            'location': latLng,
+            'address': address,
+            'street': street,
+            'city': city,
+            'state': state,
+            'country': country,
+        }
+
+        // + 88 hours = 1603438044575
+        // - 48 hours = 1602948470357
+
+        // market square lat= 4.785717; lng = 7.041944
+
+
+        trackedData = storedLocation;
+        trackedData.push(data);
+        localStorage.setItem('trackedLocations', JSON.stringify(trackedData));
+
+        // console.log('check 7', "success")
     }
 
     // Clear Local Storage data every 48 hours

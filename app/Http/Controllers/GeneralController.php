@@ -86,6 +86,16 @@ class GeneralController extends Controller
     }
 
     /**
+     * Show the Frequently Asked Questions page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function faq()
+    {
+        return view('components.faq');
+    }
+
+    /**
      * Show the GDPR info.
      *
      * @return \Illuminate\Contracts\Support\Renderable
