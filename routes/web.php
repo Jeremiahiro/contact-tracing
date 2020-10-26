@@ -30,6 +30,7 @@ Route::get('/', 'GeneralController@index')->name('home');
 Route::get('/about-us', 'GeneralController@about')->name('about');
 Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
 Route::get('/terms-of-use', 'GeneralController@terms')->name('tos');
+Route::get('/frequently-asked-questions', 'GeneralController@faq')->name('faq');
 Route::get('/gdpr/dpa', 'GeneralController@gdprDPA')->name('gdpr.dpa');
 Route::get('/activity/map-view', 'GeneralController@mapView')->name('map.view');
 
@@ -65,7 +66,9 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
 
     Route::get('/dashboard/{id}/setting', 'SettingController@setting')->name('dashboard.setting');
     Route::post('/dashboard/password', 'SettingController@updatePassword')->name('dashboard.password');
-    Route::get('/deactivate/account', 'SettingController@deactivate')->name('deactivateAccount');
+    Route::get('/deactivate/account', 'SettingController@deactivateAccount')->name('deactivate.account');
+    Route::get('/toggle/notification', 'SettingController@toggleNotification')->name('toggle.notification');
+    Route::get('/background/activity', 'SettingController@backgroundActivity')->name('backgroundActivity');
     Route::post('/image-upload', 'SettingController@uploadImage')->name('upload.image');
     Route::post('/image-delete', 'SettingController@destroyImage')->name('delete.image');
     Route::get('/walkthrough/complete', 'SettingController@skipWalkthrough')->name('tour.finish');

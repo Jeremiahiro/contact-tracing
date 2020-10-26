@@ -7,6 +7,7 @@ use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
@@ -37,23 +38,6 @@ class SettingController extends Controller
 
     }
 
-
-    // public function  ()
-    // {
-    //     if (Auth::user()->first_time_login) {
-    //         $first_time_login = true;
-    //         Auth::user()->first_time_login = false;
-    //         Auth::user()->save();
-    //     } else {
-    //         $first_time_login = false;
-    //     }
-
-    //     return view(
-    //         'activity.create', 
-    //         ['first_time_login' => $first_time_login]
-    //     ); 
-    // }
-
     /**
      * Update the specified resource in storage.
      *
@@ -65,10 +49,19 @@ class SettingController extends Controller
     {
         $user = Auth::user();
         
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'current_password' => 'sometimes',
             'password'  => 'required|string|min:8|different:current_password|confirmed|regex:/(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
         ]);
+
+        if($validator->fails()){
+            $response = [
+                'success' => false,
+                'message' => 'Incorrect Password',
+            ];
+            $statusCode = 422;
+            return response()->json($response, $statusCode);
+        }
 
         $current_password = $request->input('current_password');
         $password = $request->input('password');
@@ -76,30 +69,55 @@ class SettingController extends Controller
         if($user->password === null && $current_password === null){
             $user->password = Hash::make($password);
             $user->save();
-            return redirect()->back()->with('success', 'Successful');  
+
+            $response = [
+                'success' => true,
+                'message' => 'Successful',
+            ];
+            $statusCode = 201;
+            return response()->json($response, $statusCode);
+
+            // return redirect()->back()->with('success', 'Successful');  
         } elseif ($current_password != null) {
             $passwordCheck = Hash::check($current_password, $user->password);
             if($passwordCheck) {
                 $user->password = Hash::make($password);
                 $user->save();
-                return redirect()->back()->with('success', 'Successful');  
+
+                $response = [
+                    'success' => true,
+                    'message' => 'Successful',
+                ];
+                $statusCode = 201;
+                // return redirect()->back()->with('success', 'Successful');  
             } else {
-                return redirect()->back()->with('error', 'Current Password is not correct');  
+                $response = [
+                    'success' => false,
+                    'message' => 'Current Password is not correct',
+                ];
+                $statusCode = 422;
             }
+
+            return response()->json($response, $statusCode);
         }
-        return redirect()->back()->with('error', 'Current Password is required');  
+        $response = [
+            'success' => false,
+            'message' => 'Current Password is not correct',
+        ];
+        $statusCode = 422;
+        return response()->json($response, $statusCode);
 
     }
 
     /**
-     * Deactivate and Activate request.
+     * Toggle background activity.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function deactivate(Request $request)
+    public function backgroundActivity(Request $request)
     {
         $user = Auth::user();
-        $user->status = $request->status;
+        $user->background_activity = $request->status;
         $user->save();
 
         $response = [
@@ -107,6 +125,41 @@ class SettingController extends Controller
             "message" => 'Successful'
         ];
         return response()->json($response, 201);
+    }
+
+    // /**
+    //  * Toggle background activity.
+    //  *
+    //  * @return \Illuminate\Contracts\Support\Renderable
+    //  */
+    // public function toggleNotification(Request $request)
+    // {
+    //     $user = Auth::user();
+    //     $user->background_activity = $request->status;
+    //     $user->save();
+
+    //     $response = [
+    //         'success' => true,
+    //         "message" => 'Successful'
+    //     ];
+    //     return response()->json($response, 201);
+    // }
+
+    
+    /**
+     * Deactivate and Activate request.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function deactivateAccount()
+    {
+        $user = Auth::user();
+        $user->status = 0;
+
+        Auth::logout();
+
+        return redirect()->route('home');
+
     }
 
     /** 
@@ -176,7 +229,11 @@ class SettingController extends Controller
                 return response()->json($response, 201);
     
             } else {
-                return response()->json(['error' => 'Oops! Something went wrong.']);
+                $response = [
+                    'success' => false,
+                    "message" => 'Unsupported Image Size or Format',
+                ];
+                return response()->json($response, 422);
             }
 
         }
@@ -186,7 +243,7 @@ class SettingController extends Controller
     public function saveAvatar(Request $request, $image_url)
     {
         $user = Auth::user();
-        $user->avarar = $image_url;
+        $user->avatar = $image_url;
         $user->save();
     }
 

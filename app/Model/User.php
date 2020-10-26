@@ -12,10 +12,11 @@ use Dialect\Gdpr\Anonymizable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Webpatser\Uuid\Uuid;
+use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Followable, Notifiable, Portable, Anonymizable, Favoriter, HasApiTokens, LogsActivity;
+    use Followable, Notifiable, Portable, Anonymizable, Favoriter, HasApiTokens, LogsActivity, UsersOnlineTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -31,9 +32,11 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $hidden = [
         'password', 'remember_token',
-        'first_time_login' => 'boolean',
-        'show_location' => 'boolean',
         'status' => 'boolean',
+        'show_location' => 'boolean',
+        'active' => 'boolean',
+        'background_activity' => 'boolean',
+        'first_time_login' => 'boolean',
     ];
 
     /**
@@ -42,9 +45,14 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $casts = [
+        'email_verified_at' => 'datetime',
         'status' => 'boolean',
         'show_location' => 'boolean',
-        'email_verified_at' => 'datetime',
+
+        // use active for admin disabling user
+        'active' => 'boolean',
+        'background_activity' => 'boolean',
+        'first_time_login' => 'boolean',
     ];
 
     protected $gdprWith = ['location'];
@@ -63,15 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAnonymizedEmail()
     {
         return random_bytes(10);
-    }
-
-    /**
-     * User has many activities
-     */
-    public function locations()
-    {
-        return $this->hasMany('App\Model\Location')->orderBy('address', 'ASC');
-    }    
+    }   
 
     /**
      * User has many activities
@@ -84,11 +84,10 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * User has many activities
      */
-    public function distinctActivity()
+    public function locations()
     {
-        return $this->hasMany('App\Model\Activity')->distinct('from_address');
-    }
-
+        return $this->hasMany('App\Model\Location')->orderBy('address', 'ASC');
+    }  
 
     /**
      * User has many tags
@@ -178,6 +177,4 @@ class User extends Authenticatable implements MustVerifyEmail
             $model->uuid = (string) Uuid::generate();
         });
     }
-
-
 }

@@ -7,13 +7,15 @@ Dashboard
 @section('custom-style')
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 <script src="{{ asset('frontend/jquery/map-view.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script>
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer>
+</script> --}}
 
 @endsection
 
 @section('web-content')
 <script type="text/javascript">
     window.location = "{{ route('map.view') }}";
+
 </script>
 @endsection
 
@@ -58,12 +60,12 @@ Dashboard
 <section class="">
     <div class="container px-3 pt-5 mb-5" id="tab-view">
         <p class="f-14">ROUTE HISTORY</p>
-        @if ($user->id === auth()->user()->id)
+        @if ($user->id === auth()->user()->id || $user->show_location === true)
         @include('profile.partials.activity-view')
-        @else
-        @if ($user->show_location != true)
-        @include('profile.partials.activity-view')
-        @endif
+        {{-- @else --}}
+        {{-- @if ($user->show_location == true) --}}
+        {{-- @include('profile.partials.activity-view') --}}
+        {{-- @endif --}}
         @endif
     </div>
 </section>
@@ -76,6 +78,7 @@ Dashboard
 
 @section('script')
 
+@if ($activities->count() > 100)
 <script type="text/javascript">
     var page = 1;
     var stop = false;
@@ -112,7 +115,8 @@ Dashboard
                 });
         }
     }
-</script>
 
+</script>
+@endif
 @include('components.tour.profileTour')
 @endsection

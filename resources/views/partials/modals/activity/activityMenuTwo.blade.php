@@ -6,8 +6,6 @@
                     alt="map-pin"></span>
         </button>
         <nav class="nav flex-column">
-            <a class="nav-link text-white bold f-16" href="#" data-dismiss="modal" data-toggle="modal" data-target="#activitySelectionModal-{{ $activity->id }}">Map View</a>
-            <a class="nav-link text-white bold f-16" href="{{ route('activity.edit', $activity->id) }}">Edit</a>
             <a class="nav-link text-white bold f-16" href="#" data-dismiss="modal" data-toggle="modal" data-target="#deleteModal-{{ $activity->id }}">Delete</a>
             <a class="nav-link text-white bold f-16" href="#" data-dismiss="modal" data-toggle="modal" data-target="#unarchiveActivity-{{ $activity->id }}">UnArchive</a>
         </nav>

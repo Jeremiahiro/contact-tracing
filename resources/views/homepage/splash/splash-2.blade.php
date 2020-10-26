@@ -15,7 +15,7 @@
                     @guest
                     0
                     @else
-                    <span class="counter" data-count="{{ $activities }}"></span>
+                    <span class="counter" data-count="{{ $locations }}"></span>
                     @endguest
                     Locations
                 </div>

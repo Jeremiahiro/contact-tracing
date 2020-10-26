@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\ActivityTagNotification;
 use App\Notifications\ActivityTagSmsNotification;
+use Illuminate\Support\Facades\Validator;
 
 class ActivityController extends Controller
 {
@@ -68,7 +69,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        $favorites = Auth::user()->getFavoriteItems(Location::class)->paginate(5);
+        $favorites = Auth::user()->getFavoriteItems(Location::class)->take(5);
 
         return view('activity.create', compact(['favorites']));
     }
@@ -83,9 +84,21 @@ class ActivityController extends Controller
     {
         // TODO delete the script with google key from activit.create
 
-        // dd($request->all());
-        $this->validateActivity($request);
+        $validator = Validator::make($request->all(), [
+            'activity_tags.*.name' => 'sometimes',
+            'activity_tags.*.email' => 'sometimes',
+            'activity_tags.*.phone' => 'sometimes',
+        ]);
 
+        if($validator->fails()){
+            $response = [
+                'success' => false,
+                'message' => 'Incorrect Form Values',
+            ];
+            return response()->json($response, 422);
+        }
+
+        $user = Auth::user();
         $start = Carbon::parse($request->start_date)->format('Y-m-d H:i');
         $end = Carbon::parse($request->end_date)->format('Y-m-d H:i');
 
@@ -93,53 +106,32 @@ class ActivityController extends Controller
 
         try {
 
+            $location = Location::where('address', $request->address)->where('user_id', $user->id)->first();
+
+            if(!$location){
+                $location = [
+                    'address'   => $request->address,
+                    'street'    => $request->street,
+                    'latitude'  => $request->latitude,
+                    'longitude' => $request->longitude,
+                    'city'      => $request->city,
+                    'state'     => $request->state,
+                    'country'   => $request->country,
+                    'image'     => $request->image,
+                    'user_id'   => $user->id,
+                ];
+
+                $location = $this->save_new_location($location);
+            }
+
             $activity = Activity::firstOrCreate([
-                'from_address' => $request->from_address,
-                'from_location' => $request->from_location,
-                'from_latitude' => $request->from_latitude,
-                'from_longitude' => $request->from_longitude,
-                'from_image' => $request->from_image,
-    
-                'to_address' => $request->to_address,
-                'to_location' => $request->to_location,
-                'to_latitude' => $request->to_latitude,
-                'to_longitude' => $request->to_longitude,
-                'to_image' => $request->to_image,
-    
-                'start_date' => $start,
-                'end_date' => $end,
-    
-                'user_id' => auth()->user()->id,
+                'location_id'   => $location->id,
+                'start_date'    => $start,
+                'end_date'      => $end,
+                'user_id'       => $user->id
             ]);
 
             if ($activity->wasRecentlyCreated) {
-
-                $location_1 = Location::where('location', $request->from_location)->where('user_id', auth()->user()->id)->first();
-
-                if(!$location_1){
-                    $location = [
-                        'address'   => $request->from_address,
-                        'location'  => $request->from_location,
-                        'latitude'  => $request->from_latitude,
-                        'longitude' => $request->from_longitude,
-                        'image'     => $request->from_image,
-                    ];
-                    $this->save_new_location($location);
-                }
-
-                $location_2 = Location::where('location', $request->to_location)->where('user_id', auth()->user()->id)->first();
-
-                if(!$location_2){
-                    $location = [
-                        'address'   => $request->to_address,
-                        'location'  => $request->to_location,
-                        'latitude'  => $request->to_latitude,
-                        'longitude' => $request->to_longitude,
-                        'image'     => $request->to_image,
-                    ];
-                    $this->save_new_location($location);
-                }
-    
                 // for existing users
                 if($request->tags != null) {
                     $tags = explode(",", $request->tags);
@@ -147,10 +139,14 @@ class ActivityController extends Controller
                         $existingUser = User::where('username', $person)->first();
                         if ($existingUser) {
                             $data = [
-                                'activity_id' => $activity->id,
-                                'user'        => $existingUser,
+                                'name'          => $existingUser->name,
+                                'email'         => $existingUser->email,
+                                'phone'         => $existingUser->phone,
+                                'person_id'     => $existingUser->id,
+                                'activity_id'   => $activity->id,
+                                'type'          => 'old_user',
                             ];
-                            $this->save_tag_for_existing_user($data);
+                            $this->save_tag_for_user($data);
                         } 
                     }
                 } 
@@ -165,10 +161,15 @@ class ActivityController extends Controller
                         $existingUser = User::where('email', $email[$key])->first();
                         if ($existingUser) {
                             $data = [
-                                'activity_id' => $activity->id,
-                                'user'        => $existingUser,
+                                'name'          => $existingUser->name,
+                                'email'         => $existingUser->email,
+                                'phone'         => $existingUser->phone,
+                                'person_id'     => $existingUser->id,
+                                'activity_id'   => $activity->id,
+                                'type'          => 'old_user',
                             ];
-                            $this->save_tag_for_existing_user($data);
+                            $this->save_tag_for_user($data);
+
 
                         } elseif ($name[$key] != null) {
                             $data = [
@@ -176,27 +177,37 @@ class ActivityController extends Controller
                                 'email'         => $email[$key],
                                 'phone'         => $phone[$key],
                                 'activity_id'   => $activity->id,
+                                'type'          => 'new_user',
                             ];
-                            $this->save_tag_for_new_user($data);
+                            $this->save_tag_for_user($data);
                         } 
                     }
                 }
-            
             } else {
-                return redirect()->back()->with('error', 'Activity was recently created');
+                $response = [
+                    'success' => false,
+                    'message' => 'Error! Activity was recently created',
+                ];
+    
+                return response()->json($response, 422);
             }
             DB::commit();
-
-            return redirect()->route('activity.index')->with('success', 'Successful!');
-
+            $response = [
+                'success' => true,
+                'message' => 'Successful',
+            ];
+            return response()->json($response, 201);
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
-            return redirect()->back()->with('error', 'OOPS something went wrong');
+            $response = [
+                'success' => false,
+                'message' => 'OOPS! Something went wrong',
+            ];
+
+            return response()->json($response, 422);
         } 
 
     }
-
 
     /**
      * Display the specified resource.
@@ -241,63 +252,84 @@ class ActivityController extends Controller
                         foreach($tags as $person) {
                             $existingUser = User::where('username', $person)->first();
                             if ($existingUser) {
-                                $existingTag = ActivityTags::where('person_id', $existingUser->id)->where('activity_id', $activity->id)->first();
-                                if(!$existingTag){
-                                    $data = [
-                                        'activity_id' => $activity->id,
-                                        'user'        => $existingUser,
-                                    ];
-                                    $this->save_tag_for_existing_user($data);
-                                } 
+                                $data = [
+                                    'name'          => $existingUser->name,
+                                    'email'         => $existingUser->email,
+                                    'phone'         => $existingUser->phone,
+                                    'person_id'     => $existingUser->id,
+                                    'activity_id'   => $activity->id,
+                                    'type'          => 'old_user',
+                                ];
+                                $this->save_tag_for_user($data);
                             } 
                         }
-                    }
+                    } 
         
                     // for users not on the platform
-                    $name = $request->name;
-                    $email = $request->email;
-                    $phone = $request->phone;
-    
-                    if($name != null) {
+                    if($request->name != null) {
+                        $name = $request->name;
+                        $email = $request->email;
+                        $phone = $request->phone;
+        
                         foreach($name as $key => $value) {
                             $existingUser = User::where('email', $email[$key])->first();
                             if ($existingUser) {
-                                $existingTag = ActivityTags::where('person_id', $existingUser->id)->where('activity_id', $activity->id)->first();
-                                if(!$existingTag){
-                                    $data = [
-                                        'activity_id' => $activity->id,
-                                        'user'        => $existingUser,
-                                    ];
-                                    $this->save_tag_for_existing_user($data);
-                                }
-                             
+                                $data = [
+                                    'name'          => $existingUser->name,
+                                    'email'         => $existingUser->email,
+                                    'phone'         => $existingUser->phone,
+                                    'person_id'     => $existingUser->id,
+                                    'activity_id'   => $activity->id,
+                                    'type'          => 'old_user',
+                                ];
+                                $this->save_tag_for_user($data);
+
+
                             } elseif ($name[$key] != null) {
-                                $existingTag = ActivityTags::where('name', $name[$key])->where('activity_id', $activity->id)->first();
-                                if(!$existingTag){
-                                    $data = [
-                                        'name'          => $name[$key],
-                                        'email'         => $email[$key],
-                                        'phone'         => $phone[$key],
-                                        'activity_id'   => $activity->id,
-                                    ];
-                                    $this->save_tag_for_new_user($data);
-                                }
-                            }
+                                $data = [
+                                    'name'          => $name[$key],
+                                    'email'         => $email[$key],
+                                    'phone'         => $phone[$key],
+                                    'activity_id'   => $activity->id,
+                                    'type'          => 'new_user',
+                                ];
+                                $this->save_tag_for_user($data);
+                            } 
                         }
                     }
+
                     DB::commit();
-                    return redirect()->route('activity.index')->with('success', 'Activity Updated Successfuly!');
+                    $response = [
+                        'success' => true,
+                        'message' => 'Updated Successfuly',
+                    ];
+                    return response()->json($response, 201);
     
                 } catch (\Throwable $th) {
                     DB::rollBack();
-                    dd($th);
-                    return redirect()->back()->with('error', 'OOps something went wrong');
+                    $response = [
+                        'success' => false,
+                        'message' => 'OOps something went wrong',
+                    ];
+        
+                    return response()->json($response, 422);
                 } 
             } else {
-                return redirect()->back()->with('error', 'Entry fields cannot be null');
+                $response = [
+                    'success' => false,
+                    'message' => 'Error! Tag at least one person',
+                ];
+    
+                return response()->json($response, 422);
             }
         }
-        return redirect()->back()->with('info', 'Unauthorized Access!');
+
+        $response = [
+            'success' => false,
+            'message' => 'Unauthorized Access',
+        ];
+
+        return response()->json($response, 401);
 
     }
 
@@ -339,18 +371,15 @@ class ActivityController extends Controller
 
     public function validateActivity(Request $request)
     {
-
 		$rules = [
-            'from_latitude' => 'required',
-            'to_latitude' => 'required',
+            'latitude' => 'required',
             'activity_tags.*.name' => 'sometimes',
             'activity_tags.*.email' => 'sometimes',
             'activity_tags.*.phone' => 'sometimes',
         ];
 
         $messages = [
-            'from_latitude' => 'Select location from the menu',
-            'to_latitude' => 'Select location from the menu',
+            'latitude' => 'Select location from the menu',
         ];
          
 		$this->validate($request, $rules, $messages);
@@ -366,38 +395,20 @@ class ActivityController extends Controller
         return view('activity.calendar');
     }
 
-    public function save_tag_for_existing_user($data)
-    {
-        $activityTag = new ActivityTags;
-        $activityTag->activity_id   = $data['activity_id'];
-        $activityTag->person_id     = $data['user']->id;
-        $activityTag->name          = $data['user']->name;
-        $activityTag->user_id       = Auth::user()->id;
-        $activityTag->save();
-
-        // initiate notification
-        $details = [
-            'greeting' => 'Hi ' . $data['user']->name,
-            'body' => 'You were tagged in an activity',
-            'action' => 'click here to see',
-            'activity_id' => $data['activity_id'],
-        ];
-        $activityTag->notify(new ActivityTagNotification($details));
-        // $data['user']->notify(new ActivityTagNwotification($details));
-
-    }
-
-    public function save_tag_for_new_user($data)
+    public function save_tag_for_user($data)
     {
         $activityTag = new ActivityTags;
         $activityTag->activity_id   = $data['activity_id'];
         $activityTag->name          = $data['name'];
         $activityTag->email         = $data['email'];
         $activityTag->phone         = $data['phone'];
+        if($data['type'] == 'old_user'){
+            $activityTag->person_id     = $data['person_id'];
+        }
         $activityTag->user_id       = Auth::user()->id;
         $activityTag->save();
 
-        // initiate notification
+        // initiate notification details
         $details = [
             'greeting' => 'Hi ' . $data['name'],
             'body' => 'You were tagged in an activity',
@@ -405,22 +416,34 @@ class ActivityController extends Controller
             'activity_id' => $data['activity_id'],
         ];
 
-        if($data['email'] != null){
+        // notification for old users
+        if($data['type'] == 'old_user'){
             $activityTag->notify(new ActivityTagNotification($details));
-        } elseif($data['phone'] != null) {
-            $activityTag->notify(new ActivityTagSmsNotification($details));
+        } else {
+
+            // notification for new users
+            if($data['email'] != null){
+                $activityTag->notify(new ActivityTagNotification($details));
+            } elseif($data['phone'] != null) {
+                $activityTag->notify(new ActivityTagSmsNotification($details));
+            }
         }
     }
 
     public function save_new_location($location)
     {
-        $loc = new Location;
-        $loc->address      = $location['address'];
-        $loc->location     = $location['location'];
-        $loc->latitude     = $location['latitude'];
-        $loc->longitude    = $location['longitude'];
-        $loc->image        = $location['image'];
-        $loc->user_id      = Auth::user()->id;
-        $loc->save();
+        $new_location               = new Location;
+        $new_location->address      = $location['address'];
+        $new_location->latitude     = $location['latitude'];
+        $new_location->longitude    = $location['longitude'];
+        $new_location->street       = $location['street'];
+        $new_location->city         = $location['city'];
+        $new_location->state        = $location['state'];
+        $new_location->country      = $location['country'];
+        $new_location->image        = $location['image'];
+        $new_location->user_id      = $location['user_id'];
+        $new_location->save();
+
+        return $new_location;
     }
 }

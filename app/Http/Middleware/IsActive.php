@@ -16,10 +16,6 @@ class IsActive extends Middleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->is_active === false) {
-            Auth::logout();
-        }
-
         // if ($request->user()->is_active == false) {
         //     Auth::logout();
         // }

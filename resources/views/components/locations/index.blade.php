@@ -6,13 +6,12 @@ Locations
 
 @section('custom-style')
 {{-- <script src="{{ asset('frontend/jquery/map-loc-view.js') }}"></script> --}}
-<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script>
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script> --}}
 @endsection
 
 @section('web-content')
 <script type="text/javascript">
     window.location = "{{ route('map.view') }}";
-
 </script>
 @endsection
 
@@ -22,9 +21,9 @@ Locations
 <div class="activityTab py-2">
     <ul class="m-3 f-12 nav d-flex justify-content-between">
         <li class="active">
-            <a data-toggle="tab" href="#allLoc" class="text-primary active">All Locations</a>
+            <a data-toggle="tab" href="#allLoc" class="text-primary active">Locations</a>
         </li>
-        <li><a data-toggle="tab" href="#fav" class="text-primary">Favourite</a></li>
+        <li><a data-toggle="tab" href="#fav" class="text-primary">Favourites</a></li>
     </ul>
 </div>
 
@@ -99,7 +98,6 @@ jQuery(document).ready(function ($) {
 
     $('.toggleFavourite').click(function () {
         var locationID = $(this).data('id');
-        console.log(locationID);
         var object = $(this);
         var c = $(this).parent("div").find("#fav_icon").attr('src');
 
@@ -146,8 +144,6 @@ jQuery(document).ready(function ($) {
             },
         });
     }
-
-
 });
 
 </script>

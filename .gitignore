@@ -5,8 +5,10 @@
 /vendor
 .env
 .env.backup
+.env.live_backup
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+

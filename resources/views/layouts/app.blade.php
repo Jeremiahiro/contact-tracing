@@ -10,6 +10,8 @@
 
     <title>{{ env('APP_NAME')}} | @yield('title')</title>
 
+    <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon" />
+
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
@@ -21,8 +23,11 @@
     <script src="{{ asset('frontend/jquery/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('frontend/js/script.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js"
+        crossorigin="anonymous"></script>
 
     {{-- bootstrap --}}
     <link href="{{ asset('frontend/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -42,7 +47,15 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" crossorigin="anonymous"></script>
-    
+
+    @auth
+    @if (auth()->user()->background_activity === true)
+    <script src="{{ asset('frontend/jquery/watchLoc.js')}}"></script>
+    @endif
+    @endauth
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places"
+        type="text/javascript"></script>
+
     @yield('custom-style')
     @laravelPWA
 </head>
@@ -54,17 +67,21 @@
         @elsedesktop
         <main class="p-0 m-0">
             @php
-                $route = \Route::current()->getName();
+            $route = \Route::current()->getName();
             @endphp
             @if ($route == 'home' || $route == 'login' || $route == 'register' || $route == 'password.request' ||
-             $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' || $route == 'dashboard.index'
-             || $route == 'dashboard.show' || $route == 'dashboard.edit' || $route == 'followers' || $route == 'followings' || $route == 'locations')
+            $route == 'password.confirm' || $route == 'password.reset' || $route == 'verification.notice' || $route ==
+            'dashboard.index'
+            || $route == 'dashboard.show' || $route == 'dashboard.edit' || $route == 'followers' || $route ==
+            'followings' || $route == 'locations')
             @else
-                @include('partials.mobile.header.header')
+            @include('partials.mobile.header.header')
             @endif
+            <div class="" id="upload-alert" style="z-index: 999999;">
 
+            </div>
             @include('partials.alert.alert')
-        
+
             @yield('content')
         </main>
         @auth
@@ -77,7 +94,6 @@
         @yield('script')
         @enddesktop
     </div>
-
 
 </body>
 

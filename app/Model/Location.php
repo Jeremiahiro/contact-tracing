@@ -23,4 +23,12 @@ class Location extends Model
     {
         return $this->belongsTo('App\Model\User');
     }
+
+    /**
+     * Location has many activities
+     */
+    public function activities()
+    {
+        return $this->hasMany('App\Model\Activity');
+    }
 }

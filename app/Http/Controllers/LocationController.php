@@ -16,7 +16,7 @@ class LocationController extends Controller
      */
     public function index(Request $request)
     {
-        $locations = Location::where('user_id', Auth::user()->id)->orderBy('address', 'ASC')->simplePaginate(100);
+        $locations = Location::where('user_id', Auth::user()->id)->orderBy('address', 'asc')->simplePaginate(100);
 
         $favorites = Auth::user()->getFavoriteItems(Location::class)->paginate(5);
 
@@ -147,7 +147,6 @@ class LocationController extends Controller
             "message" => 'Successful'
         ];
         return response()->json($response, 201);
-   
     }
 
 }
