@@ -71,14 +71,13 @@
         @yield('footer')
         @include('partials.modals.views.sideNav')
         @include('partials.modals.views.settings')
+        <script src="{{ asset('frontend/jquery/followToggle.js')}}"></script>
         @endauth
+        <script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
+        @yield('script')
         @enddesktop
     </div>
-    @auth
-    <script src="{{ asset('frontend/jquery/followToggle.js')}}"></script>
-    @endauth
-    <script src="{{ asset('frontend/jquery/tabToggle.js')}}"></script>
-    @yield('script')
+
 
 </body>
 

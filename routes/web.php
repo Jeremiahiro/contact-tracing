@@ -13,28 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('index', function () {
-    return view('activity.index');
-});
-
-Route::get('create', function () {
-    return view('activity.create');
-})->name('activity.create');
-
 Route::get('proximity', function () {
     return view('activity.modals.proximity');
-});
-
-Route::get('profile', function () {
-    return view('profile.index');
-})->name('profile.index');
-
-Route::get('alert', function () {
-    return view('alert.index');
-});
-
-Route::get('activityConnection', function () {
-    return view('partials.modals.activityConnection');
 });
 
 Auth::routes(['verify' => true]);
@@ -45,15 +25,16 @@ Auth::routes(['verify' => true]);
 // });
 
 // unauthenticate routes
-Route::get('/activity/map-view', 'GeneralController@mapView')->name('map.view');
+Route::get('/', 'GeneralController@index')->name('home');
+
 Route::get('/about-us', 'GeneralController@about')->name('about');
 Route::get('/privacy-policy', 'GeneralController@privacy')->name('privacy');
 Route::get('/terms-of-use', 'GeneralController@terms')->name('tos');
 Route::get('/gdpr/dpa', 'GeneralController@gdprDPA')->name('gdpr.dpa');
+Route::get('/activity/map-view', 'GeneralController@mapView')->name('map.view');
 
 Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->name('social.login');
 Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
-Route::get('/', 'GeneralController@index')->name('home');
 
 // authenticated routes
 Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
@@ -99,6 +80,7 @@ Route::get('/offline', function () {
 });
 
 
+// Admin Routes
 Route::group(['namespace' => 'Admin', 'prefix' => 'backend', 'middleware' => ['auth']], function () {
     Route::group(['middleware' => 'super_admin'], function() {
         Route::get('/', 'DashboardController@index')->name('admin.dashboard');

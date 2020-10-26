@@ -8,7 +8,7 @@ Homepage
 <link href="{{ asset('frontend/css/splash.css') }}" rel="stylesheet">
 @endsection
 
-@section('web-content')
+@section('web-content') 
 <div class="splash splash-2">
     <div class="container col-md-4 mx-auto">
         <div class="">
