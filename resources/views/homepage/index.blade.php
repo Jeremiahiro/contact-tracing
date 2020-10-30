@@ -36,17 +36,21 @@ Homepage
             <li data-target="#splashCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#splashCarousel" data-slide-to="1"></li>
             <li data-target="#splashCarousel" data-slide-to="2"></li>
+            <li data-target="#splashCarousel" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item splash active"
                 style="background-image: url('{{ $contact_info->splash_image }}');">
                 @include('homepage.splash.splash-1')
             </div>
-            <div class="carousel-item splash" style="background-image: url('{{ $support_info->splash_image }}');">
-                @include('homepage.splash.splash-3')
+            <div class="carousel-item splash" style="background-image: url('{{ $safety_info->splash_image }}');">
+                @include('homepage.splash.splash-2')
             </div>
             <div class="carousel-item splash" style="background-image: url('{{ $location_info->splash_image }}');">
-                @include('homepage.splash.splash-2')
+                @include('homepage.splash.splash-3')
+            </div>
+            <div class="carousel-item splash" style="background-image: url('{{ $support_info->splash_image }}');">
+                @include('homepage.splash.splash-4')
             </div>
         </div>
     </div>

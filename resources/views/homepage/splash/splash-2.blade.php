@@ -6,53 +6,13 @@
             @include('homepage.splash.extra.time')
         </div>
 
-        <div class="d-flex justify-content-around align-items-center">
-            <div class="text-center">
-                <a href="{{ route('locations') }}">
-                    <img src="{{  asset('/frontend/img/svg/marker.svg') }}" alt="marker">
-                </a>
-                <div class="py-2 f-12 bold">
-                    @guest
-                    0
-                    @else
-                    <span class="counter" data-count="{{ $locations }}"></span>
-                    @endguest
-                    Locations
-                </div>
+        <a class="add_contact text-white" href="{{ route('activity.create') }}">
+            <div class="mb-2">
+                <img src="{{  asset('/frontend/img/svg/add.svg') }}" alt="Add Activity">
             </div>
-            <div class="text-center pt-2">
-                <a href="{{ route('search')}}">
-                    <img src="{{  asset('/frontend/img/svg/person.svg') }}" alt="contacts">
-                </a>
-                <div class="py-2 f-12 bold">
-                    @guest
-                    0
-                    @else
-                    <span class="counter" data-count="{{ $tags }}"></span>
-                    @endguest
-                    Contacts
-                </div>
-            </div>
-            <div class="text-center pt-2">
-                <a href="{{ route('map.view')}}"><img src="{{  asset('/frontend/img/svg/people.svg') }}" alt="Active"></a>
-                <div class="py-2 f-12 bold">
-                    @if($count > 999 && $count <= 999999) 
-                    <span class="counter" data-count="{{ $count/1000 . ' K' }}">0</span>
-                    @elseif($count> 999999) 
-                    <span class="counter" data-count="{{ $count/1000000 . ' M' }}">0</span>
-                    @else
-                    <span class="counter" data-count="{{ $count }}">0</span>
-                    @endif
-                    Active
-                </div>
-            </div>
-        </div>
-
-        <div class="pl-4">
-            <a href="{{ route('activity.index') }}" class="f-14 border border-white py-1 px-3 rounded text-white">
-                VIEW
-            </a>
-        </div>
+            <span class="">
+                <span class="border border-white py-1 px-3 rounded f-14">ADD</span>
+            </span>
+        </a>
     </div>
-
 </div>

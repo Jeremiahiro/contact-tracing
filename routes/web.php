@@ -76,6 +76,9 @@ Route::group(['middleware' => ['auth', 'verified', 'gdpr.terms']], function () {
     Route::get('/notification', 'NotificationsController@show')->name('notification');
     Route::get('/get_data', 'GeneralController@fetchData');
 
+    Route::resource('/support', 'SupportController');
+
+
 });
 
 Route::get('/offline', function () {    

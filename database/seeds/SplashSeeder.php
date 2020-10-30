@@ -26,9 +26,16 @@ class SplashSeeder extends Seeder
         ]);
         SplashImage::create([
             'splash_image'  => 'https://res.cloudinary.com/iro/image/upload/v1602500709/SOP_Pictures/support.jpg',
+            'type'          => 'safety',
+            'description'   => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum voluptas omnis illo labore, asperiores quo dolorum reiciendis aperiam blanditiis animi',
+            'status'        => 1,
+        ]);
+        SplashImage::create([
+            'splash_image'  => 'https://res.cloudinary.com/iro/image/upload/v1603710907/SOP_Pictures/support-1.png',
             'type'          => 'support',
             'description'   => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum voluptas omnis illo labore, asperiores quo dolorum reiciendis aperiam blanditiis animi',
             'status'        => 1,
         ]);
+
     }
 }

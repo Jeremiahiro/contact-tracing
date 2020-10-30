@@ -148,7 +148,8 @@ jQuery(document).ready(function ($) {
     function saveLocationToLocalStorage(latLng, created_at) {
 
         const geocoder = new google.maps.Geocoder();
-        var lastAddress = storedLocation.reverse()[0].address;
+
+
 
         geocoder.geocode({
             location: latLng
@@ -157,6 +158,8 @@ jQuery(document).ready(function ($) {
                 address = result[0].formatted_address;
 
                 if (storedLocation.length > 0) {
+                    var lastAddress = storedLocation.reverse()[0].address;
+
                     if (lastAddress != address) {
                         // console.log('check 10', "check if address exists")
                         persistData(result, address, created_at, latLng)

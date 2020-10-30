@@ -24,6 +24,7 @@ class GeneralController extends Controller
 
         $location_info = SplashImage::where('type', 'location')->where('status', true)->first();
         $contact_info = SplashImage::where('type', 'contact')->where('status', true)->first();
+        $safety_info = SplashImage::where('type', 'safety')->where('status', true)->first();
         $support_info = SplashImage::where('type', 'support')->where('status', true)->first();
 
         if(Auth::user()){
@@ -31,7 +32,7 @@ class GeneralController extends Controller
             $tags = ActivityTags::where('user_id', auth()->user()->id)->distinct('name')->count(); 
             return view('homepage.index', compact([
                 'count', 'locations', 'tags',
-                'location_info', 'contact_info', 'support_info'
+                'location_info', 'contact_info', 'safety_info', 'support_info'
                 ])); 
         } else {
             $locations = [];
